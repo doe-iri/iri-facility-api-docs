@@ -22,19 +22,15 @@ A `resource` is defined with the following attributes:
 | Attribute             | Type         | Description                                                                                                                                                                           | Required | Example                                                                                                                                       |
 |:----------------------|:-------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------|
 | `id`                  | string       | The unique identifier for the Resource.  Typically a UUID or URN to provide global uniqueness across facilities.                                                                      | True     | "09a22593-2be8-46f6-ae54-2904b04e13a4"                                                                                                        |
-| `self_uri`            | string(uri)  | A hyperlink reference (URI) to this Resource (self).                                                                                                                                  | True     | "https://iri.example.com/api/v1/status/resources/09a22593-2be8-46f6-ae54-2904b04e13a4"                                                            |
+| `self_uri`            | URI  | A hyperlink reference (URI) to this Resource (self).                                                                                                                                  | True     | "https://iri.example.com/api/v1/status/resources/09a22593-2be8-46f6-ae54-2904b04e13a4"                                                            |
 | `name`                | string       | The long name of the Resource.                                                                                                                                                        | False    | "Data Transfer Nodes"                                                                                                                         |
 | `description`         | string       | A description of the Resource.                                                                                                                                                        | False    | "The NERSC data transfer nodes provide access to Global Homes, Global Common, the Community File System (CFS), Perlmutter Scratch, and HPSS." |
 | `last_modified`       | string       | The date this Resource was last modified.  ISO 8601 standard with timezone offsets.                                                                                                   | False    | "2025-07-24T02:31:13.000Z"                                                                                                                    |
 | `resource_type`       | ResourceType | The type of Resource based on string ENUM values.                                                                                                                                     | True     | "compute"                                                                                                                                     |
 | `capability_uris`     | array[string] | Hyperlink references (URIs) to capabilities this Resource provides (hasCapability).                                                                                                   | False    | ["https://iri.example.com/api/v1/account/capabilities/b1ce8cd1-e8b8-4f77-b2ab-152084c70281"]                                                      |
-| `group`               | string        | The member resource group.                                                                                                                                                            | False    | "storage"                                                                                                                                     |
 | `current_status`      | StatusType    | The current status of this Resource at time of query based on string ENUM values. If there is no last Event associated with the resource to indicate a current status, then currentStatus defaults to "unknown". | True     | "up"                                                                                                                                          |
-| `impacted_by_uri`     | string(uri)   | A hyperlink reference (URI) to the last event impacting this Resource (impactedBy).                                                                                                   | False    | "https://iri.example.com/api/v1/status/events/03bdbf77-6f29-4f66-9809-7f4f77098171"                                                               |
-| `located_at_uri`      | string(uri)   | A hyperlink reference (URI) to the Site containing this Resource (locatedAt).                                                                                                         | False    | "https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45"                                                              |
-| `member_of_uri`       | string(uri)   | A hyperlink reference (URI) to facility managing this Resource (memberOf).                                                                                                            | False    | "https://iri.example.com/api/v1/facility"                                                                                                         |
-| `depends_on_uris`     | array[string] | A hyperlink reference (URI) a Resource that this Resource depends on (dependsOn).                                                                                                     | False    | ["https://iri.example.com/api/v1/status/resources/b1ce8cd1-e8b8-4f77-b2ab-152084c70281"]                                                          |
-| `has_dependent_uris`  | array[string] | A hyperlink reference (URI) to a Resource that depend on this Resource (hasDependent).                                                                                                | False    | ["https://iri.example.com/api/v1/status/resources/8b61b346-b53c-4a8e-83b4-776eaa14cc67"]                                                          |
+| `located_at_uri`      | URI   | A hyperlink reference (URI) to the Site containing this Resource (locatedAt).                                                                                                         | False    | "https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45"                                                              |
+| `member_of_uri`       | URI   | A hyperlink reference (URI) to facility managing this Resource (memberOf).                                                                                                            | False    | "https://iri.example.com/api/v1/facility"                                                                                                         |
 
 ### ENUM ResourceType
 
@@ -85,13 +81,11 @@ The following table describes the relationships contained in `resource` and thei
 | Attribute            | Source   | Relationship   | Destination  | Description                                                                        |
 |:---------------------|:---------|:---------------|:-------------|:-----------------------------------------------------------------------------------|
 | `self_uri`           | Resource | self           | Resource     | A Resource has a mandatory reference to itself.                                    |
-| `impacted_by_uri`    | Resource | impactedBy     | Event        | A Resource is impacted by the last applicable Events.                              |
 | `member_of_uri`      | Resource | memberOf       | Facility     | A Resource is a member of one of more Facilities (allowing for a shared resource). |
 | `located_at_uri`     | Resource | locatedAt      | Site         | A Resource is located at one Site.                                                 |
-| `depends_on_uris`    | Resource | dependsOn      | Resource     | A Resource can depend on zero or more Resources.                                   |
-| `has_dependent_uris` | Resource | hasDependent   | Resource     | A Resource can have zero or more dependent Resources.                              |
 
 ## Endpoints
+
 The following REST endpoints provide access to Resources available under the Status model:
 
 | Method | Path                                        | Description                                                                                   | Idempotency |
@@ -107,39 +101,6 @@ The following REST endpoints provide access to Resources available under the Fac
 |    GET | `/api/v1/facility/resources/{resource_id}`  | Retrieve a single resource by ID. Supports conditional requests.                              | Yes (safe)  |
 
 ## Request & Response Semantics
-
-### Headers
-**`Authorization` (request, string):**
-Sends credentials so the user agent can authenticate to the origin server; its value is scheme-specific 
-credentials for the realm of the requested resource. It can be sent pre-emptively or after a 
-`401 Unauthorized`; proxies MUST NOT modify it. For OAuth 2.0 bearer tokens, use the Bearer scheme: 
-`Authorization: Bearer <token>`. ([RFC Editor][6])
-
-**`If-Modified-Since` (request, HTTP-date):**
-Makes a `GET`/`HEAD` conditional on the selected representation being newer than the given date; if not newer, 
-the server SHOULD return `304 Not Modified` with just useful metadata. Recipients MUST ignore it if the date is
-invalid, if there are multiple values, if the method isn’t `GET`/`HEAD`, or if the resource lacks a modification 
-date. Caches typically derive it from a prior `Last-Modified`. ([RFC Editor][6])
-
-**`Last-Modified` (response, HTTP-date):**
-Provides the server’s timestamp for when the **selected representation** was last modified, to support conditional 
-requests and cache freshness evaluation. Servers SHOULD send it whenever they can determine a consistent 
-modification time, SHOULD generate it as close as possible to the response `Date`, and MUST NOT set a future time 
-relative to the server’s clock. ([RFC Editor][6])
-
-**`Content-Location` (response, URI):**
-Gives a URI that identifies a specific resource corresponding to the representation in the response body—i.e., 
-a `GET` on that URI (at response time) would yield the same representation. If it equals the target URI, treat 
-the body as a current representation of that resource; if it differs, the server asserts the body represents
-that other URI (commonly the more specific, negotiated variant for `GET`/`HEAD`). It’s representation metadata, 
-not a redirect target. ([RFC Editor][6])
-
-| Header              | Direction | Type      | Required | Notes                                                                                                                                                                                                                       |
-|---------------------| --------- |-----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Authorization`     | request   | string    | no       | `Bearer <token>`; RFC 6750. ([IETF Datatracker][3]).  Unauthenticated access may be allowed by provider.                                                                                                                    |
-| `If-Modified-Since` | request   | HTTP-date | no       | Conditional GET; on no change server returns **304** with no body. ([MDN Web Docs][4])                                                                                                                                      |
-| `Last-Modified`     | response  | HTTP-date | n/a      | Timestamp of last modification of the selected representation. ([RFC Editor][6])                                                                                                                                            |
-| `Content-Location`  | response  | URI       | n/a      | Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET. ([RFC Editor][6]) |
 
 ### Path params
 When a GET operation targets a single resource it can do this through use of path params.  The URL 
@@ -160,7 +121,6 @@ The endpoint also supports the `Accept` header and optional `If-Modified-Since` 
 | Parameter | Description                                                | Type/Format                                                                       | Default | Required |
 |-----------|------------------------------------------------------------|-----------------------------------------------------------------------------------|---------|----------|
 | `name` | Filter by resource name.                                      | string                                                                            | - | No |
-| `group` | Filter by group name.                                        | string                                                                            | - | No |
 | `resource_type` | Filter by resource type.                             | enum: `website`, `service`, `compute`, `system`, `storage`, `network`, `unknown`  | - | No |
 | `capability` | Filter by capability names.                             | array of strings                                                                  | - | No |
 | `current_status` | Filter by current status.                           | array of enum: `up`, `degraded`, `down`, `unknown`                                | - | No |
@@ -169,9 +129,7 @@ The endpoint also supports the `Accept` header and optional `If-Modified-Since` 
 | `limit` | Maximum number of records to return.  Defaults to 100.       | integer                                                                           | `100` | No |
 
 ### Security model (authN/authZ).
-Endpoints use OAuth 2.0 Bearer access tokens (`Authorization: Bearer …`).  Unauthenticated requests 
-yield **401** with `WWW-Authenticate: Bearer`, and authenticated callers without the necessary role 
-receive **403**. This follows RFC 6750 and HTTP semantics for 401/403. ([IETF Datatracker][3])
+Endpoints are unauthenticated for the *Facility* and *Status* API.
 
 ### State transitions / invariants
 
@@ -181,12 +139,10 @@ receive **403**. This follows RFC 6750 and HTTP semantics for 401/403. ([IETF Da
 
 ## Examples
 
-THis section contains a set of example `GET` operations on `resource` collections and individual items.
+This section contains a set of example `GET` operations on `resource` collections and individual items.
 Common errors are also presented.
 
 ### Successful response example(s)
-
-----
 
 #### _`resource` Collection GET `/api/v1/status/resources`_
 
@@ -295,10 +251,12 @@ semantics and MDN’s reference. ([RFC Editor][6])
 
 #### _`resource` Item GET (conditional GET via `modified_since` query parameter)_
 
-Using `modified_since` on a `GET` makes the request conditional similar to the `If-Modified-Since`.  
-The only difference is that `modified_since` specifies the date format as ISO 8601 standard date
-time.  Each `resource` contains a property named `last_modified` that is also in ISO 8601 standard
-date time format and mimics the `Last-Modified` functionality for that `resource`.
+Using `modified_since` on a `GET` makes the request conditional similar to the standard `If-Modified-Since`
+header: the server only sends the full representation if it has changed since the supplied date; otherwise 
+it replies 304 Not Modified with no message body. The only difference is that `modified_since` specifies 
+the date format as ISO 8601 standard date time.  Each `resource` contains a property named `last_modified`
+that is also in ISO 8601 standard date time format and mimics the standard `Last-Modified` header 
+functionality for that `resource`. ([RFC Editor][6])
 
 Request:
 
@@ -356,7 +314,7 @@ All error responses use media type `application/problem+json` and fields per RFC
   "detail": "resource_type must be from defined ENUM set.",
   "instance": "/api/v1/status/resources?resource_type=car",
   "invalid_params": [
-    { "name": "size", "reason": "resource_type must be from defined ENUM set." }
+    { "name": "resource_type", "reason": "resource_type must be from defined ENUM set." }
   ]
 }
 ```
