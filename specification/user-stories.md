@@ -1,5 +1,7 @@
 # 2. User Stories 
 
+The following user stories are written in the context of the IRI Facility and Status functionalities.
+
 [1] Jinnette is a Research Software Engineer (RSE) designing an application workflow to programmatically access resources within the ASCR Facilities Ecosystem through the new IRI Facility Status API.  Jinnette requires uninterrupted access to the API and its related services, and would like to programmatically determine:
 
 * The ASCR Facility that is associated with an API instance.  
@@ -30,7 +32,7 @@
 [4] Sébastien is DoE facility security administrator who is concerned about vulnerability aspects of the IRI Facility Status API and wants to ensure the system is operational, is behaving correctly, and remains secure.  Sébastien is concerned with the following types of bad actors:
 
 * A hacker attempting to gain unauthorized access to DoE facility resources through the IRI Facility Status API and steal resources or sensitive data.  
-* A hacker attempting to perform denial of service attacks on DoE facility resources to disrupt service availability, impacting a researcher’s ability to perform their science.  
+* A hacker attempting to perform denial-of-service attacks on DoE facility resources to disrupt service availability, impacting a researcher’s ability to perform their science.  
 * A Research Software Engineer (RSE) at a DoE user facility that has project allocation and is trying to game the system to jump their compute jobs to the front of the queue at an HPC facility.  
 * A Research Software Engineer (RSE) at a DoE user facility that has project allocation runs an inappropriate job on the system.
 
@@ -43,3 +45,16 @@
   * UNKNOWN — The component state is unknown.  
 * Access to telemetry data (metrics, logs, and traces) to troubleshoot failures and issues relating to latency of operations.  
 * Administrator level access to the API allows for a complete view of data relating to the system.
+
+The following user stories are written in the context of the IRI Facility Account functionalities.
+
+[6]
+
+The following user stories are written in the context of the IRI Facility Job Management functionalities.
+
+[7]
+
+The following user stories are written in the context of the IRI Facility File System functionalities.
+
+[8]
+

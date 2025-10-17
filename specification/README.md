@@ -11,6 +11,10 @@ Editor: John MacAuley
 
 Contributors: Ilya Baldin, Bjoern Enders, Carol Hawk, Gabor Torok, Justas Balcas, Addi Malviya Thakur, Paul Rich, Scott Campbell, Xi Yang, Thomas Uram, Tyler J. Skluzacek
 
+### OpenAPI specification for the Facility API suite **[openapi/](./openapi/)**
+
+- openapi_iri_facility_api_v1.json **[JSON](./openapi/openapi_iri_facility_api_v1.json)**
+- openapi_iri_facility_api_v1.yaml **[YAML](./openapi/openapi_iri_facility_api_v1.yaml)**
 
 # Document Organization
 
@@ -26,7 +30,7 @@ The specification follows a logical progression:
 
 # Contents
 
-### 1. Introduction **[introduction.md](./status-user-stories.md)**
+### 1. Introduction **[introduction.md](./introduction.md)**
 
 Introduction to the Facility Status API explaining its purpose and scope:
 - Overview of programmatic access to facility operational status
@@ -38,7 +42,7 @@ Introduction to the Facility Status API explaining its purpose and scope:
 
 Definitions of key terms used throughout the specification.
 
-### 2. User Stories **[status-user-stories.md](./status-user-stories.md)**
+### 2. User Stories **[user-stories.md](./user-stories.md)**
 
 User stories describing how different stakeholders interact with the IRI Facility Status API:
 - Jinnette - Research Software Engineer designing application workflows
@@ -47,20 +51,20 @@ User stories describing how different stakeholders interact with the IRI Facilit
 - Sébastien - DoE facility security administrator
 - Céline - DoE facility system administrator
 
-### 3. Requirements **[status-requirements.md](./status-requirements.md)**
+### 3. Requirements **[requirements.md](./requirements.md)**
 
 Detailed functional requirements for the facility status API including:
 - API technology and resource exposure requirements [R1-R15]
 - Search and query use cases
 - Resource retrieval patterns
 
-### 4. Design Requirements **[status-design-requirements.md](./status-design-requirements.md)**
+### 4. Design Requirements **[design-requirements.md](design-requirements.md)**
 
 - RESTful API design patterns
 - Self-describing and navigable API
 - OpenAPI documentation requirements
 
-### 5. Implementation Requirements **[status-design-requirements.md](./status-design-requirements.md)**
+### 5. Implementation Requirements **[implementation-requirements.md](implementation-requirements.md)**
 - OpenTelemetry implementation
 - Content type encodings (JSON/XML)
 - Security guidelines
@@ -95,11 +99,6 @@ Comprehensive specification for Resource objects including:
 - Standards references and changelog
 
 ## Supporting Materials
-
-### OpenAPI specification for the Facility API suite **[openapi/](./openapi/)**
-
- - openapi_iri_facility_api_v1.json **[JSON](./openapi/openapi_iri_facility_api_v1.json)**
- - openapi_iri_facility_api_v1.yaml **[YAML](./openapi/openapi_iri_facility_api_v1.yaml)**
 
 ### Images used within the document [images/](./images/)
 

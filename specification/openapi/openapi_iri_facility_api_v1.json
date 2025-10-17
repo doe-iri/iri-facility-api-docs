@@ -249,15 +249,6 @@
             }
           },
           {
-            "name": "group",
-            "in": "query",
-            "description": "The group parameter will filter resources based on group membership.  If group is specified then only resources that are a member of the specified group will be returned.",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "resource_type",
             "in": "query",
             "description": "Return only resources of this type.",
@@ -7888,11 +7879,6 @@
               "example": "https://example.com/api/v1/account/capabilities/b1ce8cd1-e8b8-4f77-b2ab-152084c70281"
             }
           },
-          "group": {
-            "type": "string",
-            "description": "The member resource group.",
-            "example": "PERLMUTTER"
-          },
           "current_status": {
             "type": "string",
             "description": "The current status of this resource at time of query.",
@@ -7903,12 +7889,6 @@
               "unknown"
             ],
             "example": "up"
-          },
-          "impacted_by_uri": {
-            "type": "string",
-            "format": "uri",
-            "description": "A hyperlink reference (URI) to the last event impacting this Resource (impactedBy).",
-            "example": "https://example.com/api/v1/status/events/03bdbf77-6f29-4f66-9809-7f4f77098171"
           },
           "located_at_uri": {
             "type": "string",
@@ -7921,30 +7901,11 @@
             "format": "uri",
             "description": "A hyperlink reference (URI) to facility managing this Resource (memberOf).",
             "example": "https://example.com/api/v1/facility"
-          },
-          "depends_on_uris": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "uri",
-              "description": "A hyperlink reference (URI) a Resource that this Resource depends on (dependsOn).",
-              "example": "https://example.com/api/v1/status/resources/b1ce8cd1-e8b8-4f77-b2ab-152084c70281"
-            }
-          },
-          "has_dependent_uris": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "uri",
-              "description": "A hyperlink reference (URI) to a Resource that depend on this Resource (hasDependent).",
-              "example": "https://example.com/api/v1/status/resources/8b61b346-b53c-4a8e-83b4-776eaa14cc67"
-            }
           }
         },
         "required": [
           "current_status",
           "id",
-          "impacted_by_uri",
           "last_modified",
           "name",
           "resource_type",
@@ -8413,11 +8374,6 @@
         "type": "object",
         "description": "Defines an allocation.",
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier for this allocation entry.",
-            "example": "98820b64-d3ac-4eff-8e74-80decd80b37c"
-          },
           "allocation": {
             "type": "number",
             "format": "float",
