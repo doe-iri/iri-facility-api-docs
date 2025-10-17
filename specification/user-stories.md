@@ -46,15 +46,29 @@ The following user stories are written in the context of the IRI Facility and St
 * Access to telemetry data (metrics, logs, and traces) to troubleshoot failures and issues relating to latency of operations.  
 * Administrator level access to the API allows for a complete view of data relating to the system.
 
-The following user stories are written in the context of the IRI Facility Account functionalities.
+The following user stories are written in the context of the IRI Facility Account functionalities. The stories assume that the accounting part of the IRI api returns all the projects a user is either the member of, or manages (as a PI or Program Manager.)
 
-[6]
+[6] David is a Research Software Engineer who wrote an experiment workflow. After verifying available compute resources via the status API, the workflow checks that the user has remaining compute time before submitting simulation jobs to the scheduler.
+
+* Download information about all the projects a user belongs to at the facility.
+* For each project, download the project allocations, showing how much compute time the project has and how much of that time has already been used up.
+* For each project allocation, the user can also download their own personal allocation. This information shows how much of the project's time has been allocated to the current user and how much of that time has been used up.
+
+[7] Olivia, a principal investigator at a DOE IRI Facility, wants to check her project's allocation usage and identify which users are consuming the most time and storage.
+
+* Download the project allocation data for project to see how much of the project's allocation has been used.
+* For a given project allocation, get all of the user allocations and sort them (on her laptop) to determine the top users by compute time and storage space.
+
+[8] Evelyn is a DOE program manager for the Fusion Energy Sciences (FES) program. She needs to identify which FES projects have exhausted their compute time allocations.
+
+* Download project information for every project under the FES program.
+* For each project, download the project allocations which contain allocated and used compute time and then sort the data locally, to see which projects have the smallest deltas.
 
 The following user stories are written in the context of the IRI Facility Job Management functionalities.
 
-[7]
+[9]
 
 The following user stories are written in the context of the IRI Facility File System functionalities.
 
-[8]
+[10]
 
