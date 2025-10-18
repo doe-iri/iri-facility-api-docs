@@ -1,4 +1,4 @@
-# 9. Incidents
+# 6.3. Incidents
 
 ## Overview
 An **Incident** represents a period of impaired behavior or outage affecting a **Resource**.

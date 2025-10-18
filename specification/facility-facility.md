@@ -1,4 +1,4 @@
-# Facility
+# 6.4 Facility
 
 ## Overview
 The **Facility** endpoint returns metadata about the facility itself and discovery links to related resources

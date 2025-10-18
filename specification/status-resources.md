@@ -1,4 +1,4 @@
-# 7. Resource
+# 6.1 Resource
 
 ## Overview
 A *Resource* is an entity that either directly delivers a service to an end user or application 
@@ -8,13 +8,6 @@ server, routers, switches, power supplies).  *Resources* are typed, managed, and
 represent the components making up a system’s operational fabric. They are central to service modeling, 
 observability, and incident response. A *Resource* will have an associated operational state, events, 
 and incidents.
-
-A *Resource* represents a facility component surfaced by a status API so clients can discover and monitor
-its identity, description, and last modification timestamp. This document standardizes the representation
-and endpoints using OpenAPI 3.1 aligned with JSON Schema 2020-12. 
-
-OpenAPI 3.1 was chosen because it is fully compatible with JSON Schema 2020-12, which improves interoperability
-and validation in tooling. ([OpenAPI Initiative Publications][1])
 
 ## Attributes
 A `resource` is defined with the following attributes:
@@ -36,45 +29,40 @@ A `resource` is defined with the following attributes:
 
 The type of Resource based on its role at the Facility.
 ```yaml
-    "resource_type": {
-      "type": "string",
-      "description": "The type of resource.",
-      "enum": [
-        "website",
-        "service",
-        "compute",
-        "system",
-        "storage",
-        "network",
-        "unknown"
-      ],
-      "example": "system"
-    }
+    ResourceType:
+      type: string
+      description: The type of resource.
+      enum:
+        - website
+        - service
+        - compute
+        - system
+        - storage
+        - network
+        - unknown
+      example: system
 ```
 
 ### ENUM StatusType
 
 The possible status values for a resource.  If there is no last Event associated with the resource to indicate a current status, then currentStatus defaults to "unknown".
 ```yaml
-    "current_status": {
-      "type": "string",
-      "description": "The current status of this resource at time of query.",
-      "enum": [
-        "up",
-        "degraded",
-        "down",
-        "unknown"
-      ],
-      "example": "up"
-    },
+    StatusType:
+      type: string
+      description: The current status of this resource at time of query.
+      enum:
+        - up
+        - degraded
+        - down
+        - unknown
+      example: up
 ```
 
 ## Relationships to other resources
 
 The `resource` has a set of well-defined relationships that allows for navigation between objects based on 
 relationship type.  In this model the type relationship is represented by the attribute name, and the 
-target object of the relationship is represented by a URI (`*_uri`).  Relationships with 1-to-many 
-cardinalities are represented as lists of URI (`*_uris`). 
+target object of the relationship is represented by a URI (`*_uri`). 
 
 The following table describes the relationships contained in `resource` and their destination object type.
 
@@ -93,13 +81,6 @@ The following REST endpoints provide access to Resources available under the Sta
 |    GET | `/api/v1/status/resources`                  | Retrieve a collection of resources (paginated and filterable). Supports conditional requests. | Yes (safe)  |
 |    GET | `/api/v1/status/resources/{resource_id}`    | Retrieve a single resource by ID. Supports conditional requests.                              | Yes (safe)  |
 
-The following REST endpoints provide access to Resources available under the Facility model:
-
-| Method | Path                                        | Description                                                                                   | Idempotency |
-|-------:|:--------------------------------------------|:----------------------------------------------------------------------------------------------|:------------|
-|    GET | `/api/v1/facility/resources`                | Retrieve a collection of resources (paginated and filterable). Supports conditional requests. | Yes (safe)  |
-|    GET | `/api/v1/facility/resources/{resource_id}`  | Retrieve a single resource by ID. Supports conditional requests.                              | Yes (safe)  |
-
 ## Request & Response Semantics
 
 ### Path params
@@ -108,27 +89,27 @@ template `/api/v1/status/resources/{resource_id}` is used to focus the GET opera
 single `resource` object identified by `{resource_id}`.
 
   | Name          | In   | Type          | Required | Description                 |
-  | ------------- | ---- | ------------- | -------- | --------------------------- |
-  | `resource_id` | path | string (UUID) | yes      | Identifier of the resource. |
+  | ------------- | ---- | ------------- | -------- |-----------------------------|
+  | `resource_id` | path | string (UUID) | yes      | Identifier of the Resource. |
 
 ### Query params (collection)
+
 All query parameters are optional, however, paging is automatically enforced using the `limit` and `offset`
 query parameter defaults.  This will restrict any unparameterized GET operation to return the first 100
-`resource` objects sorted by `id`. 
+`resource` objects sorted by `id`.
 
-The endpoint also supports the `Accept` header and optional `If-Modified-Since` header (RFC 1123 format) for conditional requests as described in the *Headers* section.
-
-| Parameter | Description                                                | Type/Format                                                                       | Default | Required |
-|-----------|------------------------------------------------------------|-----------------------------------------------------------------------------------|---------|----------|
-| `name` | Filter by resource name.                                      | string                                                                            | - | No |
-| `resource_type` | Filter by resource type.                             | enum: `website`, `service`, `compute`, `system`, `storage`, `network`, `unknown`  | - | No |
-| `capability` | Filter by capability names.                             | array of strings                                                                  | - | No |
-| `current_status` | Filter by current status.                           | array of enum: `up`, `degraded`, `down`, `unknown`                                | - | No |
-| `modified_since` | Filter resources modified since timestamp.          | ISO 8601 timestamp                                                                | - | No |
-| `offset` | Number of records to skip for pagination.  Defaults to 0.   | integer                                                                           | `0` | No |
-| `limit` | Maximum number of records to return.  Defaults to 100.       | integer                                                                           | `100` | No |
+| Parameter        | Description                                               | Type/Format                                                                       | Default | Required |
+|------------------|-----------------------------------------------------------|-----------------------------------------------------------------------------------|---------|----------|
+| `name`           | Filter by resource name.                                  | string                                                                            | - | No |
+| `resource_type`  | Filter by resource type.                                  | enum: `website`, `service`, `compute`, `system`, `storage`, `network`, `unknown`  | - | No |
+| `capability`     | Filter by capability names.                               | array of strings                                                                  | - | No |
+| `current_status` | Filter by current status.                                 | array of enum: `up`, `degraded`, `down`, `unknown`                                | - | No |
+| `modified_since` | Filter resources modified since timestamp (ISO 8601).               | date-time                                                                | - | No |
+| `offset`         | Number of records to skip for pagination.  Defaults to 0. | integer                                                                           | `0` | No |
+| `limit`          | Maximum number of records to return.  Defaults to 100.    | integer                                                                           | `100` | No |
 
 ### Security model (authN/authZ).
+
 Endpoints are unauthenticated for the *Facility* and *Status* API.
 
 ### State transitions / invariants
@@ -142,17 +123,34 @@ Endpoints are unauthenticated for the *Facility* and *Status* API.
 This section contains a set of example `GET` operations on `resource` collections and individual items.
 Common errors are also presented.
 
+| Operation                    | HTTP Request                                             | Description                                                                     
+|:-----------------------------|:---------------------------------------------------------|:--------------------------------------------------------------------------------|
+| getResources                 | GET `/api/v1/status/resources`                           | Retrieve a collection of resources.                                             |
+| getResources(resource_id)    | GET `/api/v1/status/resources/{resource_id}`             | Retrieve a single resource by `resource_id`.                                    |
+| getResources(name)           | GET `/api/v1/status/events?name={string}`                | Retrieve a collection of resources with the specified `name`.                   |
+| getResources(current_status) | GET `/api/v1/status/events?current_status={StatusType}`  | Retrieve a collection of resources with the specified `current_status`.         |
+| getResources(modified_since) | GET `/api/v1/status/events?modified_since={date-time}`   | Retrieve a collection of resources that have been modified since `modified_since`. |
+
 ### Successful response example(s)
 
-#### _`resource` Collection GET `/api/v1/status/resources`_
+This section provides a list of example `GET` operations and associated responses.
+
+-----
+
+#### Operation: _getResources()_
+* GET `/api/v1/status/resources` (paginated)
+* Returns: `resource` Collection
+
+This operation returns a collection of `resource` filtered by query parameters.  In this specific example
+paging query parameters are used to get the first resource.
 
 Request:
 
-`% curl -sS -H "Accept: application/json" -i "https://iri.example.com/api/v1/status/resources?limit=1"`
+```% curl -sS -H "Accept: application/json" -i "https://iri.example.com/api/v1/status/resources?limit=1"```
 
 Response **200 OK**:
 
-```json
+```http
 HTTP/1.1 200
 Last-Modified: Tue, 14 Oct 2025 10:08:39 GMT
 Content-Location: https://iri.example.com/api/v1/status/resources
@@ -161,7 +159,8 @@ Content-Type: application/json
 Transfer-Encoding: chunked
 Date: Tue, 14 Oct 2025 15:22:37 GMT
 Server: DOE IRI Demo Server
-
+```
+```json
 [ {
 "id" : "057c3750-4ba1-4b51-accf-b160be683d80",
 "self_uri" : "https://iri.example.com/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80",
@@ -176,17 +175,52 @@ Server: DOE IRI Demo Server
 } ]
 ```
 
-----
+-----
 
-#### _`resource` Item GET `/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80`_
+#### Operation: _getResourceById(resource_id)_
+* GET `/api/v1/status/resource/{resource_id}`
+* Returns: `resource`
+
+This operation returns the `resource` identified by `resource_id` if it exists.
 
 Request:
 
-`% curl -sS -H "Accept: application/json" -i "https://iri.example.com/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80"`
+```http
+% curl -sS -H "Accept: application/json" -v -i "http://iri.example.com/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80"
+
+GET /api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80 HTTP/1.1
+Host: iri.example.com
+User-Agent: curl/8.1.2
+Accept: application/json
+```
+
+-----
+
+#### Operation: _getResources(modified_since)_
+* GET `/api/v1/status/resources?modified_since={date-time}` (paginated)
+* Returns: `resource` Collection
+
+Using `modified_since` on a `GET` makes the request conditional similar to the standard `If-Modified-Since`
+header: the server only sends the full representation if it has changed since the supplied date; otherwise
+it replies 304 Not Modified with no message body. The only difference is that `modified_since` specifies
+the date format as ISO 8601 standard date time.  Each `resource` contains a property named `last_modified`
+that is also in ISO 8601 standard date time format and mimics the standard `Last-Modified` header
+functionality for that `resource`. ([RFC Editor][6])
+
+Request:
+
+```http
+% curl -sS -H "Accept: application/json" -v -i "https://iri.example.com/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80?modified_since=2025-10-13T23:00:48-04:00"
+
+GET /api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80?modified_since=2025-10-13T23:00:48-04:00 HTTP/1.1
+Host: localhost:8081
+User-Agent: curl/8.1.2
+Accept: application/json
+```
 
 Response **200 OK**:
 
-```json
+```http
 HTTP/1.1 200
 Last-Modified: Tue, 14 Oct 2025 03:00:48 GMT
 Content-Location: https://iri.example.com/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80
@@ -195,7 +229,8 @@ Content-Type: application/json
 Transfer-Encoding: chunked
 Date: Tue, 14 Oct 2025 15:31:15 GMT
 Server: DOE IRI Demo Server
-
+```
+```json
 {
   "id" : "057c3750-4ba1-4b51-accf-b160be683d80",
   "self_uri" : "https://iri.example.com/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80",
@@ -210,20 +245,12 @@ Server: DOE IRI Demo Server
 }
 ```
 
-----
-
-#### _`resource` Item GET (conditional GET via `modified_since` query parameter)_
-
-Using `modified_since` on a `GET` makes the request conditional similar to the standard `If-Modified-Since`
-header: the server only sends the full representation if it has changed since the supplied date; otherwise 
-it replies 304 Not Modified with no message body. The only difference is that `modified_since` specifies 
-the date format as ISO 8601 standard date time.  Each `resource` contains a property named `last_modified`
-that is also in ISO 8601 standard date time format and mimics the standard `Last-Modified` header 
-functionality for that `resource`. ([RFC Editor][6])
+Here is a second example where a 304 status code is returned since the `resource` has not been modified 
+since the query date-time.
 
 Request:
 
-```json
+```http
 % curl -sS -H "Accept: application/json" -v -i "https://iri.example.com/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80?modified_since=2025-10-13T23:00:48-04:00"
 
 GET /api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80?modified_since=2025-10-13T23:00:48-04:00 HTTP/1.1
@@ -234,7 +261,7 @@ Accept: application/json
 
 Response **304 Not Modified**:
 
-```json
+```http
 HTTP/1.1 304 
 Content-Location: https://iri.example.com/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80
 Last-Modified: Tue, 14 Oct 2025 03:00:48 GMT
@@ -360,7 +387,7 @@ info:
     url: https://opensource.org/license/bsd-3-clause/
   version: v1
 servers:
-  - url: http://localhost:8081
+  - url: http://iri.example.com
     description: Generated server url
 tags:
   - name: IRI Status API
@@ -369,7 +396,7 @@ tags:
 
       It should be noted that the operational status of a resource is not an indication of a commitment to provide service, only that the resource is in the described operational state.
 
-      The Facility and Status API is not intended for reporting or monitoring purposes; it does not support asynchronous logging or alerting capabilities, and should not be used to derive any type of up or downtime metrics. Instead, its primary focus is on delivering simple, on-demand access to facility resource status, and scheduled maintenance events.
+      The Facility Status API is not intended for reporting or monitoring purposes; it does not support asynchronous logging or alerting capabilities, and should not be used to derive any type of up or downtime metrics. Instead, its primary focus is on delivering simple, on-demand access to facility resource status, and scheduled maintenance events.
 paths:
   /api/v1/status/resources:
     get:
@@ -428,14 +455,6 @@ paths:
           schema:
             type: integer
             default: 100
-        - name: group
-          in: query
-          description: The group parameter will filter resources based on group membership.  If
-            group is specified then only resources that are a member of the specified
-            group will be returned.
-          required: false
-          schema:
-            type: string
         - name: resource_type
           in: query
           description: Return only resources of this type.
@@ -745,7 +764,7 @@ components:
           format: uri
           default: about:blank
           description: A URI reference that identifies the problem type.
-          example: https://iri.example.com/notFound
+          example: https://example.com/notFound
         title:
           type: string
           description: "A short, human-readable summary of the problem type."
@@ -768,7 +787,7 @@ components:
           format: uri
           description: A URI reference that identifies the specific occurrence of
             the problem.
-          example: http://localhost:8081/api/v1/status/events/f9d6e700-1807-45bd-9a52-e81c32d40c5a
+          example: http://iri.example.com/api/v1/status/events/f9d6e700-1807-45bd-9a52-e81c32d40c5a
       required:
         - instance
         - status
@@ -788,7 +807,7 @@ components:
           type: string
           format: uri
           description: A hyperlink reference (URI) to this resource (self)
-          example: https://iri.example.com/api/v1/status/events/03bdbf77-6f29-4f66-9809-7f4f77098171
+          example: https://example.com/api/v1/status/events/03bdbf77-6f29-4f66-9809-7f4f77098171
         name:
           type: string
           description: The long name of the resource.
@@ -823,11 +842,7 @@ components:
             format: uri
             description: Hyperlink references (URIs) to capabilities this resource
               provides (hasCapability).
-            example: https://iri.example.com/api/v1/account/capabilities/b1ce8cd1-e8b8-4f77-b2ab-152084c70281
-        group:
-          type: string
-          description: The member resource group.
-          example: PERLMUTTER
+            example: https://example.com/api/v1/account/capabilities/b1ce8cd1-e8b8-4f77-b2ab-152084c70281
         current_status:
           type: string
           description: The current status of this resource at time of query.
@@ -837,44 +852,21 @@ components:
             - down
             - unknown
           example: up
-        impacted_by_uri:
-          type: string
-          format: uri
-          description: A hyperlink reference (URI) to the last event impacting this
-            Resource (impactedBy).
-          example: https://iri.example.com/api/v1/status/events/03bdbf77-6f29-4f66-9809-7f4f77098171
         located_at_uri:
           type: string
           format: uri
           description: A hyperlink reference (URI) to the Site containing this Resource
             (locatedAt).
-          example: https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45
+          example: https://example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45
         member_of_uri:
           type: string
           format: uri
           description: A hyperlink reference (URI) to facility managing this Resource
             (memberOf).
-          example: https://iri.example.com/api/v1/facility
-        depends_on_uris:
-          type: array
-          items:
-            type: string
-            format: uri
-            description: A hyperlink reference (URI) a Resource that this Resource
-              depends on (dependsOn).
-            example: https://iri.example.com/api/v1/status/resources/b1ce8cd1-e8b8-4f77-b2ab-152084c70281
-        has_dependent_uris:
-          type: array
-          items:
-            type: string
-            format: uri
-            description: A hyperlink reference (URI) to a Resource that depend on
-              this Resource (hasDependent).
-            example: https://iri.example.com/api/v1/status/resources/8b61b346-b53c-4a8e-83b4-776eaa14cc67
+          example: https://example.com/api/v1/facility
       required:
         - current_status
         - id
-        - impacted_by_uri
         - last_modified
         - name
         - resource_type
