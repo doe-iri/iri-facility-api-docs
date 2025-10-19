@@ -528,11 +528,9 @@ semantics. ([RFC Editor][6])
 
 #### Operation: _getResourceByEvent(event_id)_
 * GET `/api/v1/status/events/{event_id}/resource`
-* Returns: `event` Item
+* Returns: `resource` Item
 
-This operation returns a collection of `event` items filtered by the query parameters `from` and `to`
-providing a date range for occurrence.  Any `event` occurring between these two date-times will be
-returned.
+This operation returns the single `resource` item impacted by this `event`.
 
 Request:
 
@@ -557,7 +555,82 @@ Transfer-Encoding: chunked
 Date: Sat, 18 Oct 2025 13:28:32 GMT
 Server: DOE IRI Demo Server
 ```
-```json```
+```json
+{
+  "id": "29ea05ad-86de-4df8-b208-f0691aafbaa2",
+  "self_uri": "https://iri.example.com/api/v1/status/resources/29ea05ad-86de-4df8-b208-f0691aafbaa2",
+  "name": "Scratch",
+  "description": "The Perlmutter Scratch File System is an all-flash file system.",
+  "last_modified": "2025-10-19T00:11:49.000Z",
+  "resource_type": "storage",
+  "current_status": "up",
+  "located_at_uri": "https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45",
+  "member_of_uri": "https://iri.example.com/api/v1/facility"
+}
+```
+
+-----
+
+#### Operation: _getIncidentByEvent(event_id)_
+* GET `/api/v1/status/events/{event_id}/incident`
+* Returns: `incident` Item
+
+This operation returns the `incident` item that generated the `event` item through which it is reference.
+
+Request:
+
+```http
+% curl -sS -H "Accept: application/json" -v -i "https://iri.example.com/api/v1/status/events/04a89656-32e2-4b5b-9af6-4fb1efc83a63/incident" 
+
+GET /api/v1/status/events/04a89656-32e2-4b5b-9af6-4fb1efc83a63/incident HTTP/1.1
+Host: iri.example.com
+User-Agent: curl/8.1.2
+Accept: application/json
+```
+
+Response **200 OK**:
+
+```http
+HTTP/1.1 200 
+Last-Modified: Sun, 29 Jun 2025 12:34:25 GMT
+Content-Location: https://iri.example.com/api/v1/status/events/04a89656-32e2-4b5b-9af6-4fb1efc83a63/incident
+vary: accept-encoding
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sun, 19 Oct 2025 00:19:12 GMT
+Server: DOE IRI Demo Server
+```
+```json
+{
+  "id": "beb13cb0-1b06-4daa-bde4-bda04aa677a8",
+  "self_uri": "https://iri.example.com/api/v1/status/incidents/beb13cb0-1b06-4daa-bde4-bda04aa677a8",
+  "name": "unplanned outage on group perlmutter",
+  "description": "Auto-generated incident of type unplanned",
+  "last_modified": "2025-06-29T12:34:25.000Z",
+  "status": "down",
+  "type": "unplanned",
+  "start": "2025-06-29T04:34:25.272Z",
+  "end": "2025-06-29T12:34:25.272Z",
+  "resolution": "completed",
+  "resource_uris": [
+    "https://iri.example.com/api/v1/status/resources/f8a06086-b79b-4f45-beec-abb8bee38fa1",
+    "https://iri.example.com/api/v1/status/resources/29ea05ad-86de-4df8-b208-f0691aafbaa2",
+    "https://iri.example.com/api/v1/status/resources/b1ce8cd1-e8b8-4f77-b2ab-152084c70281",
+    "https://iri.example.com/api/v1/status/resources/8b61b346-b53c-4a8e-83b4-776eaa14cc67"
+  ],
+  "event_uris": [
+    "https://iri.example.com/api/v1/status/events/093c403b-c709-4b77-9223-446b050bc8a8",
+    "https://iri.example.com/api/v1/status/events/04a89656-32e2-4b5b-9af6-4fb1efc83a63",
+    "https://iri.example.com/api/v1/status/events/cd5a8926-5180-48f4-8886-061c6cb194fa",
+    "https://iri.example.com/api/v1/status/events/a5b22476-f236-45a2-ae49-c2b30e86ec50",
+    "https://iri.example.com/api/v1/status/events/fb44095d-50a6-4599-b062-a8aaa048eae8",
+    "https://iri.example.com/api/v1/status/events/a3b48933-cc81-456d-a362-79aab117a962",
+    "https://iri.example.com/api/v1/status/events/5b76a2b3-4acc-43a8-98ce-fc6504a7dbdd",
+    "https://iri.example.com/api/v1/status/events/a23cf4df-ddf3-449a-b04f-4d883accdd62"
+  ]
+}
+```
+
 -----
 
 ### Error examples (Problem Details, RFC 9457)

@@ -146,7 +146,14 @@ paging query parameters are used to get the first resource.
 
 Request:
 
-```% curl -sS -H "Accept: application/json" -i "https://iri.example.com/api/v1/status/resources?limit=1"```
+```http
+% curl -sS -H "Accept: application/json" -v -i "https://iri.example.com/api/v1/status/resources?limit=1"
+
+GET /api/v1/status/resources?limit=1 HTTP/1.1
+Host: iri.example.com
+User-Agent: curl/8.1.2
+Accept: application/json
+```
 
 Response **200 OK**:
 
@@ -161,18 +168,21 @@ Date: Tue, 14 Oct 2025 15:22:37 GMT
 Server: DOE IRI Demo Server
 ```
 ```json
-[ {
-"id" : "057c3750-4ba1-4b51-accf-b160be683d80",
-"self_uri" : "https://iri.example.com/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80",
-"name" : "Data Transfer Nodes",
-"description" : "The NERSC data transfer nodes provide access to Global Homes, Global Common, the Community File System (CFS), Perlmutter Scratch, and HPSS.",
-"last_modified" : "2025-10-14T03:00:48.000Z",
-"resource_type" : "compute",
-"group" : "storage",
-"current_status" : "up",
-"impacted_by_uri" : "https://iri.example.com/api/v1/status/events/6364a479-400c-481f-9980-6c1dd2947958",
-"member_of_uri" : "https://iri.example.com/api/v1/facility"
-} ]
+[
+  {
+    "id": "057c3750-4ba1-4b51-accf-b160be683d80",
+    "self_uri": "https://iri.example.com/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80",
+    "name": "Data Transfer Nodes",
+    "description": "The NERSC data transfer nodes provide access to Global Homes, Global Common, the Community File System (CFS), Perlmutter Scratch, and HPSS.",
+    "last_modified": "2025-10-14T03:00:48.000Z",
+    "resource_type": "compute",
+    "group": "storage",
+    "current_status": "up",
+    "impacted_by_uri": "https://iri.example.com/api/v1/status/events/6364a479-400c-481f-9980-6c1dd2947958",
+    "member_of_uri": "https://iri.example.com/api/v1/facility",
+    "located_at_uri": "https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45"
+  }
+]
 ```
 
 -----
@@ -194,6 +204,113 @@ User-Agent: curl/8.1.2
 Accept: application/json
 ```
 
+Response **200 OK**:
+
+```http
+HTTP/1.1 200
+Last-Modified: Sat, 18 Oct 2025 15:20:15 GMT
+Content-Location: https://iri.example.com/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80
+vary: accept-encoding
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 18 Oct 2025 16:14:53 GMT
+Server: DOE IRI Demo Server
+```
+```json
+{
+  "id" : "057c3750-4ba1-4b51-accf-b160be683d80",
+  "self_uri" : "https://iri.example.com/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80",
+  "name" : "Data Transfer Nodes",
+  "description" : "The NERSC data transfer nodes provide access to Global Homes, Global Common, the Community File System (CFS), Perlmutter Scratch, and HPSS.",
+  "last_modified" : "2025-10-18T15:20:15.000Z",
+  "resource_type" : "compute",
+  "current_status" : "up",
+  "member_of_uri" : "https://iri.example.com/api/v1/facility",
+  "located_at_uri": "https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45"
+}
+```
+
+-----
+
+#### Operation: _getResources(name)_
+* GET `/api/v1/status/resources?name={string}` (paginated)
+* Returns: `resources` Collection
+
+This operation returns a collection of `resources` filtered by the query parameter `name`.
+
+Request:
+
+```http
+% curl -sS -H "Accept: application/json" -v -i "https://iri.example.com/api/v1/status/resources?name=Scratch"
+
+GET /api/v1/status/resources?name=Scratch HTTP/1.1
+Host: iri.example.com
+User-Agent: curl/8.1.2
+Accept: application/json
+```
+
+Response **200 OK**:
+
+```http
+HTTP/1.1 200 
+Last-Modified: Sat, 18 Oct 2025 22:13:06 GMT
+Content-Location: https://iri.example.com/api/v1/status/resources
+vary: accept-encoding
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 18 Oct 2025 23:35:28 GMT
+Server: DOE IRI Demo Server
+```
+```json
+[
+  {
+    "id": "29ea05ad-86de-4df8-b208-f0691aafbaa2",
+    "self_uri": "https://iri.example.com/api/v1/status/resources/29ea05ad-86de-4df8-b208-f0691aafbaa2",
+    "name": "Scratch",
+    "description": "The Perlmutter Scratch File System is an all-flash file system.",
+    "last_modified": "2025-10-18T22:13:06.000Z",
+    "resource_type": "storage",
+    "current_status": "up",
+    "member_of_uri": "https://iri.example.com/api/v1/facility",
+    "located_at_uri": "https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45"
+  }
+]
+```
+
+-----
+#### Operation: _getResources(current_status)_
+* GET `/api/v1/status/resources?current_status={StatusType}` (paginated)
+* Returns: `resource` Collection
+
+This operation returns a collection of `resource` filtered by the query parameter current_status.
+
+Request:
+
+```http
+% curl -sS -H "Accept: application/json" -v -i "https://iri.example.com/api/v1/status/resources?current_status=down"
+
+GET /api/v1/status/resources?current_status=down HTTP/1.1
+Host: iri.example.com
+User-Agent: curl/8.1.2
+Accept: application/json
+```
+
+Response **200 OK**:
+
+```http
+HTTP/1.1 200 
+Last-Modified: Sat, 18 Oct 2025 22:13:06 GMT
+Content-Location: https://iri.example.com/api/v1/status/resources
+vary: accept-encoding
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 18 Oct 2025 23:40:26 GMT
+Server: DOE IRI Demo Server
+```
+```json
+[ ]
+```
+
 -----
 
 #### Operation: _getResources(modified_since)_
@@ -213,7 +330,7 @@ Request:
 % curl -sS -H "Accept: application/json" -v -i "https://iri.example.com/api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80?modified_since=2025-10-13T23:00:48-04:00"
 
 GET /api/v1/status/resources/057c3750-4ba1-4b51-accf-b160be683d80?modified_since=2025-10-13T23:00:48-04:00 HTTP/1.1
-Host: localhost:8081
+Host: iri.example.com
 User-Agent: curl/8.1.2
 Accept: application/json
 ```
@@ -241,7 +358,8 @@ Server: DOE IRI Demo Server
   "group" : "storage",
   "current_status" : "up",
   "impacted_by_uri" : "https://iri.example.com/api/v1/status/events/6364a479-400c-481f-9980-6c1dd2947958",
-  "member_of_uri" : "https://iri.example.com/api/v1/facility"
+  "member_of_uri" : "https://iri.example.com/api/v1/facility",
+  "located_at_uri": "https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45"
 }
 ```
 
