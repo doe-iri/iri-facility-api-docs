@@ -764,18 +764,21 @@
             }
           },
           {
-            "name": "short_name",
+            "name": "resource_uris",
             "in": "query",
-            "description": "The short name of the resource.",
+            "description": "A list of resources to match.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {
-            "name": "resources",
+            "name": "event_uris",
             "in": "query",
-            "description": "A list of resources to match.",
+            "description": "A list of event to match.",
             "required": false,
             "schema": {
               "type": "array",
@@ -1120,15 +1123,15 @@
         }
       }
     },
-    "/api/v1/status/incidents/{incident_id}/events": {
+    "/api/v1/status/incidents/{incident_id}/resources": {
       "get": {
         "tags": [
-          "getEventsByIncident",
-          "IRI Status API"
+          "IRI Status API",
+          "getResourcesByIncident"
         ],
-        "summary": "Get the events associated with the specified incident.",
-        "description": "RReturns the events associated with the specified incident.",
-        "operationId": "getEventsByIncident",
+        "summary": "Get the resources associated with the specified incident.",
+        "description": "Returns the resources associated with the specified incident.",
+        "operationId": "getResourceByIncident",
         "parameters": [
           {
             "name": "Accept",
@@ -1229,7 +1232,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Event"
+                    "$ref": "#/components/schemas/Resource"
                   }
                 }
               }
@@ -6168,7 +6171,7 @@
           },
           "status": {
             "type": "string",
-            "description": "The status of the resource associated with this incident.",
+            "description": "The status of the Resource associated with this Incident.",
             "enum": [
               "up",
               "degraded",
@@ -6179,7 +6182,7 @@
           },
           "type": {
             "type": "string",
-            "description": "The type of incident.",
+            "description": "The type of Incident.",
             "enum": [
               "planned",
               "unplanned",
@@ -6190,19 +6193,19 @@
           "start": {
             "type": "string",
             "format": "date-time",
-            "description": "The date this incident started, or is predicted to start. Format follows the ISO 8601 standard with timezone offsets.",
+            "description": "The date this Incident started, or is predicted to start. Format follows the ISO 8601 standard with timezone offsets.",
             "example": "2023-10-17T11:02:31.690-00:00"
           },
           "end": {
             "type": "string",
             "format": "date-time",
-            "description": "The date this incident ended, or is predicted to end.  Format follows the ISO 8601 standard with timezone offsets.",
+            "description": "The date this Incident ended, or is predicted to end.  Format follows the ISO 8601 standard with timezone offsets.",
             "example": "2023-10-19T11:02:31.690-00:00"
           },
           "resolution": {
             "type": "string",
             "default": "pending",
-            "description": "The resolution for this incident.",
+            "description": "The resolution for this Incident.",
             "enum": [
               "unresolved",
               "cancelled",
@@ -6235,7 +6238,9 @@
           "id",
           "last_modified",
           "name",
-          "self_uri"
+          "self_uri",
+          "start",
+          "type"
         ]
       },
       "Event": {

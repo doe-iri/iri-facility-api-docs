@@ -27,11 +27,12 @@ A `resource` is defined with the following attributes:
 
 ### ENUM ResourceType
 
-The type of Resource based on its role at the Facility.
+The type of `resource` based on its role at the Facility.
+
 ```yaml
     ResourceType:
       type: string
-      description: The type of resource.
+      description: The type of Resource.
       enum:
         - website
         - service
@@ -45,11 +46,12 @@ The type of Resource based on its role at the Facility.
 
 ### ENUM StatusType
 
-The possible status values for a resource.  If there is no last Event associated with the resource to indicate a current status, then currentStatus defaults to "unknown".
+The possible status values for a `resource`.  If there is no last Event associated with the `resource` to indicate a current status, then currentStatus defaults to `unknown`.
+
 ```yaml
     StatusType:
       type: string
-      description: The current status of this resource at time of query.
+      description: The current status of this Resource at time of query.
       enum:
         - up
         - degraded
@@ -84,7 +86,7 @@ The following REST endpoints provide access to Resources available under the Sta
 ## Request & Response Semantics
 
 ### Path params
-When a GET operation targets a single resource it can do this through use of path params.  The URL 
+When a GET operation targets a single `resource` it can do this through use of path params.  The URL 
 template `/api/v1/status/resources/{resource_id}` is used to focus the GET operation to return a 
 single `resource` object identified by `{resource_id}`.
 
@@ -995,8 +997,7 @@ components:
 
 * **Versioning rationale.** The API is versioned under `/api/v1` to allow additive, backward-compatible evolution following common REST versioning practices while keeping path stability. (OpenAPI 3.1 is used to describe the interface.) ([OpenAPI Initiative Publications][1])
 * **Pagination/filtering rules.** Page-based query parameters (`offset`, `limit`) are provided so clients can traverse pages by relation rather than by constructing URLs. ([IETF Datatracker][2])
-* **Sorting rules.** `sort` uses `<field>,<direction>`; unrecognized fields are rejected with **400**.
-* **Cachingvrules.** Clients may send `If-Modified-Since` on no changes the server responds **304** with no body. ([RFC Editor][6])
+- **Filtering.** `from`/`to` filter on `occurred_at`; `modified_since` filters on `last_modified`.
 
 ## Changelog
 

@@ -616,15 +616,17 @@ paths:
         schema:
           type: string
           format: date-time
-      - name: short_name
-        in: query
-        description: The short name of the resource.
-        required: false
-        schema:
-          type: string
-      - name: resources
+      - name: resource_uris
         in: query
         description: A list of resources to match.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: event_uris
+        in: query
+        description: A list of event to match.
         required: false
         schema:
           type: array
@@ -905,14 +907,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /api/v1/status/incidents/{incident_id}/events:
+  /api/v1/status/incidents/{incident_id}/resources:
     get:
       tags:
-      - getEventsByIncident
       - IRI Status API
-      summary: Get the events associated with the specified incident.
-      description: RReturns the events associated with the specified incident.
-      operationId: getEventsByIncident
+      - getResourcesByIncident
+      summary: Get the resources associated with the specified incident.
+      description: Returns the resources associated with the specified incident.
+      operationId: getResourceByIncident
       parameters:
       - name: Accept
         in: header
@@ -1000,7 +1002,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Event"
+                  $ref: "#/components/schemas/Resource"
         "304":
           description: Not Modified - The requested resource was not modified.
           headers:
@@ -5054,7 +5056,7 @@ components:
           example: 2025-03-11T07:28:24.000−00:00
         status:
           type: string
-          description: The status of the resource associated with this incident.
+          description: The status of the Resource associated with this Incident.
           enum:
           - up
           - degraded
@@ -5063,7 +5065,7 @@ components:
           example: down
         type:
           type: string
-          description: The type of incident.
+          description: The type of Incident.
           enum:
           - planned
           - unplanned
@@ -5072,19 +5074,19 @@ components:
         start:
           type: string
           format: date-time
-          description: "The date this incident started, or is predicted to start.\
+          description: "The date this Incident started, or is predicted to start.\
             \ Format follows the ISO 8601 standard with timezone offsets."
           example: 2023-10-17T11:02:31.690-00:00
         end:
           type: string
           format: date-time
-          description: "The date this incident ended, or is predicted to end.  Format\
+          description: "The date this Incident ended, or is predicted to end.  Format\
             \ follows the ISO 8601 standard with timezone offsets."
           example: 2023-10-19T11:02:31.690-00:00
         resolution:
           type: string
           default: pending
-          description: The resolution for this incident.
+          description: The resolution for this Incident.
           enum:
           - unresolved
           - cancelled
@@ -5113,6 +5115,8 @@ components:
       - last_modified
       - name
       - self_uri
+      - start
+      - type
     Event:
       type: object
       description: "An Event represents a discrete, timestamped occurrence that reflects\

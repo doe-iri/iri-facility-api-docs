@@ -32,8 +32,8 @@ Here is the OpenAPI definitions for the IRI Facility API:
    - ### 6.2 Events **[status-events.md](./status-events.md)**
    - ### 6.3 Incidents **[status-incidents.md](./status-incidents.md)**
    - ### 6.4 Facility **[facility-facility.md](./facility-facility.md)**
-   - ### 6.3 Sites **[facility-sites.md](./facility-sites.md)**
-   - ### 6.3 Locations **[facility-locations.md](./facility-locations.md)**
+   - ### 6.5 Sites **[facility-sites.md](./facility-sites.md)**
+   - ### 6.6 Locations **[facility-locations.md](./facility-locations.md)**
 ## 7. Account Models **[account-model.md](./account-model.md)**
    - ### 7.1 Project **[account-projects.md](./account-projects.md)**
 

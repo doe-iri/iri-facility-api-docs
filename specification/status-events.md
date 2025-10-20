@@ -1714,7 +1714,6 @@ components:
 - **Pagination.** `offset` + `limit` paging on the sorted-by-id list per implementation.
 - **Filtering.** `status` applies to the event’s status at occurrence; `from`/`to` filter on `occurred_at`; `modified_since`
   filters on `last_modified`.
-- **Caching.** Conditional GET with `If-Modified-Since` is supported; responses include `Last-Modified` and `Content-Location`.
 
 ## Changelog
 - 2025-10-15 — Initial draft for Events based on `docs/status-resources.md` and `StatusController.java`.
