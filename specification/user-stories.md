@@ -66,9 +66,33 @@ The following user stories are written in the context of the IRI Facility Accoun
 
 The following user stories are written in the context of the IRI Facility Job Management functionalities.
 
-[9]
+[9] Michael, a junior Research Software Engineer, needs to submit a simulation job at a DOE compute facility and check its status.
+
+* Submit a job script via the JSON API and receive a job ID in response.
+* Use the job id to retrieve the job's status in a loop until the job is finished
+* View the job's exit code and status to determine that the simulation completed successfully.
+
+[10] Joyce, a senior Research Software Engineer, needs to run a job script tailored for the specialized hardware at a DOE compute facility. The script is already uploaded.
+
+* For each observation, an automated script submits a job by posting the job script's file path at the facility.
+* Use the multiple-job status api to download information for all jobs launched for a given account in the last hour.
+* Take further action for jobs that completed with a successful exit code.
+
+[11] Alex, a Research Software Engineer, has discovered a bug in code currently executing at a compute facility and needs to cancel the job.
+
+* Given the resource and the job id, call the cancel job api to terminate the job.
+* The API signals a status back to notify the user that the operation succeeded.
+
+[12] Sunita, a Research Software Engineer, needs to update a previously submitted job with new metadata.
+
+* Given the resource, job ID, and updated job definition (as a JSON object), the job upda te API applies the changes. Exactly which fields of an existing job can be updated depends on the compute facility.
+* The API signals a status back to notify the user that the operation succeeded.
 
 The following user stories are written in the context of the IRI Facility File System functionalities.
 
-[10]
+[13] Kevin, a Research Software Engineer, needs to manipulate files on a DOE compute facility's filesystem as part of his workflow.
 
+* Each commonly used posix file command (cp, mv, chmod, etc.) is exposed by the IRI api, via the corresponding REST methods.
+* The user is able to upload and download small files via the IRI API.
+* The IRI API enforces limits on the amount of data file content viewing operation (head, tail, etc.) can return.
+* Users can only access their own and their groups' files using these APIs.
