@@ -90,7 +90,7 @@ The following user stories are written in the context of the IRI Facility Job Ma
 
 The following user stories are written in the context of the IRI Facility File System functionalities.
 
-[11] Kevin, a Research Software Engineer, needs to manipulate files on a DOE compute facility's filesystem as part of his workflow.
+[13] Kevin, a Research Software Engineer, needs to manipulate files on a DOE compute facility's filesystem as part of his workflow.
 
 * Each commonly used posix file command (cp, mv, chmod, etc.) is exposed by the IRI api, via the corresponding REST methods.
 * The user is able to upload and download small files via the IRI API.
