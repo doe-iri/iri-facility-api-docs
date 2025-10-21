@@ -68,7 +68,7 @@ The following user stories are written in the context of the IRI Facility Job Ma
 
 [9] Michael, a junior Research Software Engineer, needs to submit a simulation job at a DOE compute facility and check its status.
 
-* Post a basic jobscript using the json object API and get a job id back.
+* Submit a job script via the JSON API and receive a job ID in response.
 * Use the job id to retrieve the job's status in a loop until the job is finished
 * View the job's exit code and status to determine that the simulation completed successfully.
 
@@ -77,6 +77,16 @@ The following user stories are written in the context of the IRI Facility Job Ma
 * For each observation, an automated script submits a job by posting the job script's file path at the facility.
 * Use the multiple-job status api to download information for all jobs launched for a given account in the last hour.
 * Take further action for jobs that completed with a successful exit code.
+
+[11] Alex, a Research Software Engineer, has discovered a bug in code currently executing at a compute facility and needs to cancel the job.
+
+* Given the resource and the job id, call the cancel job api to terminate the job.
+* The API signals a status back to notify the user that the operation succeeded.
+
+[12] Sunita, a Research Software Engineer, needs to update a previously submitted job with new metadata.
+
+* Given the resource, job ID, and updated job definition (as a JSON object), the job upda te API applies the changes. Exactly which fields of an existing job can be updated depends on the compute facility.
+* The API signals a status back to notify the user that the operation succeeded.
 
 The following user stories are written in the context of the IRI Facility File System functionalities.
 
