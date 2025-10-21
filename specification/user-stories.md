@@ -66,9 +66,23 @@ The following user stories are written in the context of the IRI Facility Accoun
 
 The following user stories are written in the context of the IRI Facility Job Management functionalities.
 
-[9]
+[9] Michael, a junior Research Software Engineer, needs to submit a simulation job at a DOE compute facility and check its status.
+
+* Post a basic jobscript using the json object API and get a job id back.
+* Use the job id to retrieve the job's status in a loop until the job is finished
+* View the job's exit code and status to determine that the simulation completed successfully.
+
+[10] Joyce, a senior Research Software Engineer, needs to run a job script tailored for the specialized hardware at a DOE compute facility. The script is already uploaded.
+
+* For each observation, an automated script submits a job by posting the job script's file path at the facility.
+* Use the multiple-job status api to download information for all jobs launched for a given account in the last hour.
+* Take further action for jobs that completed with a successful exit code.
 
 The following user stories are written in the context of the IRI Facility File System functionalities.
 
-[10]
+[11] Kevin, a Research Software Engineer, needs to manipulate files on a DOE compute facility's filesystem as part of his workflow.
 
+* Each commonly used posix file command (cp, mv, chmod, etc.) is exposed by the IRI api, via the corresponding REST methods.
+* The user is able to upload and download small files via the IRI API.
+* The IRI API enforces limits on the amount of data file content viewing operation (head, tail, etc.) can return.
+* Users can only access their own and their groups' files using these APIs.
