@@ -4,8 +4,8 @@
 ---
 
 **I2SC-02**  
-**Version 0.1**  
-**November 2024**
+**Draft**  
+**October 2025**
 
 Editor: John MacAuley
 
@@ -16,9 +16,12 @@ Contributors: Ilya Baldin, Bjoern Enders, Carol Hawk, Gabor Torok, Justas Balcas
 OpenAPI 3.1 was chosen for documentation of the REST API because it is fully compatible with JSON Schema 2020-12, 
 which improves interoperability and validation in tooling. ([OpenAPI Initiative Publications][1])
 
-Here is the OpenAPI definitions for the IRI Facility API:
+Here is the OpenAPI definitions for the IRI Facility API (current agreed specifications):
 - openapi_iri_facility_api_v1.json **[JSON](./openapi/openapi_iri_facility_api_v1.json)**
 - openapi_iri_facility_api_v1.yaml **[YAML](./openapi/openapi_iri_facility_api_v1.yaml)**
+
+Here is a draft OpenAPI definitions for the job submission and filesystem operations from NERSC:
+- nersc-openapi-job-draft.json **[JSON](./openapi/nersc-openapi-job-draft.json)**
 
 # Contents
 
@@ -59,4 +62,4 @@ The specification references and adheres to the following standards:
 
 ---
 
-*Last Updated: October 14, 2025*
+*Last Updated: October 24, 2025*
