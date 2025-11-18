@@ -8,7 +8,8 @@ The following user stories are written in the context of the IRI Facility and St
 * The resources associated with a specific ASCR Facility.  
 * If a specific resource at an ASCR Facility is currently available for use by the workflow.  
 * If a specific resource at an ASCR Facility will be available for use by the workflow at a specific point in the future.  
-* The start and end times of both scheduled and unscheduled outages for a resource.  
+* The start and end times of scheduled outages for a resource.
+* The start and end times, if available, or ongoing unscheduled outages for a resource.  
 * If a workflow failure was caused by a specific resource outage.  
 * Contact information for support staff at the ASCR Facility that could help troubleshoot a workflow related issue.
 
@@ -88,9 +89,28 @@ The following user stories are written in the context of the IRI Facility Job Ma
 * Given the resource, job ID, and updated job definition (as a JSON object), the job upda te API applies the changes. Exactly which fields of an existing job can be updated depends on the compute facility.
 * The API signals a status back to notify the user that the operation succeeded.
 
+[14] Samuel is a scientist who has a multistage run pipeline he wants to automate.  This pipeline can be run at one facility
+
+* Submit a Job Script to a resource at a facility.
+* Determine successful submission of job script.
+* Check for successful completion of job script.  If unsuccessful, resubmit, if successful submit the next stage in the pipeline.  Repeat until pipeline is complete.
+
+[15] Gordon is a user at a detector who has a large number of small datasets to postprocess in a high throughput mode.
+
+* Submit a pilot job script on a resource
+* Determine when the job script is running
+* Job script framework calls out and pulls in small datasets to postprocess
+
+[16] James is a user at a light source with an experiment he wants to run.  He wants to verify settings for his test run and needs rapid turnaround on the order of minutes as well as perform in-situ analysis durinng his limited run time.
+
+* Query the interface for resources that James has access to that also accept on-demand workloads.
+* Submit a job script to the on-demand resource with settings.
+* Monitor for run completion and result.
+* Repeat as-needed during his experiment time.
+
 The following user stories are written in the context of the IRI Facility File System functionalities.
 
-[13] Kevin, a Research Software Engineer, needs to manipulate files on a DOE compute facility's filesystem as part of his workflow.
+[17] Kevin, a Research Software Engineer, needs to manipulate files on a DOE compute facility's filesystem as part of his workflow.
 
 * Each commonly used posix file command (cp, mv, chmod, etc.) is exposed by the IRI api, via the corresponding REST methods.
 * The user is able to upload and download small files via the IRI API.
