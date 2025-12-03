@@ -54,3 +54,23 @@ relationships.
 | Site | self | Site | A Site has a reference to itself. |
 | Location | hasSite | Site | A Location can contain one or more Sites. |
 | Location | self | Location | A Location has a reference to itself. |
+
+## 6.2 Facility Model
+
+![Facility Model](./images/facility-model.png)
+<div align="center"><b>Figure 2 - Facility Model.</b></div>
+
+## 6.3 Status Model
+
+![Status Model](./images/status-model.png)
+<div align="center"><b>Figure 3 - Status Model.</b></div>
+
+## 6.4 Allocations Model
+
+![Allocations Model](./images/allocation-model.png)
+<div align="center"><b>Figure 4 - Allocation Model.</b></div>
+
+## 6.5 Job Model
+
+![Job Model](./images/job-model.png)
+<div align="center"><b>Figure 5 - Job Model.</b></div>
