@@ -57,8 +57,8 @@ class UserAllocation {
 ---
   + id <b>: String</b>
   + self_uri <b>: Uri</b>
-  + name <b>: String</b>
-  + description <b>: String</b>
+  + name <b>: String [0..1]</b>
+  + description <b>: String [0..1]</b>
   + last_modified <b>: DateTime</b>
   + user_id <b>: String</b>
   + entries <b>: AllocationEntry[]</b>
@@ -91,8 +91,8 @@ class ProjectAllocation {
 ---
   + id <b>: String</b>
   + self_uri <b>: Uri</b>
-  + name <b>: String</b>
-  + description <b>: String</b>
+  + name <b>: String [0..1]</b>
+  + description <b>: String [0..1]</b>
   + last_modified <b>: DateTime</b>
   + entries <b>: AllocationEntry[]</b>
   + project_uri <b>: Uri</b>

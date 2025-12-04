@@ -18,21 +18,21 @@ class Facility {
 ---
   + id <b>: String</b>
   + self_uri <b>: Uri</b>
-  + name <b>: String</b>
-  + description <b>: String</b>
+  + name <b>: String [0..1]</b>
+  + description <b>: String [0..1]</b>
   + last_modified <b>: DateTime</b>
-  + short_name <b>: String</b>
+  + short_name <b>: String [0..1]</b>
   + organization_name <b>: String</b>
-  + support_uri <b>: Uri</b>
-  + site_uris <b>: Uri[]</b>
-  + location_uris <b>: Uri[]</b>
-  + resource_uris <b>: Uri[]</b>
-  + event_uris <b>: Uri[]</b>
-  + incident_uris <b>: Uri[]</b>
-  + capability_uris <b>: Uri[]</b>
-  + project_uris <b>: Uri[]</b>
-  + project_allocation_uris <b>: Uri[]</b>
-  + user_allocation_uris <b>: Uri[]</b>
+  + support_uri <b>: Uri [0..1]</b>
+  + site_uris <b>: Uri[] [0..1]</b>
+  + location_uris <b>: Uri[] [0..1]</b>
+  + resource_uris <b>: Uri[] [0..1]</b>
+  + event_uris <b>: Uri[] [0..1]</b>
+  + incident_uris <b>: Uri[] [0..1]</b>
+  + capability_uris <b>: Uri[] [0..1]</b>
+  + project_uris <b>: Uri[] [0..1]</b>
+  + project_allocation_uris <b>: Uri[] [0..1]</b>
+  + user_allocation_uris <b>: Uri[] [0..1]</b>
 }
 
 Facility --> "      1" Facility : self_uri (self)
@@ -46,14 +46,14 @@ class Resource {
 ---
   + id <b>: String</b>
   + self_uri <b>: Uri</b>
-  + name <b>: String</b>
-  + description <b>: String</b>
+  + name <b>: String [0..1]</b>
+  + description <b>: String [0..1]</b>
   + last_modified <b>: DateTime</b>
   + resource_type <b>: ResourceType</b>
-  + group <b>: String</b>
+  + group <b>: String [0..1]</b>
   + current_status <b>: StatusType</b>
-  + capability_uris <b>: Uri[]</b>
-  + located_at_uri <b>: Uri</b>
+  + capability_uris <b>: Uri[] [0..1]</b>
+  + located_at_uri <b>: Uri [0..1]</b>
   + member_of_uri <b>: Uri</b>
 }
 
@@ -100,13 +100,13 @@ class Site {
 ---
   + id <b>: String</b>
   + self_uri <b>: Uri</b>
-  + name <b>: String</b>
-  + description <b>: String</b>
+  + name <b>: String [0..1]</b>
+  + description <b>: String [0..1]</b>
   + last_modified <b>: DateTime</b>
-  + short_name <b>: String</b>
+  + short_name <b>: String [0..1]</b>
   + operating_organization <b>: String</b>
-  + location_uri <b>: Uri</b>
-  + resource_uris <b>: Uri[]</b>
+  + location_uri <b>: Uri [0..1]</b>
+  + resource_uris <b>: Uri[] [0..1]</b>
 } 
 
 Site --> "      1" Site : self_uri (self)
@@ -125,19 +125,19 @@ class Location {
 ---
   + id <b>: String</b>
   + self_uri <b>: Uri</b>
-  + name <b>: String</b>
-  + description <b>: String</b>
+  + name <b>: String [0..1]</b>
+  + description <b>: String [0..1]</b>
   + last_modified <b>: DateTime</b>
-  + short_name <b>: String</b>
-  + country_name <b>: String</b>
-  + locality_name <b>: String</b>
-  + state_or_province_name <b>: String</b>
-  + street_address <b>: String</b>
-  + unlocode <b>: String</b>
-  + altitude <b>: Double</b>
-  + latitude <b>: Double</b>
-  + longitude <b>: Double</b>
-  + site_uris <b>: Uri[]</b>
+  + short_name <b>: String [0..1]</b>
+  + country_name <b>: String [0..1]</b>
+  + locality_name <b>: String [0..1]</b>
+  + state_or_province_name <b>: String [0..1]</b>
+  + street_address <b>: String [0..1]</b>
+  + unlocode <b>: String [0..1]</b>
+  + altitude <b>: Double [0..1]</b>
+  + latitude <b>: Double [0..1]</b>
+  + longitude <b>: Double [0..1]</b>
+  + site_uris <b>: Uri[] [0..1]</b>
 }
 
 Location --> "      1" Location : self_uri (self)

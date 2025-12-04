@@ -16,8 +16,8 @@ class Incident {
   ---
   + id <b>: String</b>
   + self_uri <b>: Uri</b>
-  + name <b>: String</b>
-  + description <b>: String</b>
+  + name <b>: String [0..1]</b>
+  + description <b>: String [0..1]</b>
   + last_modified <b>: DateTime</b>
   + status <b>: StatusType</b>
   + type <b>: IncidentType</b>
@@ -69,8 +69,8 @@ class Event {
   ---
   + id <b>: String</b>
   + self_uri <b>: Uri</b>
-  + name <b>: String</b>
-  + description <b>: String</b>
+  + name <b>: String [0..1]</b>
+  + description <b>: String [0..1]</b>
   + last_modified <b>: DateTime</b>
   + status <b>: StatusType</b>
   + occurred_at <b>: DateTime</b>
@@ -93,8 +93,8 @@ class Resource {
   ---
   + id <b>: String</b>
   + self_uri <b>: Uri</b>
-  + name <b>: String</b>
-  + description <b>: String</b>
+  + name <b>: String [0..1]</b>
+  + description <b>: String [0..1]</b>
   + last_modified <b>: DateTime</b>
   + resource_type <b>: ResourceType</b>
   + group <b>: String</b>
