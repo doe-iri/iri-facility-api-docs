@@ -25,19 +25,21 @@ Here is a draft OpenAPI definitions for the job submission and filesystem operat
 
 # Contents
 
-## 1. Introduction **[introduction.md](./introduction.md)**
-## 2. User Stories **[user-stories.md](./user-stories.md)**
-## 3. User Requirements **[requirements.md](./requirements.md)**
-## 4. Design Requirements **[design-requirements.md](design-requirements.md)**
-## 5. Implementation Requirements **[implementation-requirements.md](implementation-requirements.md)**
-## 6. Facility and Status Models **[model.md](./model.md)**
-   - ### 6.1 Resources **[status-resources.md](./status-resources.md)**
-   - ### 6.2 Events **[status-events.md](./status-events.md)**
-   - ### 6.3 Incidents **[status-incidents.md](./status-incidents.md)**
-   - ### 6.4 Facility **[facility-facility.md](./facility-facility.md)**
-   - ### 6.5 Sites **[facility-sites.md](./facility-sites.md)**
-   - ### 6.6 Locations **[facility-locations.md](./facility-locations.md)**
-## 7. Account Models **[account-model.md](./account-model.md)**
+## 1. **[Introduction](./introduction.md)**
+## 2. **[User Stories](./user-stories.md)**
+## 3. **[User Requirements](./requirements.md)**
+## 4. **[Design Requirements](design-requirements.md)**
+## 5. **[Implementation Requirements](implementation-requirements.md)**
+## 6. **[Conceptual Model](conceptual-model.md)**
+## 7. Facility Model
+    - ### 7.1 Facility **[facility-facility.md](./facility-facility.md)**
+    - ### 7.2 Sites **[facility-sites.md](./facility-sites.md)**
+    - ### 7.3 Locations **[facility-locations.md](./facility-locations.md)**
+    - ### 7.4 Resources **[status-resources.md](./status-resources.md)**
+## 8. Status Model
+   - ### 8.1 Events **[status-events.md](./status-events.md)**
+   - ### 8.2 Incidents **[status-incidents.md](./status-incidents.md)**
+## 9. Allocation Models **[account-model.md](./account-model.md)**
    - ### 7.1 Project **[account-projects.md](./account-projects.md)**
 
 # Supporting Materials
