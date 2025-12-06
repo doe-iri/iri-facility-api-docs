@@ -110,7 +110,7 @@ class Site {
 } 
 
 Site --> "      1" Site : self_uri (self)
-Facility --> "0..n    " Site : site_uris (hostedAt)
+Facility --> "0..*    " Site : site_uris (hostedAt)
 Resource --> "0..1    " Site : located_at_uri (locatedAt)
 
 class Location {
@@ -141,9 +141,9 @@ class Location {
 }
 
 Location --> "      1" Location : self_uri (self)
-Facility --> "0..n    " Location : location_uris (hasLocation)
+Facility --> "0..*    " Location : location_uris (hasLocation)
 Site --> "1   " Location : location_uri (hasLocation)
-Location --> "1..n   " Site : site_uris (hasSite)
-Site --> "0..n   " Resource : resource_uris (hasResource)
+Location --> "1..*   " Site : site_uris (hasSite)
+Site --> "0..*   " Resource : resource_uris (hasResource)
 
 @enduml

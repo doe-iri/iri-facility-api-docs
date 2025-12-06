@@ -23,24 +23,40 @@ Here is the OpenAPI definitions for the IRI Facility API (current agreed specifi
 Here is a draft OpenAPI definitions for the job submission and filesystem operations from NERSC:
 - nersc-openapi-job-draft.json **[JSON](./openapi/nersc-openapi-job-draft.json)**
 
-# Contents
+# Design Documentation
 
 ## 1. **[Introduction](./introduction.md)**
 ## 2. **[User Stories](./user-stories.md)**
 ## 3. **[User Requirements](./requirements.md)**
 ## 4. **[Design Requirements](design-requirements.md)**
 ## 5. **[Implementation Requirements](implementation-requirements.md)**
-## 6. **[Conceptual Model](conceptual-model.md)**
+## 6. **[Conceptual Model](./conceptual-model.md)**
+ - ### **[6.1 NamedObject](./conceptual-model.md#61-namedobject)**
+ - ### **[6.2 Facility Model](./conceptual-model.md#62-facility-model)**
+   - #### **[6.2.1 Facility](./conceptual-model.md#621-facility)**
+   - #### **[6.2.2 Resource](./conceptual-model.md#622-resource)**
+   - #### **[6.2.3 Site](./conceptual-model.md#623-site)**
+   - #### **[6.2.4 Location](./conceptual-model.md#624-location)**
+   - #### **[6.2.5 Relationships](./conceptual-model.md#625-relationships)**
+ - ### **[6.3 Status Model](./conceptual-model.md#61-namedobject)**
+ - ### **[6.4 Allocation Model](./conceptual-model.md#64-allocation-model)**
+ - ### **[6.5 Job Model](./conceptual-model.md#65-job-model)**
+ - ### **[6.6 Filesystem](./conceptual-model.md#66-filesystem)**
+
+# REST API Specification
+
 ## 7. Facility Model
-    - ### 7.1 Facility **[facility-facility.md](./facility-facility.md)**
-    - ### 7.2 Sites **[facility-sites.md](./facility-sites.md)**
-    - ### 7.3 Locations **[facility-locations.md](./facility-locations.md)**
-    - ### 7.4 Resources **[status-resources.md](./status-resources.md)**
+  - ### 7.1 Facility **[facility-facility.md](./facility-facility.md)**
+  - ### 7.2 Sites **[facility-sites.md](./facility-sites.md)**
+  - ### 7.3 Locations **[facility-locations.md](./facility-locations.md)**
+  - ### 7.4 Resources **[status-resources.md](./status-resources.md)**
 ## 8. Status Model
    - ### 8.1 Events **[status-events.md](./status-events.md)**
    - ### 8.2 Incidents **[status-incidents.md](./status-incidents.md)**
 ## 9. Allocation Models **[account-model.md](./account-model.md)**
-   - ### 7.1 Project **[account-projects.md](./account-projects.md)**
+   - ### 9.1 Project **[account-projects.md](./account-projects.md)**
+## 10. Job Model
+  - ### **[10.1 Job](./job-job.md)**
 
 # Supporting Materials
 
