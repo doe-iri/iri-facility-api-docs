@@ -38,10 +38,10 @@ Here is a draft OpenAPI definitions for the job submission and filesystem operat
    - #### **[6.2.3 Site](./conceptual-model.md#623-site)**
    - #### **[6.2.4 Location](./conceptual-model.md#624-location)**
    - #### **[6.2.5 Relationships](./conceptual-model.md#625-relationships)**
- - ### **[6.3 Status Model](./conceptual-model.md#61-namedobject)**
+ - ### **[6.3 Status Model](./conceptual-model.md#63-status-model)**
  - ### **[6.4 Allocation Model](./conceptual-model.md#64-allocation-model)**
  - ### **[6.5 Job Model](./conceptual-model.md#65-job-model)**
- - ### **[6.6 Filesystem](./conceptual-model.md#66-filesystem)**
+ - ### **[6.6 Filesystem](./conceptual-model.md#66-filesystem-model)**
 
 # REST API Specification
 

@@ -44,10 +44,10 @@ identified, linked, and maintained within distributed infrastructures.
 
 The NamedObject class has the following definition:
 
-<div style="text-align: center;">
+<div align="center">
     <img src="./images/namedObject.png" alt="NamedObject">
 </div>
-<div style="text-align: center;"><b>Figure 6.11 - NamedObject class.</b></div>
+<div align="center"><b>Figure 6.11 - NamedObject class.</b></div>
 
 ## 6.1.1 Attributes
 The NamedObject class has the attribute definitions:
@@ -81,10 +81,10 @@ Facility, Site, Location, and Resource.  Each class encapsulates key attributes 
 to its domain. These classes serve as the foundational entities for describing physical infrastructure, 
 service components, and administrative context.
 
-<div style="text-align: center;">
+<div align="center">
     <img src="./images/facility-model.png" alt="Facility Model">
 </div>
-<div style="text-align: center;"><b>Figure 6.2 - Facility Model.</b></div>
+<div align="center"><b>Figure 6.2 - Facility Model.</b></div>
 
 These object definitions enable users and systems to traverse the Facility model dynamically, answering 
 questions such as "Which resources of type xyx are hosted at this Facility?" or "Which resources are 
@@ -96,10 +96,10 @@ unique scientific tools, expertise, and infrastructure for researchers from acro
 industry, and government. In a more general definition, a `Facility` offers `Resources` to scientific
 workflows for programmatic consumption.
 
-<div style="text-align: center;">
+<div align="center">
     <img src="./images/facility-class.png" alt="Facility class">
 </div>
-<div style="text-align: center;"><b>Figure 6.2.1 - Facility class.</b></div>
+<div align="center"><b>Figure 6.2.1 - Facility class.</b></div>
 
 The `Facility` class has the following attribute definitions:
 
@@ -128,10 +128,10 @@ A `Resource` models a consumable resource, a consumable service, or dependent in
 services exposed to the end user.  A `Resource` has a reportable status, operational state, and
 capabilities.
 
-<div style="text-align: center;">
+<div align="center">
     <img src="./images/resource-class.png" alt="Resource class">
 </div>
-<div style="text-align: center;"><b>Figure 6.2.2 - Resource class.</b></div>
+<div align="center"><b>Figure 6.2.2 - Resource class.</b></div>
 
 The `Resource` class has the following attribute definitions:
 
@@ -156,10 +156,10 @@ anchor point for associating these resources with their broader infrastructure a
 
 A `Site` is location of a resource that has an associated physical location and an operating organization.
 
-<div style="text-align: center;">
+<div align="center">
     <img src="./images/site-class.png" alt="Site class">
 </div>
-<div style="text-align: center;"><b>Figure 6.2.3 - Site class.</b></div>
+<div align="center"><b>Figure 6.2.3 - Site class.</b></div>
 
 The `Site` class has the following attribute definitions:
 
@@ -181,10 +181,10 @@ contain zero or more `Resources`. It serves as a foundational concept for expres
 physically exist, are operated, or are logically grouped, enabling meaningful organization and
 visualization.  `Location`s are reusable entities that may be shared across multiple `Sites` or `Facilities`.
 
-<div style="text-align: center;">
+<div align="center">
     <img src="./images/location-class.png" alt="Location class">
 </div>
-<div style="text-align: center;"><b>Figure 6.2.4 - Location class.</b></div>
+<div align="center"><b>Figure 6.2.4 - Location class.</b></div>
 
 The `Location` class has the following attribute definitions:
 
