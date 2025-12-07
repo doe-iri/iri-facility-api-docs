@@ -1,7 +1,7 @@
 # 6. Conceptual Model
 The IRI conceptual model is an ever expanding set of functionalities needed to provide users with access
 to capabilities at the DoE User Facilities.  Initially targeting scientific workflows, and now expanded
-to incorporate the needs of the American Science Cloud, the IRI conceptual model is the basis for 
+to incorporate the needs of the American Science Cloud (AmSC), the IRI conceptual model is the basis for 
 development of programmatic interfaces into the DoE user facilities.  This section describes the 
 conceptual model in its current state.
 
@@ -21,11 +21,17 @@ application to determine if, from an accounting perspective, can store data or r
 - The <b>Job model</b> defines Job related classes (Job, JobSpec, JobStatus) for specification and 
 management of the invocation of application executables on exascale machines.  This specification is
 based off of the [ExWorks PSI/J](https://exaworks.org/) job management model.
-- The <b>Filesystem model</b>
+- The <b>Filesystem model</b> defines asynchronous file system access (ls, head, cp, etc.) on HPC
+machines through the use of a Task class.  Individual files are not modelled as resources in this mode.
+This specification is based off of the 
+[FireCrest RESTful Services Gateway](https://firecrest.readthedocs.io/en/latest/) which provides a RESTful 
+API for High-Performance Computing (HPC) systems, offering file system operations like listing files (ls), 
+creating directories (mkdir), moving files (mv), and managing permissions (chmod, chown) via standard HTTP 
+requests.
 
-Each class encapsulates key attributes and behaviors relevant to its domain. 
+Each class defined on these models encapsulates key attributes and behaviors relevant to its domain. 
 
-In addition to defining these object types, the model includes a set of well-defined relationships 
+In addition to defining these object classes, the model includes a set of well-defined relationships 
 and cardinalities that govern how instances of these classes are interconnected. These relationships 
 capture structural, functional, and temporal associations (e.g., a Resource belongs to a Site, an 
 Event is part of an Incident, an Event impacts a Resource, a Facility is hosted at one or more Sites), 
@@ -47,7 +53,7 @@ The NamedObject class has the following definition:
 <div align="center">
     <img src="./images/namedObject.png" alt="NamedObject">
 </div>
-<div align="center"><b>Figure 6.11 - NamedObject class.</b></div>
+<div align="center"><b>Figure 6.1 - NamedObject class.</b></div>
 
 ## 6.1.1 Attributes
 The NamedObject class has the attribute definitions:
@@ -55,7 +61,7 @@ The NamedObject class has the attribute definitions:
 | Attribute     | Type                                     | Description                                                                                                    | Required | Cardinality | Example                                                                                                                   |
 |:--------------|:-----------------------------------------|:---------------------------------------------------------------------------------------------------------------|:---------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------|
 | id            | String                                   | The unique identifier for the object.  Typically a UUID or URN to provide global uniqueness across facilities. | yes      | 1           | 09a22593-2be8-46f6-ae54-2904b04e13a4                                                                                                  |
-| self_uri      | Uri                                      | A “self” relationship link.                                                                                    | yes      | 1           | "https://iri.example.com/api/v1/facility"                                                                                             |
+| self_uri      | Uri                                      | Canonical "self" hyperlink to this instance.                                                                   | yes      | 1           | "https://iri.example.com/api/v1/facility"                                                                                             |
 | name          | String                                   | The long name of the object.                                                                                   | no       | 0..1        | Lawrence Berkeley National Laboratory                                                                                                 |
 | description   | String                                   | A description of the object.                                                                                   | no       | 0..1        | Lawrence Berkeley National Laboratory is charged with conducting unclassified research across a wide range of scientific disciplines. |
 | last_modified | ISO 8601 standard with timezone offsets. | The date this object was last modified.                                                                        | yes      | 1           | 2025-05-11T20:34:25.272Z |
@@ -65,7 +71,7 @@ The inheritance relationship is not shown in the consolidated model diagrams for
 attributes are included.
 
 ## 6.1.2 Relationships
-The NamedObject has a well-defined "self" relationship that allows for navigation to the instance 
+The NamedObject has a well-defined canonical "self" relationship that allows for navigation to the instance 
 of the NamedObject.
 
 | Source       | Relationship | Destination  | Cardinality | Description                              |
@@ -77,7 +83,7 @@ of the NamedObject.
 ## 6.2 Facility Model
 The Facility model (see Figure 1) defines the core structure for representing organizational information
 across the IRI distributed infrastructure. It is composed of four primary classes of named objects:
-Facility, Site, Location, and Resource.  Each class encapsulates key attributes and behaviors relevant 
+`Facility`, `Site`, `Location`, and `Resource`.  Each class encapsulates key attributes and behaviors relevant 
 to its domain. These classes serve as the foundational entities for describing physical infrastructure, 
 service components, and administrative context.
 
@@ -154,7 +160,8 @@ A `Site` represents the physical and administrative context in which a `Resource
 It is associated with a geographic or network location  where one or more resources reside and serves as the
 anchor point for associating these resources with their broader infrastructure and organizational relationships.
 
-A `Site` is location of a resource that has an associated physical location and an operating organization.
+A `Site` is a managed location that has an associated physical location and an operating organization.  A `Site`
+can host zero or more `Resource`.
 
 <div align="center">
     <img src="./images/site-class.png" alt="Site class">
@@ -163,17 +170,17 @@ A `Site` is location of a resource that has an associated physical location and 
 
 The `Site` class has the following attribute definitions:
 
-| Attribute                            | Type     | Description                                                                                                                                                   | Required | Cardinality | Example                                                                                  |
-|:-------------------------------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------|:------------|:-----------------------------------------------------------------------------------------|
-| `id`                                 | String   | The unique identifier for the `Site`.  Typically a UUID or URN to provide global uniqueness across facilities.                                                | yes      | 1           | "ce2bbc49-ba63-4711-8f36-43b74ec2fe45"                                                   |
-| `self_uri`                           | URI      | A hyperlink reference (URI) to this `Shelf` (self). Canonical hyperlink to this `Shelf`.                                                                      | yes      | 1           | "https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45"       |
-| `name`                               | String   | The long name of the `Site`.                                                                                                                                  | no       | 0..1        | "Lawrence Berkeley National Laboratory Building 59"                                                                    |
-| `description`                        | String   | A description of the `Site`.                                                                                                                                  | no       | 0..1        | "Level3 CLLI BKLYCACE, ESNETWEST at LBNL59."                                             |
-| `last_modified`                      | DateTime | The date this `Site` object was last modified, including modification of any attributes or links. Format follows the ISO 8601 standard with timezone offsets. | no       | 0..1        | "2025-07-24T02:31:13.000Z"                                                               |
-| `short_name`                         | String   | Common/short name of the `Site`.                                                                                                                              | no       | 0..1        | `LBNL59`                                                                                 |
-| `operating_organization`             | String   | The name of the organization operating the `Site`.                                                                                                            | yes      | 1           | "Lawrence Berkeley National Laboratory"                                                  |
-| `location_uri`                       | URI      | A hyperlink reference (URI) to the `Location` containing this Site (hasLocation).                                                                             | no       | 0..1        | "https://iri.example.com/api/v1/facility/locations/ce2bbc49-ba63-4711-8f36-43b74ec2fe45" |
-| `resource_uris`                      | URI[]    | A hyperlink reference (URI) to the `Resource` located at this `Site` (hasResource).                                                                           | no       | 0..*        | "https://iri.example.com/api/v1/facility/resources/289d38f2-e93c-4840-b037-8b78d8ec36cc"                                               |
+| Attribute                            | Type     | Description                                                                                                                                                   | Required | Cardinality | Example                                                                                                                              |
+|:-------------------------------------|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------|
+| `id`                                 | String   | The unique identifier for the `Site`.  Typically a UUID or URN to provide global uniqueness across facilities.                                                | yes      | 1           | "ce2bbc49-ba63-4711-8f36-43b74ec2fe45"                                                                                               |
+| `self_uri`                           | URI      | A hyperlink reference (URI) to this `Shelf` (self). Canonical hyperlink to this `Shelf`.                                                                      | yes      | 1           | "https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45"                                                 |
+| `name`                               | String   | The long name of the `Site`.                                                                                                                                  | no       | 0..1        | "Lawrence Berkeley National Laboratory Building 59"                                                                                  |
+| `description`                        | String   | A description of the `Site`.                                                                                                                                  | no       | 0..1        | "Level3 CLLI BKLYCACE, ESNETWEST at LBNL59."                                                                                         |
+| `last_modified`                      | DateTime | The date this `Site` object was last modified, including modification of any attributes or links. Format follows the ISO 8601 standard with timezone offsets. | no       | 0..1        | "2025-07-24T02:31:13.000Z"                                                                                                           |
+| `short_name`                         | String   | Common/short name of the `Site`.                                                                                                                              | no       | 0..1        | "LBNL59"                                                                                                                              |
+| `operating_organization`             | String   | The name of the organization operating the `Site`.                                                                                                            | yes      | 1           | "Lawrence Berkeley National Laboratory"                                                                                              |
+| `location_uri`                       | URI      | A hyperlink reference (URI) to the `Location` containing this Site (hasLocation).                                                                             | no       | 0..1        | "https://iri.example.com/api/v1/facility/locations/ce2bbc49-ba63-4711-8f36-43b74ec2fe45"                                             |
+| `resource_uris`                      | URI[]    | A hyperlink reference (URI) to the `Resource` located at this `Site` (hasResource).                                                                           | no       | 0..*        | "https://iri.example.com/api/v1/facility/resources/289d38f2-e93c-4840-b037-8b78d8ec36cc"                                             |
 
 ### 6.2.4 Location
 A `Location` models the geographic, geopolitical, or spatial context associated with a `Site` that may
@@ -229,19 +236,100 @@ relationships.
 ---
 
 ## 6.3 Status Model
-The Status model (see Figure 2) defines the core structure for representing operational information across 
-the IRI distributed infrastructure. It is composed of three primary classes of named objects: Incident, 
-Event, and Resource.  Each class encapsulates key attributes and behaviors relevant to the communication of
+The Status model (see Figure 6.3) defines the core structure for representing operational information across 
+the IRI distributed infrastructure. It is composed of three primary classes of named objects: `Incident`, 
+`Event`, and `Resource`.  Each class encapsulates key attributes and behaviors relevant to the communication of
 operational status. These classes serve as the foundational entities for describing a facility's operational 
 impacts and administrative context on defined Resources.
 
 ![Status Model](./images/status-model.png)
-<div align="center"><b>Figure 2 - Status Model.</b></div>
+<div align="center"><b>Figure 6.3 - Status Model.</b></div>
 
 These object definitions enable users and systems to traverse the Status model dynamically, answering
 questions such as "What incidents have affected this facility and which resources are impacted?", or 
 "Which events were logged during a specific outage?”.
 
+### 6.3.1 Incident
+An `Incident` represents a discrete occurrence, planned or unplanned, that actually or potentially affects 
+the availability, performance, integrity, or security of one or more `Resource`s at a given Facility. It 
+serves as a high-level grouping construct for aggregating and tracking related `Event`s over time and across
+`Resources`.
+
+<div align="center">
+    <img src="./images/incident-class.png" alt="Incident class">
+</div>
+<div align="center"><b>Figure 6.3.1 - Incident class.</b></div>
+
+The `Incident` class has the following attribute definitions:
+
+| Attribute         | Type           | Description                                                                     | Required | Cardinality | Example                                                                                    |
+|:------------------|:---------------|:--------------------------------------------------------------------------------|:---------|:------------|--------------------------------------------------------------------------------------------|
+| `id`              | String         | Unique identifier (UUID) for the `Incident`.                                    | yes      | 1           | "05dcf051-8e9f-4806-8af0-125782ec2799`                                                     |
+| `self_uri`        | URI            | Canonical hyperlink to this `Incident`.                                         | yes      | 1           | "https://iri.example.com/api/v1/status/incidents/05dcf051-8e9f-4806-8af0-125782ec2799"     |
+| `name`            | String         | The long name of the `Incident`.                                                | no       | 0..1        | "Unplanned outage on resource group websites"                                              |
+| `description`     | String         | Human‑readable description for this `Incident`.                                 | no       | 0..1        | "Unplanned outage on resource group websites."                                             |
+| `last_modified`   | DateTime       | Timestamp (ISO 8601) when this `Incident` was last modified.                    | yes      | 1           | "2025-06-29T02:34:25.000Z"                                                                 |
+| `status`          | StatusType     | The status of the resources associated with this `Incident`.                    | yes      | 1           | "down"                                                                 |
+| `type`            | IncidentType   | The type of Incident.                                                           | yes      | 1           | "unplanned"                                                                 |
+| `start`           | DateTime       | Timestamp (ISO 8601) of when this `Incident` started, or is predicted to start. | yes      | 1           | "2025-06-28T18:34:25.272Z"                                                                 |
+| `end`             | DateTime       | Timestamp (ISO 8601) of when this `Incident` ended, or is predicted to end.     | no       | 0..1        | "2025-06-29T02:34:25.278Z"                                                                 |
+| `resolution`      | ResolutionType | The resolution for this `Incident`.                                              | yes      | 1           | "unresolved" |
+| `resource_uris`   | URI[]          | URIs of `Resource`s that maybe impacted by this `Incident` (mayImpact).         | no       | 0..*        | [`https://iri.example.com/api/v1/facility/resources/289d38f2-e93c-4840-b037-8b78d8ec36cc`] |
+| `event_uris`      | URI[]          | URIs of `Event`s generated by this `Incident` (hasEvent).                       | no       | 0..*        | [`https://iri.example.com/api/v1/status/events/f9d6e700-1807-45bd-9a52-e81c32d40c5a`]      |
+
+### 6.3.2 Event
+An `Event` represents a discrete, timestamped occurrence that reflects a change in state, condition, or behavior 
+of a `Resource`, typically within the context of an ongoing `Incident`. `Event`s provide the fine-grained details 
+necessary to understand the progression and impact of an `Incident`, serving as both diagnostic data and a 
+lightweight status log of relevant activity.
+
+<div align="center">
+    <img src="./images/event-class.png" alt="Event class">
+</div>
+<div align="center"><b>Figure 6.3.2 - Event class.</b></div>
+
+The `Event` class has the following attribute definitions:
+
+| Attribute       | Type       | Description                                                   | Required | Cardinality | Example                                                                                    |
+|:----------------|:-----------|:--------------------------------------------------------------|:---------|:------------|--------------------------------------------------------------------------------------------|
+| `id`            | String     | Unique identifier (UUID) for the `Event`.                     | yes      | 1           | "0108be78-8771-4507-abfd-5823f265708d`                                                     |
+| `self_uri`      | URI        | Canonical hyperlink to this `Event`.                          | yes      | 1           | "https://iri.example.com/api/v1/status/event/0108be78-8771-4507-abfd-5823f265708d"         |
+| `name`          | String     | The long name of the `Event`.                                 | no       | 0..1        | "HPSS Archive (User)"                                                                      |
+| `description`   | String     | Human‑readable description for this `Event`.                  | no       | 0..1        | "archive is UP."                                                                           |
+| `last_modified` | DateTime   | Timestamp (ISO 8601) when this `Event` was last modified.     | yes      | 1           | "2025-07-24T02:31:13.000Z"                                                                 |
+| `status`        | StatusType | The status of the resources associated with this `Event`.     | yes      | 1           | "up"                                                                                       |
+| `occurred_at`   | DateTime   | Timestamp (ISO 8601) of when this `Event` occured.            | yes      | 1           | "2025-07-24T02:31:13.794Z"                                                                 |
+| `resource_uri`  | URI        | URI of `Resource` that is impacted by this `Event` (impacts). | yes      | 1           | [`https://iri.example.com/api/v1/facility/resources/289d38f2-e93c-4840-b037-8b78d8ec36cc`] |
+| `incident_uri`  | URI        | URI of `Incident` that generated this `Event` (generatedBy).  | yes      | 1           | [`https://iri.example.com/api/v1/status/incident/f9d6e700-1807-45bd-9a52-e81c32d40c5a`]    |
+
+### 6.3.3 Resource
+
+A `Resource` (see 6.2.2 Resource) models a consumable resource, a consumable service, or dependent infrastructure 
+services exposed to the end user. In the context of the Status model, an `Incident` and `Event` reference
+a `Resource` providing previous, current, or future status information.
+
+<div align="center">
+    <img src="./images/resource-class.png" alt="Resource class">
+</div>
+<div align="center"><b>Figure 6.3.3 - Resource class.</b></div>
+
+The `Resource` class has the following attribute definitions:
+
+| Attribute            | Type         | Description                                                                                                                                                                                                        | Required | Cardinality | Example                                                                                                                                       |
+|:---------------------|:-------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+| `id`                 | String       | The unique identifier for the `Resource`.  Typically a UUID or URN to provide global uniqueness across facilities.                                                                                                 | yes      | 1           | "09a22593-2be8-46f6-ae54-2904b04e13a4"                                                                                                        |
+| `self_uri`           | URI          | A hyperlink reference (URI) to this `Resource` (self). Canonical hyperlink to this `Resource`.                                                                                                                                                            | yes      | 1           | "https://iri.example.com/api/v1/status/resources/09a22593-2be8-46f6-ae54-2904b04e13a4"                                                        |
+| `name`               | String       | The long name of the `Resource`.                                                                                                                                                                                   | no       | 0..1        | "Data Transfer Nodes"                                                                                                                         |
+| `description`        | String       | A description of the `Resource`.                                                                                                                                                                                   | no       | 0..1        | "The NERSC data transfer nodes provide access to Global Homes, Global Common, the Community File System (CFS), Perlmutter Scratch, and HPSS." |
+| `last_modified`      | DateTime     | The date this `Resource` was last modified.  ISO 8601 standard with timezone offsets.                                                                                                                              | no       | 0..1        | "2025-07-24T02:31:13.000Z"                                                                                                                    |
+| `resource_type`      | ResourceType | The type of `Resource` based on string ENUM values.                                                                                                                                                                | yes      | 1           | "compute"                                                                                                                                     |
+| `group`              | String       | The member `Resource` group.                                                                                                                                                                                       | no       | 0..1        | "perlmutter" |
+| `current_status`     | StatusType   | The current status of this `Resource` at time of query based on string ENUM values. If there is no last Event associated with the resource to indicate a current status, then currentStatus defaults to "unknown". | yes      | 1           | "up"                                                                                                                                          |
+| `capability_uris`    | String[]     | Hyperlink references (URIs) to capabilities this `Resource` provides (hasCapability).                                                                                                                              | no       | 0..*        | ["https://iri.example.com/api/v1/account/capabilities/b1ce8cd1-e8b8-4f77-b2ab-152084c70281"]                                                  |
+| `located_at_uri`     | URI          | A hyperlink reference (URI) to the `Site` containing this `Resource` (locatedAt).                                                                                                                                  | no       | 0..1        | "https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45"                                                          |
+| `member_of_uri`      | URI          | A hyperlink reference (URI) to `Facility` managing this `Resource` (memberOf).                                                                                                                                         | no       | 0..1        | "https://iri.example.com/api/v1/facility"                                                                                                     |
+
+### 6.3.4 Relationships
 The Status model has a set of well-defined relationships and their cardinalities that allows
 for navigation between objects based on relationship type.  The following table describes these
 relationships.
@@ -260,16 +348,24 @@ relationships.
 ---
 
 ## 6.4 Allocation Model
+The Allocation model (see Figure 6.4) defines the core structure for representing project 
+allocations at the `Facility`. An allocation represents a project-specific, time-bounded 
+budget of facility resources, granted via the facility’s proposal/review process and 
+tracked/managed by the facility over the allocation period.
+
+It is composed of four primary classes of named objects: `Project`, `ProjectAllocation`, 
+`UserAllocation`, and `Capability`. Each class encapsulates key attributes and behaviors 
+relevant to the management of allocations.
 
 ![Allocations Model](./images/allocation-model.png)
-<div align="center"><b>Figure 4 - Allocation Model.</b></div>
+<div align="center"><b>Figure 6.4 - Allocation Model.</b></div>
 
 ---
 
 ## 6.5 Job Model
 
 ![Job Model](./images/job-model.png)
-<div align="center"><b>Figure 5 - Job Model.</b></div>
+<div align="center"><b>Figure 6.5 - Job Model.</b></div>
 
 ---
 
