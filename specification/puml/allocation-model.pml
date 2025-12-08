@@ -83,11 +83,12 @@ Project --> "      1" Project : self_uri (self)
 
 class ProjectAllocation {
   Defines a project's allocation for a capability 
-  (aka. repo).  This allocation is a piece of the 
-  total allocation for the capability (eg. 5% of 
-  the total node hours of Perlmutter GPU nodes).  
-  A project would at least have a storage and job 
-  repos, maybe more than 1 of each.
+  (aka. repository).  This allocation is a piece of 
+  the total allocation for the capability (eg. 5% 
+  of the total node hours of Perlmutter GPU nodes).
+  A project would at least have a one storage and job 
+  repository at an HPC facility, maybe more than 1 of 
+  each.
 ---
   + id <b>: String</b>
   + self_uri <b>: Uri</b>

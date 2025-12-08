@@ -1,3 +1,17 @@
+# Contents
+## **[6. Conceptual Model](./conceptual-model.md)**
+- ### **[6.1 NamedObject](./conceptual-model.md#61-namedobject)**
+- ### **[6.2 Facility Model](./conceptual-model.md#62-facility-model)**
+    - #### **[6.2.1 Facility](./conceptual-model.md#621-facility)**
+    - #### **[6.2.2 Resource](./conceptual-model.md#622-resource)**
+    - #### **[6.2.3 Site](./conceptual-model.md#623-site)**
+    - #### **[6.2.4 Location](./conceptual-model.md#624-location)**
+    - #### **[6.2.5 Relationships](./conceptual-model.md#625-relationships)**
+- ### **[6.3 Status Model](./conceptual-model.md#63-status-model)**
+- ### **[6.4 Allocation Model](./conceptual-model.md#64-allocation-model)**
+- ### **[6.5 Job Model](./conceptual-model.md#65-job-model)**
+- ### **[6.6 Filesystem](./conceptual-model.md#66-filesystem-model)**
+
 # 6. Conceptual Model
 The IRI conceptual model is an ever expanding set of functionalities needed to provide users with access
 to capabilities at the DoE User Facilities.  Initially targeting scientific workflows, and now expanded
@@ -303,7 +317,6 @@ The `Event` class has the following attribute definitions:
 | `incident_uri`  | URI        | URI of `Incident` that generated this `Event` (generatedBy).  | yes      | 1           | [`https://iri.example.com/api/v1/status/incident/f9d6e700-1807-45bd-9a52-e81c32d40c5a`]    |
 
 ### 6.3.3 Resource
-
 A `Resource` (see 6.2.2 Resource) models a consumable resource, a consumable service, or dependent infrastructure 
 services exposed to the end user. In the context of the Status model, an `Incident` and `Event` reference
 a `Resource` providing previous, current, or future status information.
@@ -348,17 +361,89 @@ relationships.
 ---
 
 ## 6.4 Allocation Model
-The Allocation model (see Figure 6.4) defines the core structure for representing project 
-allocations at the `Facility`. An allocation represents a project-specific, time-bounded 
-budget of facility resources, granted via the facility’s proposal/review process and 
-tracked/managed by the facility over the allocation period.
+The Allocation model (Figure 6.4) defines the core structure for representing project and user 
+allocations at a `Facility`. An allocation is a project-specific, time-bounded budget of facility 
+resources, granted through the facility’s proposal and review process and tracked by the facility 
+for the duration of the allocation period.
 
-It is composed of four primary classes of named objects: `Project`, `ProjectAllocation`, 
-`UserAllocation`, and `Capability`. Each class encapsulates key attributes and behaviors 
-relevant to the management of allocations.
+The Allocation model is composed of four primary classes of named objects: `Project`, 
+`ProjectAllocation`, `UserAllocation`, and `Capability`. Each class encapsulates key 
+attributes and behaviors relevant to the management of allocations.
 
 ![Allocations Model](./images/allocation-model.png)
 <div align="center"><b>Figure 6.4 - Allocation Model.</b></div>
+
+### 6.4.1 Project
+A `Project` is the allocation account (also called a repository) that represents a specific DOE Office 
+of Science research effort, owned by a single PI, to which compute and storage resources are awarded 
+and against which all jobs and data usage by that project’s members are charged.  In the Allocation
+model a project is a named object that associates a list of users to an allocation at the facility.
+
+<div align="center">
+    <img src="./images/project-class.png" alt="Project class">
+</div>
+<div align="center"><b>Figure 6.4.1 - Project Class.</b></div>
+
+The `Project` class has the following attribute definitions:
+
+| Attribute        | Type     | Description                                                                                                       | Required | Cardinality | Example                                                                                |
+|:-----------------|:---------|:------------------------------------------------------------------------------------------------------------------|:---------|:------------|:---------------------------------------------------------------------------------------|
+| `id`             | String   | The unique identifier for the `Project`.  Typically a UUID or URN to provide global uniqueness across facilities. | yes      | 1           | "863a48f9-447e-4c22-82fb-72bcc6686d4c"                                                 |
+| `self_uri`       | URI      | A hyperlink reference (URI) to this `Project` (self). Canonical hyperlink to this `Project`.                      | yes      | 1           | "https://iri.example.com/api/v1/account/projects/863a48f9-447e-4c22-82fb-72bcc6686d4c" |
+| `name`           | String   | The long name of the `Project`.                                                                                   | no       | 0..1        | "Staff research project"                                                               |
+| `description`    | String   | A description of the `Project`.                                                                                   | no       | 0..1        | "Compute and storage allocation for staff research use"                                |
+| `last_modified`  | DateTime | The date this `Project` was last modified.  ISO 8601 standard with timezone offsets.                              | no       | 0..1        | "2025-06-03T10:04:25.000Z"                                                             |
+| `user_ids`       | String[] | The list of user identifiers associated with this `Project`.                                                      | no       | 0..*        | [ "gtorok", "hacksaw", "bubbles" ]                                                     |
+
+### 6.4.2 ProjectAllocation
+A `ProjectAllocation` is an accounting object that represents the pool of `Resource`s awarded to a 
+specific `Project`. In practical terms, it’s the record that ties a `Project` to its compute and storage
+allocation at an HPC facility. For example, how much was awarded, how much has been used, and how much 
+remains, for the current allocation period.
+
+<div align="center">
+    <img src="./images/projectallocation-class.png" alt="ProjectAllocation class">
+</div>
+<div align="center"><b>Figure 6.4.2 - ProjectAllocation Class.</b></div>
+
+The `ProjectAllocation` class has the following attribute definitions:
+
+| Attribute       | Type              | Description                                                                                                                 | Required | Cardinality | Example                                                                                                                                       |
+|:----------------|:------------------|:----------------------------------------------------------------------------------------------------------------------------|:---------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+| `id`            | String            | The unique identifier for the `ProjectAllocation`.  Typically a UUID or URN to provide global uniqueness across facilities. | yes      | 1           | "09a22593-2be8-46f6-ae54-2904b04e13a4"                                                                                                        |
+| `self_uri`      | URI               | A hyperlink reference (URI) to this `ProjectAllocation` (self). Canonical hyperlink to this `Project`.                      | yes      | 1           | "https://iri.example.com/api/v1/status/resources/09a22593-2be8-46f6-ae54-2904b04e13a4"                                                        |
+| `name`          | String            | The long name of the `ProjectAllocation`.                                                                                   | no       | 0..1        | "Data Transfer Nodes"                                                                                                                         |
+| `description`   | String            | A description of the `ProjectAllocation`.                                                                                   | no       | 0..1        | "The NERSC data transfer nodes provide access to Global Homes, Global Common, the Community File System (CFS), Perlmutter Scratch, and HPSS." |
+| `last_modified` | DateTime          | The date this `ProjectAllocation` was last modified.  ISO 8601 standard with timezone offsets.                              | no       | 0..1        | "2025-07-24T02:31:13.000Z"                                                                                                                    |
+| `entries`       | AllocationEntry[] | The list of allocation entry associted with a `ProjectAllocation`.                                                          | no       | 0..*        | "compute"                                                                                                                                     |
+| `project_uri`   | URI               | A hyperlink reference (URI) to the `Project` associated with this this `ProjectAllocation` (hasProject).                    | yes      | 1           | "https://iri.example.com/api/v1/allocation/project/"                                                                                          |
+| `capability_uri`   | URI               | A hyperlink reference (URI) to the `Project` associated with this this `ProjectAllocation` (hasProject).                    | yes      | 1           | "https://iri.example.com/api/v1/allocation/project/"                                                                                          |
+| `user_allocation_uris`   | URI[]             | A hyperlink reference (URI) to the `Project` associated with this this `ProjectAllocation` (hasProject).                    | yes      | 1           | "https://iri.example.com/api/v1/allocation/project/"                                                                                          |
+
+`AllocationEntry` is a class that defines a specific `Resourceallocation
+### 6.4.3 UserAllocation
+UserAllocation is the per-user slice of a project’s allocation: how much compute and storage a 
+specific user is allowed to spend from a given project.
+
+<div align="center">
+    <img src="./images/userallocation-class.png" alt="UserAllocation class">
+</div>
+<div align="center"><b>Figure 6.4.3 - UserAllocation Class.</b></div>
+
+### 6.4.4 Capability
+    Defines an aspect of a resource that can have
+    an allocation. For example, Perlmutter nodes
+    with GPUs. For some resources at a facility,
+    this will be 1 to 1 with the resource. It is
+    a way to subdivide a resource into allocatable
+    sub-resources further.  The word "capability"
+    is also known to users as something they need
+    for a job to run. (eg. gpu)
+
+<div align="center">
+    <img src="./images/capability-class.png" alt="Capability class">
+</div>
+<div align="center"><b>Figure 6.4.4 - Capability Class.</b></div>
 
 ---
 
