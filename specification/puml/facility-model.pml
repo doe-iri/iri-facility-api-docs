@@ -24,15 +24,15 @@ class Facility {
   + short_name <b>: String [0..1]</b>
   + organization_name <b>: String</b>
   + support_uri <b>: Uri [0..1]</b>
-  + site_uris <b>: Uri[] [0..1]</b>
-  + location_uris <b>: Uri[] [0..1]</b>
-  + resource_uris <b>: Uri[] [0..1]</b>
-  + event_uris <b>: Uri[] [0..1]</b>
-  + incident_uris <b>: Uri[] [0..1]</b>
-  + capability_uris <b>: Uri[] [0..1]</b>
-  + project_uris <b>: Uri[] [0..1]</b>
-  + project_allocation_uris <b>: Uri[] [0..1]</b>
-  + user_allocation_uris <b>: Uri[] [0..1]</b>
+  + site_uris <b>: Uri[] [0..*]</b>
+  + location_uris <b>: Uri[] [0..*]</b>
+  + resource_uris <b>: Uri[] [0..*]</b>
+  + event_uris <b>: Uri[] [0..*]</b>
+  + incident_uris <b>: Uri[] [0..*]</b>
+  + capability_uris <b>: Uri[] [0..*]</b>
+  + project_uris <b>: Uri[] [0..*]</b>
+  + project_allocation_uris <b>: Uri[] [0..*]</b>
+  + user_allocation_uris <b>: Uri[] [0..*]</b>
 }
 
 Facility --> "      1" Facility : self_uri (self)
@@ -52,9 +52,9 @@ class Resource {
   + resource_type <b>: ResourceType</b>
   + group <b>: String [0..1]</b>
   + current_status <b>: StatusType</b>
-  + capability_uris <b>: Uri[] [0..1]</b>
+  + capability_uris <b>: Uri[] [0..*]</b>
   + located_at_uri <b>: Uri [0..1]</b>
-  + member_of_uri <b>: Uri</b>
+  + member_of_uri <b>: Uri [0..1]</b>
 }
 
 Resource --> "      1" Resource : self_uri (self)

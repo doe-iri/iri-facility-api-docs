@@ -169,6 +169,29 @@ The `Resource` class has the following attribute definitions:
 | `located_at_uri`     | URI          | A hyperlink reference (URI) to the `Site` containing this `Resource` (locatedAt).                                                                                                                                  | no       | 0..1        | "https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45"                                                          |
 | `member_of_uri`      | URI          | A hyperlink reference (URI) to `Facility` managing this `Resource` (memberOf).                                                                                                                                         | no       | 0..1        | "https://iri.example.com/api/v1/facility"                                                                                                     |
 
+The `ResourceType` is an enumeration to identify the type of `Resource`.  This
+is a broad classification and may not provide enough detail to make job
+submission decisions.
+
+| ENUM        | Description                           |
+|:------------|:--------------------------------------|
+| `website`   | This `Resource` is of type `website`. |
+| `service`   | This `Resource` is of type `service`. |
+| `compute`   | This `Resource` is of type `compute`. |
+| `system`    | This `Resource` is of type `system`.  |
+| `storage`   | This `Resource` is of type `storage`. |
+| `network`   | This `Resource` is of type `network`. |
+| `unknown`   | This `Resource` is of type `unknown`. |
+
+The `StatusType` is an enumeration of the possible status values for a `Resource`.
+
+| ENUM       | Description                                                                             |
+|:-----------|:----------------------------------------------------------------------------------------|
+| `up`       | The `Resource` is `up` and available for use.                                           |
+| `degraded` | The `Resource` is `degraded` and although available, may not be providing full service. |
+| `down`     | The `Resource` is `down` and unavailable for use.                                       |
+| `unknown`  | The `Resource` is in an `unknown` state and should be considered unavailable.           |
+
 ### 6.2.3 Site
 A `Site` represents the physical and administrative context in which a `Resource` is deployed and operated.
 It is associated with a geographic or network location  where one or more resources reside and serves as the
@@ -342,6 +365,29 @@ The `Resource` class has the following attribute definitions:
 | `located_at_uri`     | URI          | A hyperlink reference (URI) to the `Site` containing this `Resource` (locatedAt).                                                                                                                                  | no       | 0..1        | "https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45"                                                          |
 | `member_of_uri`      | URI          | A hyperlink reference (URI) to `Facility` managing this `Resource` (memberOf).                                                                                                                                         | no       | 0..1        | "https://iri.example.com/api/v1/facility"                                                                                                     |
 
+The `ResourceType` is an enumeration to identify the type of `Resource`.  This
+is a broad classification and may not provide enough detail to make job
+submission decisions.
+
+| ENUM        | Description                           |
+|:------------|:--------------------------------------|
+| `website`   | This `Resource` is of type `website`. |
+| `service`   | This `Resource` is of type `service`. |
+| `compute`   | This `Resource` is of type `compute`. |
+| `system`    | This `Resource` is of type `system`.  |
+| `storage`   | This `Resource` is of type `storage`. |
+| `network`   | This `Resource` is of type `network`. |
+| `unknown`   | This `Resource` is of type `unknown`. |
+
+The `StatusType` is an enumeration of the possible status values for a `Resource`.
+
+| ENUM       | Description                                                                             |
+|:-----------|:----------------------------------------------------------------------------------------|
+| `up`       | The `Resource` is `up` and available for use.                                           |
+| `degraded` | The `Resource` is `degraded` and although available, may not be providing full service. |
+| `down`     | The `Resource` is `down` and unavailable for use.                                       |
+| `unknown`  | The `Resource` is in an `unknown` state and should be considered unavailable.           |
+
 ### 6.3.4 Relationships
 The Status model has a set of well-defined relationships and their cardinalities that allows
 for navigation between objects based on relationship type.  The following table describes these
@@ -412,14 +458,14 @@ The `ProjectAllocation` class has the following attribute definitions:
 | Attribute                | Type              | Description                                                                                                                              | Required | Cardinality | Example                                                                                              |
 |:-------------------------|:------------------|:-----------------------------------------------------------------------------------------------------------------------------------------|:---------|:------------|:-----------------------------------------------------------------------------------------------------|
 | `id`                     | String            | The unique identifier for the `ProjectAllocation`.  Typically a UUID or URN to provide global uniqueness across facilities.              | yes      | 1           | "ed25c679-0d1e-4c99-817c-0475694fde31"                                                               |
-| `self_uri`               | URI               | A hyperlink reference (URI) to this `ProjectAllocation` (self). Canonical hyperlink to this `Project`.                                   | yes      | 1           | "https://iri.example.com/api/v1/allocation/project_allocations/ed25c679-0d1e-4c99-817c-0475694fde31" |
+| `self_uri`               | URI               | A hyperlink reference (URI) to this `ProjectAllocation` (self). Canonical hyperlink to this `ProjectAllocation`.                                   | yes      | 1           | "https://iri.example.com/api/v1/allocation/project_allocations/ed25c679-0d1e-4c99-817c-0475694fde31" |
 | `name`                   | String            | The long name of the `ProjectAllocation`.                                                                                                | no       | 0..1        | "Perlmutter allocation"                                                                              |
 | `description`            | String            | A description of the `ProjectAllocation`.                                                                                                | no       | 0..1        | "Perlmutter allocation for staff research project"                                                   |
 | `last_modified`          | DateTime          | The date this `ProjectAllocation` was last modified.  ISO 8601 standard with timezone offsets.                                           | no       | 0..1        | "2025-07-24T02:31:13.000Z"                                                                           |
-| `entries`                | AllocationEntry[] | The list of numerical allocations associted with a `ProjectAllocation`.                                                                  | no       | 0..*        | [ ]                                                                                                  |
+| `entries`                | AllocationEntry[] | The list of numerical allocations associated with a `ProjectAllocation`.                                                                 | no       | 0..*        | [ ]                                                                                                  |
 | `project_uri`            | URI               | A hyperlink reference (URI) to the `Project` associated with this this `ProjectAllocation` (hasProject).                                 | yes      | 1           | "https://iri.example.com/api/v1/allocation/projects/d1dfbe36-c00a-40bd-8960-5a87ceb6a1ba"            |
 | `capability_uri`         | URI               | A hyperlink reference (URI) to the `Capability` associated with this this `ProjectAllocation` (hasCapability).                           | no       | 0..*        | "https://iri.example.com/api/v1/allocation/capabilities/2783f4b6-a4f4-4385-8fd6-8a546e3f2209"        |
-| `user_allocation_uris`   | URI[]             | A list of hyperlink references (URI) to instances of `UserAllocation` associated with this this `ProjectAllocation` (hasUserAllocation). | no       | 0..*        | "https://iri.example.com/api/v1/allocation/user_allocations/b70fbc23-e265-45c9-8de2-491fcc3f8c0"     |
+| `user_allocation_uris`   | URI[]             | A list of hyperlink references (URI) to instances of `UserAllocation` associated with this `ProjectAllocation` (hasUserAllocation).      | no       | 0..*        | "https://iri.example.com/api/v1/allocation/user_allocations/b70fbc23-e265-45c9-8de2-491fcc3f8c0"     |
 
 `AllocationEntry` is a non-named object class (is not directly referencable through the API) that augments the
 `ProjectAllocation` class with numerical allocation data.  The `AllocationEntry` class has the following attribute 
@@ -442,27 +488,134 @@ allocated based on `node_hours`.
 
 ### 6.4.3 UserAllocation
 UserAllocation is the per-user slice of a project’s allocation: how much compute and storage a 
-specific user is allowed to spend from a given project.
+specific user is allowed to spend from a given project.  This can never exceed limits placed
+on the associated `ProjectAllocation`.
 
 <div align="center">
     <img src="./images/userallocation-class.png" alt="UserAllocation class">
 </div>
 <div align="center"><b>Figure 6.4.3 - UserAllocation Class.</b></div>
 
+The `UserAllocation` class has the following attribute definitions:
+
+| Attribute                 | Type              | Description                                                                                                                         | Required | Cardinality | Example                                                                                              |
+|:--------------------------|:------------------|:------------------------------------------------------------------------------------------------------------------------------------|:---------|:------------|:-----------------------------------------------------------------------------------------------------|
+| `id`                      | String            | The unique identifier for the `UserAllocation`.  Typically a UUID or URN to provide global uniqueness across facilities.            | yes      | 1           | "ed25c679-0d1e-4c99-817c-0475694fde31"                                                               |
+| `self_uri`                | URI               | A hyperlink reference (URI) to this `UserAllocation` (self). Canonical hyperlink to this `UserAllocation`.                                 | yes      | 1           | "https://iri.example.com/api/v1/allocation/user_allocations/ed25c679-0d1e-4c99-817c-0475694fde31"    |
+| `name`                    | String            | The long name of the `UserAllocation`.                                                                                              | no       | 0..1        | "Bubble's user allocaton"                                                                            |
+| `description`             | String            | A description of the `UserAllocation`.                                                                                              | no       | 0..1        | "Bubble's user allocaton for staff research project"                                                 |
+| `last_modified`           | DateTime          | The date this `UserAllocation` was last modified.  ISO 8601 standard with timezone offsets.                                         | no       | 0..1        | "2025-07-24T02:31:13.000Z"                                                                           |
+| `user_id`                 | String            | The user identifier associated with this `UserAllocation`.                                                                          | yes      | 1           | "bubbles"                                                                                            |
+| `entries`                 | AllocationEntry[] | The list of numerical allocations associated with the `UserAllocation`.                                                             | no       | 0..*        | [ ]                                                                                                  |
+| `project_allocation_uri`  | URI               | A hyperlink reference (URI) to an instance of `ProjectAllocation` associated with this `UserAllocation` (hasProjectAllocation).     | yes      | 1           | "https://iri.example.com/api/v1/allocation/project_allocations/ed25c679-0d1e-4c99-817c-0475694fde31" |
+
+`AllocationEntry` is a non-named object class (is not directly referencable through the API) that augments the
+`UserAllocation` class with numerical allocation data.  The `AllocationEntry` class has the following attribute
+definitions:
+
+| Attribute     | Type           | Description                                        | Required | Cardinality | Example            |
+|:--------------|:---------------|:---------------------------------------------------|:---------|:------------|:-------------------|
+| `allocation`  | Float          | The total amount of the `Resource` allocated.      | yes      | 1           | 597.0710332588748  |
+| `usage`       | Float          | The amount of allocation already consumed.         | yes      | 1           | 168.51791796212257 |
+| `unit`        | AllocationUnit | The unit of measurement the allocation represents. | yes      | 1           | "node_hours"       |
+
+The `AllocationUnit` is an enumeration that models the technology unit of measure.  For example, compute is
+allocated based on `node_hours`.
+
+| ENUM         | Description                                              |
+|:-------------|:---------------------------------------------------------|
+| `node_hours` | HPC compute resources are tracked based on `node_hours`. |
+| `bytes`      | Storage resources are tracked based on `bytes`.          |
+| `inodes`     | Storage resources are tracked based on `inodes`.         |
+
 ### 6.4.4 Capability
-    Defines an aspect of a resource that can have
-    an allocation. For example, Perlmutter nodes
-    with GPUs. For some resources at a facility,
-    this will be 1 to 1 with the resource. It is
-    a way to subdivide a resource into allocatable
-    sub-resources further.  The word "capability"
-    is also known to users as something they need
-    for a job to run. (eg. gpu)
+Defines an aspect of a resource (facility service or resource) that can be allocated.
+For example, Examples in practice would map to things like:
+* “Perlmutter CPU core-hours”
+* “Perlmutter GPU core-hours”
+* “Project directory space on global_common”
+* “Archive (HPSS) space/operations”
+* “Data-transfer service on DTNs”
+
+For some resources at a facility, this will be 1 to 1 with the resource. It is
+a way to subdivide a resource into allocatable sub-resources further.  The word 
+"capability" is also known to users as something they need for a job to run.
 
 <div align="center">
     <img src="./images/capability-class.png" alt="Capability class">
 </div>
 <div align="center"><b>Figure 6.4.4 - Capability Class.</b></div>
+
+The `Capability` class has the following attribute definitions:
+
+| Attribute         | Type             | Description                                                                                                          | Required | Cardinality | Example                                                                                       |
+|:------------------|:-----------------|:---------------------------------------------------------------------------------------------------------------------|:---------|:------------|:----------------------------------------------------------------------------------------------|
+| `id`              | String           | The unique identifier for the `Capability`.  Typically a UUID or URN to provide global uniqueness across facilities. | yes      | 1           | "ed25c679-0d1e-4c99-817c-0475694fde31"                                                        |
+| `self_uri`        | URI              | A hyperlink reference (URI) to this `Capability` (self). Canonical hyperlink to this `UserAllocation`.               | yes      | 1           | "https://iri.example.com/api/v1/allocation/capabilities/ed25c679-0d1e-4c99-817c-0475694fde31" |
+| `name`            | String           | The long name of the `Capability`.                                                                                   | no       | 0..1        | "Perlmutter GPU"                                                                              |
+| `description`     | String           | A description of the `Capability`.                                                                                   | no       | 0..1        | "Perlmutter GPU capability"                                                                   |
+| `last_modified`   | DateTime         | The date this `Capability` was last modified.  ISO 8601 standard with timezone offsets.                              | no       | 0..1        | "2025-07-24T02:31:13.000Z"                                                                    |
+| `units`           | AllocationUnit[] | A list of units of measurement that apply to the capability provided by the `Resource`.                              | yes      | 1           | "node_hours"                                                                                  |
+| `resource_uri`    | URI              | A hyperlink reference (URI) to an instance of `Resource` that this `Capability` is associated with (hasResource).    | yes      | 1           | "https://iri.example.com/api/v1/facility/resources/8b61b346-b53c-4a8e-83b4-776eaa14cc67"      |
+
+The `AllocationUnit` is an enumeration that models the technology unit of measure.  For example, compute is
+allocated based on `node_hours`.
+
+| ENUM         | Description                                              |
+|:-------------|:---------------------------------------------------------|
+| `node_hours` | HPC compute resources are tracked based on `node_hours`. |
+| `bytes`      | Storage resources are tracked based on `bytes`.          |
+| `inodes`     | Storage resources are tracked based on `inodes`.         |
+
+### 6.4.5 Resource
+A `Resource` (see 6.2.2 Resource) models a consumable resource, a consumable service, or 
+dependent infrastructure services exposed to the end user.  A `Resource` in the context
+of the Allocation model is referenced by `Capability` to describe the `Resource`s 
+available for use by the user/project in the associated `Allocation`.
+
+<div align="center">
+    <img src="./images/resource-class.png" alt="Resource class">
+</div>
+<div align="center"><b>Figure 6.4.5 - Resource class.</b></div>
+
+The `Resource` class has the following attribute definitions:
+
+| Attribute            | Type         | Description                                                                                                                                                                                                        | Required | Cardinality | Example                                                                                                                                       |
+|:---------------------|:-------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+| `id`                 | String       | The unique identifier for the `Resource`.  Typically a UUID or URN to provide global uniqueness across facilities.                                                                                                 | yes      | 1           | "09a22593-2be8-46f6-ae54-2904b04e13a4"                                                                                                        |
+| `self_uri`           | URI          | A hyperlink reference (URI) to this `Resource` (self). Canonical hyperlink to this `Resource`.                                                                                                                                                            | yes      | 1           | "https://iri.example.com/api/v1/status/resources/09a22593-2be8-46f6-ae54-2904b04e13a4"                                                        |
+| `name`               | String       | The long name of the `Resource`.                                                                                                                                                                                   | no       | 0..1        | "Data Transfer Nodes"                                                                                                                         |
+| `description`        | String       | A description of the `Resource`.                                                                                                                                                                                   | no       | 0..1        | "The NERSC data transfer nodes provide access to Global Homes, Global Common, the Community File System (CFS), Perlmutter Scratch, and HPSS." |
+| `last_modified`      | DateTime     | The date this `Resource` was last modified.  ISO 8601 standard with timezone offsets.                                                                                                                              | no       | 0..1        | "2025-07-24T02:31:13.000Z"                                                                                                                    |
+| `resource_type`      | ResourceType | The type of `Resource` based on string ENUM values.                                                                                                                                                                | yes      | 1           | "compute"                                                                                                                                     |
+| `group`              | String       | The member `Resource` group.                                                                                                                                                                                       | no       | 0..1        | "perlmutter" |
+| `current_status`     | StatusType   | The current status of this `Resource` at time of query based on string ENUM values. If there is no last Event associated with the resource to indicate a current status, then currentStatus defaults to "unknown". | yes      | 1           | "up"                                                                                                                                          |
+| `capability_uris`    | String[]     | Hyperlink references (URIs) to capabilities this `Resource` provides (hasCapability).                                                                                                                              | no       | 0..*        | ["https://iri.example.com/api/v1/account/capabilities/b1ce8cd1-e8b8-4f77-b2ab-152084c70281"]                                                  |
+| `located_at_uri`     | URI          | A hyperlink reference (URI) to the `Site` containing this `Resource` (locatedAt).                                                                                                                                  | no       | 0..1        | "https://iri.example.com/api/v1/facility/sites/ce2bbc49-ba63-4711-8f36-43b74ec2fe45"                                                          |
+| `member_of_uri`      | URI          | A hyperlink reference (URI) to `Facility` managing this `Resource` (memberOf).                                                                                                                                         | no       | 0..1        | "https://iri.example.com/api/v1/facility"                                                                                                     |
+
+The `ResourceType` is an enumeration to identify the type of `Resource`.  This
+is a broad classification and may not provide enough detail to make job
+submission decisions.
+
+| ENUM        | Description                           |
+|:------------|:--------------------------------------|
+| `website`   | This `Resource` is of type `website`. |
+| `service`   | This `Resource` is of type `service`. |
+| `compute`   | This `Resource` is of type `compute`. |
+| `system`    | This `Resource` is of type `system`.  |
+| `storage`   | This `Resource` is of type `storage`. |
+| `network`   | This `Resource` is of type `network`. |
+| `unknown`   | This `Resource` is of type `unknown`. |
+
+The `StatusType` is an enumeration of the possible status values for a `Resource`.
+
+| ENUM       | Description                                                                             |
+|:-----------|:----------------------------------------------------------------------------------------|
+| `up`       | The `Resource` is `up` and available for use.                                           |
+| `degraded` | The `Resource` is `degraded` and although available, may not be providing full service. |
+| `down`     | The `Resource` is `down` and unavailable for use.                                       |
+| `unknown`  | The `Resource` is in an `unknown` state and should be considered unavailable.           |
 
 ---
 

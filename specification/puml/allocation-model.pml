@@ -25,6 +25,7 @@ class Capability {
   + description <b>: String</b>
   + last_modified <b>: DateTime</b>
   + units <b>: AllocationUnit[]</b>
+  + resource_uri <b>: Uri</b>
 }
 
 Capability --> "      1" Capability : self_uri (self)
@@ -109,5 +110,55 @@ ProjectAllocation --> "      0..*" UserAllocation : user_allocation_uris (hasUse
 ProjectAllocation --> "0..*   " Capability : capability_uri (hasCapability)
 UserAllocation --> "1   " ProjectAllocation : project_allocation_uri (hasProjectAllocation)
 Project --> "1..*   " ProjectAllocation : project_allocation_uris(hasProjectAllocation)
+
+class Resource {
+  A Resource models a consumable resource, a
+  consumable service, or dependent infrastructure
+  services exposed to the end user.  A Resource
+  has a reportable status, operational state, and
+  capabilities.
+---
+  + id <b>: String</b>
+  + self_uri <b>: Uri</b>
+  + name <b>: String [0..1]</b>
+  + description <b>: String [0..1]</b>
+  + last_modified <b>: DateTime</b>
+  + resource_type <b>: ResourceType</b>
+  + group <b>: String [0..1]</b>
+  + current_status <b>: StatusType</b>
+  + capability_uris <b>: Uri[] [0..*]</b>
+  + located_at_uri <b>: Uri [0..1]</b>
+  + member_of_uri <b>: Uri [0..1]</b>
+}
+
+Resource --> "      1" Resource : self_uri (self)
+Resource --> "0..*   " Capability : capability_uris (providesCapability)
+Capability --> "1    " Resource : resource_uri (hasResource)
+
+enum ResourceType {
+  The type of Resource.
+---
+    website,
+    service,
+    compute,
+    system,
+    storage,
+    network,
+    unknown
+}
+
+Resource ..> ResourceType : resource_type
+
+enum StatusType {
+  Possible status values for
+  a resource.
+---
+    up,
+    degraded,
+    down,
+    unknown
+}
+
+Resource ..> StatusType : current_status
 
 @enduml
