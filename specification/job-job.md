@@ -1,4 +1,4 @@
-# DRAFT| Job Model (v1.0)
+# DRAFT: Job Model (v1.0)
 
 ## Overview
 This is the interface for programatic job submission. Users must be able to submit a job to a facility resource batch scheulder, query the status of jobs via the identifiers returned, and delete jobs as needed.  Users must be able to submit jobs that run as an unprivliged user on the given resource.  The endpoints are per-resource.
