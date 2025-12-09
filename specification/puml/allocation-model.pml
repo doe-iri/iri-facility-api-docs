@@ -47,7 +47,7 @@ class AllocationEntry {
   + unit <b>: AllocationUnit</b>
 }
 
-Capability ..> "0..n  " AllocationUnit : units
+Capability ..> "0..*  " AllocationUnit : units
 AllocationEntry ..> "1   " AllocationUnit : unit
 
 class UserAllocation {
@@ -66,7 +66,7 @@ class UserAllocation {
 }
 
 UserAllocation --> "      1" UserAllocation : self_uri (self)
-UserAllocation *-- "0..n   " AllocationEntry : "  entries"
+UserAllocation *-- "0..*   " AllocationEntry : "  entries"
 
 class Project {
   A project and its list of users at a facility.
@@ -77,6 +77,7 @@ class Project {
   + description <b>: String</b>
   + last_modified <b>: DateTime</b>
   + user_ids <b>: String[]</b>
+  + project_allocation_uris <b>: Uri[]</b>
 }
 
 Project --> "      1" Project : self_uri (self)
@@ -102,10 +103,11 @@ class ProjectAllocation {
 }
 
 ProjectAllocation --> "      1" ProjectAllocation : self_uri (self)
-ProjectAllocation *-- "0..n   " AllocationEntry : "  entries"
+ProjectAllocation *-- "0..*   " AllocationEntry : "  entries"
 ProjectAllocation --> "1   " Project : project_uri (hasProject)
-ProjectAllocation --> "      0..n" UserAllocation : user_allocation_uris (hasUserAllocation)
-ProjectAllocation --> "0..n   " Capability : capability_uri (hasCapability)
+ProjectAllocation --> "      0..*" UserAllocation : user_allocation_uris (hasUserAllocation)
+ProjectAllocation --> "0..*   " Capability : capability_uri (hasCapability)
 UserAllocation --> "1   " ProjectAllocation : project_allocation_uri (hasProjectAllocation)
+Project --> "1..*   " ProjectAllocation : project_allocation_uris(hasProjectAllocation)
 
 @enduml

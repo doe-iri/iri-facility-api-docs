@@ -386,14 +386,15 @@ model a project is a named object that associates a list of users to an allocati
 
 The `Project` class has the following attribute definitions:
 
-| Attribute        | Type     | Description                                                                                                       | Required | Cardinality | Example                                                                                |
-|:-----------------|:---------|:------------------------------------------------------------------------------------------------------------------|:---------|:------------|:---------------------------------------------------------------------------------------|
-| `id`             | String   | The unique identifier for the `Project`.  Typically a UUID or URN to provide global uniqueness across facilities. | yes      | 1           | "863a48f9-447e-4c22-82fb-72bcc6686d4c"                                                 |
-| `self_uri`       | URI      | A hyperlink reference (URI) to this `Project` (self). Canonical hyperlink to this `Project`.                      | yes      | 1           | "https://iri.example.com/api/v1/account/projects/863a48f9-447e-4c22-82fb-72bcc6686d4c" |
-| `name`           | String   | The long name of the `Project`.                                                                                   | no       | 0..1        | "Staff research project"                                                               |
-| `description`    | String   | A description of the `Project`.                                                                                   | no       | 0..1        | "Compute and storage allocation for staff research use"                                |
-| `last_modified`  | DateTime | The date this `Project` was last modified.  ISO 8601 standard with timezone offsets.                              | no       | 0..1        | "2025-06-03T10:04:25.000Z"                                                             |
-| `user_ids`       | String[] | The list of user identifiers associated with this `Project`.                                                      | no       | 0..*        | [ "gtorok", "hacksaw", "bubbles" ]                                                     |
+| Attribute                  | Type     | Description                                                                                                                             | Required | Cardinality | Example                                                                                                 |
+|:---------------------------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------|:---------|:------------|:--------------------------------------------------------------------------------------------------------|
+| `id`                       | String   | The unique identifier for the `Project`.  Typically a UUID or URN to provide global uniqueness across facilities.                       | yes      | 1           | "863a48f9-447e-4c22-82fb-72bcc6686d4c"                                                                  |
+| `self_uri`                 | URI      | A hyperlink reference (URI) to this `Project` (self). Canonical hyperlink to this `Project`.                                            | yes      | 1           | "https://iri.example.com/api/v1/account/projects/863a48f9-447e-4c22-82fb-72bcc6686d4c"                  |
+| `name`                     | String   | The long name of the `Project`.                                                                                                         | no       | 0..1        | "Staff research project"                                                                                |
+| `description`              | String   | A description of the `Project`.                                                                                                         | no       | 0..1        | "Compute and storage allocation for staff research use"                                                 |
+| `last_modified`            | DateTime | The date this `Project` was last modified.  ISO 8601 standard with timezone offsets.                                                    | no       | 0..1        | "2025-06-03T10:04:25.000Z"                                                                              |
+| `user_ids`                 | String[] | The list of user identifiers associated with this `Project`.                                                                            | no       | 0..*        | [ "gtorok", "hacksaw", "bubbles" ]                                                                      |
+| `project_allocation_uris`  | URI[]    | A list of hyperlink references (URI) to instances of `ProjectAllocation` associated with this this `Project` (hasProjectAllocation).    | no       | 0..*        | [ "https://iri.example.com/api/v1/allocation/project_allocations/ed25c679-0d1e-4c99-817c-0475694fde31" ] |
 
 ### 6.4.2 ProjectAllocation
 A `ProjectAllocation` is an accounting object that represents the pool of `Resource`s awarded to a 
@@ -408,19 +409,37 @@ remains, for the current allocation period.
 
 The `ProjectAllocation` class has the following attribute definitions:
 
-| Attribute       | Type              | Description                                                                                                                 | Required | Cardinality | Example                                                                                                                                       |
-|:----------------|:------------------|:----------------------------------------------------------------------------------------------------------------------------|:---------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
-| `id`            | String            | The unique identifier for the `ProjectAllocation`.  Typically a UUID or URN to provide global uniqueness across facilities. | yes      | 1           | "09a22593-2be8-46f6-ae54-2904b04e13a4"                                                                                                        |
-| `self_uri`      | URI               | A hyperlink reference (URI) to this `ProjectAllocation` (self). Canonical hyperlink to this `Project`.                      | yes      | 1           | "https://iri.example.com/api/v1/status/resources/09a22593-2be8-46f6-ae54-2904b04e13a4"                                                        |
-| `name`          | String            | The long name of the `ProjectAllocation`.                                                                                   | no       | 0..1        | "Data Transfer Nodes"                                                                                                                         |
-| `description`   | String            | A description of the `ProjectAllocation`.                                                                                   | no       | 0..1        | "The NERSC data transfer nodes provide access to Global Homes, Global Common, the Community File System (CFS), Perlmutter Scratch, and HPSS." |
-| `last_modified` | DateTime          | The date this `ProjectAllocation` was last modified.  ISO 8601 standard with timezone offsets.                              | no       | 0..1        | "2025-07-24T02:31:13.000Z"                                                                                                                    |
-| `entries`       | AllocationEntry[] | The list of allocation entry associted with a `ProjectAllocation`.                                                          | no       | 0..*        | "compute"                                                                                                                                     |
-| `project_uri`   | URI               | A hyperlink reference (URI) to the `Project` associated with this this `ProjectAllocation` (hasProject).                    | yes      | 1           | "https://iri.example.com/api/v1/allocation/project/"                                                                                          |
-| `capability_uri`   | URI               | A hyperlink reference (URI) to the `Project` associated with this this `ProjectAllocation` (hasProject).                    | yes      | 1           | "https://iri.example.com/api/v1/allocation/project/"                                                                                          |
-| `user_allocation_uris`   | URI[]             | A hyperlink reference (URI) to the `Project` associated with this this `ProjectAllocation` (hasProject).                    | yes      | 1           | "https://iri.example.com/api/v1/allocation/project/"                                                                                          |
+| Attribute                | Type              | Description                                                                                                                              | Required | Cardinality | Example                                                                                              |
+|:-------------------------|:------------------|:-----------------------------------------------------------------------------------------------------------------------------------------|:---------|:------------|:-----------------------------------------------------------------------------------------------------|
+| `id`                     | String            | The unique identifier for the `ProjectAllocation`.  Typically a UUID or URN to provide global uniqueness across facilities.              | yes      | 1           | "ed25c679-0d1e-4c99-817c-0475694fde31"                                                               |
+| `self_uri`               | URI               | A hyperlink reference (URI) to this `ProjectAllocation` (self). Canonical hyperlink to this `Project`.                                   | yes      | 1           | "https://iri.example.com/api/v1/allocation/project_allocations/ed25c679-0d1e-4c99-817c-0475694fde31" |
+| `name`                   | String            | The long name of the `ProjectAllocation`.                                                                                                | no       | 0..1        | "Perlmutter allocation"                                                                              |
+| `description`            | String            | A description of the `ProjectAllocation`.                                                                                                | no       | 0..1        | "Perlmutter allocation for staff research project"                                                   |
+| `last_modified`          | DateTime          | The date this `ProjectAllocation` was last modified.  ISO 8601 standard with timezone offsets.                                           | no       | 0..1        | "2025-07-24T02:31:13.000Z"                                                                           |
+| `entries`                | AllocationEntry[] | The list of numerical allocations associted with a `ProjectAllocation`.                                                                  | no       | 0..*        | [ ]                                                                                                  |
+| `project_uri`            | URI               | A hyperlink reference (URI) to the `Project` associated with this this `ProjectAllocation` (hasProject).                                 | yes      | 1           | "https://iri.example.com/api/v1/allocation/projects/d1dfbe36-c00a-40bd-8960-5a87ceb6a1ba"            |
+| `capability_uri`         | URI               | A hyperlink reference (URI) to the `Capability` associated with this this `ProjectAllocation` (hasCapability).                           | no       | 0..*        | "https://iri.example.com/api/v1/allocation/capabilities/2783f4b6-a4f4-4385-8fd6-8a546e3f2209"        |
+| `user_allocation_uris`   | URI[]             | A list of hyperlink references (URI) to instances of `UserAllocation` associated with this this `ProjectAllocation` (hasUserAllocation). | no       | 0..*        | "https://iri.example.com/api/v1/allocation/user_allocations/b70fbc23-e265-45c9-8de2-491fcc3f8c0"     |
 
-`AllocationEntry` is a class that defines a specific `Resourceallocation
+`AllocationEntry` is a non-named object class (is not directly referencable through the API) that augments the
+`ProjectAllocation` class with numerical allocation data.  The `AllocationEntry` class has the following attribute 
+definitions:
+
+| Attribute     | Type           | Description                                        | Required | Cardinality | Example            |
+|:--------------|:---------------|:---------------------------------------------------|:---------|:------------|:-------------------|
+| `allocation`  | Float          | The total amount of the `Resource` allocated.      | yes      | 1           | 597.0710332588748  |
+| `usage`       | Float          | The amount of allocation already consumed.         | yes      | 1           | 168.51791796212257 |
+| `unit`        | AllocationUnit | The unit of measurement the allocation represents. | yes      | 1           | "node_hours"       |
+
+The `AllocationUnit` is an enumeration that models the technology unit of measure.  For example, compute is
+allocated based on `node_hours`.
+
+| ENUM         | Description                                              |
+|:-------------|:---------------------------------------------------------|
+| `node_hours` | HPC compute resources are tracked based on `node_hours`. |
+| `bytes`      | Storage resources are tracked based on `bytes`.          |
+| `inodes`     | Storage resources are tracked based on `inodes`.         |
+
 ### 6.4.3 UserAllocation
 UserAllocation is the per-user slice of a project’s allocation: how much compute and storage a 
 specific user is allowed to spend from a given project.
