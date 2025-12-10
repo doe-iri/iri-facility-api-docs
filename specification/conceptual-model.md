@@ -1,26 +1,26 @@
 # Contents
-## 6. **[Conceptual Model](./conceptual-model.md)**
-- ### **[6.1 NamedObject](./conceptual-model.md#61-namedobject)**
-- ### **[6.2 Facility Model](./conceptual-model.md#62-facility-model)**
-  - #### **[6.2.1 Facility](./conceptual-model.md#621-facility)**
-  - #### **[6.2.2 Resource](./conceptual-model.md#622-resource)**
-  - #### **[6.2.3 Site](./conceptual-model.md#623-site)**
-  - #### **[6.2.4 Location](./conceptual-model.md#624-location)**
-  - #### **[6.2.5 Relationships](./conceptual-model.md#625-relationships)**
-- ### **[6.3 Status Model](./conceptual-model.md#63-status-model)**
-  - #### **[6.3.1 Incident](./conceptual-model.md#631-incident)**
-  - #### **[6.3.2 Event](./conceptual-model.md#632-event)**
-  - #### **[6.3.3 Resource](./conceptual-model.md#633-resource)**
-  - #### **[6.3.4 Relationships](./conceptual-model.md#634-relationships)**
-- ### **[6.4 Allocation Model](./conceptual-model.md#64-allocation-model)**
-  - #### **[6.4.1 Project](./conceptual-model.md#641-project)**
-  - #### **[6.4.2 ProjectAllocation](./conceptual-model.md#642-projectallocation)**
-  - #### **[6.4.3 UserAllocation](./conceptual-model.md#643-userallocation)**
-  - #### **[6.4.4 Capability](./conceptual-model.md#644-capability)**
-  - #### **[6.4.5 Resource](./conceptual-model.md#645-resource)**
-  - #### **[6.4.6 Relationships](./conceptual-model.md#646-relationships)**
-- ### **[6.5 Job Model](./conceptual-model.md#65-job-model)**
-- ### **[6.6 Filesystem](./conceptual-model.md#66-filesystem-model)**
+## 6. **[Conceptual Model](#6-conceptual-model)**
+- ### **[6.1 NamedObject](#61-namedobject)**
+- ### **[6.2 Facility Model](#62-facility-model)**
+  - #### **[6.2.1 Facility](#621-facility)**
+  - #### **[6.2.2 Resource](#622-resource)**
+  - #### **[6.2.3 Site](#623-site)**
+  - #### **[6.2.4 Location](#624-location)**
+  - #### **[6.2.5 Relationships](#625-relationships)**
+- ### **[6.3 Status Model](#63-status-model)**
+  - #### **[6.3.1 Incident](#631-incident)**
+  - #### **[6.3.2 Event](#632-event)**
+  - #### **[6.3.3 Resource](#633-resource)**
+  - #### **[6.3.4 Relationships](#634-relationships)**
+- ### **[6.4 Allocation Model](#64-allocation-model)**
+  - #### **[6.4.1 Project](#641-project)**
+  - #### **[6.4.2 ProjectAllocation](#642-projectallocation)**
+  - #### **[6.4.3 UserAllocation](#643-userallocation)**
+  - #### **[6.4.4 Capability](#644-capability)**
+  - #### **[6.4.5 Resource](#645-resource)**
+  - #### **[6.4.6 Relationships](#646-relationships)**
+- ### **[6.5 Job Model](#65-job-model)**
+- ### **[6.6 Filesystem](#66-filesystem-model)**
 
 # 6. Conceptual Model
 The IRI conceptual model is an ever expanding set of functionalities needed to provide users with access
@@ -112,7 +112,7 @@ to its domain. These classes serve as the foundational entities for describing p
 service components, and administrative context.
 
 <div align="center">
-    <img src="./images/facility-model.png" alt="Facility Model" style="max-width: 800px">
+    <img src="./images/facility-model.png" alt="Facility Model" width="800" />
 </div>
 <div align="center"><b>Figure 6.2 - Facility Model.</b></div>
 
@@ -127,7 +127,7 @@ industry, and government. In a more general definition, a `Facility` offers `Res
 workflows for programmatic consumption.
 
 <div align="center">
-    <img src="./images/facility-class.png" alt="Facility class" style="max-width: 450px">
+    <img src="./images/facility-class.png" alt="Facility class" width="450" />
 </div>
 <div align="center"><b>Figure 6.2.1 - Facility class.</b></div>
 
@@ -159,7 +159,7 @@ services exposed to the end user.  A `Resource` has a reportable status, operati
 capabilities.
 
 <div align="center">
-    <img src="./images/resource-class.png" alt="Resource class" style="max-width: 400px">
+    <img src="./images/resource-class.png" alt="Resource class" width="400" />
 </div>
 <div align="center"><b>Figure 6.2.2 - Resource class.</b></div>
 
@@ -211,7 +211,7 @@ A `Site` is a managed location that has an associated physical location and an o
 can host zero or more `Resource`.
 
 <div align="center">
-    <img src="./images/site-class.png" alt="Site class" style="max-width: 400px">
+    <img src="./images/site-class.png" alt="Site class" width="400" />
 </div>
 <div align="center"><b>Figure 6.2.3 - Site class.</b></div>
 
@@ -236,7 +236,7 @@ physically exist, are operated, or are logically grouped, enabling meaningful or
 visualization.  `Location`s are reusable entities that may be shared across multiple `Sites` or `Facilities`.
 
 <div align="center">
-    <img src="./images/location-class.png" alt="Location class" style="max-width: 400px">
+    <img src="./images/location-class.png" alt="Location class" width="400" />
 </div>
 <div align="center"><b>Figure 6.2.4 - Location class.</b></div>
 
@@ -290,7 +290,7 @@ operational status. These classes serve as the foundational entities for describ
 impacts and administrative context on defined Resources.
 
 <div align="center">
-    <img src="./images/status-model.png" alt="Status Model" style="max-width: 950px">
+    <img src="./images/status-model.png" alt="Status Model" width="950" />
 </div>
 <div align="center"><b>Figure 6.3 - Status Model.</b></div>
 
@@ -305,7 +305,7 @@ serves as a high-level grouping construct for aggregating and tracking related `
 `Resources`.
 
 <div align="center">
-    <img src="./images/incident-class.png" alt="Incident class"  style="max-width: 450px">
+    <img src="./images/incident-class.png" alt="Incident class"  width="450" />
 </div>
 <div align="center"><b>Figure 6.3.1 - Incident class.</b></div>
 
@@ -333,7 +333,7 @@ necessary to understand the progression and impact of an `Incident`, serving as 
 lightweight status log of relevant activity.
 
 <div align="center">
-    <img src="./images/event-class.png" alt="Event class"  style="max-width: 400px">
+    <img src="./images/event-class.png" alt="Event class"  width="400" />
 </div>
 <div align="center"><b>Figure 6.3.2 - Event class.</b></div>
 
@@ -357,7 +357,7 @@ services exposed to the end user. In the context of the Status model, an `Incide
 a `Resource` providing previous, current, or future status information.
 
 <div align="center">
-    <img src="./images/resource-class.png" alt="Resource class"  style="max-width: 400px">
+    <img src="./images/resource-class.png" alt="Resource class"  width="400" />
 </div>
 <div align="center"><b>Figure 6.3.3 - Resource class.</b></div>
 
@@ -429,7 +429,7 @@ The Allocation model is composed of four primary classes of named objects: `Proj
 attributes and behaviors relevant to the management of allocations.
 
 <div align="center">
-    <img src="./images/allocation-model.png" alt="Allocations Model"  style="max-width: 900px">
+    <img src="./images/allocation-model.png" alt="Allocations Model"  width="900" />
 </div>
 <div align="center"><b>Figure 6.4 - Allocation Model.</b></div>
 
@@ -440,7 +440,7 @@ and against which all jobs and data usage by that project’s members are charge
 model a project is a named object that associates a list of users to an allocation at the facility.
 
 <div align="center">
-    <img src="./images/project-class.png" alt="Project class" style="max-width: 400px">
+    <img src="./images/project-class.png" alt="Project class" width="400" />
 </div>
 <div align="center"><b>Figure 6.4.1 - Project Class.</b></div>
 
@@ -463,7 +463,7 @@ allocation at an HPC facility. For example, how much was awarded, how much has b
 remains, for the current allocation period.
 
 <div align="center">
-    <img src="./images/projectallocation-class.png" alt="ProjectAllocation class" style="max-width: 400px">
+    <img src="./images/projectallocation-class.png" alt="ProjectAllocation class" width="400" />
 </div>
 <div align="center"><b>Figure 6.4.2 - ProjectAllocation Class.</b></div>
 
@@ -506,7 +506,7 @@ specific user is allowed to spend from a given project.  This can never exceed l
 on the associated `ProjectAllocation`.
 
 <div align="center">
-    <img src="./images/userallocation-class.png" alt="UserAllocation class" style="max-width: 400px">
+    <img src="./images/userallocation-class.png" alt="UserAllocation class" width="400" />
 </div>
 <div align="center"><b>Figure 6.4.3 - UserAllocation Class.</b></div>
 
@@ -556,7 +556,7 @@ a way to subdivide a resource into allocatable sub-resources further.  The word
 "capability" is also known to users as something they need for a job to run.
 
 <div align="center">
-    <img src="./images/capability-class.png" alt="Capability class" style="max-width: 400px">
+    <img src="./images/capability-class.png" alt="Capability class" width="400" />
 </div>
 <div align="center"><b>Figure 6.4.4 - Capability Class.</b></div>
 
@@ -588,7 +588,7 @@ of the Allocation model is referenced by `Capability` to describe the `Resource`
 available for use by the user/project in the associated `Allocation`.
 
 <div align="center">
-    <img src="./images/resource-class.png" alt="Resource class" style="max-width: 400px">
+    <img src="./images/resource-class.png" alt="Resource class" width="400" />
 </div>
 <div align="center"><b>Figure 6.4.5 - Resource class.</b></div>
 
@@ -668,7 +668,7 @@ The Job model is composed of a single named class called `Job`, four supporting 
 enumeration.
 
 <div align="center">
-    <img src="./images/job-model.png" alt="Job Model" style="max-width: 900px">
+    <img src="./images/job-model.png" alt="Job Model" width="900" />
 </div>
 <div align="center"><b>Figure 6.5 - Job Model.</b></div>
 
