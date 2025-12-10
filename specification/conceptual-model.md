@@ -1,14 +1,24 @@
 # Contents
-## **[6. Conceptual Model](./conceptual-model.md)**
+## 6. **[Conceptual Model](./conceptual-model.md)**
 - ### **[6.1 NamedObject](./conceptual-model.md#61-namedobject)**
 - ### **[6.2 Facility Model](./conceptual-model.md#62-facility-model)**
-    - #### **[6.2.1 Facility](./conceptual-model.md#621-facility)**
-    - #### **[6.2.2 Resource](./conceptual-model.md#622-resource)**
-    - #### **[6.2.3 Site](./conceptual-model.md#623-site)**
-    - #### **[6.2.4 Location](./conceptual-model.md#624-location)**
-    - #### **[6.2.5 Relationships](./conceptual-model.md#625-relationships)**
+  - #### **[6.2.1 Facility](./conceptual-model.md#621-facility)**
+  - #### **[6.2.2 Resource](./conceptual-model.md#622-resource)**
+  - #### **[6.2.3 Site](./conceptual-model.md#623-site)**
+  - #### **[6.2.4 Location](./conceptual-model.md#624-location)**
+  - #### **[6.2.5 Relationships](./conceptual-model.md#625-relationships)**
 - ### **[6.3 Status Model](./conceptual-model.md#63-status-model)**
+  - #### **[6.3.1 Incident](./conceptual-model.md#631-incident)**
+  - #### **[6.3.2 Event](./conceptual-model.md#632-event)**
+  - #### **[6.3.3 Resource](./conceptual-model.md#633-resource)**
+  - #### **[6.3.4 Relationships](./conceptual-model.md#634-relationships)**
 - ### **[6.4 Allocation Model](./conceptual-model.md#64-allocation-model)**
+  - #### **[6.4.1 Project](./conceptual-model.md#641-project)**
+  - #### **[6.4.2 ProjectAllocation](./conceptual-model.md#642-projectallocation)**
+  - #### **[6.4.3 UserAllocation](./conceptual-model.md#643-userallocation)**
+  - #### **[6.4.4 Capability](./conceptual-model.md#644-capability)**
+  - #### **[6.4.5 Resource](./conceptual-model.md#645-resource)**
+  - #### **[6.4.6 Relationships](./conceptual-model.md#646-relationships)**
 - ### **[6.5 Job Model](./conceptual-model.md#65-job-model)**
 - ### **[6.6 Filesystem](./conceptual-model.md#66-filesystem-model)**
 
@@ -65,7 +75,7 @@ identified, linked, and maintained within distributed infrastructures.
 The NamedObject class has the following definition:
 
 <div align="center">
-    <img src="./images/namedObject.png" alt="NamedObject">
+    <img src="./images/namedObject.png" alt="NamedObject" sizes="">
 </div>
 <div align="center"><b>Figure 6.1 - NamedObject class.</b></div>
 
@@ -102,7 +112,7 @@ to its domain. These classes serve as the foundational entities for describing p
 service components, and administrative context.
 
 <div align="center">
-    <img src="./images/facility-model.png" alt="Facility Model">
+    <img src="./images/facility-model.png" alt="Facility Model" style="max-width: 800px">
 </div>
 <div align="center"><b>Figure 6.2 - Facility Model.</b></div>
 
@@ -117,7 +127,7 @@ industry, and government. In a more general definition, a `Facility` offers `Res
 workflows for programmatic consumption.
 
 <div align="center">
-    <img src="./images/facility-class.png" alt="Facility class">
+    <img src="./images/facility-class.png" alt="Facility class" style="max-width: 450px">
 </div>
 <div align="center"><b>Figure 6.2.1 - Facility class.</b></div>
 
@@ -149,7 +159,7 @@ services exposed to the end user.  A `Resource` has a reportable status, operati
 capabilities.
 
 <div align="center">
-    <img src="./images/resource-class.png" alt="Resource class">
+    <img src="./images/resource-class.png" alt="Resource class" style="max-width: 400px">
 </div>
 <div align="center"><b>Figure 6.2.2 - Resource class.</b></div>
 
@@ -201,7 +211,7 @@ A `Site` is a managed location that has an associated physical location and an o
 can host zero or more `Resource`.
 
 <div align="center">
-    <img src="./images/site-class.png" alt="Site class">
+    <img src="./images/site-class.png" alt="Site class" style="max-width: 400px">
 </div>
 <div align="center"><b>Figure 6.2.3 - Site class.</b></div>
 
@@ -226,7 +236,7 @@ physically exist, are operated, or are logically grouped, enabling meaningful or
 visualization.  `Location`s are reusable entities that may be shared across multiple `Sites` or `Facilities`.
 
 <div align="center">
-    <img src="./images/location-class.png" alt="Location class">
+    <img src="./images/location-class.png" alt="Location class" style="max-width: 400px">
 </div>
 <div align="center"><b>Figure 6.2.4 - Location class.</b></div>
 
@@ -255,20 +265,20 @@ The Facility model has a set of well-defined relationships and their cardinaliti
 for navigation between objects based on relationship type.  The following table describes these
 relationships.
 
-| Source     | Relationship  | Destination | Cardinality | Description                                                                        |
-|:-----------|:--------------|:------------|:------------|:-----------------------------------------------------------------------------------|
-| Facility   | hasLocation   | Location    | 0..*        | A Facility can be associated with one or more geographical Locations.              |
-| Facility   | hostedAt      | Site        | 0..*        | A Facility can be hosted at one or more physical Sites.                            |
-| Facility   | hasResource   | Resource    | 1..*        | A Facility can host zero or more Resources.                                        |
-| Facility   | self          | Facility    | 1           | A Facility has a reference to itself.                                              |
-| Resource   | memberOf      | Facility    | 1           | A Resource is a member of one of more Facilities (allowing for a shared resource). |
-| Resource   | locatedAt     | Site        | 0..1        | A Resource is located at one Site.                                                 |
-| Resource   | self          | Resource    | 1           | A Resource has a reference to itself.                                              |
-| Site       | hasResource   | Resource    | 0..*        | A Site hosts zero or more Resources.                                               |
-| Site       | locatedAt     | Location    | 0..1        | A Site is located at a geographic location.                                        |
-| Site       | self          | Site        | 1           | A Site has a reference to itself.                                                  |
-| Location   | hasSite       | Site        | 1..*        | A Location can contain one or more Sites.                                          |
-| Location   | self          | Location    | 1           | A Location has a reference to itself.                                              |
+| Source      | Relationship  | Destination  | Cardinality | Description                                                                        |
+|:------------|:--------------|:-------------|:------------|:-----------------------------------------------------------------------------------|
+| `Facility`   | hasLocation   | `Location`    | 0..*        | A Facility can be associated with one or more geographical Locations.              |
+| `Facility`   | hostedAt      | `Site`        | 0..*        | A Facility can be hosted at one or more physical Sites.                            |
+| `Facility`   | hasResource   | `Resource`   | 1..*        | A Facility can host zero or more Resources.                                        |
+| `Facility`   | self          | `Facility`   | 1           | A Facility has a reference to itself.                                              |
+| `Resource`   | memberOf      | `Facility`   | 1           | A Resource is a member of one of more Facilities (allowing for a shared resource). |
+| `Resource`   | locatedAt     | `Site`       | 0..1        | A Resource is located at one Site.                                                 |
+| `Resource`   | self          | `Resource`   | 1           | A Resource has a reference to itself.                                              |
+| `Site`      | hasResource   | `Resource`   | 0..*        | A Site hosts zero or more Resources.                                               |
+| `Site`      | locatedAt     | `Location`   | 0..1        | A Site is located at a geographic location.                                        |
+| `Site`      | self          | `Site`       | 1           | A Site has a reference to itself.                                                  |
+| `Location`  | hasSite       | `Site`       | 1..*        | A Location can contain one or more Sites.                                          |
+| `Location`  | self          | `Location`   | 1           | A Location has a reference to itself.                                              |
 
 ---
 
@@ -279,7 +289,9 @@ the IRI distributed infrastructure. It is composed of three primary classes of n
 operational status. These classes serve as the foundational entities for describing a facility's operational 
 impacts and administrative context on defined Resources.
 
-![Status Model](./images/status-model.png)
+<div align="center">
+    <img src="./images/status-model.png" alt="Status Model" style="max-width: 950px">
+</div>
 <div align="center"><b>Figure 6.3 - Status Model.</b></div>
 
 These object definitions enable users and systems to traverse the Status model dynamically, answering
@@ -293,7 +305,7 @@ serves as a high-level grouping construct for aggregating and tracking related `
 `Resources`.
 
 <div align="center">
-    <img src="./images/incident-class.png" alt="Incident class">
+    <img src="./images/incident-class.png" alt="Incident class"  style="max-width: 450px">
 </div>
 <div align="center"><b>Figure 6.3.1 - Incident class.</b></div>
 
@@ -321,7 +333,7 @@ necessary to understand the progression and impact of an `Incident`, serving as 
 lightweight status log of relevant activity.
 
 <div align="center">
-    <img src="./images/event-class.png" alt="Event class">
+    <img src="./images/event-class.png" alt="Event class"  style="max-width: 400px">
 </div>
 <div align="center"><b>Figure 6.3.2 - Event class.</b></div>
 
@@ -345,7 +357,7 @@ services exposed to the end user. In the context of the Status model, an `Incide
 a `Resource` providing previous, current, or future status information.
 
 <div align="center">
-    <img src="./images/resource-class.png" alt="Resource class">
+    <img src="./images/resource-class.png" alt="Resource class"  style="max-width: 400px">
 </div>
 <div align="center"><b>Figure 6.3.3 - Resource class.</b></div>
 
@@ -393,16 +405,16 @@ The Status model has a set of well-defined relationships and their cardinalities
 for navigation between objects based on relationship type.  The following table describes these
 relationships.
 
-| Source | Relationship | Destination | Description |
-| :---- | :---- | :---- | :---- |
-| Incident | hasEvent | Event | A Facility has one or more associated Events. |
-| Incident | mayImpact | Resource | An Incident may impact one or more Resources. |
-| Incident | self | Incident | An Incident has a reference to itself. |
-| Event | generatedBy | Incident | An Event is generated by an Incident. |
-| Event | impacts | Resource | An Event impacts a Resource. |
-| Event | self | Event | An Event has a reference to itself. |
-| Resource | impactedBy | Event | A Resource is impacted by zero or more Events. |
-| Resource | hasIncident | Incident | A Resource is impacted by zero or more Incidents. |
+| Source   | Relationship | Destination | Description                                       |
+|:---------|:-------------|:------------|:--------------------------------------------------|
+| `Incident` | hasEvent     | `Event`     | A Facility has one or more associated Events.     |
+| `Incident` | mayImpact    | `Resource`  | An Incident may impact one or more Resources.     |
+| `Incident` | self         | `Incident`  | An Incident has a reference to itself.            |
+| `Event`    | generatedBy  | `Incident`  | An Event is generated by an Incident.             |
+| `Event`    | impacts      | `Resource`  | An Event impacts a Resource.                      |
+| `Event`    | self         | `Event`     | An Event has a reference to itself.               |
+| `Resource` | impactedBy   | `Event`     | A Resource is impacted by zero or more Events.    |
+| `Resource` | hasIncident  | `Incident`  | A Resource is impacted by zero or more Incidents. |
 
 ---
 
@@ -416,7 +428,9 @@ The Allocation model is composed of four primary classes of named objects: `Proj
 `ProjectAllocation`, `UserAllocation`, and `Capability`. Each class encapsulates key 
 attributes and behaviors relevant to the management of allocations.
 
-![Allocations Model](./images/allocation-model.png)
+<div align="center">
+    <img src="./images/allocation-model.png" alt="Allocations Model"  style="max-width: 900px">
+</div>
 <div align="center"><b>Figure 6.4 - Allocation Model.</b></div>
 
 ### 6.4.1 Project
@@ -426,7 +440,7 @@ and against which all jobs and data usage by that project’s members are charge
 model a project is a named object that associates a list of users to an allocation at the facility.
 
 <div align="center">
-    <img src="./images/project-class.png" alt="Project class">
+    <img src="./images/project-class.png" alt="Project class" style="max-width: 400px">
 </div>
 <div align="center"><b>Figure 6.4.1 - Project Class.</b></div>
 
@@ -449,7 +463,7 @@ allocation at an HPC facility. For example, how much was awarded, how much has b
 remains, for the current allocation period.
 
 <div align="center">
-    <img src="./images/projectallocation-class.png" alt="ProjectAllocation class">
+    <img src="./images/projectallocation-class.png" alt="ProjectAllocation class" style="max-width: 400px">
 </div>
 <div align="center"><b>Figure 6.4.2 - ProjectAllocation Class.</b></div>
 
@@ -492,7 +506,7 @@ specific user is allowed to spend from a given project.  This can never exceed l
 on the associated `ProjectAllocation`.
 
 <div align="center">
-    <img src="./images/userallocation-class.png" alt="UserAllocation class">
+    <img src="./images/userallocation-class.png" alt="UserAllocation class" style="max-width: 400px">
 </div>
 <div align="center"><b>Figure 6.4.3 - UserAllocation Class.</b></div>
 
@@ -542,7 +556,7 @@ a way to subdivide a resource into allocatable sub-resources further.  The word
 "capability" is also known to users as something they need for a job to run.
 
 <div align="center">
-    <img src="./images/capability-class.png" alt="Capability class">
+    <img src="./images/capability-class.png" alt="Capability class" style="max-width: 400px">
 </div>
 <div align="center"><b>Figure 6.4.4 - Capability Class.</b></div>
 
@@ -574,7 +588,7 @@ of the Allocation model is referenced by `Capability` to describe the `Resource`
 available for use by the user/project in the associated `Allocation`.
 
 <div align="center">
-    <img src="./images/resource-class.png" alt="Resource class">
+    <img src="./images/resource-class.png" alt="Resource class" style="max-width: 400px">
 </div>
 <div align="center"><b>Figure 6.4.5 - Resource class.</b></div>
 
@@ -617,12 +631,49 @@ The `StatusType` is an enumeration of the possible status values for a `Resource
 | `down`     | The `Resource` is `down` and unavailable for use.                                       |
 | `unknown`  | The `Resource` is in an `unknown` state and should be considered unavailable.           |
 
+### 6.4.6 Relationships
+The Allocation model has a set of well-defined relationships and their cardinalities that allows
+for navigation between objects based on relationship type.  The following table describes these
+relationships.
+
+| Source              | Relationship            | Destination         | Cardinality | Description                                                             |
+|:--------------------|:------------------------|:--------------------|:------------|:------------------------------------------------------------------------|
+| `Project`           | self                    | `Project`           | 1           | A `Project` has a reference to itself.                                  |
+| `Project`           | hasProjectAllocation    | `ProjectAllocation` | 0..*        | A `Project` has zero or more `ProjectAllocation`.                       |
+| `ProjectAllocation` | self                    | `ProjectAllocation` | 1           | A `ProjectAllocation` has a reference to itself.                        |
+| `ProjectAllocation` | hasProject              | `Project`           | 1           | A `ProjectAllocation` is associated with single `Project`.              |
+| `ProjectAllocation` | hasUserAllocation       | `UserAllocation`    | 0..*        | A `ProjectAllocation` is associated with zero or more `UserAllocation`. |
+| `ProjectAllocation` | hasCapability           | `Capability`        | 0..*        | A `ProjectAllocation` is associated with zero or more `Capability`.     |
+| `UserAllocation`    | self                    | `UserAllocation`    | 1           | A `UserAllocation` has a reference to itself.                           |
+| `UserAllocation`    | hasProjectAllocation    | `ProjectAllocation` | 1           | A `UserAllocation` is associated with a single `ProjectAllocation`.     |
+| `Capability`        | self                    | `Capability`        | 1           | A `Capability` has a reference to itself.                               |
+| `Capability`        | hasResource             | `Resource`          | 1           | A `Capability` is associated with a single `Resource`.                  |
+| `Resource`          | self                    | `Resource`          | 1           | A `Resource` has a reference to itself.                                 |
+| `Resource`          | providesCapability      | `Capability`        | 0..*        | A `Resource` his associated with zero or more `Capability`.             |
+
 ---
 
 ## 6.5 Job Model
+The Job model (Figure 6.5) defines encapsulates all of the information needed to run and 
+manage a job at a Facility. This model definition is based off of the ExaWorks PSI/J job 
+specification.  The PSI/J Job class represents a concrete, scheduler-aware unit of work 
+and is the primary abstraction through which applications interact with underlying batch 
+or resource managers. It encapsulates the full lifecycle of a job from creation and 
+configuration using a job description, through submission and state transitions, to 
+completion, cancellation, and error handling while insulating callers from 
+scheduler-specific details.
 
-![Job Model](./images/job-model.png)
+The Job model is composed of a single named class called `Job`, four supporting classes
+`JobSpec`, `ResourceSpec`, `JobAttributes`, and `JobStatus`, along with the `JobState`
+enumeration.
+
+<div align="center">
+    <img src="./images/job-model.png" alt="Job Model" style="max-width: 900px">
+</div>
 <div align="center"><b>Figure 6.5 - Job Model.</b></div>
+
+### 6.5.1 Job
+
 
 ---
 

@@ -49,6 +49,7 @@ Here is a draft OpenAPI definitions for the job submission and filesystem operat
    - #### **[6.4.3 UserAllocation](./conceptual-model.md#643-userallocation)**
    - #### **[6.4.4 Capability](./conceptual-model.md#644-capability)**
    - #### **[6.4.5 Resource](./conceptual-model.md#645-resource)**
+   - #### **[6.4.6 Relationships](./conceptual-model.md#646-relationships)**
  - ### **[6.5 Job Model](./conceptual-model.md#65-job-model)**
  - ### **[6.6 Filesystem](./conceptual-model.md#66-filesystem-model)**
 
