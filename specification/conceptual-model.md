@@ -1,26 +1,26 @@
 # Contents
-## 6. **[Conceptual Model](#6-conceptual-model)**
-- ### **[6.1 NamedObject](#61-namedobject)**
-- ### **[6.2 Facility Model](#62-facility-model)**
-  - #### **[6.2.1 Facility](#621-facility)**
-  - #### **[6.2.2 Resource](#622-resource)**
-  - #### **[6.2.3 Site](#623-site)**
-  - #### **[6.2.4 Location](#624-location)**
-  - #### **[6.2.5 Relationships](#625-relationships)**
-- ### **[6.3 Status Model](#63-status-model)**
-  - #### **[6.3.1 Incident](#631-incident)**
-  - #### **[6.3.2 Event](#632-event)**
-  - #### **[6.3.3 Resource](#633-resource)**
-  - #### **[6.3.4 Relationships](#634-relationships)**
-- ### **[6.4 Allocation Model](#64-allocation-model)**
-  - #### **[6.4.1 Project](#641-project)**
-  - #### **[6.4.2 ProjectAllocation](#642-projectallocation)**
-  - #### **[6.4.3 UserAllocation](#643-userallocation)**
-  - #### **[6.4.4 Capability](#644-capability)**
-  - #### **[6.4.5 Resource](#645-resource)**
-  - #### **[6.4.6 Relationships](#646-relationships)**
-- ### **[6.5 Job Model](#65-job-model)**
-- ### **[6.6 Filesystem](#66-filesystem-model)**
+**[6. Conceptual Model](#6-conceptual-model)**
+- **[6.1 NamedObject](#61-namedobject)**
+- **[6.2 Facility Model](#62-facility-model)**
+  - **[6.2.1 Facility](#621-facility)**
+  - **[6.2.2 Resource](#622-resource)**
+  - **[6.2.3 Site](#623-site)**
+  - **[6.2.4 Location](#624-location)**
+  - **[6.2.5 Relationships](#625-relationships)**
+- **[6.3 Status Model](#63-status-model)**
+  - **[6.3.1 Incident](#631-incident)**
+  - **[6.3.2 Event](#632-event)**
+  - **[6.3.3 Resource](#633-resource)**
+  - **[6.3.4 Relationships](#634-relationships)**
+- **[6.4 Allocation Model](#64-allocation-model)**
+  - **[6.4.1 Project](#641-project)**
+  - **[6.4.2 ProjectAllocation](#642-projectallocation)**
+  - **[6.4.3 UserAllocation](#643-userallocation)**
+  - **[6.4.4 Capability](#644-capability)**
+  - **[6.4.5 Resource](#645-resource)**
+  - **[6.4.6 Relationships](#646-relationships)**
+- **[6.5 Job Model](#65-job-model)**
+- **[6.6 Filesystem](#66-filesystem-model)**
 
 # 6. Conceptual Model
 The IRI conceptual model is an ever expanding set of functionalities needed to provide users with access
