@@ -67,6 +67,8 @@ Here is a draft OpenAPI definitions for the job submission and filesystem operat
    - ### 9.1 Project **[account-projects.md](./account-projects.md)**
 ## 10. Job Model
   - ### **[10.1 DRAFT: Job](./job-job.md)**
+## 11. Filesystem Model
+  - ### **[11.1 DRAFT: Filesystem](./filesystem-filesystem.md)**
 
 # Supporting Materials
 
