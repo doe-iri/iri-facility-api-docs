@@ -62,6 +62,12 @@ paths:
           $ref: '#/components/responses/MethodNotAllowed'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -89,6 +95,12 @@ paths:
           $ref: '#/components/responses/MethodNotAllowed'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -137,6 +149,7 @@ paths:
         required: false
         schema:
           type: string
+          title: The name of the resource.
       - name: offset
         in: query
         description: An integer value specifying the starting number of resource to
@@ -193,6 +206,12 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
   /api/v1/status/resources/{resource_id}:
@@ -254,6 +273,12 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
   /api/v1/status/incidents:
     get:
       tags:
@@ -407,6 +432,12 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
   /api/v1/status/incidents/{incident_id}:
@@ -468,6 +499,12 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
   /api/v1/status/incidents/{incident_id}/resources:
     get:
       tags:
@@ -550,6 +587,12 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
   /api/v1/status/events:
     get:
       tags:
@@ -648,6 +691,12 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
   /api/v1/status/events/{event_id}:
@@ -709,6 +758,12 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
   /api/v1/status/events/{event_id}/resource:
     get:
       tags:
@@ -768,6 +823,12 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
   /api/v1/status/events/{event_id}/incident:
     get:
       tags:
@@ -827,6 +888,12 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
   /api/v1/facility:
     get:
       tags:
@@ -878,6 +945,12 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
   /api/v1/facility/sites:
@@ -956,6 +1029,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
         '405':
@@ -1017,6 +1096,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '405':
           $ref: '#/components/responses/MethodNotAllowed'
         '422':
@@ -1076,6 +1161,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '405':
           $ref: '#/components/responses/MethodNotAllowed'
         '422':
@@ -1162,6 +1253,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
         '405':
@@ -1223,6 +1320,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '405':
           $ref: '#/components/responses/MethodNotAllowed'
         '422':
@@ -1324,6 +1427,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
         '405':
@@ -1385,6 +1494,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '405':
           $ref: '#/components/responses/MethodNotAllowed'
         '422':
@@ -1467,6 +1582,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
         '405':
@@ -1528,6 +1649,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '405':
           $ref: '#/components/responses/MethodNotAllowed'
         '422':
@@ -1609,6 +1736,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
         '405':
@@ -1677,6 +1810,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '405':
           $ref: '#/components/responses/MethodNotAllowed'
         '422':
@@ -1763,6 +1902,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
         '405':
@@ -1834,6 +1979,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '403':
           $ref: '#/components/responses/Forbidden'
         '500':
@@ -1912,6 +2063,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
         '405':
@@ -1973,6 +2130,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '405':
           $ref: '#/components/responses/MethodNotAllowed'
         '422':
@@ -2047,6 +2210,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
         '405':
@@ -2108,6 +2277,12 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalServerError'
+        '501':
+          $ref: '#/components/responses/NotImplemented'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
         '405':
           $ref: '#/components/responses/MethodNotAllowed'
         '422':
@@ -3054,6 +3229,42 @@ components:
     InternalServerError:
       description: Internal Server Error - A generic error message given when an unexpected
         condition was encountered.
+      headers:
+        Content-Type:
+          description: Provides media type used to encode the result of the operation.
+          style: simple
+          schema:
+            type: string
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotImplemented:
+      description: The requested functionality is not implemented.
+      headers:
+        Content-Type:
+          description: Provides media type used to encode the result of the operation.
+          style: simple
+          schema:
+            type: string
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServiceUnavailable:
+      description: The service is currently unavailable.
+      headers:
+        Content-Type:
+          description: Provides media type used to encode the result of the operation.
+          style: simple
+          schema:
+            type: string
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    GatewayTimeout:
+      description: The upstream service failed to respond in time.
       headers:
         Content-Type:
           description: Provides media type used to encode the result of the operation.
