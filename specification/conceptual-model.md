@@ -20,6 +20,13 @@
   - **[6.4.5 Resource](#645-resource)**
   - **[6.4.6 Relationships](#646-relationships)**
 - **[6.5 Job Model](#65-job-model)**
+  - **[6.5.1 Job](#651-job)**
+  - **[6.5.2 JobStatus](#652-jobstatus)**
+  - **[6.5.3 JobSpec](#653-jobspec)**
+  - **[6.5.4 ResourceSpec](#654-resourcespec)**
+  - **[6.5.5 JobAttributes](#655-jobattributes)**
+  - **[6.5.6 JobStateType](#656-enum-jobstatetype)**
+  - **[6.5.7 Relationships](#657-relationships)**
 - **[6.6 Filesystem](#66-filesystem-model)**
 
 # 6. Conceptual Model
@@ -527,13 +534,13 @@ The `UserAllocation` class has the following attribute definitions:
 `UserAllocation` class with numerical allocation data.  The `AllocationEntry` class has the following attribute
 definitions:
 
-| Attribute     | Type           | Description                                        | Required | Cardinality | Example            |
-|:--------------|:---------------|:---------------------------------------------------|:---------|:------------|:-------------------|
-| `allocation`  | Float          | The total amount of the `Resource` allocated.      | yes      | 1           | 597.0710332588748  |
-| `usage`       | Float          | The amount of allocation already consumed.         | yes      | 1           | 168.51791796212257 |
-| `unit`        | AllocationUnit | The unit of measurement the allocation represents. | yes      | 1           | "node_hours"       |
+| Attribute     | Type               | Description                                        | Required | Cardinality | Example            |
+|:--------------|:-------------------|:---------------------------------------------------|:---------|:------------|:-------------------|
+| `allocation`  | Float              | The total amount of the `Resource` allocated.      | yes      | 1           | 597.0710332588748  |
+| `usage`       | Float              | The amount of allocation already consumed.         | yes      | 1           | 168.51791796212257 |
+| `unit`        | AllocationUnitType | The unit of measurement the allocation represents. | yes      | 1           | "node_hours"       |
 
-The `AllocationUnit` is an enumeration that models the technology unit of measure.  For example, compute is
+The `AllocationUnitType` is an enumeration that models the technology unit of measure.  For example, compute is
 allocated based on `node_hours`.
 
 | ENUM         | Description                                              |
@@ -562,17 +569,17 @@ a way to subdivide a resource into allocatable sub-resources further.  The word
 
 The `Capability` class has the following attribute definitions:
 
-| Attribute         | Type             | Description                                                                                                          | Required | Cardinality | Example                                                                                       |
-|:------------------|:-----------------|:---------------------------------------------------------------------------------------------------------------------|:---------|:------------|:----------------------------------------------------------------------------------------------|
-| `id`              | String           | The unique identifier for the `Capability`.  Typically a UUID or URN to provide global uniqueness across facilities. | yes      | 1           | "ed25c679-0d1e-4c99-817c-0475694fde31"                                                        |
-| `self_uri`        | URI              | A hyperlink reference (URI) to this `Capability` (self). Canonical hyperlink to this `UserAllocation`.               | yes      | 1           | "https://iri.example.com/api/v1/allocation/capabilities/ed25c679-0d1e-4c99-817c-0475694fde31" |
-| `name`            | String           | The long name of the `Capability`.                                                                                   | no       | 0..1        | "Perlmutter GPU"                                                                              |
-| `description`     | String           | A description of the `Capability`.                                                                                   | no       | 0..1        | "Perlmutter GPU capability"                                                                   |
-| `last_modified`   | DateTime         | The date this `Capability` was last modified.  ISO 8601 standard with timezone offsets.                              | no       | 0..1        | "2025-07-24T02:31:13.000Z"                                                                    |
-| `units`           | AllocationUnit[] | A list of units of measurement that apply to the capability provided by the `Resource`.                              | yes      | 1           | "node_hours"                                                                                  |
-| `resource_uri`    | URI              | A hyperlink reference (URI) to an instance of `Resource` that this `Capability` is associated with (hasResource).    | yes      | 1           | "https://iri.example.com/api/v1/facility/resources/8b61b346-b53c-4a8e-83b4-776eaa14cc67"      |
+| Attribute         | Type                 | Description                                                                                                          | Required | Cardinality | Example                                                                                       |
+|:------------------|:---------------------|:---------------------------------------------------------------------------------------------------------------------|:---------|:------------|:----------------------------------------------------------------------------------------------|
+| `id`              | String               | The unique identifier for the `Capability`.  Typically a UUID or URN to provide global uniqueness across facilities. | yes      | 1           | "ed25c679-0d1e-4c99-817c-0475694fde31"                                                        |
+| `self_uri`        | URI                  | A hyperlink reference (URI) to this `Capability` (self). Canonical hyperlink to this `UserAllocation`.               | yes      | 1           | "https://iri.example.com/api/v1/allocation/capabilities/ed25c679-0d1e-4c99-817c-0475694fde31" |
+| `name`            | String               | The long name of the `Capability`.                                                                                   | no       | 0..1        | "Perlmutter GPU"                                                                              |
+| `description`     | String               | A description of the `Capability`.                                                                                   | no       | 0..1        | "Perlmutter GPU capability"                                                                   |
+| `last_modified`   | DateTime             | The date this `Capability` was last modified.  ISO 8601 standard with timezone offsets.                              | no       | 0..1        | "2025-07-24T02:31:13.000Z"                                                                    |
+| `units`           | AllocationUnitType[] | A list of units of measurement that apply to the capability provided by the `Resource`.                              | yes      | 1           | "node_hours"                                                                                  |
+| `resource_uri`    | URI                  | A hyperlink reference (URI) to an instance of `Resource` that this `Capability` is associated with (hasResource).    | yes      | 1           | "https://iri.example.com/api/v1/facility/resources/8b61b346-b53c-4a8e-83b4-776eaa14cc67"      |
 
-The `AllocationUnit` is an enumeration that models the technology unit of measure.  For example, compute is
+The `AllocationUnitType` is an enumeration that models the technology unit of measure.  For example, compute is
 allocated based on `node_hours`.
 
 | ENUM         | Description                                              |
@@ -612,15 +619,15 @@ The `ResourceType` is an enumeration to identify the type of `Resource`.  This
 is a broad classification and may not provide enough detail to make job
 submission decisions.
 
-| ENUM        | Description                           |
-|:------------|:--------------------------------------|
-| `website`   | This `Resource` is of type `website`. |
-| `service`   | This `Resource` is of type `service`. |
-| `compute`   | This `Resource` is of type `compute`. |
-| `system`    | This `Resource` is of type `system`.  |
-| `storage`   | This `Resource` is of type `storage`. |
-| `network`   | This `Resource` is of type `network`. |
-| `unknown`   | This `Resource` is of type `unknown`. |
+| ENUM        | Description [TODO: Better descriptions] |
+|:------------|:----------------------------------------|
+| `website`   | This `Resource` is of type `website`.   |
+| `service`   | This `Resource` is of type `service`.   |
+| `compute`   | This `Resource` is of type `compute`.   |
+| `system`    | This `Resource` is of type `system`.    |
+| `storage`   | This `Resource` is of type `storage`.   |
+| `network`   | This `Resource` is of type `network`.   |
+| `unknown`   | This `Resource` is of type `unknown`.   |
 
 The `StatusType` is an enumeration of the possible status values for a `Resource`.
 
@@ -654,14 +661,14 @@ relationships.
 ---
 
 ## 6.5 Job Model
-The Job model (Figure 6.5) defines encapsulates all of the information needed to run and 
-manage a job at a Facility. This model definition is based off of the ExaWorks PSI/J job 
-specification.  The PSI/J Job class represents a concrete, scheduler-aware unit of work 
-and is the primary abstraction through which applications interact with underlying batch 
-or resource managers. It encapsulates the full lifecycle of a job from creation and 
-configuration using a job description, through submission and state transitions, to 
-completion, cancellation, and error handling while insulating callers from 
-scheduler-specific details.
+The Job model (Figure 6.5) defines class needed for specification and management 
+of jobs at a `Facility`. This model definition is based off of the ExaWorks PSI/J job 
+specification, but tailored to meet the needs of IRI.  The PSI/J Job class represents 
+a concrete, scheduler-aware unit of work and is the primary abstraction through which 
+applications interact with underlying batch or resource managers. It encapsulates the 
+full lifecycle of a job from creation and configuration using a job description, 
+through submission and state transitions, to completion, cancellation, and error handling 
+while insulating callers from scheduler-specific details.
 
 The Job model is composed of a single named class called `Job`, four supporting classes
 `JobSpec`, `ResourceSpec`, `JobAttributes`, and `JobStatus`, along with the `JobState`
@@ -673,9 +680,132 @@ enumeration.
 <div align="center"><b>Figure 6.5 - Job Model.</b></div>
 
 ### 6.5.1 Job
+A class representing an abstract job which has a formal specification represented by a `JobSpec`
+instance as well as a `JobStatus`, which indicates, for example, whether the `Job` is running or
+completed.  When constructed, a `Job` is in the NEW state.
 
+<div align="center">
+    <img src="./images/job-class.png" alt="Job Class" width="900" />
+</div>
+<div align="center"><b>Figure 6.5.1 - Job Class.</b></div>
+
+The `Job` class has the following attribute definitions:
+
+| Attribute       | Type             | Description                                                                                                   | Required | Cardinality | Example                                                                                  |
+|:----------------|:-----------------|:--------------------------------------------------------------------------------------------------------------|:---------|:------------|:-----------------------------------------------------------------------------------------|
+| `id`            | String           | The unique identifier for the `Job`.  Typically a UUID or URN to provide global uniqueness across facilities. | yes      | 1           | "003e33cd-fa5e-43f8-8670-e4681c41559a"                                                   |
+| `self_uri`      | URI              | A hyperlink reference (URI) to this `Job` (self). Canonical hyperlink to this `Job`.                          | yes      | 1           | "https://iri.example.com/api/v1/jobs/003e33cd-fa5e-43f8-8670-e4681c41559a"               |
+| `name`          | String           | The long name of the `Job`.                                                                                   | yes      | 1           | "Model A training job"                                                                   |
+| `description`   | String           | A description of the `Job`.                                                                                   | no       | 0..1        | "This job is training a new model."                                                      |
+| `last_modified` | DateTime         | The date this `Job` was last modified.  ISO 8601 standard with timezone offsets.                              | yes      | 1           | "2025-07-24T02:31:13.000Z"                                                               |
+| `native_id`     | String           | The native system identifier for the job assigned from the underlying `Resource`.                             | no       | 0..1        | "12345.system.fqdn.org"                                                                  |
+| `status`        | JobStatus[0..1]  | Status of the job at the time of query.                                                                       | no       | 1           | "QUEUED"                                                                                 |
+| `spec`          | JobSpec[0..1]    | A `JobSpec` that defined the characteristics of this `Job`.                                                   | no       | 1           | See example of JobSpec type in section 6.5.3.                                            |
+| `resource_uri`  | URI              | A hyperlink reference (URI) to `Resource` executing this `Job` (executesOn).                                  | yes      | 1           | "https://iri.example.com/api/v1/facility/resources/8b61b346-b53c-4a8e-83b4-776eaa14cc67" |
 
 ---
+### 6.5.2 JobStatus
+A non-named object class representing the status of a `Job`.  A `JobStatus` is associated with a `Job` 
+object once the `Job` is created on the target `Resource`.  `JobStatus` does not exist as a named 
+object independent of its associated `Job`.
+
+The `JobStatus` class has the following attribute definitions:
+
+| Attribute               | Type          | Description                                                                                                        | Required | Cardinality | Example                                |
+|-------------------------|---------------|--------------------------------------------------------------------------------------------------------------------|----------|------------|----------------------------------------|
+| `state`                 | JobStateType  | Current state of the job.                                                                                          | yes      | 1          | "ACTIVE"                               |
+| `time`                  | DateTime      | The date this `JobStatus` was last modified.  ISO 8601 standard with timezone offsets.                             | yes      | 1          | "2025-07-24T02:31:13.000Z"             |
+| `message`               | String        | Information about state transition.                                                                                | yes      | 1          | "QUEUED to ACTIVE"                     | 
+| `exit_code`             | Integer       | Exit code for job from underlying workload manager.  Absent if job has not exited                                  | no       | 0..1       | "137"                                  | 
+| `metadata` [`job_uri`?] | String [URI?] | Reference to the associated Job.  [hyperlink reference to job?  Is this needed?  This is alway embedded in a Job.] | yes      | 1          | "987e6543-e21b-45d3-b123-426614174999" |
+
+### 6.5.3 JobSpec
+A non-named object class representing the attributes required to specify a `Job`.  When a job is accepted by the system 
+in will be in the `NEW` state.
+
+A `JobSpec` is defined with the following attributes:
+
+| Attribute             | Type                 | Description                                                                                                                                                                    | Required | Cardinality             | Example                       |
+|-----------------------|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|-------------------------|-------------------------------|
+| `executable`          | String               | The path to the executable file to be launched.  A relative path is considered relative to the job directory (if specified), or the default job directory.                     | no     | 0..1                    | "/scratch/MyProject/job.bin"  |
+| `arguments`           | String               | Argument list to pass to the executable. argv[1] will be the first element of htis list.                                                                                       | no     | 0..1                    | "-o output.txt -ppn 4"        |
+| `directory`           | String               | Directory to run executable from as it's working directory.                                                                                                                    | no     | 0..1                    | "/scratch/MyProject/run123"   |
+| `name`                | String               | Name of job for workload manager defaults.                                                                                                                                     | no     | 0..1                    | "MyJob"                       |
+| `inherit_environment` | Boolean              | If set to true, job has aceess to variables in the job's default execution environment.  Otherwise the job starts with a clean environment with only explicitly set variables. | no     | 0..1 [default = "true"]   | "false"                       |
+| `environment`         | Map<String, String>  | Variable names to set in environment with values. Should be a JSON object providing the mapping.                                                                               | no     | 0..1                    | "[{"FOO": "bar"}]"            | 
+| `stdin_path`          | String               | Path to file which will be passed to the job's standard input.                                                                                                                 | no     | 0..1                    | "/scratch/project/input.txt"  | 
+| `stdout_path`         | String               | Path to file which to place job's standard output.                                                                                                                             | no     | 0..1                    | "/scratch/project/output.txt" | 
+| `stderr_path`         | String               | Path to file which to place job's standard error.                                                                                                                              | no     | 0..1                    | "/scratch/project/error.txt"  | 
+| `pre_launch`          | String               | Path to script to run before job is launched.  Only run on the head/service node of the job.                                                                                   | no     | 0..1                    | "/home/user/prelaunch.sh"     |
+| `post_launch`         | String               | Path to script to run after job is completed.  Only run on the head/service node of the job.                                                                                   | no     | 0..1                    | "/home/user/postlaunch.sh"    | 
+| `launcher`            | String               | The launcher to be used for this job.                                                                                                                                          | no     | 0..1 [default = "single"] | "single"                      |
+| `resources`           | ResourceSpec         | The resource spec object for the requested job.                                                                                                                                | no     | 0..1                    | "{"node_count": 4}"           |
+| `attributes`          | JobAttributes        | The attributes for the requested job.                                                                                                                                          | no     | 0..1                    | "{"duration": 1440}"          |
+
+A launcher is a mechanism used to start the parallel ranks of a job. An implementation is required to implement, 
+at a minimum, the following launchers:
+
+ * `single` - The single launcher launches a single rank on the lead node. This launcher must be used if no launcher is explicitly specified.
+ * `multiple` - A multiple launcher launches multiple ranks on the lead node.
+ * `mpirun` - This launcher uses the standard `mpirun` tool to launch the job ranks.
+
+In addition to the base launchers above, implementation must implement launchers that are likely to correspond 
+to job executors that are provided that are provided by that implementation. For example, if a Slurm job 
+executor is provided, a `srun` launcher must also be made available.
+
+### 6.5.4 ResourceSpec
+A non-named object class representing the resource level attributes specified for a `Job`.  This class
+contains additional information that is specific to queuing systems and can be used to describe the 
+resources required to run a `Job`.
+
+A `ResourceSpec` is defined with the following attributes:
+
+| Attribute               | Type    | Description                                             | Required | Cardinality              | Example  |
+|-------------------------|---------|---------------------------------------------------------|----------|--------------------------|----------|
+| `node_count`            | Integer | Count of nodes to allocate to this job.                 | no       | 0..1                     | "256"    |
+| `process_count`         | Integer | Number of processes to start for the job.               | no       | 0..1                     | "4"      |
+| `processes_per_node`    | Integer | Count of processes to run on each node.                 | no       | 0..1                     | "4"      |
+| `cpu_cores_per_process` | Integer | Request this many CPU cores for each process instance.  | no       | 0..1                     | "64"     |
+| `gpu_cores_per_process` | Integer | Request this many GPU cores for each process instance.  | no       | 0..1                     | "8"       |
+| `exclusive_node_use`    | Boolean | Exclusively allocate node to job.  Defaults to `false`.  | no       | 0..1 [default = "false"] | "true"   |
+| `memory`                | Integer | Total amount of memory requested for the job, in bytes. | no       | 0..1 | "2147483648" |
+
+### 6.5.5 JobAttributes
+The non-named object `JobAttributes` class provides additional information that is specific to queuing 
+systems.  The `JobAttributes` class is used to specify any other job information that is not 
+conceptually part of the `ResourceSpec` class.
+
+`JobAttributes` are defined with the following attributes:
+
+| Attribute           | Type                | Description                                                                                           | Required | Cardinality | Example                                |
+|---------------------|---------------------|-------------------------------------------------------------------------------------------------------|----------|-------------|----------------------------------------|
+| `duration`          | Duration            | A duration for the requested job.  Jobs that exceed this time will be killed by the workload manager. | yes      | 1           | `86400`                                |
+| `queue_name`        | String              | Queue to submit job to if backend supports multiple queues.                                           | no       | 0..1        | `prod`                                 | 
+| `account`           | String              | Account identifier to use for time used by job.                                                       | no       | 0..1        | `IRIProject`                           |
+| `reservation_id`    | String              | Advance reservation id if an advance reservation is in use.                                           | no       | 0..1        | "003e33cd-fa5e-43f8-8670-e4681c41559a" | `R12345`      | 
+| `custom_attributes` | Map<String, String> | Custom attributes for resource-specific resource specification. String should be a valid JSON map.    | no       | 0..1        | "[{"filesystems" : "home,scratch"}]"   |
+
+### 6.5.6 ENUM JobStateType
+The `JobStateType` is an enumeration of the possible job state values for a `Job`.
+
+| ENUM        | Description                                                                                |
+|:------------|:-------------------------------------------------------------------------------------------|
+| `NEW`       | The `Job` is in a `NEW` state when it is initially created by the system.                  |
+| `QUEUED`    | The `Job` is in a `QUEUED` state when the job is accepted by the backend for execution.    |
+| `ACTIVE`    | The `Job` is in an `ACTIVE` state when the `Job` is being executed and consumes resources. |
+| `COMPLETED` | The `Job` is in a `COMPLETED` state (a final state) when the `Job` has completed.          |
+| `FAILED`    | The `Job` is in an `FAILED` state (a final state) when the `Job` has failed execution.     |
+| `CANCELED`  | The `Job` is in an `CANCELED` state (a final state) when the `Job` has been canceled.      |
+
+### 6.5.7 Relationships
+The Jobs model has a limited set of well-defined relationships and their cardinalities that allows
+for navigation between objects based on relationship type.  The following table describes these
+relationships.
+
+| Source | Relationship | Destination | Description                      |
+| :---- |:-------------|:------------|:---------------------------------|
+| Job | self         | Job         | A Job has a reference to itself. |
+| Job | executesOn   | Resource    | A Job executes on a resource.    |
 
 ## 6.6 Relationships
 
@@ -683,29 +813,31 @@ The Facility and Status model has a set of well-defined relationships and their 
 for navigation between objects based on relationship type.  The following table describes these
 relationships.
 
-| Source | Relationship | Destination | Description |
-| :---- | :---- | :---- | :---- |
-| Facility | hasLocation | Location | A Facility can be associated with one or more geographical Locations. |
-| Facility | hostedAt | Site | A Facility can be hosted at one or more physical Sites. |
-| Facility | hasIncident | Incident | A Facility can have zero or more Incidents. |
-| Facility | hasEvent | Event | A Facility can have zero or more Events caused by Incidents. |
-| Facility | hasResource | Resource | A Facility can host zero or more Resources. |
-| Facility | self | Facility | A Facility has a reference to itself. |
-| Incident | hasEvent | Event | A Facility has one or more associated Events. |
-| Incident | mayImpact | Resource | An Incident may impact one or more Resources. |
-| Incident | self | Incident | An Incident has a reference to itself. |
-| Event | generatedBy | Incident | An Event is generated by an Incident. |
-| Event | impacts | Resource | An Event impacts a Resource. |
-| Event | self | Event | An Event has a reference to itself. |
-| Resource | impactedBy | Event | A Resource is impacted by zero or more Events. |
-| Resource | hasIncident | Incident | A Resource is impacted by zero or more Incidents. |
-| Resource | memberOf | Facility | A Resource is a member of one of more Facilities (allowing for a shared resource). |
-| Resource | locatedAt | Site | A Resource is located at one Site. |
-| Resource | dependsOn | Resource | A Resource can depend on zero or more Resources. |
-| Resource | hasDependent | Resource | A Resource can have zero or more dependent Resources. |
-| Resource | self | Resource | A Resource has a reference to itself. |
-| Site | hasResource | Resource | A Site hosts zero or more Resources. |
-| Site | locatedAt | Location | A Site is located at a geographic location. |
-| Site | self | Site | A Site has a reference to itself. |
-| Location | hasSite | Site | A Location can contain one or more Sites. |
-| Location | self | Location | A Location has a reference to itself. |
+| Source | Relationship | Destination | Description                                                                        |
+| :---- |:-------------|:------------|:-----------------------------------------------------------------------------------|
+| Facility | hasLocation  | Location    | A Facility can be associated with one or more geographical Locations.              |
+| Facility | hostedAt     | Site        | A Facility can be hosted at one or more physical Sites.                            |
+| Facility | hasIncident  | Incident    | A Facility can have zero or more Incidents.                                        |
+| Facility | hasEvent     | Event       | A Facility can have zero or more Events caused by Incidents.                       |
+| Facility | hasResource  | Resource    | A Facility can host zero or more Resources.                                        |
+| Facility | self         | Facility    | A Facility has a reference to itself.                                              |
+| Incident | hasEvent     | Event       | A Facility has one or more associated Events.                                      |
+| Incident | mayImpact    | Resource    | An Incident may impact one or more Resources.                                      |
+| Incident | self         | Incident    | An Incident has a reference to itself.                                             |
+| Event | generatedBy  | Incident    | An Event is generated by an Incident.                                              |
+| Event | impacts      | Resource    | An Event impacts a Resource.                                                       |
+| Event | self         | Event       | An Event has a reference to itself.                                                |
+| Resource | impactedBy   | Event       | A Resource is impacted by zero or more Events.                                     |
+| Resource | hasIncident  | Incident    | A Resource is impacted by zero or more Incidents.                                  |
+| Resource | memberOf     | Facility    | A Resource is a member of one of more Facilities (allowing for a shared resource). |
+| Resource | locatedAt    | Site        | A Resource is located at one Site.                                                 |
+| Resource | dependsOn    | Resource    | A Resource can depend on zero or more Resources.                                   |
+| Resource | hasDependent | Resource    | A Resource can have zero or more dependent Resources.                              |
+| Resource | self         | Resource    | A Resource has a reference to itself.                                              |
+| Site | hasResource  | Resource    | A Site hosts zero or more Resources.                                               |
+| Site | locatedAt    | Location    | A Site is located at a geographic location.                                        |
+| Site | self         | Site        | A Site has a reference to itself.                                                  |
+| Location | hasSite      | Site        | A Location can contain one or more Sites.                                          |
+| Location | self         | Location    | A Location has a reference to itself.                                              |
+| Job | self         | Job         | A Job has a reference to itself.                                                   |
+| Job | executesOn   | Resource    | A Job executes on a resource.                                                      |

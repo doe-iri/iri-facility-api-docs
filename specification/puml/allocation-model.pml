@@ -24,13 +24,13 @@ class Capability {
   + name <b>: String</b>
   + description <b>: String</b>
   + last_modified <b>: DateTime</b>
-  + units <b>: AllocationUnit[]</b>
+  + units <b>: AllocationUnitType[]</b>
   + resource_uri <b>: Uri</b>
 }
 
 Capability --> "      1" Capability : self_uri (self)
 
-enum AllocationUnit {
+enum AllocationUnitType {
   The allocation type will have an associated unit
   based on technology.  For example, compute is
   allocated based on node hours.

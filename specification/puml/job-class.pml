@@ -1,5 +1,5 @@
 /**
- * This is the UML description for the IRI Job Model version 1 circa 2025.
+ * This is the UML description for the IRI Job class version 1 circa 2025.
  */
 @startuml
 
@@ -9,6 +9,19 @@ skinparam class {
     BorderColor Black
 }
 
+class NamedObject {
+  A parent class definition containing common
+  properties for use in named objects.
+---
+  + id <b>: String</b>
+  + self_uri <b>: Uri</b>
+  + name <b>: String [0..1]</b>
+  + description <b>: String [0..1]</b>
+  + last_modified <b>: DateTime</b>
+}
+
+NamedObject --> "      1" NamedObject : self_uri (self)
+
 class Job {
   A class representing an abstract job which has a
   formal specification represented by a JobSpec  
@@ -17,23 +30,18 @@ class Job {
   completed.  When constructed, a job is in the NEW 
   state.
 ---
-  + id <b>: String</b>
-  + self_uri <b>: Uri</b>
-  + name <b>: String [0..1]</b>
-  + description <b>: String [0..1]</b>
-  + last_modified <b>: DateTime</b>
   + native_id <b>: String</b>
   + status <b>: JobStatus</b>
   + spec <b>: JobSpec [0..1]</b>
   + resource_uri <b>: URI</b>
 }
 
-Job --> "      1" Job : self_uri (self)
+NamedObject <|-- Job
 
 class JobStatus {
   A class containing details about job transitions to new states.
 ---
-  + state <b>: JobState</b>
+  + state <b>: JobStateType</b>
   + time <b>: DateTime [0..1]</b>
   + message <b>: String [0..1]</b>
   + exit_code <b>: Integer [0..1]</b>
@@ -42,7 +50,7 @@ class JobStatus {
 
 Job *-- "0..1  " JobStatus : "  status"
 
-enum JobState {
+enum JobStateType {
    An enumeration of possible job states.
 ---
     NEW,
@@ -53,7 +61,7 @@ enum JobState {
     CANCELED
 }
 
-JobStatus ..> JobState : "  state"
+JobStatus ..> JobStateType : "  state"
 
 class JobSpec {
   A class that describes the details of a job.

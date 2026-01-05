@@ -8,15 +8,15 @@ This is the interface for programatic job submission. Users must be able to subm
 ### Job
 A `Job` is defined with the following attributes:
 
-| Attribute       | Type           | Description                                                                 | Required | Example |
-|-----------------|----------------|-----------------------------------------------------------------------------|----------|---------|
-| `id`            | string         | Unique identifier (UUID).                                                   | yes      | `003e33cd-fa5e-43f8-8670-e4681c41559a` |
-| `self_uri`      | URI            | Canonical hyperlink to this Event.                                         | yes      | `https|//iri.example.com/api/v1/status/jobs/003e33cd-fa5e-43f8-8670-e4681c41559a` |
-| `name`          | string         | Long name/title of the Job.                                              | yes      | `TestJob` |
-| `description`   | string         | Human-readable description of the Job.                                   | no       | `TestJob is NEW` |
-|`native_id` | string | Identifier for job from underlying system. | No | `12345.system.fqdn.org` |
-| `last_modified` | date-time      | Timestamp (ISO 8601) when this Job was last modified.                    | yes      | `2025-05-24T17|04|30.000Z` |
-| `status`        | JobStatus    | Status at the time of the job.                                           | yes      | `QUEUED` |
+| Attribute       | Type           | Description                                                                    | Required | Example |
+|-----------------|----------------|--------------------------------------------------------------------------------|----------|---------|
+| `id`            | string         | Unique identifier (UUID).                                                      | yes      | `003e33cd-fa5e-43f8-8670-e4681c41559a` |
+| `self_uri`      | URI            | Canonical hyperlink to this Event.                                             | yes      | `https|//iri.example.com/api/v1/status/jobs/003e33cd-fa5e-43f8-8670-e4681c41559a` |
+| `name`          | string         | Long name/title of the Job.                                                    | yes      | `TestJob` |
+| `description`   | string         | Human-readable description of the Job.                                         | no       | `TestJob is NEW` |
+|`native_id` | string | The native system identifier for the job assigned from the underlying `Resource`. | No | `12345.system.fqdn.org` |
+| `last_modified` | date-time      | Timestamp (ISO 8601) when this Job was last modified.                          | yes      | `2025-05-24T17|04|30.000Z` |
+| `status`        | JobStatus    | Status of the job at the time of query.                                        | yes      | `QUEUED` |
 
 ### JobStatus
 A `JobStatus` is defined with the following attributes:
