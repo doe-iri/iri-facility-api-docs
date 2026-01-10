@@ -46,9 +46,6 @@
         "description": "Returns a list of available facility URL.",
         "operationId": "getMetaData",
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK"
-          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
@@ -81,6 +78,35 @@
           },
           "422": {
             "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "200": {
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Discovery"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -95,9 +121,6 @@
         "description": "Returns a list of available facility status URL.",
         "operationId": "getMetaData_1",
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK"
-          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
@@ -130,6 +153,35 @@
           },
           "422": {
             "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "200": {
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Discovery"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -238,9 +290,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK"
-          },
           "304": {
             "$ref": "#/components/responses/NotModified"
           },
@@ -273,6 +322,42 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
+          },
+          "200": {
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Resource"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -327,9 +412,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK"
-          },
           "304": {
             "$ref": "#/components/responses/NotModified"
           },
@@ -362,6 +444,39 @@
           },
           "504": {
             "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "200": {
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource"
+                }
+              }
+            }
           }
         }
       }
@@ -538,9 +653,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK"
-          },
           "304": {
             "$ref": "#/components/responses/NotModified"
           },
@@ -573,6 +685,42 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
+          },
+          "200": {
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Incident"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -627,9 +775,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK"
-          },
           "304": {
             "$ref": "#/components/responses/NotModified"
           },
@@ -662,6 +807,39 @@
           },
           "504": {
             "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "200": {
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Incident"
+                }
+              }
+            }
           }
         }
       }
@@ -745,9 +923,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK"
-          },
           "304": {
             "$ref": "#/components/responses/NotModified"
           },
@@ -780,6 +955,42 @@
           },
           "504": {
             "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "200": {
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Resource"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -884,9 +1095,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK"
-          },
           "304": {
             "$ref": "#/components/responses/NotModified"
           },
@@ -919,6 +1127,42 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
+          },
+          "200": {
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -973,9 +1217,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK"
-          },
           "304": {
             "$ref": "#/components/responses/NotModified"
           },
@@ -1008,6 +1249,39 @@
           },
           "504": {
             "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "200": {
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
           }
         }
       }
@@ -1062,9 +1336,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK"
-          },
           "304": {
             "$ref": "#/components/responses/NotModified"
           },
@@ -1097,6 +1368,39 @@
           },
           "504": {
             "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "200": {
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource"
+                }
+              }
+            }
           }
         }
       }
@@ -1151,9 +1455,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK"
-          },
           "304": {
             "$ref": "#/components/responses/NotModified"
           },
@@ -1186,6 +1487,39 @@
           },
           "504": {
             "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "200": {
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Incident"
+                }
+              }
+            }
           }
         }
       }
@@ -1231,9 +1565,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/OK"
-          },
           "304": {
             "$ref": "#/components/responses/NotModified"
           },
@@ -1266,6 +1597,39 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
+          },
+          "200": {
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Facility"
+                }
+              }
+            }
           }
         }
       }
@@ -1350,7 +1714,40 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Site"
+                  }
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1439,7 +1836,37 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Site"
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1528,7 +1955,37 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1655,7 +2112,40 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Location"
+                  }
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1744,7 +2234,37 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1793,7 +2313,33 @@
         "operationId": "getMetaData_2",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Discovery"
+                  }
+                }
+              }
+            }
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -1893,7 +2439,40 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserAllocation"
+                  }
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -1982,7 +2561,37 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAllocation"
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2103,7 +2712,40 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2192,7 +2834,37 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2310,7 +2982,40 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectAllocation"
+                  }
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2408,7 +3113,37 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectAllocation"
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2535,7 +3270,40 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserAllocation"
+                  }
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2642,7 +3410,37 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAllocation"
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2751,7 +3549,40 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectAllocation"
+                  }
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2840,7 +3671,37 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectAllocation"
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -2949,7 +3810,40 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Capability"
+                  }
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -3038,7 +3932,37 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/OK"
+            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
+            "headers": {
+              "Content-Location": {
+                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Last-Modified": {
+                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
+                "style": "simple",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Capability"
+                }
+              }
+            }
           },
           "304": {
             "$ref": "#/components/responses/NotModified"
@@ -3198,7 +4122,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000-00:00"
+            "example": "2025-03-11T07:28:24.000−00:00"
           },
           "resource_type": {
             "type": "string",
@@ -3285,7 +4209,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000-00:00"
+            "example": "2025-03-11T07:28:24.000−00:00"
           },
           "status": {
             "type": "string",
@@ -3390,7 +4314,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000-00:00"
+            "example": "2025-03-11T07:28:24.000−00:00"
           },
           "status": {
             "type": "string",
@@ -3407,7 +4331,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this event occurred.  Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000-00:00"
+            "example": "2025-03-11T07:28:24.000−00:00"
           },
           "resource_uri": {
             "type": "string",
@@ -3458,7 +4382,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000-00:00"
+            "example": "2025-03-11T07:28:24.000−00:00"
           },
           "short_name": {
             "type": "string",
@@ -3585,7 +4509,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000-00:00"
+            "example": "2025-03-11T07:28:24.000−00:00"
           },
           "short_name": {
             "type": "string",
@@ -3649,7 +4573,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000-00:00"
+            "example": "2025-03-11T07:28:24.000−00:00"
           },
           "short_name": {
             "type": "string",
@@ -3774,7 +4698,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000-00:00"
+            "example": "2025-03-11T07:28:24.000−00:00"
           },
           "user_id": {
             "type": "string",
@@ -3830,7 +4754,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000-00:00"
+            "example": "2025-03-11T07:28:24.000−00:00"
           },
           "user_ids": {
             "type": "array",
@@ -3886,7 +4810,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000-00:00"
+            "example": "2025-03-11T07:28:24.000−00:00"
           },
           "entries": {
             "type": "array",
@@ -3952,7 +4876,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000-00:00"
+            "example": "2025-03-11T07:28:24.000−00:00"
           },
           "units": {
             "type": "array",
@@ -3980,39 +4904,6 @@
       }
     },
     "responses": {
-      "OK": {
-        "description": "OK - Returns a list of available IRI resources matching the request criteria.",
-        "headers": {
-          "Content-Location": {
-            "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "Last-Modified": {
-            "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "Content-Type": {
-            "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Incident"
-            }
-          }
-        }
-      },
       "NotModified": {
         "description": "Not Modified - The requested resource was not modified.",
         "headers": {
@@ -4033,7 +4924,7 @@
         }
       },
       "BadRequest": {
-        "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client's request.",
+        "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
         "headers": {
           "Content-Type": {
             "description": "Provides media type used to encode the result of the operation.",

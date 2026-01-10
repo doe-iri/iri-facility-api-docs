@@ -52,8 +52,6 @@ paths:
       description: Returns a list of available facility URL.
       operationId: getMetaData
       responses:
-        '200':
-          $ref: '#/components/responses/OK'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -76,6 +74,31 @@ paths:
           $ref: '#/components/responses/NotFound'
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
+        '200':
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Discovery'
   /api/v1/status:
     get:
       tags:
@@ -85,8 +108,6 @@ paths:
       description: Returns a list of available facility status URL.
       operationId: getMetaData_1
       responses:
-        '200':
-          $ref: '#/components/responses/OK'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -109,6 +130,31 @@ paths:
           $ref: '#/components/responses/NotFound'
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
+        '200':
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Discovery'
   /api/v1/status/resources:
     get:
       tags:
@@ -190,8 +236,6 @@ paths:
           items:
             type: string
       responses:
-        '200':
-          $ref: '#/components/responses/OK'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -214,6 +258,38 @@ paths:
           $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
+        '200':
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Resource'
   /api/v1/status/resources/{resource_id}:
     get:
       tags:
@@ -255,8 +331,6 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          $ref: '#/components/responses/OK'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -279,6 +353,36 @@ paths:
           $ref: '#/components/responses/ServiceUnavailable'
         '504':
           $ref: '#/components/responses/GatewayTimeout'
+        '200':
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
   /api/v1/status/incidents:
     get:
       tags:
@@ -416,8 +520,6 @@ paths:
           items:
             type: string
       responses:
-        '200':
-          $ref: '#/components/responses/OK'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -440,6 +542,38 @@ paths:
           $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
+        '200':
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Incident'
   /api/v1/status/incidents/{incident_id}:
     get:
       tags:
@@ -481,8 +615,6 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          $ref: '#/components/responses/OK'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -505,6 +637,36 @@ paths:
           $ref: '#/components/responses/ServiceUnavailable'
         '504':
           $ref: '#/components/responses/GatewayTimeout'
+        '200':
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
   /api/v1/status/incidents/{incident_id}/resources:
     get:
       tags:
@@ -569,8 +731,6 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          $ref: '#/components/responses/OK'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -593,6 +753,38 @@ paths:
           $ref: '#/components/responses/ServiceUnavailable'
         '504':
           $ref: '#/components/responses/GatewayTimeout'
+        '200':
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Resource'
   /api/v1/status/events:
     get:
       tags:
@@ -675,8 +867,6 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          $ref: '#/components/responses/OK'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -699,6 +889,38 @@ paths:
           $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
+        '200':
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
   /api/v1/status/events/{event_id}:
     get:
       tags:
@@ -740,8 +962,6 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          $ref: '#/components/responses/OK'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -764,6 +984,36 @@ paths:
           $ref: '#/components/responses/ServiceUnavailable'
         '504':
           $ref: '#/components/responses/GatewayTimeout'
+        '200':
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
   /api/v1/status/events/{event_id}/resource:
     get:
       tags:
@@ -805,8 +1055,6 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          $ref: '#/components/responses/OK'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -829,6 +1077,36 @@ paths:
           $ref: '#/components/responses/ServiceUnavailable'
         '504':
           $ref: '#/components/responses/GatewayTimeout'
+        '200':
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
   /api/v1/status/events/{event_id}/incident:
     get:
       tags:
@@ -870,8 +1148,6 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          $ref: '#/components/responses/OK'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -894,6 +1170,36 @@ paths:
           $ref: '#/components/responses/ServiceUnavailable'
         '504':
           $ref: '#/components/responses/GatewayTimeout'
+        '200':
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
   /api/v1/facility:
     get:
       tags:
@@ -929,8 +1235,6 @@ paths:
           type: string
           format: date-time
       responses:
-        '200':
-          $ref: '#/components/responses/OK'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -953,6 +1257,36 @@ paths:
           $ref: '#/components/responses/GatewayTimeout'
         '404':
           $ref: '#/components/responses/NotFound'
+        '200':
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Facility'
   /api/v1/facility/sites:
     get:
       tags:
@@ -1018,7 +1352,37 @@ paths:
           type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Site'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -1083,7 +1447,35 @@ paths:
           type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Site'
         '304':
           $ref: '#/components/responses/NotModified'
         '404':
@@ -1148,7 +1540,35 @@ paths:
           type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
         '304':
           $ref: '#/components/responses/NotModified'
         '404':
@@ -1242,7 +1662,37 @@ paths:
           type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -1307,7 +1757,35 @@ paths:
           type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
         '304':
           $ref: '#/components/responses/NotModified'
         '404':
@@ -1340,7 +1818,30 @@ paths:
       operationId: getMetaData_2
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Discovery'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -1416,7 +1917,37 @@ paths:
           default: 100
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserAllocation'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -1481,7 +2012,35 @@ paths:
           type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAllocation'
         '304':
           $ref: '#/components/responses/NotModified'
         '404':
@@ -1571,7 +2130,37 @@ paths:
             type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -1636,7 +2225,35 @@ paths:
           type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
         '304':
           $ref: '#/components/responses/NotModified'
         '404':
@@ -1725,7 +2342,37 @@ paths:
           type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectAllocation'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -1797,7 +2444,35 @@ paths:
           type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectAllocation'
         '304':
           $ref: '#/components/responses/NotModified'
         '404':
@@ -1891,7 +2566,37 @@ paths:
           type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserAllocation'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -1970,7 +2675,35 @@ paths:
           type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAllocation'
         '304':
           $ref: '#/components/responses/NotModified'
         '404':
@@ -2052,7 +2785,37 @@ paths:
           default: 100
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectAllocation'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -2117,7 +2880,35 @@ paths:
           type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectAllocation'
         '304':
           $ref: '#/components/responses/NotModified'
         '404':
@@ -2199,7 +2990,37 @@ paths:
           default: 100
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Capability'
         '304':
           $ref: '#/components/responses/NotModified'
         '400':
@@ -2264,7 +3085,35 @@ paths:
           type: string
       responses:
         '200':
-          $ref: '#/components/responses/OK'
+          description: OK - Returns a list of available IRI resources matching the
+            request criteria.
+          headers:
+            Content-Location:
+              description: Identifies the specific resource for the representation
+                you just returned. It provides a URI that, at the time the response
+                was generated, would return the same representation if dereferenced
+                with GET.
+              style: simple
+              schema:
+                type: string
+            Last-Modified:
+              description: The HTTP response should contain the Last-Modified header
+                with the date set to the RFC 1123 format of the resource's last modified
+                time.
+              style: simple
+              schema:
+                type: string
+            Content-Type:
+              description: Provides media type used to encode the result of the operation
+                based on those values provided in the Accept request header. At the
+                moment application/json is the only supported Content-Type encoding.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Capability'
         '304':
           $ref: '#/components/responses/NotModified'
         '404':
@@ -3101,34 +3950,6 @@ components:
       - self_uri
       title: Capability
   responses:
-    OK:
-      description: OK - Returns a list of available IRI resources matching the request
-        criteria.
-      headers:
-        Content-Location:
-          description: Identifies the specific resource for the representation you
-            just returned. It provides a URI that, at the time the response was generated,
-            would return the same representation if dereferenced with GET.
-          style: simple
-          schema:
-            type: string
-        Last-Modified:
-          description: The HTTP response should contain the Last-Modified header with
-            the date set to the RFC 1123 format of the resource's last modified time.
-          style: simple
-          schema:
-            type: string
-        Content-Type:
-          description: Provides media type used to encode the result of the operation
-            based on those values provided in the Accept request header. At the moment
-            application/json is the only supported Content-Type encoding.
-          style: simple
-          schema:
-            type: string
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Incident'
     NotModified:
       description: Not Modified - The requested resource was not modified.
       headers:
