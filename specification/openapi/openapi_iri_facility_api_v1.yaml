@@ -189,6 +189,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: name
         in: query
         description: The name of the resource.
@@ -196,6 +198,7 @@ paths:
         schema:
           type: string
           title: The name of the resource.
+          minLength: 1
       - name: offset
         in: query
         description: An integer value specifying the starting number of resource to
@@ -204,6 +207,8 @@ paths:
         schema:
           type: integer
           default: 0
+          minimum: 0
+          maximum: 1000
       - name: limit
         in: query
         description: An integer value specifying the maximum number of resources to
@@ -213,12 +218,15 @@ paths:
         schema:
           type: integer
           default: 100
+          minimum: 0
+          maximum: 1000
       - name: resource_type
         in: query
         description: Return only resources of this type.
         required: false
         schema:
           type: string
+          minLength: 1
       - name: capability
         in: query
         description: Return only resources with this capability.
@@ -324,6 +332,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: resource_id
         in: path
         description: resource_id
@@ -417,12 +427,15 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: name
         in: query
         description: The name of the resource.
         required: false
         schema:
           type: string
+          minLength: 1
       - name: offset
         in: query
         description: An integer value specifying the starting number of resource to
@@ -431,6 +444,8 @@ paths:
         schema:
           type: integer
           default: 0
+          minimum: 0
+          maximum: 1000
       - name: limit
         in: query
         description: An integer value specifying the maximum number of resources to
@@ -440,6 +455,8 @@ paths:
         schema:
           type: integer
           default: 100
+          minimum: 0
+          maximum: 1000
       - name: status
         in: query
         description: The status of a resource.
@@ -452,6 +469,7 @@ paths:
           - degraded
           - down
           - unknown
+          minLength: 1
       - name: type
         in: query
         description: The type of incident.
@@ -463,6 +481,7 @@ paths:
           - planned
           - unplanned
           - reservation
+          minLength: 1
       - name: resolution
         in: query
         description: The type of resolution to the incident.
@@ -476,6 +495,7 @@ paths:
           - completed
           - extended
           - pending
+          minLength: 1
       - name: time
         in: query
         description: Search for incidents overlapping with time, where start <= time
@@ -485,6 +505,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: from
         in: query
         description: Search for incidents/events that are active after (and including)
@@ -494,6 +516,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: to
         in: query
         description: Search for incidents/events that are active before (and including)
@@ -503,6 +527,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: resource_uris
         in: query
         description: A list of resources to match.
@@ -608,6 +634,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: incident_id
         in: path
         description: incident_id
@@ -701,12 +729,15 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: name
         in: query
         description: The name of the resource.
         required: false
         schema:
           type: string
+          minLength: 1
       - name: offset
         in: query
         description: An integer value specifying the starting number of resource to
@@ -715,6 +746,8 @@ paths:
         schema:
           type: integer
           default: 0
+          minimum: 0
+          maximum: 1000
       - name: limit
         in: query
         description: An integer value specifying the maximum number of resources to
@@ -724,6 +757,8 @@ paths:
         schema:
           type: integer
           default: 100
+          minimum: 0
+          maximum: 1000
       - name: incident_id
         in: path
         description: incident_id
@@ -819,12 +854,15 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: name
         in: query
         description: The name of the resource.
         required: false
         schema:
           type: string
+          minLength: 1
       - name: offset
         in: query
         description: An integer value specifying the starting number of resource to
@@ -833,6 +871,8 @@ paths:
         schema:
           type: integer
           default: 0
+          minimum: 0
+          maximum: 1000
       - name: limit
         in: query
         description: An integer value specifying the maximum number of resources to
@@ -842,6 +882,8 @@ paths:
         schema:
           type: integer
           default: 100
+          minimum: 0
+          maximum: 1000
       - name: status
         in: query
         description: The status of a resource.
@@ -858,6 +900,7 @@ paths:
         required: false
         schema:
           type: string
+          minLength: 1
       - name: to
         in: query
         description: Search for incidents/events that are active before (and including)
@@ -866,6 +909,7 @@ paths:
         required: false
         schema:
           type: string
+          minLength: 1
       responses:
         '304':
           $ref: '#/components/responses/NotModified'
@@ -955,6 +999,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: event_id
         in: path
         description: event_id
@@ -1048,6 +1094,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: event_id
         in: path
         description: event_id
@@ -1141,6 +1189,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: event_id
         in: path
         description: event_id
@@ -1234,6 +1284,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       responses:
         '304':
           $ref: '#/components/responses/NotModified'
@@ -1321,12 +1373,15 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: name
         in: query
         description: The name of the resource.
         required: false
         schema:
           type: string
+          minLength: 1
       - name: offset
         in: query
         description: An integer value specifying the starting number of resource to
@@ -1335,6 +1390,8 @@ paths:
         schema:
           type: integer
           default: 0
+          minimum: 0
+          maximum: 1000
       - name: limit
         in: query
         description: An integer value specifying the maximum number of resources to
@@ -1344,12 +1401,15 @@ paths:
         schema:
           type: integer
           default: 100
+          minimum: 0
+          maximum: 1000
       - name: short_name
         in: query
         description: The short name of the resource.
         required: false
         schema:
           type: string
+          minLength: 1
       responses:
         '200':
           description: OK - Returns a list of available IRI resources matching the
@@ -1439,6 +1499,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: site_id
         in: path
         description: The UUID uniquely identifying the IRI site resource.
@@ -1532,6 +1594,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: site_id
         in: path
         description: site_id
@@ -1625,12 +1689,15 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: name
         in: query
         description: The name of the resource.
         required: false
         schema:
           type: string
+          minLength: 1
       - name: offset
         in: query
         description: An integer value specifying the starting number of resource to
@@ -1639,6 +1706,8 @@ paths:
         schema:
           type: integer
           default: 0
+          minimum: 0
+          maximum: 1000
       - name: limit
         in: query
         description: An integer value specifying the maximum number of resources to
@@ -1648,18 +1717,22 @@ paths:
         schema:
           type: integer
           default: 100
+          minimum: 0
+          maximum: 1000
       - name: short_name
         in: query
         description: The short name of the resource.
         required: false
         schema:
           type: string
+          minLength: 1
       - name: country_name
         in: query
         description: The country name in which a resource resides.
         required: false
         schema:
           type: string
+          minLength: 1
       responses:
         '200':
           description: OK - Returns a list of available IRI resources matching the
@@ -1749,6 +1822,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: location_id
         in: path
         description: location_id
@@ -1892,12 +1967,15 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: name
         in: query
         description: The name of the resource.
         required: false
         schema:
           type: string
+          minLength: 1
       - name: offset
         in: query
         description: An integer value specifying the starting number of resource to
@@ -1906,6 +1984,8 @@ paths:
         schema:
           type: integer
           default: 0
+          minimum: 0
+          maximum: 1000
       - name: limit
         in: query
         description: An integer value specifying the maximum number of resources to
@@ -1915,6 +1995,8 @@ paths:
         schema:
           type: integer
           default: 100
+          minimum: 0
+          maximum: 1000
       responses:
         '200':
           description: OK - Returns a list of available IRI resources matching the
@@ -2004,6 +2086,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: user_allocation_id
         in: path
         description: The UUID uniquely identifying the IRI user allocation resource.
@@ -2097,12 +2181,15 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: name
         in: query
         description: The name of the resource.
         required: false
         schema:
           type: string
+          minLength: 1
       - name: offset
         in: query
         description: An integer value specifying the starting number of resource to
@@ -2111,6 +2198,8 @@ paths:
         schema:
           type: integer
           default: 0
+          minimum: 0
+          maximum: 1000
       - name: limit
         in: query
         description: An integer value specifying the maximum number of resources to
@@ -2120,6 +2209,8 @@ paths:
         schema:
           type: integer
           default: 100
+          minimum: 0
+          maximum: 1000
       - name: user_ids
         in: query
         description: Return only projects containing any of the listed users.
@@ -2217,6 +2308,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: project_id
         in: path
         description: The UUID uniquely identifying the IRI project resource.
@@ -2311,12 +2404,15 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: name
         in: query
         description: The name of the resource.
         required: false
         schema:
           type: string
+          minLength: 1
       - name: offset
         in: query
         description: An integer value specifying the starting number of resource to
@@ -2325,6 +2421,8 @@ paths:
         schema:
           type: integer
           default: 0
+          minimum: 0
+          maximum: 1000
       - name: limit
         in: query
         description: An integer value specifying the maximum number of resources to
@@ -2334,6 +2432,8 @@ paths:
         schema:
           type: integer
           default: 100
+          minimum: 0
+          maximum: 1000
       - name: project_id
         in: path
         description: The UUID uniquely identifying the IRI project resource.
@@ -2430,6 +2530,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: project_id
         in: path
         description: The UUID uniquely identifying the IRI project resource.
@@ -2529,12 +2631,15 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: name
         in: query
         description: The name of the resource.
         required: false
         schema:
           type: string
+          minLength: 1
       - name: offset
         in: query
         description: An integer value specifying the starting number of resource to
@@ -2543,6 +2648,8 @@ paths:
         schema:
           type: integer
           default: 0
+          minimum: 0
+          maximum: 1000
       - name: limit
         in: query
         description: An integer value specifying the maximum number of resources to
@@ -2552,6 +2659,8 @@ paths:
         schema:
           type: integer
           default: 100
+          minimum: 0
+          maximum: 1000
       - name: project_id
         in: path
         description: The UUID uniquely identifying the IRI project resource.
@@ -2655,6 +2764,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: project_id
         in: path
         description: The UUID uniquely identifying the IRI project resource.
@@ -2760,12 +2871,15 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: name
         in: query
         description: The name of the resource.
         required: false
         schema:
           type: string
+          minLength: 1
       - name: offset
         in: query
         description: An integer value specifying the starting number of resource to
@@ -2774,6 +2888,8 @@ paths:
         schema:
           type: integer
           default: 0
+          minimum: 0
+          maximum: 1000
       - name: limit
         in: query
         description: An integer value specifying the maximum number of resources to
@@ -2783,6 +2899,8 @@ paths:
         schema:
           type: integer
           default: 100
+          minimum: 0
+          maximum: 1000
       responses:
         '200':
           description: OK - Returns a list of available IRI resources matching the
@@ -2872,6 +2990,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: project_allocation_id
         in: path
         description: The UUID uniquely identifying the IRI project allocation resource.
@@ -2965,12 +3085,15 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: name
         in: query
         description: The name of the resource.
         required: false
         schema:
           type: string
+          minLength: 1
       - name: offset
         in: query
         description: An integer value specifying the starting number of resource to
@@ -2979,6 +3102,8 @@ paths:
         schema:
           type: integer
           default: 0
+          minimum: 0
+          maximum: 1000
       - name: limit
         in: query
         description: An integer value specifying the maximum number of resources to
@@ -2988,6 +3113,8 @@ paths:
         schema:
           type: integer
           default: 100
+          minimum: 0
+          maximum: 1000
       responses:
         '200':
           description: OK - Returns a list of available IRI resources matching the
@@ -3077,6 +3204,8 @@ paths:
         schema:
           type: string
           format: date-time
+          minLength: 20
+          maxLength: 35
       - name: capability_id
         in: path
         description: The UUID uniquely identifying the IRI capability resource.
@@ -3243,7 +3372,7 @@ components:
           format: date-time
           description: The date this resource was last modified. Format follows the
             ISO 8601 standard with timezone offsets.
-          example: "2025-03-11T07:28:24.000\u221200:00"
+          example: '2025-03-11T07:28:24.000-00:00'
         resource_type:
           type: string
           description: The type of resource.
@@ -3324,7 +3453,7 @@ components:
           format: date-time
           description: The date this resource was last modified. Format follows the
             ISO 8601 standard with timezone offsets.
-          example: "2025-03-11T07:28:24.000\u221200:00"
+          example: '2025-03-11T07:28:24.000-00:00'
         status:
           type: string
           description: The status of the Resource associated with this Incident.
@@ -3347,13 +3476,13 @@ components:
           format: date-time
           description: The date this Incident started, or is predicted to start. Format
             follows the ISO 8601 standard with timezone offsets.
-          example: 2023-10-17 11:02:31.690000+00:00
+          example: '2023-10-17T11:02:31.690000+00:00'
         end:
           type: string
           format: date-time
           description: The date this Incident ended, or is predicted to end.  Format
             follows the ISO 8601 standard with timezone offsets.
-          example: 2023-10-19 11:02:31.690000+00:00
+          example: '2023-10-19T11:02:31.690000+00:00'
         resolution:
           type: string
           default: pending
@@ -3420,7 +3549,7 @@ components:
           format: date-time
           description: The date this resource was last modified. Format follows the
             ISO 8601 standard with timezone offsets.
-          example: "2025-03-11T07:28:24.000\u221200:00"
+          example: '2025-03-11T07:28:24.000-00:00'
         status:
           type: string
           description: The status of the resource associated with this event.
@@ -3435,7 +3564,7 @@ components:
           format: date-time
           description: The date this event occurred.  Format follows the ISO 8601
             standard with timezone offsets.
-          example: "2025-03-11T07:28:24.000\u221200:00"
+          example: '2025-03-11T07:28:24.000-00:00'
         resource_uri:
           type: string
           format: uri
@@ -3485,7 +3614,7 @@ components:
           format: date-time
           description: The date this resource was last modified. Format follows the
             ISO 8601 standard with timezone offsets.
-          example: "2025-03-11T07:28:24.000\u221200:00"
+          example: '2025-03-11T07:28:24.000-00:00'
         short_name:
           type: string
           description: The short name of the resource.
@@ -3602,7 +3731,7 @@ components:
           format: date-time
           description: The date this resource was last modified. Format follows the
             ISO 8601 standard with timezone offsets.
-          example: "2025-03-11T07:28:24.000\u221200:00"
+          example: '2025-03-11T07:28:24.000-00:00'
         short_name:
           type: string
           description: The short name of the resource.
@@ -3663,7 +3792,7 @@ components:
           format: date-time
           description: The date this resource was last modified. Format follows the
             ISO 8601 standard with timezone offsets.
-          example: "2025-03-11T07:28:24.000\u221200:00"
+          example: '2025-03-11T07:28:24.000-00:00'
         short_name:
           type: string
           description: The short name of the resource.
@@ -3768,7 +3897,7 @@ components:
           format: date-time
           description: The date this resource was last modified. Format follows the
             ISO 8601 standard with timezone offsets.
-          example: "2025-03-11T07:28:24.000\u221200:00"
+          example: '2025-03-11T07:28:24.000-00:00'
         user_id:
           type: string
           description: The user identifier associated with the allocation (hasUser).
@@ -3816,7 +3945,7 @@ components:
           format: date-time
           description: The date this resource was last modified. Format follows the
             ISO 8601 standard with timezone offsets.
-          example: "2025-03-11T07:28:24.000\u221200:00"
+          example: '2025-03-11T07:28:24.000-00:00'
         user_ids:
           type: array
           items:
@@ -3867,7 +3996,7 @@ components:
           format: date-time
           description: The date this resource was last modified. Format follows the
             ISO 8601 standard with timezone offsets.
-          example: "2025-03-11T07:28:24.000\u221200:00"
+          example: '2025-03-11T07:28:24.000-00:00'
         entries:
           type: array
           description: Allocation entries associated with this user allocation (hasAllocationEntry).
@@ -3926,7 +4055,7 @@ components:
           format: date-time
           description: The date this resource was last modified. Format follows the
             ISO 8601 standard with timezone offsets.
-          example: "2025-03-11T07:28:24.000\u221200:00"
+          example: '2025-03-11T07:28:24.000-00:00'
         units:
           type: array
           description: The list of AllocationUnit associated with this capability.
@@ -3965,8 +4094,8 @@ components:
           schema:
             type: string
     BadRequest:
-      description: "Bad Request - The server due to malformed syntax or invalid query\
-        \ parameters could not understand the client\u2019s request."
+      description: Bad Request - The server due to malformed syntax or invalid query
+        parameters could not understand the client's request.
       headers:
         Content-Type:
           description: Provides media type used to encode the result of the operation.
