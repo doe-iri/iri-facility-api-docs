@@ -46,6 +46,39 @@
         "description": "Returns a list of available facility URL.",
         "operationId": "getMetaData",
         "responses": {
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
           "200": {
             "description": "OK - Returns a list of available IRI resources matching the request criteria.",
             "headers": {
@@ -71,36 +104,6 @@
                   "items": {
                     "$ref": "#/components/schemas/Discovery"
                   }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -118,6 +121,39 @@
         "description": "Returns a list of available facility status URL.",
         "operationId": "getMetaData_1",
         "responses": {
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
           "200": {
             "description": "OK - Returns a list of available IRI resources matching the request criteria.",
             "headers": {
@@ -143,36 +179,6 @@
                   "items": {
                     "$ref": "#/components/schemas/Discovery"
                   }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -216,7 +222,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -225,7 +233,9 @@
             "description": "The name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "title": "The name of the resource.",
+              "minLength": 1
             }
           },
           {
@@ -235,7 +245,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 0
+              "default": 0,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -245,7 +257,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 100
+              "default": 100,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -254,7 +268,8 @@
             "description": "Return only resources of this type.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -283,6 +298,39 @@
           }
         ],
         "responses": {
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
           "200": {
             "description": "OK - Returns a list of available IRI resources matching the request criteria.",
             "headers": {
@@ -315,101 +363,6 @@
                   "items": {
                     "$ref": "#/components/schemas/Resource"
                   }
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -453,7 +406,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -467,6 +422,39 @@
           }
         ],
         "responses": {
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
           "200": {
             "description": "OK - Returns a list of available IRI resources matching the request criteria.",
             "headers": {
@@ -496,120 +484,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Resource"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -653,7 +527,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -662,7 +538,8 @@
             "description": "The name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -672,7 +549,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 0
+              "default": 0,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -682,7 +561,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 100
+              "default": 100,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -698,7 +579,8 @@
                 "degraded",
                 "down",
                 "unknown"
-              ]
+              ],
+              "minLength": 1
             }
           },
           {
@@ -713,7 +595,8 @@
                 "planned",
                 "unplanned",
                 "reservation"
-              ]
+              ],
+              "minLength": 1
             }
           },
           {
@@ -730,7 +613,8 @@
                 "completed",
                 "extended",
                 "pending"
-              ]
+              ],
+              "minLength": 1
             }
           },
           {
@@ -740,7 +624,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -750,7 +636,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -760,7 +648,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -789,6 +679,39 @@
           }
         ],
         "responses": {
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
           "200": {
             "description": "OK - Returns a list of available IRI resources matching the request criteria.",
             "headers": {
@@ -821,101 +744,6 @@
                   "items": {
                     "$ref": "#/components/schemas/Incident"
                   }
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -959,7 +787,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -973,6 +803,39 @@
           }
         ],
         "responses": {
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
           "200": {
             "description": "OK - Returns a list of available IRI resources matching the request criteria.",
             "headers": {
@@ -1002,120 +865,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Incident"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -1159,7 +908,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -1168,7 +919,8 @@
             "description": "The name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -1178,7 +930,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 0
+              "default": 0,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -1188,7 +942,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 100
+              "default": 100,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -1202,6 +958,39 @@
           }
         ],
         "responses": {
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
           "200": {
             "description": "OK - Returns a list of available IRI resources matching the request criteria.",
             "headers": {
@@ -1234,120 +1023,6 @@
                   "items": {
                     "$ref": "#/components/schemas/Resource"
                   }
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -1391,7 +1066,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -1400,7 +1077,8 @@
             "description": "The name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -1410,7 +1088,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 0
+              "default": 0,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -1420,7 +1100,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 100
+              "default": 100,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -1441,7 +1123,8 @@
             "description": "Search for incidents/events that are active after (and including) the specified from time.  The from query parameter must be in ISO 8601 format with timezone offsets.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -1450,11 +1133,45 @@
             "description": "Search for incidents/events that are active before (and including) the specified 'to' time.  The from query parameter must be in ISO 8601 format with timezone offsets.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           }
         ],
         "responses": {
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
           "200": {
             "description": "OK - Returns a list of available IRI resources matching the request criteria.",
             "headers": {
@@ -1487,101 +1204,6 @@
                   "items": {
                     "$ref": "#/components/schemas/Event"
                   }
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -1625,7 +1247,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -1639,6 +1263,39 @@
           }
         ],
         "responses": {
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
           "200": {
             "description": "OK - Returns a list of available IRI resources matching the request criteria.",
             "headers": {
@@ -1668,120 +1325,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Event"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -1825,7 +1368,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -1839,6 +1384,39 @@
           }
         ],
         "responses": {
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
           "200": {
             "description": "OK - Returns a list of available IRI resources matching the request criteria.",
             "headers": {
@@ -1868,120 +1446,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Resource"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -2025,7 +1489,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -2039,6 +1505,39 @@
           }
         ],
         "responses": {
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
           "200": {
             "description": "OK - Returns a list of available IRI resources matching the request criteria.",
             "headers": {
@@ -2068,120 +1567,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Incident"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -2225,11 +1610,46 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           }
         ],
         "responses": {
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
           "200": {
             "description": "OK - Returns a list of available IRI resources matching the request criteria.",
             "headers": {
@@ -2259,101 +1679,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Facility"
-                }
-              }
-            }
-          },
-          "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -2397,7 +1722,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -2406,7 +1733,8 @@
             "description": "The name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -2416,7 +1744,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 0
+              "default": 0,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -2426,7 +1756,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 100
+              "default": 100,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -2435,7 +1767,8 @@
             "description": "The short name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           }
         ],
@@ -2477,99 +1810,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -2610,7 +1881,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -2658,118 +1931,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotFound"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -2810,7 +2002,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -2858,118 +2052,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotFound"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -3010,7 +2123,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -3019,7 +2134,8 @@
             "description": "The name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -3029,7 +2145,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 0
+              "default": 0,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -3039,7 +2157,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 100
+              "default": 100,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -3048,7 +2168,8 @@
             "description": "The short name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -3057,7 +2178,8 @@
             "description": "The country name in which a resource resides.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           }
         ],
@@ -3099,99 +2221,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -3232,7 +2292,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -3280,118 +2342,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotFound"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -3436,34 +2417,28 @@
             }
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -3504,7 +2479,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -3513,7 +2490,8 @@
             "description": "The name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -3523,7 +2501,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 0
+              "default": 0,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -3533,7 +2513,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 100
+              "default": 100,
+              "minimum": 0,
+              "maximum": 1000
             }
           }
         ],
@@ -3575,99 +2557,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -3708,7 +2628,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -3756,118 +2678,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotFound"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -3908,7 +2749,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -3917,7 +2760,8 @@
             "description": "The name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -3927,7 +2771,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 0
+              "default": 0,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -3937,7 +2783,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 100
+              "default": 100,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -3991,99 +2839,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -4124,7 +2910,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -4172,118 +2960,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotFound"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -4324,7 +3031,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -4333,7 +3042,8 @@
             "description": "The name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -4343,7 +3053,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 0
+              "default": 0,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -4353,7 +3065,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 100
+              "default": 100,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -4404,99 +3118,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -4537,7 +3189,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -4594,118 +3248,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotFound"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -4746,7 +3319,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -4755,7 +3330,8 @@
             "description": "The name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -4765,7 +3341,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 0
+              "default": 0,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -4775,7 +3353,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 100
+              "default": 100,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -4835,99 +3415,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -4968,7 +3486,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -5034,118 +3554,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotFound"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -5186,7 +3625,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -5195,7 +3636,8 @@
             "description": "The name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -5205,7 +3647,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 0
+              "default": 0,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -5215,7 +3659,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 100
+              "default": 100,
+              "minimum": 0,
+              "maximum": 1000
             }
           }
         ],
@@ -5257,99 +3703,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -5390,7 +3774,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -5438,118 +3824,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotFound"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -5590,7 +3895,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -5599,7 +3906,8 @@
             "description": "The name of the resource.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -5609,7 +3917,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 0
+              "default": 0,
+              "minimum": 0,
+              "maximum": 1000
             }
           },
           {
@@ -5619,7 +3929,9 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 100
+              "default": 100,
+              "minimum": 0,
+              "maximum": 1000
             }
           }
         ],
@@ -5661,99 +3973,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -5794,7 +4044,9 @@
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date-time",
+              "minLength": 20,
+              "maxLength": 35
             }
           },
           {
@@ -5842,118 +4094,37 @@
             }
           },
           "304": {
-            "description": "Not Modified - The requested resource was not modified.",
-            "headers": {
-              "Last-Modified": {
-                "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format of the resource's last modified time.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotModified"
           },
           "404": {
-            "description": "Not Found - The provider is not currently capable of serving resource models.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/NotFound"
           },
           "400": {
-            "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client’s request.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
-            "description": "Unauthorized - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Requester is not authorized to access the requested resource.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Forbidden"
           },
           "500": {
-            "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered and a more specific message is not available.",
-            "headers": {
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref": "#/components/responses/InternalServerError"
+          },
+          "501": {
+            "$ref": "#/components/responses/NotImplemented"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "504": {
+            "$ref": "#/components/responses/GatewayTimeout"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
           }
         }
       }
@@ -6080,7 +4251,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000−00:00"
+            "example": "2025-03-11T07:28:24.000-00:00"
           },
           "resource_type": {
             "type": "string",
@@ -6167,7 +4338,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000−00:00"
+            "example": "2025-03-11T07:28:24.000-00:00"
           },
           "status": {
             "type": "string",
@@ -6194,13 +4365,13 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this Incident started, or is predicted to start. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2023-10-17T11:02:31.690-00:00"
+            "example": "2023-10-17T11:02:31.690000+00:00"
           },
           "end": {
             "type": "string",
             "format": "date-time",
             "description": "The date this Incident ended, or is predicted to end.  Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2023-10-19T11:02:31.690-00:00"
+            "example": "2023-10-19T11:02:31.690000+00:00"
           },
           "resolution": {
             "type": "string",
@@ -6272,7 +4443,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000−00:00"
+            "example": "2025-03-11T07:28:24.000-00:00"
           },
           "status": {
             "type": "string",
@@ -6289,7 +4460,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this event occurred.  Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000−00:00"
+            "example": "2025-03-11T07:28:24.000-00:00"
           },
           "resource_uri": {
             "type": "string",
@@ -6340,7 +4511,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000−00:00"
+            "example": "2025-03-11T07:28:24.000-00:00"
           },
           "short_name": {
             "type": "string",
@@ -6467,7 +4638,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000−00:00"
+            "example": "2025-03-11T07:28:24.000-00:00"
           },
           "short_name": {
             "type": "string",
@@ -6531,7 +4702,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000−00:00"
+            "example": "2025-03-11T07:28:24.000-00:00"
           },
           "short_name": {
             "type": "string",
@@ -6656,7 +4827,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000−00:00"
+            "example": "2025-03-11T07:28:24.000-00:00"
           },
           "user_id": {
             "type": "string",
@@ -6712,7 +4883,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000−00:00"
+            "example": "2025-03-11T07:28:24.000-00:00"
           },
           "user_ids": {
             "type": "array",
@@ -6768,7 +4939,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000−00:00"
+            "example": "2025-03-11T07:28:24.000-00:00"
           },
           "entries": {
             "type": "array",
@@ -6834,7 +5005,7 @@
             "type": "string",
             "format": "date-time",
             "description": "The date this resource was last modified. Format follows the ISO 8601 standard with timezone offsets.",
-            "example": "2025-03-11T07:28:24.000−00:00"
+            "example": "2025-03-11T07:28:24.000-00:00"
           },
           "units": {
             "type": "array",
@@ -6859,6 +5030,224 @@
           "self_uri"
         ],
         "title": "Capability"
+      }
+    },
+    "responses": {
+      "NotModified": {
+        "description": "Not Modified - The requested resource was not modified.",
+        "headers": {
+          "Last-Modified": {
+            "description": "The HTTP response should contain the Last-Modified header with the date set to the RFC 1123 format.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "Provides media type used to encode the result of the operation.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Bad Request - The server due to malformed syntax or invalid query parameters could not understand the client's request.",
+        "headers": {
+          "Content-Type": {
+            "description": "Provides media type used to encode the result of the operation.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized - Requester is not authorized to access the requested resource.",
+        "headers": {
+          "Content-Type": {
+            "description": "Provides media type used to encode the result of the operation.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden - Requester is not authorized to access the requested resource.",
+        "headers": {
+          "Content-Type": {
+            "description": "Provides media type used to encode the result of the operation.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Not Found - The provider is not currently capable of serving resource models.",
+        "headers": {
+          "Content-Type": {
+            "description": "Provides media type used to encode the result of the operation.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "MethodNotAllowed": {
+        "description": "Method Not Allowed - The HTTP method used in the request is not supported for this endpoint.",
+        "headers": {
+          "Allow": {
+            "description": "The set of HTTP methods supported by the target resource.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Content-Type": {
+            "description": "Provides media type used to encode the result of the operation.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "UnprocessableEntity": {
+        "description": "Unprocessable Entity - The server understands the content type and syntax of the request but was unable to process the contained instructions.",
+        "headers": {
+          "Content-Type": {
+            "description": "Provides media type used to encode the result of the operation.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Internal Server Error - A generic error message given when an unexpected condition was encountered.",
+        "headers": {
+          "Content-Type": {
+            "description": "Provides media type used to encode the result of the operation.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotImplemented": {
+        "description": "The requested functionality is not implemented.",
+        "headers": {
+          "Content-Type": {
+            "description": "Provides media type used to encode the result of the operation.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "ServiceUnavailable": {
+        "description": "The service is currently unavailable.",
+        "headers": {
+          "Content-Type": {
+            "description": "Provides media type used to encode the result of the operation.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "GatewayTimeout": {
+        "description": "The upstream service failed to respond in time.",
+        "headers": {
+          "Content-Type": {
+            "description": "Provides media type used to encode the result of the operation.",
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
       }
     }
   }
