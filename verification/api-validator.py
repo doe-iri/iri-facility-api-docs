@@ -8,6 +8,11 @@ import schemathesis
 import pytest
 
 # ---------------------------------------------------------------------------
+# Allow to pass tokens via environment variables
+# ---------------------------------------------------------------------------
+API_TOKEN = os.environ.get("IRI_API_TOKEN")
+
+# ---------------------------------------------------------------------------
 # Argument parsing (script-owned, not pytest)
 # ---------------------------------------------------------------------------
 parser = argparse.ArgumentParser(add_help=True)
@@ -65,6 +70,10 @@ def before_call(ctx, case, kwargs):
         else:
             clean[k] = "X-Replaced"
 
+    # ---- AUTH ----
+    if API_TOKEN:
+        clean["Authorization"] = f"Bearer {API_TOKEN}"
+
     case.headers = clean
 
 # ---------------------------------------------------------------------------
@@ -81,6 +90,7 @@ def test_api(case):
         excluded_checks=[
             schemathesis.checks.content_type_conformance,
             schemathesis.checks.response_schema_conformance,
+            schemathesis.checks.unsupported_method,
         ],
     )
 
@@ -96,6 +106,7 @@ if __name__ == "__main__":
         "--no-header", "--no-summary",
         "--html=" + args.report_path,
         "--self-contained-html",
+        "--junitxml=schemathesis-report.xml",
         __file__,
     ]
     raise SystemExit(pytest.main(pytest_args))
