@@ -19,7 +19,7 @@ parser = argparse.ArgumentParser(add_help=True)
 parser.add_argument("--baseurl", help="Base URL of the API under test. Default: http://localhost:8000/")
 parser.add_argument("--schema-url", help="URL to the OpenAPI schema. Cannot be used with --schema-path. Default: <baseurl>/openapi.json")
 parser.add_argument("--schema-path", help="Path to the OpenAPI schema file. Cannot be used with --schema-url. Default: None")
-parser.add_argument("--report-path", help="Path to output the HTML report. Default: schemathesis-report.html", default="schemathesis-report.html")
+parser.add_argument("--report-name", help="Name of the HTML/XML report file. Default: schemathesis-report", default="schemathesis-report")
 
 # parse_known_args so pytest flags are untouched
 args, _ = parser.parse_known_args()
@@ -100,14 +100,15 @@ def test_api(case):
 if __name__ == "__main__":
     pytest_args = [
         "-s",
-        "-vv",
+        "-v",
+        "--tb=no",
         "--maxfail=0",
         "--disable-warnings",
         "--continue-on-collection-errors",
         "--no-header", "--no-summary",
-        "--html=" + args.report_path,
+        "--html=" + args.report_name + ".html",
         "--self-contained-html",
-        "--junitxml=schemathesis-report.xml",
+        "--junitxml=" + args.report_name + ".xml",
         __file__,
     ]
     raise SystemExit(pytest.main(pytest_args))

@@ -41,6 +41,10 @@ Activate it manually with:
 source .venv/bin/activate
 ```
 
+## How to pass Auth token
+
+Tool expects environment variable `IRI_API_TOKEN`, that will be used by Schemathesis `curl -H 'Authorization: Bearer <IRI_API_TOKEN>` ...
+
 ---
 
 ## Running the Validator
@@ -56,7 +60,7 @@ python api-validator.py
 Defaults:
 - Base URL: `http://localhost:8000/`
 - Schema URL: `http://localhost:8000/openapi.json`
-- Report: `schemathesis-report.html`
+- Report Name: `schemathesis-report`
 
 ---
 
@@ -93,13 +97,15 @@ Useful when validating an API against a local or in-progress schema.
 
 ---
 
-### Custom Report Path
+### Custom Report Name
 
 ```bash
-python api-validator.py --report-path reports/api-report.html
+python api-validator.py --report-name custom-report-name
 ```
 
-The report is a **single self-contained HTML file**.
+The report will produce two files:
+* **self-contained HTML file** with ending `.html`.
+* **XML file** with ending `.html`.
 
 ---
 
