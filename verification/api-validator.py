@@ -99,6 +99,7 @@ def test_api(case):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     pytest_args = [
+        "-s",
         "-vv",
         "--maxfail=0",
         "--disable-warnings",
