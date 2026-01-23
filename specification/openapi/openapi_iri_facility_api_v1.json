@@ -36,156 +36,6 @@
     }
   ],
   "paths": {
-    "/api/v1": {
-      "get": {
-        "tags": [
-          "IRI Facility API",
-          "getMetaData"
-        ],
-        "summary": "Get a list of facility API meta-data.",
-        "description": "Returns a list of available facility URL.",
-        "operationId": "getMetaData",
-        "responses": {
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "405": {
-            "$ref": "#/components/responses/MethodNotAllowed"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          },
-          "501": {
-            "$ref": "#/components/responses/NotImplemented"
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable"
-          },
-          "504": {
-            "$ref": "#/components/responses/GatewayTimeout"
-          },
-          "304": {
-            "$ref": "#/components/responses/NotModified"
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "200": {
-            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
-            "headers": {
-              "Content-Location": {
-                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Discovery"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/status": {
-      "get": {
-        "tags": [
-          "IRI Status API",
-          "getMetaData"
-        ],
-        "summary": "Get a list of facility status meta-data.",
-        "description": "Returns a list of available facility status URL.",
-        "operationId": "getMetaData_1",
-        "responses": {
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "405": {
-            "$ref": "#/components/responses/MethodNotAllowed"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          },
-          "501": {
-            "$ref": "#/components/responses/NotImplemented"
-          },
-          "503": {
-            "$ref": "#/components/responses/ServiceUnavailable"
-          },
-          "504": {
-            "$ref": "#/components/responses/GatewayTimeout"
-          },
-          "304": {
-            "$ref": "#/components/responses/NotModified"
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "200": {
-            "description": "OK - Returns a list of available IRI resources matching the request criteria.",
-            "headers": {
-              "Content-Location": {
-                "description": "Identifies the specific resource for the representation you just returned. It provides a URI that, at the time the response was generated, would return the same representation if dereferenced with GET.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Content-Type": {
-                "description": "Provides media type used to encode the result of the operation based on those values provided in the Accept request header. At the moment application/json is the only supported Content-Type encoding.",
-                "style": "simple",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Discovery"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/status/resources": {
       "get": {
         "tags": [
@@ -267,9 +117,10 @@
             "in": "query",
             "description": "Return only resources of this type.",
             "required": false,
+            "style": "form",
+            "explode": false,
             "schema": {
-              "type": "string",
-              "minLength": 1
+              "$ref": "#/components/schemas/ResourceType"
             }
           },
           {
@@ -280,7 +131,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "string"
+                "$ref": "#/components/schemas/AllocationUnitType"
               }
             }
           },
@@ -290,10 +141,7 @@
             "description": "Return only resources with these status values.",
             "required": false,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/components/schemas/Status"
             }
           }
         ],
@@ -572,15 +420,7 @@
             "description": "The status of a resource.",
             "required": false,
             "schema": {
-              "type": "string",
-              "description": "The status of a resource.",
-              "enum": [
-                "up",
-                "degraded",
-                "down",
-                "unknown"
-              ],
-              "minLength": 1
+              "$ref": "#/components/schemas/Status"
             }
           },
           {
@@ -589,14 +429,7 @@
             "description": "The type of incident.",
             "required": false,
             "schema": {
-              "type": "string",
-              "description": "The type of incident.",
-              "enum": [
-                "planned",
-                "unplanned",
-                "reservation"
-              ],
-              "minLength": 1
+              "$ref": "#/components/schemas/IncidentType"
             }
           },
           {
@@ -605,16 +438,7 @@
             "description": "The type of resolution to the incident.",
             "required": false,
             "schema": {
-              "type": "string",
-              "description": "The current state of the incident resolution.",
-              "enum": [
-                "unresolved",
-                "cancelled",
-                "completed",
-                "extended",
-                "pending"
-              ],
-              "minLength": 1
+              "$ref": "#/components/schemas/Resolution"
             }
           },
           {
@@ -661,7 +485,8 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "string",
+                "minLength": 1
               }
             }
           },
@@ -673,7 +498,8 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "string",
+                "minLength": 1
               }
             }
           }
@@ -4222,6 +4048,65 @@
           "type"
         ]
       },
+      "ResourceType": {
+        "type": "string",
+        "description": "The type of resource.",
+        "example": "system",
+        "enum": [
+          "website",
+          "service",
+          "compute",
+          "system",
+          "storage",
+          "network",
+          "unknown"
+        ]
+      },
+      "IncidentType": {
+        "type": "string",
+        "description": "The type of Incident.",
+        "enum": [
+          "planned",
+          "unplanned",
+          "reservation"
+        ],
+        "example": "planned"
+      },
+      "AllocationUnitType": {
+        "type": "string",
+        "description": "The unit type.",
+        "enum": [
+          "node_hours",
+          "bytes",
+          "inodes"
+        ],
+        "example": "bytes",
+        "title": "AllocationUnit"
+      },
+      "Resolution": {
+        "type": "string",
+        "default": "pending",
+        "description": "The resolution type for Incident.",
+        "enum": [
+          "unresolved",
+          "cancelled",
+          "completed",
+          "extended",
+          "pending"
+        ],
+        "example": "pending"
+      },
+      "Status": {
+        "type": "string",
+        "description": "The status object definition",
+        "enum": [
+          "up",
+          "degraded",
+          "down",
+          "unknown"
+        ],
+        "example": "up"
+      },
       "Resource": {
         "type": "object",
         "description": "A Resource is an object that either offers a service to the end user, or supports a resource that offers a service to the end user.  This resource will have an associated operational state, events, and incidents.",
@@ -4254,18 +4139,7 @@
             "example": "2025-03-11T07:28:24.000-00:00"
           },
           "resource_type": {
-            "type": "string",
-            "description": "The type of resource.",
-            "enum": [
-              "website",
-              "service",
-              "compute",
-              "system",
-              "storage",
-              "network",
-              "unknown"
-            ],
-            "example": "system"
+            "$ref": "#/components/schemas/ResourceType"
           },
           "capability_uris": {
             "type": "array",
@@ -4277,15 +4151,7 @@
             }
           },
           "current_status": {
-            "type": "string",
-            "description": "The current status of this resource at time of query.",
-            "enum": [
-              "up",
-              "degraded",
-              "down",
-              "unknown"
-            ],
-            "example": "up"
+            "$ref": "#/components/schemas/Status"
           },
           "located_at_uri": {
             "type": "string",
@@ -4343,23 +4209,10 @@
           "status": {
             "type": "string",
             "description": "The status of the Resource associated with this Incident.",
-            "enum": [
-              "up",
-              "degraded",
-              "down",
-              "unknown"
-            ],
-            "example": "down"
+            "$ref": "#/components/schemas/Status"
           },
           "type": {
-            "type": "string",
-            "description": "The type of Incident.",
-            "enum": [
-              "planned",
-              "unplanned",
-              "reservation"
-            ],
-            "example": "planned"
+            "$ref": "#/components/schemas/IncidentType"
           },
           "start": {
             "type": "string",
@@ -4374,17 +4227,7 @@
             "example": "2023-10-19T11:02:31.690000+00:00"
           },
           "resolution": {
-            "type": "string",
-            "default": "pending",
-            "description": "The resolution for this Incident.",
-            "enum": [
-              "unresolved",
-              "cancelled",
-              "completed",
-              "extended",
-              "pending"
-            ],
-            "example": "pending"
+            "$ref": "#/components/schemas/Resolution"
           },
           "resource_uris": {
             "type": "array",
@@ -4446,15 +4289,7 @@
             "example": "2025-03-11T07:28:24.000-00:00"
           },
           "status": {
-            "type": "string",
-            "description": "The status of the resource associated with this event.",
-            "enum": [
-              "up",
-              "degraded",
-              "down",
-              "unknown"
-            ],
-            "example": "down"
+            "$ref": "#/components/schemas/Status"
           },
           "occurred_at": {
             "type": "string",
@@ -4786,15 +4621,7 @@
             "example": 123.45
           },
           "unit": {
-            "type": "string",
-            "description": "The unit of this allocation.",
-            "enum": [
-              "node_hours",
-              "bytes",
-              "inodes"
-            ],
-            "example": "bytes",
-            "title": "AllocationUnit"
+            "$ref": "#/components/schemas/AllocationUnitType"
           }
         }
       },
@@ -5012,14 +4839,7 @@
             "description": "The list of AllocationUnit associated with this capability.",
             "example": "node_hours",
             "items": {
-              "type": "string",
-              "description": "Defines an aspect of a resource that can have an allocation. For example,  Perlmutter nodes with GPUs. For some resources at a facility, this will be 1 to 1 with the resource.  It is a way to subdivide a resource into allocatable sub-resources further.  The word  \"capability\" is also known to users as something they need for a job to run. (eg. gpu)",
-              "enum": [
-                "node_hours",
-                "bytes",
-                "inodes"
-              ],
-              "title": "AllocationUnit"
+              "$ref": "#/components/schemas/AllocationUnitType"
             }
           }
         },
