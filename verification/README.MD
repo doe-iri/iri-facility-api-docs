@@ -20,6 +20,7 @@ This is intentionally lightweight and script-driven rather than a full test fram
 - Sends real HTTP requests to the API
 - Validates responses against the OpenAPI contract
 - Produces a single self-contained HTML report
+- In addition to runtime API validation, the validator can perform a specification compliance check (see Compliance verification)
 
 ---
 
@@ -73,6 +74,50 @@ python api-validator.py --baseurl https://iri.example.org
 This automatically resolves the schema as:
 ```
 https://example.org/openapi.json
+```
+
+---
+
+### Compliance verification
+
+```bash
+python api-validator.py --checkspeccompliance --official-schema ../specification/openapi/openapi_iri_facility_api_v1.yaml
+```
+
+The validator will do:
+
+- Loads the official IRI OpenAPI spec (as file yaml/json)
+- Fetches the facility’s live OpenAPI spec (localhost:8000)
+- Compares operations by operationId
+- Generate and print the report
+
+Report states:
+
+- **PASSED** - Operation exists in official and facility specs
+- **FAILED** - Operation exists in official spec but is missing in facility spec
+- **WARNING** - Operation exists in facility spec but not in official spec (extension, custom apis)
+
+Example output:
+
+```text
+Found in facility spec:
+-------------------------------------------------
+spec_compliance::[GET /api/v1/account/capabilities] PASSED
+spec_compliance::[GET /api/v1/account/capabilities/{capability_id}] PASSED
+spec_compliance::[GET /api/v1/facility] PASSED
+spec_compliance::[GET /api/v1/status/incidents/{incident_id}] PASSED
+-------------------------------------------------
+
+Not found in facility spec:
+-------------------------------------------------
+spec_compliance::[GET /api/v1/status/events/{event_id}] FAILED (missing operationId: getEvent)
+spec_compliance::[GET /api/v1/status/events] FAILED (missing operationId: getEvents)
+-------------------------------------------------
+
+Extra operationIds in facility spec not found in official spec:
+-------------------------------------------------
+spec_compliance::[DELETE /api/v1/compute/cancel/{resource_id}/{job_id}] WARNING (extra operationId: cancelJob)
+spec_compliance::[GET /api/v1/filesystem/checksum/{resource_id}] WARNING (extra operationId: checksum)
 ```
 
 ---
