@@ -3931,7 +3931,6 @@ components:
             $ref: '#/components/schemas/AllocationUnitType'
       required:
       - id
-      - last_modified
       - name
       - self_uri
       title: Capability

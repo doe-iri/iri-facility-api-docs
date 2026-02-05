@@ -4845,7 +4845,6 @@
         },
         "required": [
           "id",
-          "last_modified",
           "name",
           "self_uri"
         ],
