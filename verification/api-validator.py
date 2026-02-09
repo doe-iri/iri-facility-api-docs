@@ -9,14 +9,10 @@ import yaml
 import schemathesis
 import pytest
 
-# ---------------------------------------------------------------------------
 # Allow to pass tokens via environment variables
-# ---------------------------------------------------------------------------
 API_TOKEN = os.environ.get("IRI_API_TOKEN")
 
-# ---------------------------------------------------------------------------
 # Argument parsing (script-owned, not pytest)
-# ---------------------------------------------------------------------------
 parser = argparse.ArgumentParser(add_help=True)
 parser.add_argument("--baseurl", help="Base URL of the API under test. Default: http://localhost:8000/")
 parser.add_argument("--schema-url", help="URL to the OpenAPI schema. Cannot be used with --schema-path. Default: <baseurl>/openapi.json")
@@ -24,13 +20,11 @@ parser.add_argument("--schema-path", help="Path to the OpenAPI schema file. Cann
 parser.add_argument("--report-name", help="Name of the HTML/XML report file. Default: schemathesis-report", default="schemathesis-report")
 parser.add_argument("--checkspeccompliance", action="store_true", help="Check facility spec compliance against official spec (operationIds)")
 parser.add_argument("--official-schema", help="Path or URL to the official OpenAPI schema")
+parser.add_argument("--compliance-json", help="Write spec compliance details (present/missing/extra) to this JSON file")
 
-# parse_known_args so pytest flags are untouched
 args, _ = parser.parse_known_args()
 
-# ---------------------------------------------------------------------------
 # Defaults
-# ---------------------------------------------------------------------------
 BASE_URL = args.baseurl or os.environ.get("BASE_URL") or "http://localhost:8000/"
 SCHEMA_URL = None
 SCHEMA_PATH = None
@@ -43,9 +37,7 @@ if args.schema_path:
 if not args.schema_url and not args.schema_path and not args.checkspeccompliance:
     SCHEMA_URL = f"{BASE_URL}/openapi.json"
 
-# ---------------------------------------------------------------------------
 # Load schema BEFORE test definition
-# ---------------------------------------------------------------------------
 schema = None
 if not args.checkspeccompliance:
     if SCHEMA_URL:
@@ -62,9 +54,7 @@ if not args.checkspeccompliance:
                 raw_schema = yaml.safe_load(fd)
         schema = schemathesis.openapi.from_dict(raw_schema)
 
-# ---------------------------------------------------------------------------
-# Header sanitization (unchanged)
-# ---------------------------------------------------------------------------
+# Header sanitization
 TOKEN = re.compile(r"^[A-Za-z0-9!#$%&'*+\-.^_`|~]+$").fullmatch
 VALUE = re.compile(r"^[\x20-\x7E\x80-\xFF]+$").fullmatch
 
@@ -87,9 +77,7 @@ def before_call(ctx, case, kwargs):
 
     case.headers = clean
 
-# ---------------------------------------------------------------------------
 # Spec compliance helpers
-# ---------------------------------------------------------------------------
 def _load_schema(source):
     if source.startswith("http://") or source.startswith("https://"):
         return schemathesis.openapi.from_url(source).raw_schema
@@ -109,9 +97,7 @@ def _extract_operation_ids(schema_dict):
                 ops[opid] = (path, method)
     return ops
 
-# ---------------------------------------------------------------------------
 # Spec compliance test
-# ---------------------------------------------------------------------------
 @pytest.mark.skipif(not args.checkspeccompliance, reason="Compliance mode not enabled")
 def test_spec_compliance():
     if not args.official_schema:
@@ -160,13 +146,38 @@ def test_spec_compliance():
 
     print("\n=================================================\n")
 
+    # Optional structured artifact for report aggregation
+    if args.compliance_json:
+        payload = {
+            "base_url": BASE_URL,
+            "official_schema": args.official_schema,
+            "facility_schema_url": f"{BASE_URL}/openapi.json",
+            "present": [
+                {"operationId": op, "method": official_ops[op][1].upper(), "path": official_ops[op][0]}
+                for op in present
+            ],
+            "missing": [
+                {"operationId": op, "method": official_ops[op][1].upper(), "path": official_ops[op][0]}
+                for op in missing
+            ],
+            "extra": [
+                {"operationId": op, "method": facility_ops[op][1].upper(), "path": facility_ops[op][0]}
+                for op in extra
+            ],
+            "counts": {
+                "present": len(present),
+                "missing": len(missing),
+                "extra": len(extra),
+            },
+        }
+        with open(args.compliance_json, "w", encoding="utf-8") as f:
+            json.dump(payload, f, indent=2, sort_keys=True)
+
     if missing:
         pytest.fail(f"{len(missing)} official operationIds are missing from the facility spec")
 
 
-# ---------------------------------------------------------------------------
 # API validation test
-# ---------------------------------------------------------------------------
 if schema is None and not args.checkspeccompliance:
     raise ValueError("Schema could not be loaded for API validation tests")
 if schema is not None:
@@ -190,9 +201,8 @@ else:
     def test_api():
         """Dummy test when schemathesis is disabled."""
         pass
-# ---------------------------------------------------------------------------
+
 # Pytest runner
-# ---------------------------------------------------------------------------
 if __name__ == "__main__":
     pytest_args = [
         "-s",
