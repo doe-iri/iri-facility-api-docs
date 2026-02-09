@@ -19,12 +19,12 @@ jobs:
           - name: localhost
             site: http://127.0.0.1:8000
             type: local
-          #- name: ESnet_East
-          #  site: https://iri-dev.ppg.es.net/
-          #  type: remote
-          #- name: ESnet_West
-          #  site: https://esnet-west.sdn-sense.net/
-          #  type: remote
+          - name: ESnet_East
+            site: https://iri-dev.ppg.es.net/
+            type: remote
+          - name: ESnet_West
+            site: https://esnet-west.sdn-sense.net/
+            type: remote
 
     steps:
       - name: Checkout docs repository
