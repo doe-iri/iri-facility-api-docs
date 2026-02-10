@@ -57,19 +57,33 @@ if not args.checkspeccompliance:
 # Header sanitization
 TOKEN = re.compile(r"^[A-Za-z0-9!#$%&'*+\-.^_`|~]+$").fullmatch
 VALUE = re.compile(r"^[\x20-\x7E\x80-\xFF]+$").fullmatch
+SAFE_PATH_RE = re.compile(r"^[A-Za-z0-9._~-]+$")
+
+def safeascii(value: str) -> str:
+    return "".join(c if 32 <= ord(c) <= 126 else "-" for c in value)
 
 @schemathesis.hook
 def before_call(ctx, case, kwargs):
     headers = case.headers or {}
-    clean = {}
+    clean = {"Accept": "application/json"}
+
+    if case.path_parameters:
+        for k, v in case.path_parameters.items():
+            if isinstance(v, str) and not SAFE_PATH_RE.fullmatch(v):
+                case.path_parameters[k] = "1"
 
     for k, v in headers.items():
-        if not isinstance(k, str) or not TOKEN(k):
+        if not isinstance(k, str):
             continue
-        if isinstance(v, str) and VALUE(v):
-            clean[k] = v
+
+        safe_k = safeascii(k)
+
+        if isinstance(v, str):
+            safe_v = safeascii(v)
         else:
-            clean[k] = "X-Replaced"
+            safe_v = str(v)
+
+        clean[safe_k] = safe_v
 
     # ---- AUTH ----
     if API_TOKEN:
