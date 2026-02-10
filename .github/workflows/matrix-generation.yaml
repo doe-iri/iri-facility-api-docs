@@ -25,6 +25,12 @@ jobs:
           - name: ESnet_West
             site: https://esnet-west.sdn-sense.net/
             type: remote
+          - name: NERSC
+            site: https://api.iri.nersc.gov/
+            type: remote
+          #- name: ALCF
+          #  site: https://api.alcf.anl.gov/
+          #  type: remote
 
     steps:
       - name: Checkout docs repository
