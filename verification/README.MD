@@ -33,6 +33,7 @@ Create and populate a virtual environment:
 ```
 
 This will:
+
 - Create a `.venv` directory if missing
 - Install all required dependencies from requirements.txt
 
@@ -59,6 +60,7 @@ python api-validator.py
 ```
 
 Defaults:
+
 - Base URL: `http://localhost:8000/`
 - Schema URL: `http://localhost:8000/openapi.json`
 - Report Name: `schemathesis-report`
@@ -149,6 +151,7 @@ python api-validator.py --report-name custom-report-name
 ```
 
 The report will produce two files:
+
 * **self-contained HTML file** with ending `.html`.
 * **XML file** with ending `.html`.
 
@@ -157,6 +160,7 @@ The report will produce two files:
 ## What Is Being Checked
 
 For each OpenAPI operation, Schemathesis automatically:
+
 - Generates valid inputs based on Spec
 - Generates invalid requests and methods not defined in Spec
 - Sends HTTP requests
@@ -167,7 +171,22 @@ For each OpenAPI operation, Schemathesis automatically:
 ## Header Sanitization (Remove non ansi characters)
 
 Before each request, generated headers are sanitized to ensure:
+
 - Header names are RFC-compliant tokens
 - Header values are printable and safe
 
 This keeps failures focused on **API behavior**, not HTTP encoding issues.
+
+## IRI Endpoints Validation Matrix
+
+Scripts like site-validation.py and build-report.py are used in a Github Workflow.
+
+GitHub workflows validate one or more (as defined in the workflow list of sites) IRI Facility API deployments against:
+
+- Their own OpenAPI schema
+- The official IRI OpenAPI specification
+- Spec compliance (which endpoints from the official spec are present or missing in Sites OpenAPI Specification)
+
+For comparison, it also build Py implementation container, and test full test suite against the Fake Py Driver.
+
+It produces per-site validation artifacts that are then used by build-report.py to produce a matrix chart.

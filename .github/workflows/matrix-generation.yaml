@@ -1,0 +1,160 @@
+name: IRI Endpoints Validation Matrix generation
+
+on:
+  workflow_dispatch:
+
+env:
+  OFFICIAL_SCHEMA: specification/openapi/openapi_iri_facility_api_v1.yaml
+  IRI_API_TOKEN: "12345"
+
+jobs:
+
+  validate:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: localhost
+            site: http://127.0.0.1:8000
+            type: local
+          - name: ESnet_East
+            site: https://iri-dev.ppg.es.net/
+            type: remote
+          - name: ESnet_West
+            site: https://esnet-west.sdn-sense.net/
+            type: remote
+          - name: NERSC
+            site: https://api.iri.nersc.gov/
+            type: remote
+          #- name: ALCF
+          #  site: https://api.alcf.anl.gov/
+          #  type: remote
+
+    steps:
+      - name: Checkout docs repository
+        uses: actions/checkout@v4
+        with:
+          repository: juztas/iri-facility-api-docs
+
+      - name: Checkout Python API repository
+        uses: actions/checkout@v4
+        with:
+          repository: doe-iri/iri-facility-api-python
+          path: api
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install verification dependencies
+        run: pip install -r verification/requirements.txt
+
+      # ---------- LOCAL API ----------
+      - name: Build Python API Docker image
+        if: matrix.type == 'local'
+        run: docker build -t iri-facility-api-base ./api
+
+      - name: Run Python API container
+        if: matrix.type == 'local'
+        run: |
+          docker run -d -p 8000:8000 --name iri-facility-api-base \
+            -e IRI_API_ADAPTER_facility=app.demo_adapter.DemoAdapter \
+            -e IRI_API_ADAPTER_status=app.demo_adapter.DemoAdapter \
+            -e IRI_API_ADAPTER_account=app.demo_adapter.DemoAdapter \
+            -e IRI_API_ADAPTER_compute=app.demo_adapter.DemoAdapter \
+            -e IRI_API_ADAPTER_filesystem=app.demo_adapter.DemoAdapter \
+            -e IRI_API_ADAPTER_task=app.demo_adapter.DemoAdapter \
+            -e API_URL_ROOT=http://127.0.0.1:8000 \
+            -e IRI_API_TOKEN=${IRI_API_TOKEN} \
+            iri-facility-api-base
+
+      - name: Wait for API readiness
+        if: matrix.type == 'local'
+        run: |
+          for i in {1..60}; do
+            if curl -fs http://127.0.0.1:8000/openapi.json; then exit 0; fi
+            sleep 2
+          done
+          docker logs iri-facility-api-base
+          exit 1
+
+      # ---------- VALIDATION ----------
+      - name: Run site validation
+        run: |
+          mkdir -p verification/output
+          python verification/site-validation.py \
+            --official-schema "$OFFICIAL_SCHEMA" \
+            --sites "${{ matrix.site }}"
+
+      - name: Upload validation artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-${{ matrix.name }}
+          path: verification/output/
+
+      # Stop local container
+      - name: Stop and remove local container
+        if: always() && matrix.type == 'local'
+        run: docker stop iri-facility-api-base || true && docker rm iri-facility-api-base || true
+
+
+# Build matrix report after all validations are complete
+  build-global-report:
+    needs: validate
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Set report date (global var)
+        id: reportdate
+        run: echo "DATE=$(date -u +%Y-%m-%d)" >> $GITHUB_OUTPUT
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install verification dependencies
+        run: pip install -r verification/requirements.txt
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: collected-output
+
+      - name: Merge outputs into single directory
+        run: |
+          mkdir -p verification/output
+          shopt -s nullglob
+          for artifact in collected-output/*; do
+            for site in "$artifact"/*; do
+              cp -r "$site" verification/output/
+            done
+          done
+
+      - name: Build matrix report
+        run: |
+          python verification/build-report.py \
+            --official-schema "$OFFICIAL_SCHEMA"
+
+      - name: Store versioned + latest matrix report
+        run: |
+          mkdir -p verification/test_results/history/${{ steps.reportdate.outputs.DATE }}
+          cp verification/output/*.md verification/test_results/history/${{ steps.reportdate.outputs.DATE }}/ 2>/dev/null || true
+
+          rm -rf verification/test_results/latest
+          mkdir -p verification/test_results/latest
+          cp verification/output/*.md verification/test_results/latest/ 2>/dev/null || true
+
+      - name: Commit matrix report
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add verification/test_results/
+          git commit -m "Matrix report generated at ${{ steps.reportdate.outputs.DATE }}" || echo "No changes"
+          git push
