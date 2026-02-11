@@ -8,6 +8,7 @@ import warnings
 import yaml
 import schemathesis
 import pytest
+from hypothesis import settings, HealthCheck
 
 # Allow to pass tokens via environment variables
 API_TOKEN = os.environ.get("IRI_API_TOKEN")
@@ -21,8 +22,18 @@ parser.add_argument("--report-name", help="Name of the HTML/XML report file. Def
 parser.add_argument("--checkspeccompliance", action="store_true", help="Check facility spec compliance against official spec (operationIds)")
 parser.add_argument("--official-schema", help="Path or URL to the official OpenAPI schema")
 parser.add_argument("--compliance-json", help="Write spec compliance details (present/missing/extra) to this JSON file")
-
+parser.add_argument("--max-examples", type=int, help="Maximum number of examples per endpoint. Default: 20. Setting to 100 is aggressive")
+parser.add_argument("--deadline", type=int, help="Deadline for each test in milliseconds. Default: None (no deadline)")
 args, _ = parser.parse_known_args()
+
+
+# Schemathesis settings for CI mode
+settings.register_profile("ci",
+                          max_examples=args.max_examples or 20,
+                          deadline=args.deadline or None,
+                          suppress_health_check=[HealthCheck.too_slow])
+settings.load_profile("ci")
+
 
 # Defaults
 BASE_URL = args.baseurl or os.environ.get("BASE_URL") or "http://localhost:8000/"
