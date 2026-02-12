@@ -28,9 +28,9 @@ jobs:
           - name: NERSC
             site: https://api.iri.nersc.gov/
             type: remote
-          #- name: ALCF
-          #  site: https://api.alcf.anl.gov/
-          #  type: remote
+          - name: ALCF
+            site: https://api.alcf.anl.gov/
+            type: remote
 
     steps:
       - name: Checkout docs repository
