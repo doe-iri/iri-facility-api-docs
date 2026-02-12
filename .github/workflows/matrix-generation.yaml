@@ -3,6 +3,9 @@ name: IRI Endpoints Validation Matrix generation
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 env:
   OFFICIAL_SCHEMA: specification/openapi/openapi_iri_facility_api_v1.yaml
   IRI_API_TOKEN: "12345"
