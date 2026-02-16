@@ -2,6 +2,19 @@ name: IRI Endpoints Validation Matrix generation
 
 on:
   workflow_dispatch:
+    inputs:
+      site:
+        description: "Select site to validate"
+        type: choice
+        required: true
+        default: all
+        options:
+          - all
+          - localhost
+          - ESnet_East
+          - ESnet_West
+          - NERSC
+          - ALCF
 
 permissions:
   contents: write
@@ -36,29 +49,44 @@ jobs:
             type: remote
 
     steps:
+      - name: Set flag for selected site run
+        id: siterun
+        run: |
+          if [[ "${{ github.event.inputs.site }}" == "all" || \
+                "${{ matrix.name }}" == "${{ github.event.inputs.site }}" ]]; then
+            echo "run=true" >> $GITHUB_OUTPUT
+          else
+            echo "run=false" >> $GITHUB_OUTPUT
+            echo "Skipping ${{ matrix.name }}"
+          fi
+
       - name: Checkout docs repository
+        if: steps.siterun.outputs.run == 'true'
         uses: actions/checkout@v4
 
       - name: Checkout Python API repository
+        if: steps.siterun.outputs.run == 'true'
         uses: actions/checkout@v4
         with:
           repository: doe-iri/iri-facility-api-python
           path: api
 
       - uses: actions/setup-python@v5
+        if: steps.siterun.outputs.run == 'true'
         with:
           python-version: "3.14"
 
       - name: Install verification dependencies
+        if: steps.siterun.outputs.run == 'true'
         run: pip install -r verification/requirements.txt
 
       # ---------- LOCAL API ----------
       - name: Build Python API Docker image
-        if: matrix.type == 'local'
+        if: matrix.type == 'local' && steps.siterun.outputs.run == 'true'
         run: docker build -t iri-facility-api-base ./api
 
       - name: Run Python API container
-        if: matrix.type == 'local'
+        if: matrix.type == 'local' && steps.siterun.outputs.run == 'true'
         run: |
           docker run -d -p 8000:8000 --name iri-facility-api-base \
             -e IRI_API_ADAPTER_facility=app.demo_adapter.DemoAdapter \
@@ -72,7 +100,7 @@ jobs:
             iri-facility-api-base
 
       - name: Wait for API readiness
-        if: matrix.type == 'local'
+        if: matrix.type == 'local' && steps.siterun.outputs.run == 'true'
         run: |
           for i in {1..60}; do
             if curl -fs http://127.0.0.1:8000/openapi.json; then exit 0; fi
@@ -83,6 +111,7 @@ jobs:
 
       # ---------- VALIDATION ----------
       - name: Run site validation
+        if: steps.siterun.outputs.run == 'true'
         run: |
           mkdir -p verification/output
           python verification/site-validation.py \
@@ -90,6 +119,7 @@ jobs:
             --sites "${{ matrix.site }}"
 
       - name: Upload validation artifacts
+        if: steps.siterun.outputs.run == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: validation-${{ matrix.name }}
@@ -97,9 +127,8 @@ jobs:
 
       # Stop local container
       - name: Stop and remove local container
-        if: always() && matrix.type == 'local'
+        if: always() && matrix.type == 'local' && steps.siterun.outputs.run == 'true'
         run: docker stop iri-facility-api-base || true && docker rm iri-facility-api-base || true
-
 
 # Build matrix report after all validations are complete
   build-global-report:
@@ -124,18 +153,37 @@ jobs:
         run: pip install -r verification/requirements.txt
 
       - name: Download all artifacts
+        continue-on-error: true
         uses: actions/download-artifact@v4
         with:
           path: collected-output
 
       - name: Merge outputs into single directory
         run: |
-          mkdir -p verification/output
+          mkdir -p verification/test_results/latest
           shopt -s nullglob
+
           for artifact in collected-output/*; do
             for site in "$artifact"/*; do
-              cp -r "$site" verification/output/
+              host=$(basename "$site")
+
+              echo "Updating latest results for $host"
+
+              rm -rf verification/test_results/latest/$host
+              mkdir -p verification/test_results/latest/$host
+
+              cp -r "$site"/* verification/test_results/latest/$host/
             done
+          done
+
+      - name: Prepare output from latest data
+        run: |
+          rm -rf verification/output
+          mkdir -p verification/output
+
+          shopt -s nullglob
+          for site in verification/test_results/latest/*; do
+            cp -r "$site" verification/output/
           done
 
       - name: Build matrix report
@@ -143,19 +191,33 @@ jobs:
           python verification/build-report.py \
             --official-schema "$OFFICIAL_SCHEMA"
 
-      - name: Store versioned + latest matrix report
+      - name: Store versioned + latest matrix report + per-site results
         run: |
-          mkdir -p verification/test_results/history/${{ steps.reportdate.outputs.DATE }}
-          cp verification/output/*.md verification/test_results/history/${{ steps.reportdate.outputs.DATE }}/ 2>/dev/null || true
+          DATE=${{ steps.reportdate.outputs.DATE }}
+          mkdir -p verification/test_results/history/$DATE
 
-          rm -rf verification/test_results/latest
-          mkdir -p verification/test_results/latest
-          cp verification/output/*.md verification/test_results/latest/ 2>/dev/null || true
+          if [ -f verification/output/full-report.md ]; then
+            cp verification/output/full-report.md \
+              verification/test_results/history/$DATE/
+            cp verification/output/full-report.md \
+              verification/test_results/latest/full-report.md
+          fi
+
+          for site in verification/output/*; do
+            [ -d "$site" ] || continue
+
+            host=$(basename "$site")
+            mkdir -p verification/test_results/history/$DATE/$host
+            cp -r "$site"/* verification/test_results/history/$DATE/$host/
+          done
 
       - name: Commit matrix report
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
+
           git add verification/test_results/
           git commit -m "Matrix report generated at ${{ steps.reportdate.outputs.DATE }}" || echo "No changes"
+
           git push
+
