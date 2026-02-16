@@ -1,0 +1,570 @@
+components:
+  schemas:
+    AllocationEntry:
+      properties:
+        allocation:
+          type: number
+          title: Allocation
+        usage:
+          type: number
+          title: Usage
+        unit:
+          $ref: '#/components/schemas/AllocationUnit'
+      additionalProperties: true
+      type: object
+      required:
+      - allocation
+      - usage
+      - unit
+      title: AllocationEntry
+      description: Base class for allocations.
+    AllocationUnit:
+      type: string
+      enum:
+      - node_hours
+      - bytes
+      - inodes
+      title: AllocationUnit
+      description: Units for allocation
+    Capability:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The unique identifier for the object. Typically a UUID or URN.
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The long name of the object.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Human-readable description of the object.
+        last_modified:
+          anyOf:
+          - type: string
+            format: date-time
+            description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+              are accepted.
+          - type: 'null'
+          title: Last Modified
+          description: ISO 8601 timestamp when this object was last modified.
+        units:
+          items:
+            $ref: '#/components/schemas/AllocationUnit'
+          type: array
+          title: Units
+        self_uri:
+          type: string
+          title: Self Uri
+          description: The canonical URL of this object
+          readOnly: true
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - units
+      - self_uri
+      title: Capability
+      description: 'An aspect of a resource that can have an allocation.
+
+        For example, Perlmutter nodes with GPUs
+
+        For some resources at a facility, this will be 1 to 1 with the resource.
+
+        It is a way to further subdivide a resource into allocatable sub-resources.
+
+        The word "capability" is also known to users as something they need for a
+        job to run. (eg. gpu)'
+    Event:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The unique identifier for the object. Typically a UUID or URN.
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The long name of the object.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Human-readable description of the object.
+        last_modified:
+          type: string
+          format: date-time
+          title: Last Modified
+          description: ISO 8601 timestamp when this object was last modified.
+        occurred_at:
+          type: string
+          format: date-time
+          title: Occurred At
+        status:
+          $ref: '#/components/schemas/Status'
+        self_uri:
+          type: string
+          title: Self Uri
+          description: The canonical URL of this object
+          readOnly: true
+        resource_uri:
+          type: string
+          title: Resource Uri
+          description: The resource belonging to this event
+          readOnly: true
+        incident_uri:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Incident Uri
+          description: The event's incident
+          readOnly: true
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - last_modified
+      - occurred_at
+      - status
+      - self_uri
+      - resource_uri
+      - incident_uri
+      title: Event
+    Facility:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The unique identifier for the object. Typically a UUID or URN.
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The long name of the object.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Human-readable description of the object.
+        last_modified:
+          type: string
+          format: date-time
+          title: Last Modified
+          description: ISO 8601 timestamp when this object was last modified.
+        short_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Short Name
+          description: Common or short name of the Facility.
+        organization_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Organization Name
+          description: Operating organization's name.
+        support_uri:
+          anyOf:
+          - type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Support Uri
+          description: Link to facility support portal.
+        self_uri:
+          type: string
+          title: Self Uri
+          description: The canonical URL of this object
+          readOnly: true
+        site_uris:
+          items:
+            type: string
+          type: array
+          title: Site Uris
+          description: URIs of associated Sites.
+          readOnly: true
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - last_modified
+      - self_uri
+      - site_uris
+      title: Facility
+    Incident:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The unique identifier for the object. Typically a UUID or URN.
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The long name of the object.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Human-readable description of the object.
+        last_modified:
+          type: string
+          format: date-time
+          title: Last Modified
+          description: ISO 8601 timestamp when this object was last modified.
+        status:
+          $ref: '#/components/schemas/Status'
+        start:
+          type: string
+          format: date-time
+          title: Start
+        end:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End
+        type:
+          $ref: '#/components/schemas/IncidentType'
+        resolution:
+          $ref: '#/components/schemas/Resolution'
+        self_uri:
+          type: string
+          title: Self Uri
+          description: The canonical URL of this object
+          readOnly: true
+        event_uris:
+          items:
+            type: string
+          type: array
+          title: Event Uris
+          description: The list of past events in this incident
+          readOnly: true
+        resource_uris:
+          items:
+            type: string
+          type: array
+          title: Resource Uris
+          description: The list of resources that may be impacted by this incident
+          readOnly: true
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - last_modified
+      - status
+      - start
+      - end
+      - type
+      - resolution
+      - self_uri
+      - event_uris
+      - resource_uris
+      title: Incident
+    IncidentType:
+      type: string
+      enum:
+      - planned
+      - unplanned
+      - reservation
+      title: IncidentType
+    Project:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        user_ids:
+          items:
+            type: string
+          type: array
+          title: User Ids
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - user_ids
+      title: Project
+      description: A project and its users at a facility
+    ProjectAllocation:
+      properties:
+        id:
+          type: string
+          title: Id
+        entries:
+          items:
+            $ref: '#/components/schemas/AllocationEntry'
+          type: array
+          title: Entries
+        project_uri:
+          type: string
+          title: Project Uri
+          description: The list of past events in this incident
+          readOnly: true
+        capability_uri:
+          type: string
+          title: Capability Uri
+          description: The list of past events in this incident
+          readOnly: true
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - entries
+      - project_uri
+      - capability_uri
+      title: ProjectAllocation
+      description: 'A project''s allocation for a capability. (aka. repo)
+
+        This allocation is a piece of the total allocation for the capability. (eg.
+        5% of the total node hours of Perlmutter GPU nodes)
+
+        A project would at least have a storage and job repos, maybe more than 1 of
+        each.'
+    Resolution:
+      type: string
+      enum:
+      - unresolved
+      - cancelled
+      - completed
+      - extended
+      - pending
+      title: Resolution
+    Resource:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The unique identifier for the object. Typically a UUID or URN.
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The long name of the object.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Human-readable description of the object.
+        last_modified:
+          type: string
+          format: date-time
+          title: Last Modified
+          description: ISO 8601 timestamp when this object was last modified.
+        group:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group
+        current_status:
+          anyOf:
+          - $ref: '#/components/schemas/Status'
+          - type: 'null'
+          description: The current status comes from the status of the last event
+            for this resource
+        resource_type:
+          $ref: '#/components/schemas/ResourceType'
+        self_uri:
+          type: string
+          title: Self Uri
+          description: The canonical URL of this object
+          readOnly: true
+        site_uri:
+          type: string
+          title: Site Uri
+          description: URI of the site where this resource is located
+          readOnly: true
+        capability_uris:
+          items:
+            type: string
+          type: array
+          title: Capability Uris
+          description: The list of capabilities in this resource
+          readOnly: true
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - last_modified
+      - group
+      - resource_type
+      - self_uri
+      - site_uri
+      - capability_uris
+      title: Resource
+    ResourceType:
+      type: string
+      enum:
+      - website
+      - service
+      - compute
+      - system
+      - storage
+      - network
+      - unknown
+      title: ResourceType
+    Site:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The unique identifier for the object. Typically a UUID or URN.
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: The long name of the object.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Human-readable description of the object.
+        last_modified:
+          type: string
+          format: date-time
+          title: Last Modified
+          description: ISO 8601 timestamp when this object was last modified.
+        short_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Short Name
+          description: Common or short name of the Site.
+        operating_organization:
+          type: string
+          title: Operating Organization
+          description: Organization operating the Site.
+        country_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Country Name
+          description: Country name of the Location.
+        locality_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Locality Name
+          description: City or locality name of the Location.
+        state_or_province_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State Or Province Name
+          description: State or province name of the Location.
+        street_address:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Street Address
+          description: Street address of the Location.
+        unlocode:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unlocode
+          description: United Nations trade and transport location code.
+        altitude:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Altitude
+          description: Altitude of the Location.
+        latitude:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Latitude
+          description: Latitude of the Location.
+        longitude:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Longitude
+          description: Longitude of the Location.
+        self_uri:
+          type: string
+          title: Self Uri
+          description: The canonical URL of this object
+          readOnly: true
+        resource_uris:
+          items:
+            type: string
+          type: array
+          title: Resource Uris
+          description: URIs of Resources hosted at this Site.
+          readOnly: true
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - last_modified
+      - operating_organization
+      - self_uri
+      - resource_uris
+      title: Site
+    Status:
+      type: string
+      enum:
+      - up
+      - down
+      - degraded
+      - unknown
+      title: Status
+    UserAllocation:
+      properties:
+        id:
+          type: string
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        entries:
+          items:
+            $ref: '#/components/schemas/AllocationEntry'
+          type: array
+          title: Entries
+        project_allocation_uri:
+          type: string
+          title: Project Allocation Uri
+          description: The list of past events in this incident
+          readOnly: true
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - user_id
+      - entries
+      - project_allocation_uri
+      title: UserAllocation
+      description: 'A user''s allcation in a project.
+
+        This allocation is a piece of the project''s allocation.'
+  securitySchemes:
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: Authorization

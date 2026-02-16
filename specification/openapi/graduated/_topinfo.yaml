@@ -1,0 +1,22 @@
+openapi: 3.1.0
+info:
+  title: IRI Facility API reference implementation
+  description: '
+
+    A simple implementation of the IRI facility API using Python and the FastAPI library.
+
+
+    For more information, see: [https://iri.science/](https://iri.science/)
+
+
+    <img src="https://iri.science/images/doe-icon-old.png" height=50 />
+
+    '
+  termsOfService: "IRI Facility API Copyright (c) 2025. The Regents of the University\n\
+    \    of California, through Lawrence Berkeley National Laboratory (subject to\
+    \ receipt\n    of any required approvals from the U.S. Dept. of Energy).  All\
+    \ rights reserved."
+  contact:
+    name: The IRI Interfaces Subcommittee
+    url: https://iri.science/ts/interfaces/
+  version: 1.0.0

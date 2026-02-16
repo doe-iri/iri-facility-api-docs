@@ -1,0 +1,164 @@
+name: New API application
+description: Propose a new API or request API advancement
+title: "[API] <API Name> — <Requested Stage>"
+labels: ["api", "sandbox-request"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # IRI API Request Application
+
+        Use this form to propose a new API or request advancement of an existing API. Provide as much detail as possible to facilitate discussion and evaluation.
+
+        Please provide clear and complete information to minimize follow-up questions.
+
+        For more details about the API proposal and evaluation process, see the [API proposal guidelines](./specification/new-api-requests.md).
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Basic information
+
+  - type: input
+    id: api_name
+    attributes:
+      label: API name
+      placeholder: "Example: Job Management API"
+    validations:
+      required: true
+
+  - type: textarea
+    id: api_description
+    attributes:
+      label: Summary
+      description: Brief description of what the API should do and why it is needed.
+      placeholder: One or two paragraphs describing the purpose and problem solved.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Specification details
+
+  - type: checkboxes
+    id: spec_pr
+    attributes:
+      label: Specification pull request
+      description: |
+        A detailed proposal MUST be submitted as a pull request containing the specification changes and supporting documentation.
+
+        The pull request should include as much as possible of the following information to facilitate evaluation (the more complete, the better):
+        - Proposed OpenAPI spec (new or modified)
+        - Description of the API behavior
+        - Rationale and use cases
+        - Implementation notes (if applicable)
+
+        Preferred location: [sandbox directory](https://github.com/doe-iri/iri-facility-api-docs/tree/main/specification/openapi) . Format directory with issue number and API name, e.g. `sandbox/123-job-management-api/...`.
+
+        Preferred file types: Markdown for documentation, YAML/JSON for OpenAPI spec.
+
+        In most cases, the specification pull request SHOULD be submitted within 1 week of opening this issue to avoid stalling the process. In most cases, all information filled in this form constitutes the minimal requirement documentation and is sufficient to include in a pull request for the specification.
+        
+        If more time is needed, please provide an estimated timeline in the comments for when the specification pull request will be submitted.
+
+        Any follow-up questions about the specification can be discussed in this issue or the pull request comments.
+
+      options:
+        - label: I confirm that a pull request with the detailed specification and proposal will be submitted as part of this process.
+          required: true
+
+  - type: checkboxes
+    id: impl_commit
+    attributes:
+      label: Implementation commitment
+      description: |
+        A reference implementation and demo adapter expansion for the IRI API is highly desirable to facilitate testing, validation, and adoption. While not strictly required at the time of proposal, a commitment to provide an implementation within a reasonable timeframe is strongly encouraged.
+
+        The reference implementation should be based on the defined specification and include sufficient functionality to demonstrate the API's capabilities and serve as a testbed for validation against the specification and facilities readiness.
+
+        If you can provide such implementation, please confirm your commitment below. This will help facilities to plan for testing and integration, and will strengthen the proposal with a concrete example for others to follow.
+        
+        If you are not able to provide an implementation at this time, please indicate that as well. Lack of implementation may impact the timeline of the API's adoption and validation.
+
+      options:
+        - label: I commit to providing a reference Python implementation and demo adapter expansion for the IRI API within a reasonable timeframe after the proposal is accepted.
+          required: true
+        - label: I am not able to provide a reference implementation at this time.
+          required: false
+
+
+  - type: textarea
+    id: capabilities
+    attributes:
+      label: Key capabilities, features, performance requirements, and interactions
+      description: List the main functionality that this API must provide. Describe as much detail as possible, including any specific operations, data models, security, query parameters, performance requirements, or interactions with other APIs. This will help evaluators understand the scope and requirements of the API.
+      placeholder: Bullet list of capabilities, features, security features, performance requirements, and interactions.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Implementation status
+
+  - type: textarea
+    id: existing_impl
+    attributes:
+      label: Existing implementations
+      description: List facilities that implement or prototyped this API. Write "None" if not yet implemented.
+      placeholder: Facility names and links if available
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation_level
+    attributes:
+      label: Implementation level
+      description: Required, Optional, or Conditional (include capability requirements if conditional).
+      placeholder: "Example: Conditional — required if facility advertises DPU capability"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Justification
+
+  - type: textarea
+    id: justification
+    attributes:
+      label: Why is this API needed?
+      description: Describe the use cases and problems addressed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered, and why they were rejected
+      description: Existing APIs, Tools, and approaches considered to solve this. Write "N/A" if none.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Contacts
+
+  - type: textarea
+    id: contacts
+    attributes:
+      label: Proposal authors / maintainers
+      description: Names of responsible individuals or teams.
+      placeholder: "@username1, @username2"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Voting
+
+        After discussion, a maintainer may initiate a vote according to the IRI voting process.

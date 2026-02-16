@@ -1,0 +1,299 @@
+components:
+  schemas:
+    Body_upload:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+          description: File to be uploaded as `multipart/form-data`
+      type: object
+      required:
+      - file
+      title: Body_upload
+    CompressionType:
+      type: string
+      enum:
+      - none
+      - bzip2
+      - gzip
+      - xz
+      title: CompressionType
+    PostCompressRequest:
+      properties:
+        sourcePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sourcepath
+          example: /home/user/dir
+        targetPath:
+          type: string
+          title: Targetpath
+          description: Path to the compressed file
+        matchPattern:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Matchpattern
+          description: Regex pattern to filter files to compress
+        dereference:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Dereference
+          description: If set to `true`, it follows symbolic links and archive the
+            files they point to instead of the links themselves.
+          default: false
+        compression:
+          anyOf:
+          - $ref: '#/components/schemas/CompressionType'
+          - type: 'null'
+          description: Defines the type of compression to be used. By default gzip
+            is used.
+          default: gzip
+      type: object
+      required:
+      - sourcePath
+      - targetPath
+      title: PostCompressRequest
+      examples:
+      - compression: none
+        dereference: 'true'
+        matchPattern: '*./[ab].*\.txt'
+        sourcePath: /home/user/dir
+        targetPath: /home/user/file.tar.gz
+    PostCopyRequest:
+      properties:
+        sourcePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sourcepath
+          example: /home/user/dir
+        targetPath:
+          type: string
+          title: Targetpath
+          description: Target path of the copy operation
+        dereference:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Dereference
+          description: If set to `true`, it follows symbolic links and copies the
+            files they point to instead of the links themselves.
+          default: false
+      type: object
+      required:
+      - sourcePath
+      - targetPath
+      title: PostCopyRequest
+      examples:
+      - dereference: 'true'
+        sourcePath: /home/user/dir/file.orig
+        targetPath: /home/user/dir/file.new
+    PostExtractRequest:
+      properties:
+        sourcePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sourcepath
+          example: /home/user/dir
+        targetPath:
+          type: string
+          title: Targetpath
+          description: Path to the directory where to extract the compressed file
+        compression:
+          anyOf:
+          - $ref: '#/components/schemas/CompressionType'
+          - type: 'null'
+          description: Defines the type of compression to be used. By default gzip
+            is used.
+          default: gzip
+      type: object
+      required:
+      - sourcePath
+      - targetPath
+      title: PostExtractRequest
+      examples:
+      - compression: none
+        sourcePath: /home/user/dir/file.tar.gz
+        targetPath: /home/user/dir
+    PostFileSymlinkRequest:
+      properties:
+        sourcePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sourcepath
+          example: /home/user/dir
+        linkPath:
+          type: string
+          title: Linkpath
+          description: Path to the new symlink
+      type: object
+      required:
+      - sourcePath
+      - linkPath
+      title: PostFileSymlinkRequest
+      examples:
+      - link_path: /home/user/newlink
+        path: /home/user/dir
+    PostMakeDirRequest:
+      properties:
+        sourcePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sourcepath
+          example: /home/user/dir
+        parent:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Parent
+          description: If set to `true` creates all its parent directories if they
+            do not already exist
+          default: false
+      type: object
+      required:
+      - sourcePath
+      title: PostMakeDirRequest
+      examples:
+      - parent: 'true'
+        path: /home/user/dir/newdir
+    PostMoveRequest:
+      properties:
+        sourcePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sourcepath
+          example: /home/user/dir
+        targetPath:
+          type: string
+          title: Targetpath
+          description: Target path of the move operation
+      type: object
+      required:
+      - sourcePath
+      - targetPath
+      title: PostMoveRequest
+      examples:
+      - sourcePath: /home/user/dir/file.orig
+        targetPath: /home/user/dir/file.new
+    PutFileChmodRequest:
+      properties:
+        sourcePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sourcepath
+          example: /home/user/dir
+        mode:
+          type: string
+          title: Mode
+          description: Mode in octal permission format
+      type: object
+      required:
+      - sourcePath
+      - mode
+      title: PutFileChmodRequest
+      examples:
+      - mode: '777'
+        path: /home/user/dir/file.out
+    PutFileChownRequest:
+      properties:
+        sourcePath:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sourcepath
+          example: /home/user/dir
+        owner:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Owner
+          description: User name of the new user owner of the file
+          default: ''
+        group:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group
+          description: Group name of the new group owner of the file
+          default: ''
+      type: object
+      required:
+      - sourcePath
+      title: PutFileChownRequest
+      examples:
+      - group: my-group
+        owner: user
+        path: /home/user/dir/file.out
+    Task:
+      properties:
+        id:
+          type: string
+          title: Id
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+          default: pending
+        result:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Result
+        command:
+          anyOf:
+          - $ref: '#/components/schemas/TaskCommand'
+          - type: 'null'
+      type: object
+      required:
+      - id
+      title: Task
+    TaskCommand:
+      properties:
+        router:
+          type: string
+          title: Router
+        command:
+          type: string
+          title: Command
+        args:
+          additionalProperties: true
+          type: object
+          title: Args
+      type: object
+      required:
+      - router
+      - command
+      - args
+      title: TaskCommand
+    TaskStatus:
+      type: string
+      enum:
+      - pending
+      - active
+      - completed
+      - failed
+      - canceled
+      title: TaskStatus
+    TaskSubmitResponse:
+      properties:
+        task_id:
+          type: string
+          title: Task Id
+        task_uri:
+          type: string
+          title: Task Uri
+          description: The list of past events in this incident
+          readOnly: true
+      type: object
+      required:
+      - task_id
+      - task_uri
+      title: TaskSubmitResponse
+      description: Response model for submitting a task
