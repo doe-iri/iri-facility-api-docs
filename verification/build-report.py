@@ -11,7 +11,7 @@ from datetime import datetime
 import yaml
 
 OUTPUT_DIR = Path(__file__).parent / "output"
-REPORT_FILE = OUTPUT_DIR / "federation-report.md"
+REPORT_FILE = OUTPUT_DIR / "full-report.md"
 
 
 def load_official_operations(schema_path):
@@ -69,6 +69,8 @@ def badge(status: str):
         "FAIL": "badge-fail",
         "MISSING": "badge-missing",
         "EXTRA": "badge-extra",
+        "EXTRA-PASS": "badge-extra-pass",
+        "EXTRA-FAIL": "badge-extra-fail",
     }
     return f"![][{mapping.get(status, '')}]" if status in mapping else status
 
@@ -87,12 +89,17 @@ def main():
     local_results = {}
     official_results = {}
     spec_results = {}
+    missing_ops = {}
+    extra_ops_all = {}
 
     for site_dir in sites:
         host = site_dir.name
         local_results[host] = parse_junit(site_dir / "local.xml")
         official_results[host] = parse_junit(site_dir / "official.xml")
         spec_results[host] = parse_spec_json(site_dir / "spec.compliance.json")
+        missing_ops[site_dir.name] = {f"{item['method']} {item['path']}" for item in spec_results[host].get("missing", [])}
+        extra_ops_all[site_dir.name] = {f"{item['method']} {item['path']}" for item in spec_results[site_dir.name].get("extra", [])}
+
 
     lines = []
 
@@ -120,10 +127,9 @@ def main():
         row = [op]
         for site in sites:
             host = site.name
-            missing_ops = {f"{item['method']} {item['path']}" for item in spec_results[host].get("missing", [])}
             extra_ops = {f"{item['method']} {item['path']}" for item in spec_results[host].get("extra", [])}
 
-            if op in missing_ops:
+            if op in missing_ops[host]:
                 status = "MISSING"
             elif op in extra_ops:
                 status = "EXTRA"
@@ -141,8 +147,14 @@ def main():
         row = [op]
         for site in sites:
             host = site.name
-            status = official_results[host].get(op, "MISSING")
+            if op in missing_ops[host]:
+                status = "MISSING"
+            else:
+                status = official_results[host].get(op, "MISSING")
+
             row.append(badge(status))
+
+
         write("| " + " | ".join(row) + " |")
 
     # 3. Local Behavioral
@@ -159,10 +171,30 @@ def main():
 
     for op in sorted(all_local_ops):
         row = [op]
+
         for site in sites:
             host = site.name
-            status = local_results[host].get(op, "—")
+            local_status = local_results[host].get(op)
+
+            extras = extra_ops_all.get(host, set())
+            missing = missing_ops.get(host, set())
+
+            if op in extras:
+                if local_status == "PASS":
+                    status = "EXTRA-PASS"
+                elif local_status == "FAIL":
+                    status = "EXTRA-FAIL"
+                else:
+                    status = "EXTRA"
+
+            elif op in missing:
+                status = "MISSING"
+
+            else:
+                status = local_status if local_status else "—"
+
             row.append(badge(status))
+
         write("| " + " | ".join(row) + " |")
 
     write("\n---\n")
@@ -171,6 +203,8 @@ def main():
     write("[badge-fail]: https://img.shields.io/badge/FAIL-red")
     write("[badge-missing]: https://img.shields.io/badge/MISSING-red")
     write("[badge-extra]: https://img.shields.io/badge/EXTRA-orange")
+    write("[badge-extra-pass]: https://img.shields.io/badge/EXTRA--PASS-blue")
+    write("[badge-extra-fail]: https://img.shields.io/badge/EXTRA--FAIL-purple")
 
     REPORT_FILE.write_text("\n".join(lines), encoding="utf-8")
     print(f"\nReport written to {REPORT_FILE}")

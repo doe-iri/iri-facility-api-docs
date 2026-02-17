@@ -30,23 +30,7 @@ def run_for_site(site, official_schema, validator_script):
     site_dir = OUTPUT_DIR / host
     site_dir.mkdir(parents=True, exist_ok=True)
 
-    # 1. Local schema validation
-    run_cmd([
-        sys.executable, str(validator_script),
-        "--baseurl", site,
-        "--schema-url", f"{site.rstrip('/')}/openapi.json",
-        "--report-name", str(site_dir / "local")
-    ])
-
-    # 2. Official schema validation
-    run_cmd([
-        sys.executable, str(validator_script),
-        "--baseurl", site,
-        "--schema-path", official_schema,
-        "--report-name", str(site_dir / "official")
-    ])
-
-    # 3. Spec compliance
+    # 1. Spec compliance
     run_cmd([
         sys.executable, str(validator_script),
         "--baseurl", site,
@@ -54,6 +38,22 @@ def run_for_site(site, official_schema, validator_script):
         "--official-schema", official_schema,
         "--report-name", str(site_dir / "spec"),
         "--compliance-json", str(site_dir / "spec.compliance.json")
+    ])
+
+    # 2. Local schema validation
+    run_cmd([
+        sys.executable, str(validator_script),
+        "--baseurl", site,
+        "--schema-url", f"{site.rstrip('/')}/openapi.json",
+        "--report-name", str(site_dir / "local")
+    ])
+
+    # 3. Official schema validation
+    run_cmd([
+        sys.executable, str(validator_script),
+        "--baseurl", site,
+        "--schema-path", official_schema,
+        "--report-name", str(site_dir / "official")
     ])
 
 
