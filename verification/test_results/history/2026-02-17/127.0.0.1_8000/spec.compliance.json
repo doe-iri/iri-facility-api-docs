@@ -1,0 +1,276 @@
+{
+  "base_url": "http://127.0.0.1:8000",
+  "counts": {
+    "extra": 27,
+    "missing": 10,
+    "present": 15
+  },
+  "extra": [
+    {
+      "method": "DELETE",
+      "operationId": "cancelJob",
+      "path": "/api/v1/compute/cancel/{resource_id}/{job_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "checksum",
+      "path": "/api/v1/filesystem/checksum/{resource_id}"
+    },
+    {
+      "method": "PUT",
+      "operationId": "chmod",
+      "path": "/api/v1/filesystem/chmod/{resource_id}"
+    },
+    {
+      "method": "PUT",
+      "operationId": "chown",
+      "path": "/api/v1/filesystem/chown/{resource_id}"
+    },
+    {
+      "method": "POST",
+      "operationId": "compress",
+      "path": "/api/v1/filesystem/compress/{resource_id}"
+    },
+    {
+      "method": "POST",
+      "operationId": "cp",
+      "path": "/api/v1/filesystem/cp/{resource_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "download",
+      "path": "/api/v1/filesystem/download/{resource_id}"
+    },
+    {
+      "method": "POST",
+      "operationId": "extract",
+      "path": "/api/v1/filesystem/extract/{resource_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "file",
+      "path": "/api/v1/filesystem/file/{resource_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getEventByIncident",
+      "path": "/api/v1/status/incidents/{incident_id}/events/{event_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getEventsByIncident",
+      "path": "/api/v1/status/incidents/{incident_id}/events"
+    },
+    {
+      "method": "GET",
+      "operationId": "getJob",
+      "path": "/api/v1/compute/status/{resource_id}/{job_id}"
+    },
+    {
+      "method": "POST",
+      "operationId": "getJobs",
+      "path": "/api/v1/compute/status/{resource_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getTask",
+      "path": "/api/v1/task/{task_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getTasks",
+      "path": "/api/v1/task"
+    },
+    {
+      "method": "GET",
+      "operationId": "head",
+      "path": "/api/v1/filesystem/head/{resource_id}"
+    },
+    {
+      "method": "POST",
+      "operationId": "launchJob",
+      "path": "/api/v1/compute/job/{resource_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "ls",
+      "path": "/api/v1/filesystem/ls/{resource_id}"
+    },
+    {
+      "method": "POST",
+      "operationId": "mkdir",
+      "path": "/api/v1/filesystem/mkdir/{resource_id}"
+    },
+    {
+      "method": "POST",
+      "operationId": "mv",
+      "path": "/api/v1/filesystem/mv/{resource_id}"
+    },
+    {
+      "method": "DELETE",
+      "operationId": "rm",
+      "path": "/api/v1/filesystem/rm/{resource_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "stat",
+      "path": "/api/v1/filesystem/stat/{resource_id}"
+    },
+    {
+      "method": "POST",
+      "operationId": "symlink",
+      "path": "/api/v1/filesystem/symlink/{resource_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "tail",
+      "path": "/api/v1/filesystem/tail/{resource_id}"
+    },
+    {
+      "method": "PUT",
+      "operationId": "updateJob",
+      "path": "/api/v1/compute/job/{resource_id}/{job_id}"
+    },
+    {
+      "method": "POST",
+      "operationId": "upload",
+      "path": "/api/v1/filesystem/upload/{resource_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "view",
+      "path": "/api/v1/filesystem/view/{resource_id}"
+    }
+  ],
+  "facility_schema_url": "http://127.0.0.1:8000/openapi.json",
+  "missing": [
+    {
+      "method": "GET",
+      "operationId": "getEvent",
+      "path": "/api/v1/status/events/{event_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getEvents",
+      "path": "/api/v1/status/events"
+    },
+    {
+      "method": "GET",
+      "operationId": "getIncidentByEvent",
+      "path": "/api/v1/status/events/{event_id}/incident"
+    },
+    {
+      "method": "GET",
+      "operationId": "getMetaData_2",
+      "path": "/api/v1/account"
+    },
+    {
+      "method": "GET",
+      "operationId": "getProjectAllocation",
+      "path": "/api/v1/account/project_allocations/{project_allocation_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getProjectAllocations",
+      "path": "/api/v1/account/project_allocations"
+    },
+    {
+      "method": "GET",
+      "operationId": "getResourceByEvent",
+      "path": "/api/v1/status/events/{event_id}/resource"
+    },
+    {
+      "method": "GET",
+      "operationId": "getResourceByIncident",
+      "path": "/api/v1/status/incidents/{incident_id}/resources"
+    },
+    {
+      "method": "GET",
+      "operationId": "getUserAllocation",
+      "path": "/api/v1/account/user_allocations/{user_allocation_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getUserAllocations",
+      "path": "/api/v1/account/user_allocations"
+    }
+  ],
+  "official_schema": "specification/openapi/openapi_iri_facility_api_v1.yaml",
+  "present": [
+    {
+      "method": "GET",
+      "operationId": "getCapabilities",
+      "path": "/api/v1/account/capabilities"
+    },
+    {
+      "method": "GET",
+      "operationId": "getCapability",
+      "path": "/api/v1/account/capabilities/{capability_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getFacility",
+      "path": "/api/v1/facility"
+    },
+    {
+      "method": "GET",
+      "operationId": "getIncident",
+      "path": "/api/v1/status/incidents/{incident_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getIncidents",
+      "path": "/api/v1/status/incidents"
+    },
+    {
+      "method": "GET",
+      "operationId": "getProject",
+      "path": "/api/v1/account/projects/{project_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getProjectAllocationByProject",
+      "path": "/api/v1/account/projects/{project_id}/project_allocations/{project_allocation_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getProjectAllocationsByProject",
+      "path": "/api/v1/account/projects/{project_id}/project_allocations"
+    },
+    {
+      "method": "GET",
+      "operationId": "getProjects",
+      "path": "/api/v1/account/projects"
+    },
+    {
+      "method": "GET",
+      "operationId": "getResource",
+      "path": "/api/v1/status/resources/{resource_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getResources",
+      "path": "/api/v1/status/resources"
+    },
+    {
+      "method": "GET",
+      "operationId": "getSite",
+      "path": "/api/v1/facility/sites/{site_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getSites",
+      "path": "/api/v1/facility/sites"
+    },
+    {
+      "method": "GET",
+      "operationId": "getUserAllocationByProjectAllocation",
+      "path": "/api/v1/account/projects/{project_id}/project_allocations/{project_allocation_id}/user_allocations/{user_allocation_id}"
+    },
+    {
+      "method": "GET",
+      "operationId": "getUserAllocationsByProjectAllocation",
+      "path": "/api/v1/account/projects/{project_id}/project_allocations/{project_allocation_id}/user_allocations"
+    }
+  ]
+}
