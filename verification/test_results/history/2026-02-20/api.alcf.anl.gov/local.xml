@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="1" tests="10" time="29.049" timestamp="2026-02-17T15:46:28.605296+00:00" hostname="runnervmjduv7"><properties><property name="hypothesis-statistics-verification/api-validator.py::test_api[GET /api/v1/status/resources/{resource_id}]" value="dmVyaWZpY2F0aW9uL2FwaS12YWxpZGF0b3IucHk6OnRlc3RfYXBpW0dFVCAvYXBpL3YxL3N0YXR1cy9yZXNvdXJjZXMve3Jlc291cmNlX2lkfV06CgogIC0gZHVyaW5nIGdlbmVyYXRlIHBoYXNlICgzLjI3IHNlY29uZHMpOgogICAgLSBUeXBpY2FsIHJ1bnRpbWVzOiB+IDMtMTI5IG1zLCBvZiB3aGljaCB+IDAtNCBtcyBpbiBkYXRhIGdlbmVyYXRpb24KICAgIC0gMjAgcGFzc2luZyBleGFtcGxlcywgMCBmYWlsaW5nIGV4YW1wbGVzLCA4NSBpbnZhbGlkIGV4YW1wbGVzCiAgICAtIEV2ZW50czoKICAgICAgKiA4MC45NSUsIFJldHJpZWQgZHJhdyBmcm9tIHRleHQoY2hhcmFjdGVycyhjb2RlYz0ndXRmLTgnLCBtaW5fY29kZXBvaW50PTApLCBtaW5fc2l6ZT0xKS5maWx0ZXIobGFtYmRhIHY6IG5vdCB2YWxpZGF0b3IodikpIHRvIHNhdGlzZnkgZmlsdGVyCiAgICAgICogNzMuMzMlLCBpbnZhbGlkIGJlY2F1c2U6IEFib3J0ZWQgdGVzdCBiZWNhdXNlIHVuYWJsZSB0byBzYXRpc2Z5IHRleHQoY2hhcmFjdGVycyhjb2RlYz0ndXRmLTgnLCBtaW5fY29kZXBvaW50PTApLCBtaW5fc2l6ZT0xKS5maWx0ZXIobGFtYmRhIHY6IG5vdCB2YWxpZGF0b3IodikpCiAgICAgICogMC45NSUsIFJldHJpZWQgZHJhdyBmcm9tIDxoeXBvdGhlc2lzLnN0cmF0ZWdpZXMuX2ludGVybmFsLmNvcmUuQ29tcG9zaXRlU3RyYXRlZ3kgb2JqZWN0IGF0IDB4N2ZkZGE5YTM1MmQwPi5maWx0ZXIoaXNfdmFsaWRfcGF0aCkgdG8gc2F0aXNmeSBmaWx0ZXIKCiAgLSBTdG9wcGVkIGJlY2F1c2Ugc2V0dGluZ3MubWF4X2V4YW1wbGVzPTIw" /><property name="hypothesis-statistics-verification/api-validator.py::test_api[GET /api/v1/status/incidents/{incident_id}]" value="dmVyaWZpY2F0aW9uL2FwaS12YWxpZGF0b3IucHk6OnRlc3RfYXBpW0dFVCAvYXBpL3YxL3N0YXR1cy9pbmNpZGVudHMve2luY2lkZW50X2lkfV06CgogIC0gZHVyaW5nIGdlbmVyYXRlIHBoYXNlICgzLjEyIHNlY29uZHMpOgogICAgLSBUeXBpY2FsIHJ1bnRpbWVzOiB+IDMtMTQ0IG1zLCBvZiB3aGljaCB+IDAtNCBtcyBpbiBkYXRhIGdlbmVyYXRpb24KICAgIC0gMjAgcGFzc2luZyBleGFtcGxlcywgMCBmYWlsaW5nIGV4YW1wbGVzLCA4NSBpbnZhbGlkIGV4YW1wbGVzCiAgICAtIEV2ZW50czoKICAgICAgKiA4MC45NSUsIFJldHJpZWQgZHJhdyBmcm9tIHRleHQoY2hhcmFjdGVycyhjb2RlYz0ndXRmLTgnLCBtaW5fY29kZXBvaW50PTApLCBtaW5fc2l6ZT0xKS5maWx0ZXIobGFtYmRhIHY6IG5vdCB2YWxpZGF0b3IodikpIHRvIHNhdGlzZnkgZmlsdGVyCiAgICAgICogNzMuMzMlLCBpbnZhbGlkIGJlY2F1c2U6IEFib3J0ZWQgdGVzdCBiZWNhdXNlIHVuYWJsZSB0byBzYXRpc2Z5IHRleHQoY2hhcmFjdGVycyhjb2RlYz0ndXRmLTgnLCBtaW5fY29kZXBvaW50PTApLCBtaW5fc2l6ZT0xKS5maWx0ZXIobGFtYmRhIHY6IG5vdCB2YWxpZGF0b3IodikpCiAgICAgICogMC45NSUsIFJldHJpZWQgZHJhdyBmcm9tIDxoeXBvdGhlc2lzLnN0cmF0ZWdpZXMuX2ludGVybmFsLmNvcmUuQ29tcG9zaXRlU3RyYXRlZ3kgb2JqZWN0IGF0IDB4N2ZkZGFhZDYxNmQwPi5maWx0ZXIoaXNfdmFsaWRfcGF0aCkgdG8gc2F0aXNmeSBmaWx0ZXIKCiAgLSBTdG9wcGVkIGJlY2F1c2Ugc2V0dGluZ3MubWF4X2V4YW1wbGVzPTIw" /><property name="hypothesis-statistics-verification/api-validator.py::test_api[GET /api/v1/status/incidents/{incident_id}/events/{event_id}]" value="dmVyaWZpY2F0aW9uL2FwaS12YWxpZGF0b3IucHk6OnRlc3RfYXBpW0dFVCAvYXBpL3YxL3N0YXR1cy9pbmNpZGVudHMve2luY2lkZW50X2lkfS9ldmVudHMve2V2ZW50X2lkfV06CgogIC0gZHVyaW5nIGdlbmVyYXRlIHBoYXNlICgyLjY1IHNlY29uZHMpOgogICAgLSBUeXBpY2FsIHJ1bnRpbWVzOiB+IDQtMTgyIG1zLCBvZiB3aGljaCB+IDAtNCBtcyBpbiBkYXRhIGdlbmVyYXRpb24KICAgIC0gMjAgcGFzc2luZyBleGFtcGxlcywgMCBmYWlsaW5nIGV4YW1wbGVzLCAxNCBpbnZhbGlkIGV4YW1wbGVzCiAgICAtIEV2ZW50czoKICAgICAgKiA0MS4xOCUsIFJldHJpZWQgZHJhdyBmcm9tIHRleHQoY2hhcmFjdGVycyhjb2RlYz0ndXRmLTgnLCBtaW5fY29kZXBvaW50PTApLCBtaW5fc2l6ZT0xKS5maWx0ZXIobGFtYmRhIHY6IG5vdCB2YWxpZGF0b3IodikpIHRvIHNhdGlzZnkgZmlsdGVyCiAgICAgICogNDEuMTglLCBpbnZhbGlkIGJlY2F1c2U6IEFib3J0ZWQgdGVzdCBiZWNhdXNlIHVuYWJsZSB0byBzYXRpc2Z5IHRleHQoY2hhcmFjdGVycyhjb2RlYz0ndXRmLTgnLCBtaW5fY29kZXBvaW50PTApLCBtaW5fc2l6ZT0xKS5maWx0ZXIobGFtYmRhIHY6IG5vdCB2YWxpZGF0b3IodikpCgogIC0gU3RvcHBlZCBiZWNhdXNlIHNldHRpbmdzLm1heF9leGFtcGxlcz0yMA==" /></properties><testcase classname="verification.api-validator" name="test_spec_compliance" time="0.000"><skipped type="pytest.skip" message="Compliance mode not enabled">/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py:125: Compliance mode not enabled</skipped></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/facility]" time="2.422"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
+  |     def test_wrapper(*args: Any, **kwargs: Any) -&gt; Any:
+  |                ^^^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
+  |     _raise_to_user(errors, state.settings, [], " in explicit examples")
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
+  |     raise the_error_hypothesis_found
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
+  |     return test_function(*args, **kwargs)
+  |   File "/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py", line 216, in test_api
+  |     case.validate_response(
+  |     ~~~~~~~~~~~~~~~~~~~~~~^
+  |         response,
+  |         ^^^^^^^^^
+  |     ...&lt;3 lines&gt;...
+  |         ],
+  |         ^^
+  |     )
+  |     ^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
+  |     raise FailureGroup(_failures, message) from None
+  | schemathesis.core.failures.FailureGroup: Schemathesis found 1 distinct failure
+  | 
+  | - Server error
+  | 
+  | [501] Not Implemented:
+  | 
+  |     `{"type":"https://api.alcf.anl.gov/problems/generic-error","title":"'modified_since' filter not supported yet.","status":501,"detail":"'modified_since' filter not supported yet.","instance":"https://facility-api-vmw-01.cels.anl.gov/api/v1/facility?modified_since=2000-01-01T00%253A00%253A00Z"}`
+  | 
+  | Reproduce with:
+  | 
+  |     curl -X GET -H 'Accept: application/json' -H 'Authorization: [Filtered]' 'https://api.alcf.anl.gov/api/v1/facility?modified_since=2000-01-01T00%3A00%3A00Z'
+  | 
+  |  (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | schemathesis.core.failures.ServerError: Server error
+    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/facility/sites]" time="0.115"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
+  |     def test_wrapper(*args: Any, **kwargs: Any) -&gt; Any:
+  |                ^^^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
+  |     _raise_to_user(errors, state.settings, [], " in explicit examples")
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
+  |     raise the_error_hypothesis_found
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
+  |     return test_function(*args, **kwargs)
+  |   File "/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py", line 216, in test_api
+  |     case.validate_response(
+  |     ~~~~~~~~~~~~~~~~~~~~~~^
+  |         response,
+  |         ^^^^^^^^^
+  |     ...&lt;3 lines&gt;...
+  |         ],
+  |         ^^
+  |     )
+  |     ^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
+  |     raise FailureGroup(_failures, message) from None
+  | schemathesis.core.failures.FailureGroup: Schemathesis found 1 distinct failure
+  | 
+  | - Server error
+  | 
+  | [501] Not Implemented:
+  | 
+  |     `{"type":"https://api.alcf.anl.gov/problems/generic-error","title":"'modified_since' filter not supported yet.","status":501,"detail":"'modified_since' filter not supported yet.","instance":"https://facility-api-vmw-01.cels.anl.gov/api/v1/facility/sites?limit=100&amp;modified_since=2000-01-01T00%253A00%253A00Z&amp;name=0&amp;offset=0"}`
+  | 
+  | Reproduce with:
+  | 
+  |     curl -X GET -H 'Accept: application/json' -H 'Authorization: [Filtered]' 'https://api.alcf.anl.gov/api/v1/facility/sites?modified_since=2000-01-01T00%3A00%3A00Z&amp;name=0&amp;offset=0&amp;limit=100'
+  | 
+  |  (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | schemathesis.core.failures.ServerError: Server error
+    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/facility/sites/{site_id}]" time="1.293"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
+  |     def test_wrapper(*args: Any, **kwargs: Any) -&gt; Any:
+  |                ^^^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
+  |     _raise_to_user(errors, state.settings, [], " in explicit examples")
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
+  |     raise the_error_hypothesis_found
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
+  |     return test_function(*args, **kwargs)
+  |   File "/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py", line 216, in test_api
+  |     case.validate_response(
+  |     ~~~~~~~~~~~~~~~~~~~~~~^
+  |         response,
+  |         ^^^^^^^^^
+  |     ...&lt;3 lines&gt;...
+  |         ],
+  |         ^^
+  |     )
+  |     ^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
+  |     raise FailureGroup(_failures, message) from None
+  | schemathesis.core.failures.FailureGroup: Schemathesis found 1 distinct failure
+  | 
+  | - Server error
+  | 
+  | [501] Not Implemented:
+  | 
+  |     `{"type":"https://api.alcf.anl.gov/problems/generic-error","title":"'modified_since' filter not supported yet.","status":501,"detail":"'modified_since' filter not supported yet.","instance":"https://facility-api-vmw-01.cels.anl.gov/api/v1/facility/sites/0?modified_since=2000-01-01T00%253A00%253A00Z"}`
+  | 
+  | Reproduce with:
+  | 
+  |     curl -X GET -H 'Accept: application/json' -H 'Authorization: [Filtered]' 'https://api.alcf.anl.gov/api/v1/facility/sites/0?modified_since=2000-01-01T00%3A00%3A00Z'
+  | 
+  |  (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | schemathesis.core.failures.ServerError: Server error
+    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/resources]" time="0.117"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
+  |     def test_wrapper(*args: Any, **kwargs: Any) -&gt; Any:
+  |                ^^^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
+  |     _raise_to_user(errors, state.settings, [], " in explicit examples")
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
+  |     raise the_error_hypothesis_found
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
+  |     return test_function(*args, **kwargs)
+  |   File "/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py", line 216, in test_api
+  |     case.validate_response(
+  |     ~~~~~~~~~~~~~~~~~~~~~~^
+  |         response,
+  |         ^^^^^^^^^
+  |     ...&lt;3 lines&gt;...
+  |         ],
+  |         ^^
+  |     )
+  |     ^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
+  |     raise FailureGroup(_failures, message) from None
+  | schemathesis.core.failures.FailureGroup: Schemathesis found 1 distinct failure
+  | 
+  | - Server error
+  | 
+  | [501] Not Implemented:
+  | 
+  |     `{"type":"https://api.alcf.anl.gov/problems/generic-error","title":"'modified_since' filter not supported yet.","status":501,"detail":"'modified_since' filter not supported yet.","instance":"https://facility-api-vmw-01.cels.anl.gov/api/v1/status/resources?capability=bytes&amp;current_status=up&amp;description=0&amp;group=0&amp;limit=100&amp;modified_since=2000-01-01T00%253A00%253A00Z&amp;name=0&amp;offset=0"}`
+  | 
+  | Reproduce with:
+  | 
+  |     curl -X GET -H 'Accept: application/json' -H 'Authorization: [Filtered]' 'https://api.alcf.anl.gov/api/v1/status/resources?name=0&amp;description=0&amp;group=0&amp;offset=0&amp;limit=100&amp;modified_since=2000-01-01T00%3A00%3A00Z&amp;current_status=up&amp;capability=bytes'
+  | 
+  |  (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | schemathesis.core.failures.ServerError: Server error
+    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/resources/{resource_id}]" time="4.158" /><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/incidents]" time="0.118"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
+  |     def test_wrapper(*args: Any, **kwargs: Any) -&gt; Any:
+  |                ^^^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
+  |     _raise_to_user(errors, state.settings, [], " in explicit examples")
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
+  |     raise the_error_hypothesis_found
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
+  |     return test_function(*args, **kwargs)
+  |   File "/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py", line 216, in test_api
+  |     case.validate_response(
+  |     ~~~~~~~~~~~~~~~~~~~~~~^
+  |         response,
+  |         ^^^^^^^^^
+  |     ...&lt;3 lines&gt;...
+  |         ],
+  |         ^^
+  |     )
+  |     ^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
+  |     raise FailureGroup(_failures, message) from None
+  | schemathesis.core.failures.FailureGroup: Schemathesis found 1 distinct failure
+  | 
+  | - Server error
+  | 
+  | [501] Not Implemented:
+  | 
+  |     `{"type":"https://api.alcf.anl.gov/problems/generic-error","title":"'modified_since' filter not supported yet.","status":501,"detail":"'modified_since' filter not supported yet.","instance":"https://facility-api-vmw-01.cels.anl.gov/api/v1/status/incidents?description=0&amp;from=2000-01-01T00%253A00%253A00Z&amp;limit=100&amp;modified_since=2000-01-01T00%253A00%253A00Z&amp;name=0&amp;offset=0&amp;resolution=unresolved&amp;resource_id=0&amp;status=up&amp;time=2000-01-01T00%253A00%253A00Z&amp;to=2000-01-01T00%253A00%253A00Z"}`
+  | 
+  | Reproduce with:
+  | 
+  |     curl -X GET -H 'Accept: application/json' -H 'Authorization: [Filtered]' 'https://api.alcf.anl.gov/api/v1/status/incidents?name=0&amp;description=0&amp;status=up&amp;from=2000-01-01T00%3A00%3A00Z&amp;time=2000-01-01T00%3A00%3A00Z&amp;to=2000-01-01T00%3A00%3A00Z&amp;modified_since=2000-01-01T00%3A00%3A00Z&amp;resource_id=0&amp;offset=0&amp;limit=100&amp;resolution=unresolved'
+  | 
+  |  (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | schemathesis.core.failures.ServerError: Server error
+    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/incidents/{incident_id}]" time="3.789" /><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/incidents/{incident_id}/events]" time="0.176"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
+  |     def test_wrapper(*args: Any, **kwargs: Any) -&gt; Any:
+  |                ^^^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
+  |     _raise_to_user(errors, state.settings, [], " in explicit examples")
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
+  |     raise the_error_hypothesis_found
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
+  |     return test_function(*args, **kwargs)
+  |   File "/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py", line 216, in test_api
+  |     case.validate_response(
+  |     ~~~~~~~~~~~~~~~~~~~~~~^
+  |         response,
+  |         ^^^^^^^^^
+  |     ...&lt;3 lines&gt;...
+  |         ],
+  |         ^^
+  |     )
+  |     ^
+  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
+  |     raise FailureGroup(_failures, message) from None
+  | schemathesis.core.failures.FailureGroup: Schemathesis found 1 distinct failure
+  | 
+  | - Server error
+  | 
+  | [501] Not Implemented:
+  | 
+  |     `{"type":"https://api.alcf.anl.gov/problems/generic-error","title":"'modified_since' filter not supported yet.","status":501,"detail":"'modified_since' filter not supported yet.","instance":"https://facility-api-vmw-01.cels.anl.gov/api/v1/status/incidents/0/events?description=0&amp;from=2000-01-01T00%253A00%253A00Z&amp;limit=100&amp;modified_since=2000-01-01T00%253A00%253A00Z&amp;name=0&amp;offset=0&amp;resource_id=0&amp;status=up&amp;time=2000-01-01T00%253A00%253A00Z"}`
+  | 
+  | Reproduce with:
+  | 
+  |     curl -X GET -H 'Accept: application/json' -H 'Authorization: [Filtered]' 'https://api.alcf.anl.gov/api/v1/status/incidents/0/events?resource_id=0&amp;name=0&amp;description=0&amp;status=up&amp;from=2000-01-01T00%3A00%3A00Z&amp;time=2000-01-01T00%3A00%3A00Z&amp;modified_since=2000-01-01T00%3A00%3A00Z&amp;offset=0&amp;limit=100'
+  | 
+  |  (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | schemathesis.core.failures.ServerError: Server error
+    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/incidents/{incident_id}/events/{event_id}]" time="3.511" /></testsuite></testsuites>

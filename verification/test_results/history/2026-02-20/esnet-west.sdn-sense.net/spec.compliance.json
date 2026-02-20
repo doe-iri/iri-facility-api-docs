@@ -1,7 +1,7 @@
 {
-  "base_url": "http://127.0.0.1:8000",
+  "base_url": "https://esnet-west.sdn-sense.net/",
   "counts": {
-    "extra": 28,
+    "extra": 7,
     "missing": 10,
     "present": 15
   },
@@ -10,51 +10,6 @@
       "method": "DELETE",
       "operationId": "cancelJob",
       "path": "/api/v1/compute/cancel/{resource_id}/{job_id}"
-    },
-    {
-      "method": "GET",
-      "operationId": "checksum",
-      "path": "/api/v1/filesystem/checksum/{resource_id}"
-    },
-    {
-      "method": "PUT",
-      "operationId": "chmod",
-      "path": "/api/v1/filesystem/chmod/{resource_id}"
-    },
-    {
-      "method": "PUT",
-      "operationId": "chown",
-      "path": "/api/v1/filesystem/chown/{resource_id}"
-    },
-    {
-      "method": "POST",
-      "operationId": "compress",
-      "path": "/api/v1/filesystem/compress/{resource_id}"
-    },
-    {
-      "method": "POST",
-      "operationId": "cp",
-      "path": "/api/v1/filesystem/cp/{resource_id}"
-    },
-    {
-      "method": "DELETE",
-      "operationId": "deleteTask",
-      "path": "/api/v1/task/{task_id}"
-    },
-    {
-      "method": "GET",
-      "operationId": "download",
-      "path": "/api/v1/filesystem/download/{resource_id}"
-    },
-    {
-      "method": "POST",
-      "operationId": "extract",
-      "path": "/api/v1/filesystem/extract/{resource_id}"
-    },
-    {
-      "method": "GET",
-      "operationId": "file",
-      "path": "/api/v1/filesystem/file/{resource_id}"
     },
     {
       "method": "GET",
@@ -77,77 +32,17 @@
       "path": "/api/v1/compute/status/{resource_id}"
     },
     {
-      "method": "GET",
-      "operationId": "getTask",
-      "path": "/api/v1/task/{task_id}"
-    },
-    {
-      "method": "GET",
-      "operationId": "getTasks",
-      "path": "/api/v1/task"
-    },
-    {
-      "method": "GET",
-      "operationId": "head",
-      "path": "/api/v1/filesystem/head/{resource_id}"
-    },
-    {
       "method": "POST",
       "operationId": "launchJob",
       "path": "/api/v1/compute/job/{resource_id}"
     },
     {
-      "method": "GET",
-      "operationId": "ls",
-      "path": "/api/v1/filesystem/ls/{resource_id}"
-    },
-    {
-      "method": "POST",
-      "operationId": "mkdir",
-      "path": "/api/v1/filesystem/mkdir/{resource_id}"
-    },
-    {
-      "method": "POST",
-      "operationId": "mv",
-      "path": "/api/v1/filesystem/mv/{resource_id}"
-    },
-    {
-      "method": "DELETE",
-      "operationId": "rm",
-      "path": "/api/v1/filesystem/rm/{resource_id}"
-    },
-    {
-      "method": "GET",
-      "operationId": "stat",
-      "path": "/api/v1/filesystem/stat/{resource_id}"
-    },
-    {
-      "method": "POST",
-      "operationId": "symlink",
-      "path": "/api/v1/filesystem/symlink/{resource_id}"
-    },
-    {
-      "method": "GET",
-      "operationId": "tail",
-      "path": "/api/v1/filesystem/tail/{resource_id}"
-    },
-    {
       "method": "PUT",
       "operationId": "updateJob",
       "path": "/api/v1/compute/job/{resource_id}/{job_id}"
-    },
-    {
-      "method": "POST",
-      "operationId": "upload",
-      "path": "/api/v1/filesystem/upload/{resource_id}"
-    },
-    {
-      "method": "GET",
-      "operationId": "view",
-      "path": "/api/v1/filesystem/view/{resource_id}"
     }
   ],
-  "facility_schema_url": "http://127.0.0.1:8000/openapi.json",
+  "facility_schema_url": "https://esnet-west.sdn-sense.net//openapi.json",
   "missing": [
     {
       "method": "GET",

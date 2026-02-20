@@ -1,7 +1,7 @@
 {
-  "base_url": "http://127.0.0.1:8000",
+  "base_url": "https://api.iri.nersc.gov/",
   "counts": {
-    "extra": 28,
+    "extra": 27,
     "missing": 10,
     "present": 15
   },
@@ -35,11 +35,6 @@
       "method": "POST",
       "operationId": "cp",
       "path": "/api/v1/filesystem/cp/{resource_id}"
-    },
-    {
-      "method": "DELETE",
-      "operationId": "deleteTask",
-      "path": "/api/v1/task/{task_id}"
     },
     {
       "method": "GET",
@@ -147,7 +142,7 @@
       "path": "/api/v1/filesystem/view/{resource_id}"
     }
   ],
-  "facility_schema_url": "http://127.0.0.1:8000/openapi.json",
+  "facility_schema_url": "https://api.iri.nersc.gov//openapi.json",
   "missing": [
     {
       "method": "GET",

@@ -1,5 +1,5 @@
 {
-  "base_url": "http://127.0.0.1:8000",
+  "base_url": "https://iri-dev.ppg.es.net/",
   "counts": {
     "extra": 28,
     "missing": 10,
@@ -147,7 +147,7 @@
       "path": "/api/v1/filesystem/view/{resource_id}"
     }
   ],
-  "facility_schema_url": "http://127.0.0.1:8000/openapi.json",
+  "facility_schema_url": "https://iri-dev.ppg.es.net//openapi.json",
   "missing": [
     {
       "method": "GET",
