@@ -12,7 +12,27 @@ import yaml
 
 OUTPUT_DIR = Path(__file__).parent / "output"
 REPORT_FILE = OUTPUT_DIR / "full-report.md"
+GROUP_ORDER = ["facility", "status", "account", "compute", "filesystem", "task"]
 
+GROUP_RANK = {name: i for i, name in enumerate(GROUP_ORDER)}
+UNKNOWN_RANK = len(GROUP_RANK)
+
+def api_sort_key(op: str):
+    """Sort operations by API group (/api/v1/<group>/...) first,
+    then by full path. Unknown groups go last."""
+    try:
+        _, path = op.split(" ", 1)
+        parts = path.strip("/").split("/")
+
+        if len(parts) >= 3 and parts[0] == "api" and parts[1] == "v1":
+            group = parts[2]
+        else:
+            group = ""
+        rank = GROUP_RANK.get(group, UNKNOWN_RANK)
+        return (rank, path)
+
+    except Exception:
+        return (UNKNOWN_RANK, op)
 
 def load_official_operations(schema_path):
     """Load official operations from the OpenAPI schema."""
@@ -123,7 +143,7 @@ def main():
     write("| " + " | ".join(headers) + " |")
     write("|" + "|".join(["---"] * len(headers)) + "|")
 
-    for op in sorted(official_ops):
+    for op in sorted(official_ops, key=api_sort_key):
         row = [op]
         for site in sites:
             host = site.name
@@ -143,7 +163,7 @@ def main():
     write("| " + " | ".join(headers) + " |")
     write("|" + "|".join(["---"] * len(headers)) + "|")
 
-    for op in sorted(official_ops):
+    for op in sorted(official_ops, key=api_sort_key):
         row = [op]
         for site in sites:
             host = site.name
@@ -169,7 +189,7 @@ def main():
     write("| " + " | ".join(headers) + " |")
     write("|" + "|".join(["---"] * len(headers)) + "|")
 
-    for op in sorted(all_local_ops):
+    for op in sorted(all_local_ops, key=api_sort_key):
         row = [op]
 
         for site in sites:
