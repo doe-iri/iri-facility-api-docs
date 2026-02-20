@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="1" tests="10" time="29.049" timestamp="2026-02-17T15:46:28.605296+00:00" hostname="runnervmjduv7"><properties><property name="hypothesis-statistics-verification/api-validator.py::test_api[GET /api/v1/status/resources/{resource_id}]" value="dmVyaWZpY2F0aW9uL2FwaS12YWxpZGF0b3IucHk6OnRlc3RfYXBpW0dFVCAvYXBpL3YxL3N0YXR1cy9yZXNvdXJjZXMve3Jlc291cmNlX2lkfV06CgogIC0gZHVyaW5nIGdlbmVyYXRlIHBoYXNlICgzLjI3IHNlY29uZHMpOgogICAgLSBUeXBpY2FsIHJ1bnRpbWVzOiB+IDMtMTI5IG1zLCBvZiB3aGljaCB+IDAtNCBtcyBpbiBkYXRhIGdlbmVyYXRpb24KICAgIC0gMjAgcGFzc2luZyBleGFtcGxlcywgMCBmYWlsaW5nIGV4YW1wbGVzLCA4NSBpbnZhbGlkIGV4YW1wbGVzCiAgICAtIEV2ZW50czoKICAgICAgKiA4MC45NSUsIFJldHJpZWQgZHJhdyBmcm9tIHRleHQoY2hhcmFjdGVycyhjb2RlYz0ndXRmLTgnLCBtaW5fY29kZXBvaW50PTApLCBtaW5fc2l6ZT0xKS5maWx0ZXIobGFtYmRhIHY6IG5vdCB2YWxpZGF0b3IodikpIHRvIHNhdGlzZnkgZmlsdGVyCiAgICAgICogNzMuMzMlLCBpbnZhbGlkIGJlY2F1c2U6IEFib3J0ZWQgdGVzdCBiZWNhdXNlIHVuYWJsZSB0byBzYXRpc2Z5IHRleHQoY2hhcmFjdGVycyhjb2RlYz0ndXRmLTgnLCBtaW5fY29kZXBvaW50PTApLCBtaW5fc2l6ZT0xKS5maWx0ZXIobGFtYmRhIHY6IG5vdCB2YWxpZGF0b3IodikpCiAgICAgICogMC45NSUsIFJldHJpZWQgZHJhdyBmcm9tIDxoeXBvdGhlc2lzLnN0cmF0ZWdpZXMuX2ludGVybmFsLmNvcmUuQ29tcG9zaXRlU3RyYXRlZ3kgb2JqZWN0IGF0IDB4N2ZkZGE5YTM1MmQwPi5maWx0ZXIoaXNfdmFsaWRfcGF0aCkgdG8gc2F0aXNmeSBmaWx0ZXIKCiAgLSBTdG9wcGVkIGJlY2F1c2Ugc2V0dGluZ3MubWF4X2V4YW1wbGVzPTIw" /><property name="hypothesis-statistics-verification/api-validator.py::test_api[GET /api/v1/status/incidents/{incident_id}]" value="dmVyaWZpY2F0aW9uL2FwaS12YWxpZGF0b3IucHk6OnRlc3RfYXBpW0dFVCAvYXBpL3YxL3N0YXR1cy9pbmNpZGVudHMve2luY2lkZW50X2lkfV06CgogIC0gZHVyaW5nIGdlbmVyYXRlIHBoYXNlICgzLjEyIHNlY29uZHMpOgogICAgLSBUeXBpY2FsIHJ1bnRpbWVzOiB+IDMtMTQ0IG1zLCBvZiB3aGljaCB+IDAtNCBtcyBpbiBkYXRhIGdlbmVyYXRpb24KICAgIC0gMjAgcGFzc2luZyBleGFtcGxlcywgMCBmYWlsaW5nIGV4YW1wbGVzLCA4NSBpbnZhbGlkIGV4YW1wbGVzCiAgICAtIEV2ZW50czoKICAgICAgKiA4MC45NSUsIFJldHJpZWQgZHJhdyBmcm9tIHRleHQoY2hhcmFjdGVycyhjb2RlYz0ndXRmLTgnLCBtaW5fY29kZXBvaW50PTApLCBtaW5fc2l6ZT0xKS5maWx0ZXIobGFtYmRhIHY6IG5vdCB2YWxpZGF0b3IodikpIHRvIHNhdGlzZnkgZmlsdGVyCiAgICAgICogNzMuMzMlLCBpbnZhbGlkIGJlY2F1c2U6IEFib3J0ZWQgdGVzdCBiZWNhdXNlIHVuYWJsZSB0byBzYXRpc2Z5IHRleHQoY2hhcmFjdGVycyhjb2RlYz0ndXRmLTgnLCBtaW5fY29kZXBvaW50PTApLCBtaW5fc2l6ZT0xKS5maWx0ZXIobGFtYmRhIHY6IG5vdCB2YWxpZGF0b3IodikpCiAgICAgICogMC45NSUsIFJldHJpZWQgZHJhdyBmcm9tIDxoeXBvdGhlc2lzLnN0cmF0ZWdpZXMuX2ludGVybmFsLmNvcmUuQ29tcG9zaXRlU3RyYXRlZ3kgb2JqZWN0IGF0IDB4N2ZkZGFhZDYxNmQwPi5maWx0ZXIoaXNfdmFsaWRfcGF0aCkgdG8gc2F0aXNmeSBmaWx0ZXIKCiAgLSBTdG9wcGVkIGJlY2F1c2Ugc2V0dGluZ3MubWF4X2V4YW1wbGVzPTIw" /><property name="hypothesis-statistics-verification/api-validator.py::test_api[GET /api/v1/status/incidents/{incident_id}/events/{event_id}]" value="dmVyaWZpY2F0aW9uL2FwaS12YWxpZGF0b3IucHk6OnRlc3RfYXBpW0dFVCAvYXBpL3YxL3N0YXR1cy9pbmNpZGVudHMve2luY2lkZW50X2lkfS9ldmVudHMve2V2ZW50X2lkfV06CgogIC0gZHVyaW5nIGdlbmVyYXRlIHBoYXNlICgyLjY1IHNlY29uZHMpOgogICAgLSBUeXBpY2FsIHJ1bnRpbWVzOiB+IDQtMTgyIG1zLCBvZiB3aGljaCB+IDAtNCBtcyBpbiBkYXRhIGdlbmVyYXRpb24KICAgIC0gMjAgcGFzc2luZyBleGFtcGxlcywgMCBmYWlsaW5nIGV4YW1wbGVzLCAxNCBpbnZhbGlkIGV4YW1wbGVzCiAgICAtIEV2ZW50czoKICAgICAgKiA0MS4xOCUsIFJldHJpZWQgZHJhdyBmcm9tIHRleHQoY2hhcmFjdGVycyhjb2RlYz0ndXRmLTgnLCBtaW5fY29kZXBvaW50PTApLCBtaW5fc2l6ZT0xKS5maWx0ZXIobGFtYmRhIHY6IG5vdCB2YWxpZGF0b3IodikpIHRvIHNhdGlzZnkgZmlsdGVyCiAgICAgICogNDEuMTglLCBpbnZhbGlkIGJlY2F1c2U6IEFib3J0ZWQgdGVzdCBiZWNhdXNlIHVuYWJsZSB0byBzYXRpc2Z5IHRleHQoY2hhcmFjdGVycyhjb2RlYz0ndXRmLTgnLCBtaW5fY29kZXBvaW50PTApLCBtaW5fc2l6ZT0xKS5maWx0ZXIobGFtYmRhIHY6IG5vdCB2YWxpZGF0b3IodikpCgogIC0gU3RvcHBlZCBiZWNhdXNlIHNldHRpbmdzLm1heF9leGFtcGxlcz0yMA==" /></properties><testcase classname="verification.api-validator" name="test_spec_compliance" time="0.000"><skipped type="pytest.skip" message="Compliance mode not enabled">/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py:125: Compliance mode not enabled</skipped></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/facility]" time="2.422"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="1" tests="10" time="25.348" timestamp="2026-02-20T18:32:21.940125+00:00" hostname="runnervmwffz4"><properties><property name="hypothesis-statistics-verification/api-validator.py::test_api[GET /api/v1/status/resources/{resource_id}]" value="dmVyaWZpY2F0aW9uL2FwaS12YWxpZGF0b3IucHk6OnRlc3RfYXBpW0dFVCAvYXBpL3YxL3N0YXR1cy9yZXNvdXJjZXMve3Jlc291cmNlX2lkfV06CgogIC0gZHVyaW5nIGdlbmVyYXRlIHBoYXNlICgyLjIzIHNlY29uZHMpOgogICAgLSBUeXBpY2FsIHJ1bnRpbWVzOiB+IDMtOTcgbXMsIG9mIHdoaWNoIH4gMC00IG1zIGluIGRhdGEgZ2VuZXJhdGlvbgogICAgLSAyMCBwYXNzaW5nIGV4YW1wbGVzLCAwIGZhaWxpbmcgZXhhbXBsZXMsIDQ4IGludmFsaWQgZXhhbXBsZXMKICAgIC0gRXZlbnRzOgogICAgICAqIDcwLjU5JSwgUmV0cmllZCBkcmF3IGZyb20gdGV4dChjaGFyYWN0ZXJzKGNvZGVjPSd1dGYtOCcsIG1pbl9jb2RlcG9pbnQ9MCksIG1pbl9zaXplPTEpLmZpbHRlcihsYW1iZGEgdjogbm90IHZhbGlkYXRvcih2KSkgdG8gc2F0aXNmeSBmaWx0ZXIKICAgICAgKiA2Ny42NSUsIGludmFsaWQgYmVjYXVzZTogQWJvcnRlZCB0ZXN0IGJlY2F1c2UgdW5hYmxlIHRvIHNhdGlzZnkgdGV4dChjaGFyYWN0ZXJzKGNvZGVjPSd1dGYtOCcsIG1pbl9jb2RlcG9pbnQ9MCksIG1pbl9zaXplPTEpLmZpbHRlcihsYW1iZGEgdjogbm90IHZhbGlkYXRvcih2KSkKICAgICAgKiAxLjQ3JSwgUmV0cmllZCBkcmF3IGZyb20gPGh5cG90aGVzaXMuc3RyYXRlZ2llcy5faW50ZXJuYWwuY29yZS5Db21wb3NpdGVTdHJhdGVneSBvYmplY3QgYXQgMHg3ZmNkN2U2ZTVlNTA+LmZpbHRlcihpc192YWxpZF9wYXRoKSB0byBzYXRpc2Z5IGZpbHRlcgoKICAtIFN0b3BwZWQgYmVjYXVzZSBzZXR0aW5ncy5tYXhfZXhhbXBsZXM9MjA=" /><property name="hypothesis-statistics-verification/api-validator.py::test_api[GET /api/v1/status/incidents/{incident_id}]" value="dmVyaWZpY2F0aW9uL2FwaS12YWxpZGF0b3IucHk6OnRlc3RfYXBpW0dFVCAvYXBpL3YxL3N0YXR1cy9pbmNpZGVudHMve2luY2lkZW50X2lkfV06CgogIC0gZHVyaW5nIGdlbmVyYXRlIHBoYXNlICgyLjEwIHNlY29uZHMpOgogICAgLSBUeXBpY2FsIHJ1bnRpbWVzOiB+IDMtOTggbXMsIG9mIHdoaWNoIH4gMC0zIG1zIGluIGRhdGEgZ2VuZXJhdGlvbgogICAgLSAyMCBwYXNzaW5nIGV4YW1wbGVzLCAwIGZhaWxpbmcgZXhhbXBsZXMsIDQ4IGludmFsaWQgZXhhbXBsZXMKICAgIC0gRXZlbnRzOgogICAgICAqIDcwLjU5JSwgUmV0cmllZCBkcmF3IGZyb20gdGV4dChjaGFyYWN0ZXJzKGNvZGVjPSd1dGYtOCcsIG1pbl9jb2RlcG9pbnQ9MCksIG1pbl9zaXplPTEpLmZpbHRlcihsYW1iZGEgdjogbm90IHZhbGlkYXRvcih2KSkgdG8gc2F0aXNmeSBmaWx0ZXIKICAgICAgKiA2Ny42NSUsIGludmFsaWQgYmVjYXVzZTogQWJvcnRlZCB0ZXN0IGJlY2F1c2UgdW5hYmxlIHRvIHNhdGlzZnkgdGV4dChjaGFyYWN0ZXJzKGNvZGVjPSd1dGYtOCcsIG1pbl9jb2RlcG9pbnQ9MCksIG1pbl9zaXplPTEpLmZpbHRlcihsYW1iZGEgdjogbm90IHZhbGlkYXRvcih2KSkKICAgICAgKiAxLjQ3JSwgUmV0cmllZCBkcmF3IGZyb20gPGh5cG90aGVzaXMuc3RyYXRlZ2llcy5faW50ZXJuYWwuY29yZS5Db21wb3NpdGVTdHJhdGVneSBvYmplY3QgYXQgMHg3ZmNkN2YwZmQxNTA+LmZpbHRlcihpc192YWxpZF9wYXRoKSB0byBzYXRpc2Z5IGZpbHRlcgoKICAtIFN0b3BwZWQgYmVjYXVzZSBzZXR0aW5ncy5tYXhfZXhhbXBsZXM9MjA=" /><property name="hypothesis-statistics-verification/api-validator.py::test_api[GET /api/v1/status/incidents/{incident_id}/events/{event_id}]" value="dmVyaWZpY2F0aW9uL2FwaS12YWxpZGF0b3IucHk6OnRlc3RfYXBpW0dFVCAvYXBpL3YxL3N0YXR1cy9pbmNpZGVudHMve2luY2lkZW50X2lkfS9ldmVudHMve2V2ZW50X2lkfV06CgogIC0gZHVyaW5nIGdlbmVyYXRlIHBoYXNlICgyLjA5IHNlY29uZHMpOgogICAgLSBUeXBpY2FsIHJ1bnRpbWVzOiB+IDMtOTcgbXMsIG9mIHdoaWNoIH4gMC00IG1zIGluIGRhdGEgZ2VuZXJhdGlvbgogICAgLSAyMCBwYXNzaW5nIGV4YW1wbGVzLCAwIGZhaWxpbmcgZXhhbXBsZXMsIDU1IGludmFsaWQgZXhhbXBsZXMKICAgIC0gRXZlbnRzOgogICAgICAqIDY4LjAwJSwgUmV0cmllZCBkcmF3IGZyb20gdGV4dChjaGFyYWN0ZXJzKGNvZGVjPSd1dGYtOCcsIG1pbl9jb2RlcG9pbnQ9MCksIG1pbl9zaXplPTEpLmZpbHRlcihsYW1iZGEgdjogbm90IHZhbGlkYXRvcih2KSkgdG8gc2F0aXNmeSBmaWx0ZXIKICAgICAgKiA2NS4zMyUsIGludmFsaWQgYmVjYXVzZTogQWJvcnRlZCB0ZXN0IGJlY2F1c2UgdW5hYmxlIHRvIHNhdGlzZnkgdGV4dChjaGFyYWN0ZXJzKGNvZGVjPSd1dGYtOCcsIG1pbl9jb2RlcG9pbnQ9MCksIG1pbl9zaXplPTEpLmZpbHRlcihsYW1iZGEgdjogbm90IHZhbGlkYXRvcih2KSkKICAgICAgKiAxLjMzJSwgUmV0cmllZCBkcmF3IGZyb20gPGh5cG90aGVzaXMuc3RyYXRlZ2llcy5faW50ZXJuYWwuY29yZS5Db21wb3NpdGVTdHJhdGVneSBvYmplY3QgYXQgMHg3ZmNkN2U2YTViNTA+LmZpbHRlcihpc192YWxpZF9wYXRoKSB0byBzYXRpc2Z5IGZpbHRlcgoKICAtIFN0b3BwZWQgYmVjYXVzZSBzZXR0aW5ncy5tYXhfZXhhbXBsZXM9MjA=" /></properties><testcase classname="verification.api-validator" name="test_spec_compliance" time="0.000"><skipped type="pytest.skip" message="Compliance mode not enabled">/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py:125: Compliance mode not enabled</skipped></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/facility]" time="1.835"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
   |     def test_wrapper(*args: Any, **kwargs: Any) -&gt; Any:
   |                ^^^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
   |     _raise_to_user(errors, state.settings, [], " in explicit examples")
   |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
   |     raise the_error_hypothesis_found
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
   |     return test_function(*args, **kwargs)
   |   File "/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py", line 216, in test_api
   |     case.validate_response(
@@ -19,7 +19,7 @@
   |         ^^
   |     )
   |     ^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
   |     raise FailureGroup(_failures, message) from None
   | schemathesis.core.failures.FailureGroup: Schemathesis found 1 distinct failure
   | 
@@ -36,16 +36,16 @@
   |  (1 sub-exception)
   +-+---------------- 1 ----------------
     | schemathesis.core.failures.ServerError: Server error
-    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/facility/sites]" time="0.115"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
+    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/facility/sites]" time="0.103"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
   |     def test_wrapper(*args: Any, **kwargs: Any) -&gt; Any:
   |                ^^^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
   |     _raise_to_user(errors, state.settings, [], " in explicit examples")
   |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
   |     raise the_error_hypothesis_found
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
   |     return test_function(*args, **kwargs)
   |   File "/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py", line 216, in test_api
   |     case.validate_response(
@@ -57,7 +57,7 @@
   |         ^^
   |     )
   |     ^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
   |     raise FailureGroup(_failures, message) from None
   | schemathesis.core.failures.FailureGroup: Schemathesis found 1 distinct failure
   | 
@@ -74,16 +74,16 @@
   |  (1 sub-exception)
   +-+---------------- 1 ----------------
     | schemathesis.core.failures.ServerError: Server error
-    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/facility/sites/{site_id}]" time="1.293"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
+    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/facility/sites/{site_id}]" time="1.270"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
   |     def test_wrapper(*args: Any, **kwargs: Any) -&gt; Any:
   |                ^^^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
   |     _raise_to_user(errors, state.settings, [], " in explicit examples")
   |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
   |     raise the_error_hypothesis_found
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
   |     return test_function(*args, **kwargs)
   |   File "/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py", line 216, in test_api
   |     case.validate_response(
@@ -95,7 +95,7 @@
   |         ^^
   |     )
   |     ^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
   |     raise FailureGroup(_failures, message) from None
   | schemathesis.core.failures.FailureGroup: Schemathesis found 1 distinct failure
   | 
@@ -112,16 +112,16 @@
   |  (1 sub-exception)
   +-+---------------- 1 ----------------
     | schemathesis.core.failures.ServerError: Server error
-    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/resources]" time="0.117"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
+    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/resources]" time="0.152"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
   |     def test_wrapper(*args: Any, **kwargs: Any) -&gt; Any:
   |                ^^^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
   |     _raise_to_user(errors, state.settings, [], " in explicit examples")
   |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
   |     raise the_error_hypothesis_found
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
   |     return test_function(*args, **kwargs)
   |   File "/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py", line 216, in test_api
   |     case.validate_response(
@@ -133,7 +133,7 @@
   |         ^^
   |     )
   |     ^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
   |     raise FailureGroup(_failures, message) from None
   | schemathesis.core.failures.FailureGroup: Schemathesis found 1 distinct failure
   | 
@@ -150,16 +150,16 @@
   |  (1 sub-exception)
   +-+---------------- 1 ----------------
     | schemathesis.core.failures.ServerError: Server error
-    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/resources/{resource_id}]" time="4.158" /><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/incidents]" time="0.118"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
+    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/resources/{resource_id}]" time="3.035" /><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/incidents]" time="0.100"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
   |     def test_wrapper(*args: Any, **kwargs: Any) -&gt; Any:
   |                ^^^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
   |     _raise_to_user(errors, state.settings, [], " in explicit examples")
   |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
   |     raise the_error_hypothesis_found
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
   |     return test_function(*args, **kwargs)
   |   File "/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py", line 216, in test_api
   |     case.validate_response(
@@ -171,7 +171,7 @@
   |         ^^
   |     )
   |     ^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
   |     raise FailureGroup(_failures, message) from None
   | schemathesis.core.failures.FailureGroup: Schemathesis found 1 distinct failure
   | 
@@ -188,16 +188,16 @@
   |  (1 sub-exception)
   +-+---------------- 1 ----------------
     | schemathesis.core.failures.ServerError: Server error
-    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/incidents/{incident_id}]" time="3.789" /><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/incidents/{incident_id}/events]" time="0.176"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
+    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/incidents/{incident_id}]" time="2.668" /><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/incidents/{incident_id}/events]" time="0.093"><failure message="ServerError() [single exception in FailureGroup]">+ Exception Group Traceback (most recent call last):
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 268, in test_api
   |     def test_wrapper(*args: Any, **kwargs: Any) -&gt; Any:
   |                ^^^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/hypothesis/core.py", line 2184, in wrapped_test
   |     _raise_to_user(errors, state.settings, [], " in explicit examples")
   |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/hypothesis/core.py", line 1656, in _raise_to_user
   |     raise the_error_hypothesis_found
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/hypothesis/builder.py", line 270, in test_wrapper
   |     return test_function(*args, **kwargs)
   |   File "/home/runner/work/iri-facility-api-docs/iri-facility-api-docs/verification/api-validator.py", line 216, in test_api
   |     case.validate_response(
@@ -209,7 +209,7 @@
   |         ^^
   |     )
   |     ^
-  |   File "/opt/hostedtoolcache/Python/3.14.3/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
+  |   File "/opt/hostedtoolcache/Python/3.14.2/x64/lib/python3.14/site-packages/schemathesis/generation/case.py", line 478, in validate_response
   |     raise FailureGroup(_failures, message) from None
   | schemathesis.core.failures.FailureGroup: Schemathesis found 1 distinct failure
   | 
@@ -226,4 +226,4 @@
   |  (1 sub-exception)
   +-+---------------- 1 ----------------
     | schemathesis.core.failures.ServerError: Server error
-    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/incidents/{incident_id}/events/{event_id}]" time="3.511" /></testsuite></testsuites>
+    +------------------------------------</failure></testcase><testcase classname="verification.api-validator" name="test_api[GET /api/v1/status/incidents/{incident_id}/events/{event_id}]" time="2.608" /></testsuite></testsuites>

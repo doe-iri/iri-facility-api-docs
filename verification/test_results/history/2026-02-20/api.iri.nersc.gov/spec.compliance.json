@@ -1,7 +1,7 @@
 {
   "base_url": "https://api.iri.nersc.gov/",
   "counts": {
-    "extra": 27,
+    "extra": 28,
     "missing": 10,
     "present": 15
   },
@@ -35,6 +35,11 @@
       "method": "POST",
       "operationId": "cp",
       "path": "/api/v1/filesystem/cp/{resource_id}"
+    },
+    {
+      "method": "DELETE",
+      "operationId": "deleteTask",
+      "path": "/api/v1/task/{task_id}"
     },
     {
       "method": "GET",
