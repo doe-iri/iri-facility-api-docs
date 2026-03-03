@@ -5,11 +5,10 @@ import re
 import json
 import argparse
 import warnings
-import datetime
 import yaml
 import schemathesis
 import pytest
-from hypothesis import settings, HealthCheck
+from hypothesis import settings
 
 # Allow to pass tokens via environment variables
 API_TOKEN = os.environ.get("IRI_API_TOKEN")
@@ -73,43 +72,11 @@ SAFE_PATH_RE = re.compile(r"^[A-Za-z0-9._~-]+$")
 def safeascii(value: str) -> str:
     return "".join(c if 32 <= ord(c) <= 126 else "-" for c in value)
 
-def iso8601_check(value: str) -> bool:
-    try:
-        v = value.strip()
-        if v.endswith("Z"):
-            v = v[:-1] + "+00:00"
-        datetime.datetime.fromisoformat(v)
-        return True
-    except Exception:
-        return False
-
 
 @schemathesis.hook
 def before_call(ctx, case, kwargs):
     headers = case.headers or {}
     clean = {"Accept": "application/json"}
-
-    # 3.0 uses nullable: true, which allows null in query parameters. We want to treat null/empty as not provided, so we clean them here.
-    # 3.1 allows anyOf with null, which is more complex to handle
-    if case.query:
-        cleaned_query = {}
-        for k, v in case.query.items():
-            if v is None:
-                continue
-            if isinstance(v, list):
-                v = [x for x in v if str(x).strip().lower() not in {"", "null"}]
-                if not v:
-                    continue
-                cleaned_query[k] = v
-                continue
-            if isinstance(v, str):
-                s = v.strip().lower()
-                if s in {"", "null"}:
-                    continue
-                if k in ["modified_since", "from", "to", "time"] and not iso8601_check(v):
-                    continue
-            cleaned_query[k] = v
-        case.query = cleaned_query
 
     if case.path_parameters:
         for k, v in case.path_parameters.items():
@@ -251,7 +218,7 @@ if schema is not None:
             response,
             excluded_checks=[
                 schemathesis.checks.content_type_conformance,
-                schemathesis.checks.unsupported_method
+                schemathesis.checks.unsupported_method,
             ],
         )
 else:
