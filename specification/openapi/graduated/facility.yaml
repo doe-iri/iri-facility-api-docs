@@ -15,6 +15,7 @@ paths:
           format: date-time
           description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
             are accepted.
+          example: '2026-02-21T12:00:00Z'
           title: Modified Since
       responses:
         '200':
@@ -26,47 +27,9 @@ paths:
         '400':
           description: Invalid request parameters
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/invalid-parameter
-                title: Invalid parameter
-                status: 400
-                detail: modified_since must be in ISO 8601 format.
-                instance: /api/v1/status/resources?modified_since=BADVALUE
-                invalid_params:
-                - name: modified_since
-                  reason: Invalid datetime format
+                $ref: '#/components/schemas/Problem'
         '401':
           description: Unauthorized
           headers:
@@ -75,126 +38,21 @@ paths:
               schema:
                 type: string
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/unauthorized
-                title: Unauthorized
-                status: 401
-                detail: Bearer token is missing or invalid.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '403':
           description: Forbidden
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/forbidden
-                title: Forbidden
-                status: 403
-                detail: Caller is authenticated but lacks required role.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '404':
           description: Not Found
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/not-found
-                title: Not Found
-                status: 404
-                detail: The resource ID 'abc123' does not exist.
-                instance: /api/v1/status/resources/abc123
+                $ref: '#/components/schemas/Problem'
         '405':
           description: Method Not Allowed
           headers:
@@ -203,299 +61,47 @@ paths:
               schema:
                 type: string
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/method-not-allowed
-                title: Method Not Allowed
-                status: 405
-                detail: HTTP method TRACE is not allowed for this endpoint.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '409':
           description: Conflict
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/conflict
-                title: Conflict
-                status: 409
-                detail: A job with this ID already exists.
-                instance: /api/v1/compute/job/perlmutter/123
+                $ref: '#/components/schemas/Problem'
         '422':
           description: Unprocessable Entity
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/unprocessable-entity
-                title: Unprocessable Entity
-                status: 422
-                detail: The PSIJ JobSpec is syntactically correct but invalid.
-                instance: /api/v1/compute/job/perlmutter
-                invalid_params:
-                - name: job_spec.executable
-                  reason: Executable must be provided
+                $ref: '#/components/schemas/Problem'
         '500':
           description: Internal Server Error
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/internal-error
-                title: Internal Server Error
-                status: 500
-                detail: An unexpected error occurred.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '501':
           description: Not Implemented
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/not-implemented
-                title: Not Implemented
-                status: 501
-                detail: This functionality is not implemented.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '503':
           description: Service Unavailable
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/service-unavailable
-                title: Service Unavailable
-                status: 503
-                detail: The service is temporarily unavailable.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '504':
           description: Gateway Timeout
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/gateway-timeout
-                title: Gateway Timeout
-                status: 504
-                detail: The server did not receive a timely response.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
-      x-iri:
-        maturity: graduated
-        implementation:
-          level: required
   /api/v1/facility/sites:
     get:
       tags:
@@ -512,13 +118,16 @@ paths:
           format: date-time
           description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
             are accepted.
+          example: '2026-02-21T12:00:00Z'
           title: Modified Since
       - name: name
         in: query
         required: false
         schema:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Name
       - name: offset
         in: query
@@ -542,8 +151,10 @@ paths:
         in: query
         required: false
         schema:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Short Name
       responses:
         '200':
@@ -558,47 +169,9 @@ paths:
         '400':
           description: Invalid request parameters
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/invalid-parameter
-                title: Invalid parameter
-                status: 400
-                detail: modified_since must be in ISO 8601 format.
-                instance: /api/v1/status/resources?modified_since=BADVALUE
-                invalid_params:
-                - name: modified_since
-                  reason: Invalid datetime format
+                $ref: '#/components/schemas/Problem'
         '401':
           description: Unauthorized
           headers:
@@ -607,126 +180,21 @@ paths:
               schema:
                 type: string
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/unauthorized
-                title: Unauthorized
-                status: 401
-                detail: Bearer token is missing or invalid.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '403':
           description: Forbidden
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/forbidden
-                title: Forbidden
-                status: 403
-                detail: Caller is authenticated but lacks required role.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '404':
           description: Not Found
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/not-found
-                title: Not Found
-                status: 404
-                detail: The resource ID 'abc123' does not exist.
-                instance: /api/v1/status/resources/abc123
+                $ref: '#/components/schemas/Problem'
         '405':
           description: Method Not Allowed
           headers:
@@ -735,299 +203,47 @@ paths:
               schema:
                 type: string
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/method-not-allowed
-                title: Method Not Allowed
-                status: 405
-                detail: HTTP method TRACE is not allowed for this endpoint.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '409':
           description: Conflict
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/conflict
-                title: Conflict
-                status: 409
-                detail: A job with this ID already exists.
-                instance: /api/v1/compute/job/perlmutter/123
+                $ref: '#/components/schemas/Problem'
         '422':
           description: Unprocessable Entity
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/unprocessable-entity
-                title: Unprocessable Entity
-                status: 422
-                detail: The PSIJ JobSpec is syntactically correct but invalid.
-                instance: /api/v1/compute/job/perlmutter
-                invalid_params:
-                - name: job_spec.executable
-                  reason: Executable must be provided
+                $ref: '#/components/schemas/Problem'
         '500':
           description: Internal Server Error
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/internal-error
-                title: Internal Server Error
-                status: 500
-                detail: An unexpected error occurred.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '501':
           description: Not Implemented
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/not-implemented
-                title: Not Implemented
-                status: 501
-                detail: This functionality is not implemented.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '503':
           description: Service Unavailable
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/service-unavailable
-                title: Service Unavailable
-                status: 503
-                detail: The service is temporarily unavailable.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '504':
           description: Gateway Timeout
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/gateway-timeout
-                title: Gateway Timeout
-                status: 504
-                detail: The server did not receive a timely response.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
-      x-iri:
-        maturity: graduated
-        implementation:
-          level: required
   /api/v1/facility/sites/{site_id}:
     get:
       tags:
@@ -1050,6 +266,7 @@ paths:
           format: date-time
           description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
             are accepted.
+          example: '2026-02-21T12:00:00Z'
           title: Modified Since
       responses:
         '200':
@@ -1061,47 +278,9 @@ paths:
         '400':
           description: Invalid request parameters
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/invalid-parameter
-                title: Invalid parameter
-                status: 400
-                detail: modified_since must be in ISO 8601 format.
-                instance: /api/v1/status/resources?modified_since=BADVALUE
-                invalid_params:
-                - name: modified_since
-                  reason: Invalid datetime format
+                $ref: '#/components/schemas/Problem'
         '401':
           description: Unauthorized
           headers:
@@ -1110,126 +289,21 @@ paths:
               schema:
                 type: string
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/unauthorized
-                title: Unauthorized
-                status: 401
-                detail: Bearer token is missing or invalid.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '403':
           description: Forbidden
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/forbidden
-                title: Forbidden
-                status: 403
-                detail: Caller is authenticated but lacks required role.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '404':
           description: Not Found
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/not-found
-                title: Not Found
-                status: 404
-                detail: The resource ID 'abc123' does not exist.
-                instance: /api/v1/status/resources/abc123
+                $ref: '#/components/schemas/Problem'
         '405':
           description: Method Not Allowed
           headers:
@@ -1238,296 +312,44 @@ paths:
               schema:
                 type: string
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/method-not-allowed
-                title: Method Not Allowed
-                status: 405
-                detail: HTTP method TRACE is not allowed for this endpoint.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '409':
           description: Conflict
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/conflict
-                title: Conflict
-                status: 409
-                detail: A job with this ID already exists.
-                instance: /api/v1/compute/job/perlmutter/123
+                $ref: '#/components/schemas/Problem'
         '422':
           description: Unprocessable Entity
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/unprocessable-entity
-                title: Unprocessable Entity
-                status: 422
-                detail: The PSIJ JobSpec is syntactically correct but invalid.
-                instance: /api/v1/compute/job/perlmutter
-                invalid_params:
-                - name: job_spec.executable
-                  reason: Executable must be provided
+                $ref: '#/components/schemas/Problem'
         '500':
           description: Internal Server Error
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/internal-error
-                title: Internal Server Error
-                status: 500
-                detail: An unexpected error occurred.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '501':
           description: Not Implemented
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/not-implemented
-                title: Not Implemented
-                status: 501
-                detail: This functionality is not implemented.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '503':
           description: Service Unavailable
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/service-unavailable
-                title: Service Unavailable
-                status: 503
-                detail: The service is temporarily unavailable.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '504':
           description: Gateway Timeout
           content:
-            application/problem+json:
+            application/json:
               schema:
-                type: object
-                properties:
-                  type:
-                    type: string
-                  title:
-                    type: string
-                  status:
-                    type: integer
-                  detail:
-                    type: string
-                  instance:
-                    type: string
-                  invalid_params:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        reason:
-                          type: string
-                      required:
-                      - name
-                      - reason
-                required:
-                - type
-                - title
-                - status
-                - detail
-                - instance
-              example:
-                type: https://iri.example.com/problems/gateway-timeout
-                title: Gateway Timeout
-                status: 504
-                detail: The server did not receive a timely response.
-                instance: /api/v1/status/resources
+                $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
-      x-iri:
-        maturity: graduated
-        implementation:
-          level: required

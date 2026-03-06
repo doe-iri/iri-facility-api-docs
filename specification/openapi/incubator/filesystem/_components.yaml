@@ -19,216 +19,224 @@ components:
       - gzip
       - xz
       title: CompressionType
+      description: Defines the type of compression to be used for compressing or extracting
+        files.
     PostCompressRequest:
       properties:
-        sourcePath:
+        path:
           anyOf:
           - type: string
           - type: 'null'
-          title: Sourcepath
+          title: Path
+          description: Source file or directory path
           example: /home/user/dir
-        targetPath:
+        target_path:
           type: string
-          title: Targetpath
+          title: Target Path
           description: Path to the compressed file
-        matchPattern:
+          example: /home/user/file.tar.gz
+        match_pattern:
           anyOf:
           - type: string
           - type: 'null'
-          title: Matchpattern
+          title: Match Pattern
           description: Regex pattern to filter files to compress
+          example: .*\.txt$
         dereference:
-          anyOf:
-          - type: boolean
-          - type: 'null'
+          type: boolean
           title: Dereference
           description: If set to `true`, it follows symbolic links and archive the
             files they point to instead of the links themselves.
           default: false
+          example: true
         compression:
-          anyOf:
-          - $ref: '#/components/schemas/CompressionType'
-          - type: 'null'
+          $ref: '#/components/schemas/CompressionType'
           description: Defines the type of compression to be used. By default gzip
             is used.
           default: gzip
+          example: gzip
       type: object
       required:
-      - sourcePath
-      - targetPath
+      - target_path
       title: PostCompressRequest
+      description: Represents a request to compress a file.
       examples:
       - compression: none
         dereference: 'true'
-        matchPattern: '*./[ab].*\.txt'
-        sourcePath: /home/user/dir
-        targetPath: /home/user/file.tar.gz
+        match_pattern: '*./[ab].*\.txt'
+        source_path: /home/user/dir
+        target_path: /home/user/file.tar.gz
     PostCopyRequest:
       properties:
-        sourcePath:
+        path:
           anyOf:
           - type: string
           - type: 'null'
-          title: Sourcepath
+          title: Path
+          description: Source file or directory path
           example: /home/user/dir
-        targetPath:
+        target_path:
           type: string
-          title: Targetpath
+          title: Target Path
           description: Target path of the copy operation
+          example: /home/user/dir/file.new
         dereference:
-          anyOf:
-          - type: boolean
-          - type: 'null'
+          type: boolean
           title: Dereference
           description: If set to `true`, it follows symbolic links and copies the
             files they point to instead of the links themselves.
           default: false
+          example: true
       type: object
       required:
-      - sourcePath
-      - targetPath
+      - target_path
       title: PostCopyRequest
+      description: Represents a request to copy a file.
       examples:
       - dereference: 'true'
-        sourcePath: /home/user/dir/file.orig
-        targetPath: /home/user/dir/file.new
+        source_path: /home/user/dir/file.orig
+        target_path: /home/user/dir/file.new
     PostExtractRequest:
       properties:
-        sourcePath:
+        path:
           anyOf:
           - type: string
           - type: 'null'
-          title: Sourcepath
+          title: Path
+          description: Source file or directory path
           example: /home/user/dir
-        targetPath:
+        target_path:
           type: string
-          title: Targetpath
+          title: Target Path
           description: Path to the directory where to extract the compressed file
+          example: /home/user/dir
         compression:
-          anyOf:
-          - $ref: '#/components/schemas/CompressionType'
-          - type: 'null'
+          $ref: '#/components/schemas/CompressionType'
           description: Defines the type of compression to be used. By default gzip
             is used.
           default: gzip
+          example: gzip
       type: object
       required:
-      - sourcePath
-      - targetPath
+      - target_path
       title: PostExtractRequest
+      description: Represents a request to extract a compressed file.
       examples:
       - compression: none
-        sourcePath: /home/user/dir/file.tar.gz
-        targetPath: /home/user/dir
+        source_path: /home/user/dir/file.tar.gz
+        target_path: /home/user/dir
     PostFileSymlinkRequest:
       properties:
-        sourcePath:
+        path:
           anyOf:
           - type: string
           - type: 'null'
-          title: Sourcepath
+          title: Path
+          description: Source file or directory path
           example: /home/user/dir
-        linkPath:
+        link_path:
           type: string
-          title: Linkpath
+          title: Link Path
           description: Path to the new symlink
+          example: /home/user/newlink
       type: object
       required:
-      - sourcePath
-      - linkPath
+      - link_path
       title: PostFileSymlinkRequest
+      description: Represents a request to create a symbolic link.
       examples:
       - link_path: /home/user/newlink
         path: /home/user/dir
     PostMakeDirRequest:
       properties:
-        sourcePath:
+        path:
           anyOf:
           - type: string
           - type: 'null'
-          title: Sourcepath
+          title: Path
+          description: Source file or directory path
           example: /home/user/dir
         parent:
-          anyOf:
-          - type: boolean
-          - type: 'null'
+          type: boolean
           title: Parent
           description: If set to `true` creates all its parent directories if they
             do not already exist
           default: false
+          example: true
       type: object
-      required:
-      - sourcePath
       title: PostMakeDirRequest
+      description: Represents a request to create a directory.
       examples:
       - parent: 'true'
         path: /home/user/dir/newdir
     PostMoveRequest:
       properties:
-        sourcePath:
+        path:
           anyOf:
           - type: string
           - type: 'null'
-          title: Sourcepath
+          title: Path
+          description: Source file or directory path
           example: /home/user/dir
-        targetPath:
+        target_path:
           type: string
-          title: Targetpath
+          title: Target Path
           description: Target path of the move operation
+          example: /home/user/dir/file.new
       type: object
       required:
-      - sourcePath
-      - targetPath
+      - target_path
       title: PostMoveRequest
+      description: Represents a request to move a file.
       examples:
-      - sourcePath: /home/user/dir/file.orig
-        targetPath: /home/user/dir/file.new
+      - source_path: /home/user/dir/file.orig
+        target_path: /home/user/dir/file.new
     PutFileChmodRequest:
       properties:
-        sourcePath:
+        path:
           anyOf:
           - type: string
           - type: 'null'
-          title: Sourcepath
+          title: Path
+          description: Source file or directory path
           example: /home/user/dir
         mode:
           type: string
           title: Mode
           description: Mode in octal permission format
+          example: '777'
       type: object
       required:
-      - sourcePath
       - mode
       title: PutFileChmodRequest
+      description: Represents a request to change file permissions.
       examples:
       - mode: '777'
         path: /home/user/dir/file.out
     PutFileChownRequest:
       properties:
-        sourcePath:
+        path:
           anyOf:
           - type: string
           - type: 'null'
-          title: Sourcepath
+          title: Path
+          description: Source file or directory path
           example: /home/user/dir
         owner:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Owner
           description: User name of the new user owner of the file
           default: ''
+          example: user
         group:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Group
           description: Group name of the new group owner of the file
           default: ''
+          example: my-group
       type: object
-      required:
-      - sourcePath
       title: PutFileChownRequest
+      description: Represents a request to change file ownership.
       examples:
       - group: my-group
         owner: user
@@ -238,40 +246,57 @@ components:
         id:
           type: string
           title: Id
+          description: Unique identifier of the task
+          example: task-123
         status:
           $ref: '#/components/schemas/TaskStatus'
+          description: Current status of the task
           default: pending
+          example: pending
         result:
           anyOf:
-          - type: string
+          - additionalProperties: true
+            type: object
           - type: 'null'
           title: Result
+          description: Result of the task execution, if available
         command:
           anyOf:
           - $ref: '#/components/schemas/TaskCommand'
           - type: 'null'
+          description: Command associated with this task
       type: object
       required:
       - id
       title: Task
+      description: Represents a task in the system.
     TaskCommand:
       properties:
         router:
           type: string
           title: Router
+          description: Router name the task comes from
+          example: filesystem
         command:
           type: string
           title: Command
+          description: Command to execute
+          example: chmod
         args:
           additionalProperties: true
           type: object
           title: Args
+          description: Command arguments as key-value pairs
+          example:
+            mode: '755'
+            path: /home/user/file
       type: object
       required:
       - router
       - command
       - args
       title: TaskCommand
+      description: Represents a command to be executed as part of a task.
     TaskStatus:
       type: string
       enum:
@@ -281,11 +306,14 @@ components:
       - failed
       - canceled
       title: TaskStatus
+      description: Represents the status of a task.
     TaskSubmitResponse:
       properties:
         task_id:
           type: string
           title: Task Id
+          description: Identifier of the submitted task
+          example: task-123
         task_uri:
           type: string
           title: Task Uri
