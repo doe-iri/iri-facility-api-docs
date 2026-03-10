@@ -12,6 +12,8 @@ An API progresses through the following stages:
 
 | Stage     | Description                                     |
 | --------- | ----------------------------------------------- |
+| TBD/Unset | To be defined/Unset. Used for new requests      |
+| Concept   | In progress to define required API format/doc   |
 | Sandbox   | Experimental ideas with no stability guarantees |
 | Incubator | Actively developed and stabilizing              |
 | Candidate | Approved for upcoming adoption                  |
@@ -42,7 +44,36 @@ A proposal passes if:
 
 ---
 
-### 1. Sandbox
+### 1. TBD/Unset
+
+**Purpose:** Submission state
+
+Used when a proposal has been submitted but has not yet entered the formal lifecycle.
+
+* Use the following form to submit a request and fill out all details. [Submit new request](https://github.com/doe-iri/iri-facility-api-docs/issues/new?template=newapi.yml).
+
+### 2. Concept
+
+**Purpose:** Early architectural idea.
+
+Characteristics:
+
+* RFC or proposal draft may exist
+* Implementation may not exist
+* Scope and semantics may change significantly
+
+Typical uses:
+
+* Early design proposals
+* New architectural directions
+* Conceptual capabilities
+
+Requirements to enter:
+
+* Initial review of the IRI team.
+* Create a pull request to the concept directory with details related to the new API (directory name == issue id): document, proposal, or design document for this API.
+
+### 3. Sandbox
 
 **Purpose:** Innovation zone for new ideas and experimental capabilities.
 
@@ -61,14 +92,14 @@ Typical uses:
 * Facility-specific experiments
 * New architectural approaches
 
-Requirements:
+Requirements to enter:
 
-* Use the following form to submit a request and fill out all details. [Submit new request](https://github.com/doe-iri/iri-facility-api-docs/issues/new?template=newapi.yml).
-* Create a pull request to the sandbox directory with details related to the new API: document, proposal, or design document for this API.
+* Specification draft exists
+* Pass if at least 70% of the IRI team members with binding votes vote "In favor"
 
 ---
 
-### 2. Incubator
+### 4. Incubator
 
 **Purpose:** Refinement and validation of progressed APIs.
 
@@ -96,7 +127,7 @@ Goals:
 
 ---
 
-### 3. Candidate
+### 5. Candidate
 
 **Purpose:** Preparation for broad adoption across all facilities.
 
@@ -118,7 +149,7 @@ Requirements to enter:
 
 ---
 
-### 4. Graduated
+### 6. Graduated
 
 **Purpose:** Official, stable IRI API.
 
@@ -142,7 +173,7 @@ Requirements to enter:
 
 ---
 
-### 5. Archived
+### 7. Archived
 
 **Purpose:** Retirement of obsolete or unsuccessful APIs.
 
@@ -222,20 +253,26 @@ This enables automated validation and discovery.
 
 Transitions between stages require approval from the IRI governance.
 
-### -> Sandbox
+### ->TBD/Unset
 
 * Fill out the form with details
 
-### Sandbox -> Incubator
+### TBD/Unset -> Concept
 
 * Draft specification prepared
-* Initial implementation exists
+
+### Concept -> Sandbox
+
 * Review completed
+
+### Sandbox -> Incubator
+
+* Initial implementation exists
 
 ### Incubator → Candidate
 
 * Specification stabilized
-* Community agreed on usefulness
+* Community agreed on the usefulness
 * Implementation experience documented
 
 ### Candidate → Graduated

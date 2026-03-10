@@ -1,7 +1,7 @@
 name: New API application
 description: Propose a new API or request API advancement
-title: "[API] <API Name> — <Requested Stage>"
-labels: ["api", "sandbox-request"]
+title: "[API] <API Name | Short Description>"
+labels: ["api", "tbd-request"]
 
 body:
   - type: markdown
@@ -117,7 +117,7 @@ body:
     attributes:
       label: Implementation level
       description: Required, Optional, or Conditional (include capability requirements if conditional).
-      placeholder: "Example: Conditional — required if facility advertises DPU capability"
+      placeholder: "Example: Conditional — required if facility advertises DPU capability."
     validations:
       required: true
 
