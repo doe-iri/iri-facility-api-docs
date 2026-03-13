@@ -114,6 +114,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/compute/job/{resource_id}/{job_id}:
     put:
       tags:
@@ -235,6 +239,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/compute/status/{resource_id}/{job_id}:
     get:
       tags:
@@ -368,6 +376,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/compute/status/{resource_id}:
     post:
       tags:
@@ -525,6 +537,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/compute/cancel/{resource_id}/{job_id}:
     delete:
       tags:
@@ -628,3 +644,7 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required

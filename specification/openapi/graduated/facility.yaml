@@ -102,6 +102,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required
   /api/v1/facility/sites:
     get:
       tags:
@@ -244,6 +248,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required
   /api/v1/facility/sites/{site_id}:
     get:
       tags:
@@ -353,3 +361,7 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required

@@ -100,6 +100,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
     delete:
       tags:
       - task
@@ -201,6 +205,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/task:
     get:
       tags:
@@ -298,3 +306,7 @@ paths:
           description: Not Modified
       security:
       - HTTPBearer: []
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required

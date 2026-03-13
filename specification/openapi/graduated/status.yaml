@@ -164,6 +164,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required
   /api/v1/status/resources/{resource_id}:
     get:
       tags:
@@ -263,6 +267,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required
   /api/v1/status/incidents:
     get:
       tags:
@@ -460,6 +468,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required
   /api/v1/status/incidents/{incident_id}:
     get:
       tags:
@@ -561,6 +573,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required
   /api/v1/status/incidents/{incident_id}/events:
     get:
       tags:
@@ -754,6 +770,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required
   /api/v1/status/incidents/{incident_id}/events/{event_id}:
     get:
       tags:
@@ -859,3 +879,7 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required

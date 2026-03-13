@@ -106,6 +106,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/chown/{resource_id}:
     put:
       tags:
@@ -213,6 +217,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/file/{resource_id}:
     get:
       tags:
@@ -322,6 +330,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/stat/{resource_id}:
     get:
       tags:
@@ -440,6 +452,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/mkdir/{resource_id}:
     post:
       tags:
@@ -547,6 +563,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/symlink/{resource_id}:
     post:
       tags:
@@ -654,6 +674,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/ls/{resource_id}:
     get:
       tags:
@@ -799,6 +823,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/head/{resource_id}:
     get:
       tags:
@@ -937,6 +965,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/view/{resource_id}:
     get:
       tags:
@@ -1069,6 +1101,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/tail/{resource_id}:
     get:
       tags:
@@ -1210,6 +1246,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/checksum/{resource_id}:
     get:
       tags:
@@ -1319,6 +1359,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/rm/{resource_id}:
     delete:
       tags:
@@ -1428,6 +1472,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/compress/{resource_id}:
     post:
       tags:
@@ -1535,6 +1583,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/extract/{resource_id}:
     post:
       tags:
@@ -1642,6 +1694,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/mv/{resource_id}:
     post:
       tags:
@@ -1749,6 +1805,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/cp/{resource_id}:
     post:
       tags:
@@ -1856,6 +1916,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/download/{resource_id}:
     get:
       tags:
@@ -1965,6 +2029,10 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
   /api/v1/filesystem/upload/{resource_id}:
     post:
       tags:
@@ -2080,3 +2148,7 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '304':
           description: Not Modified
+      x-iri:
+        maturity: incubator
+        implementation:
+          level: required
