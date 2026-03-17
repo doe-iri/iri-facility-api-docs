@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate a diff between a new OpenAPI spec and a baseline
-(graduated), then split into modular files.
+(production), then split into modular files.
 """
 
 import argparse
@@ -130,7 +130,7 @@ def main():
     """ Main entry point for the diff and split process. """
     parser = argparse.ArgumentParser()
     parser.add_argument("url")
-    parser.add_argument("--baseline", default="graduated")
+    parser.add_argument("--baseline", default="production")
     parser.add_argument("--outdir", required=True)
 
     args = parser.parse_args()

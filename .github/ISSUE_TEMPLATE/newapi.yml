@@ -1,7 +1,7 @@
 name: New API application
 description: Propose a new API or request API advancement
 title: "[API] <API Name | Short Description>"
-labels: ["api", "tbd-request"]
+labels: ["api", "undetermined"]
 
 body:
   - type: markdown

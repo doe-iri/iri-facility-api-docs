@@ -10,15 +10,15 @@ Without an explicit maturity lifecycle, experimental endpoints can lead to incon
 
 An API progresses through the following stages:
 
-| Stage     | Description                                     |
-| --------- | ----------------------------------------------- |
-| TBD/Unset | To be defined/Unset. Used for new requests      |
-| Concept   | In progress to define required API format/doc   |
-| Sandbox   | Experimental ideas with no stability guarantees |
-| Incubator | Actively developed and stabilizing              |
-| Candidate | Approved for upcoming adoption                  |
-| Graduated | Official stable specification                   |
-| Archived  | Deprecated or discontinued                      |
+| Stage            | Description                                     |
+| ---------------- | ----------------------------------------------- |
+| Undetermined     | To be defined/Unset. Used for new requests      |
+| Planned          | In progress to define required API format/doc   |
+| In Development   | Experimental ideas with no stability guarantees |
+| Prototype        | Actively developed and stabilizing              |
+| Beta Integration | Approved for upcoming adoption                  |
+| Production Ready | Official stable specification                   |
+| Retired          | Deprecated or discontinued                      |
 
 ## IRI API Vote process
 
@@ -44,7 +44,7 @@ A proposal passes if:
 
 ---
 
-### 1. TBD/Unset
+### 1. Undetermined (undetermined)
 
 **Purpose:** Submission state
 
@@ -52,7 +52,7 @@ Used when a proposal has been submitted but has not yet entered the formal lifec
 
 * Use the following form to submit a request and fill out all details. [Submit new request](https://github.com/doe-iri/iri-facility-api-docs/issues/new?template=newapi.yml).
 
-### 2. Concept
+### 2. Planned (planned)
 
 **Purpose:** Early architectural idea.
 
@@ -73,7 +73,7 @@ Requirements to enter:
 * Initial review of the IRI team.
 * Create a pull request to the concept directory with details related to the new API (directory name == issue id): document, proposal, or design document for this API.
 
-### 3. Sandbox
+### 3. In Development (in_development)
 
 **Purpose:** Innovation zone for new ideas and experimental capabilities.
 
@@ -99,7 +99,7 @@ Requirements to enter:
 
 ---
 
-### 4. Incubator
+### 4. Prototype (prototype)
 
 **Purpose:** Refinement and validation of progressed APIs.
 
@@ -127,7 +127,7 @@ Goals:
 
 ---
 
-### 5. Candidate
+### 5. Beta Integration (beta)
 
 **Purpose:** Preparation for broad adoption across all facilities.
 
@@ -149,7 +149,7 @@ Requirements to enter:
 
 ---
 
-### 6. Graduated
+### 6. Production Ready (production)
 
 **Purpose:** Official, stable IRI API.
 
@@ -173,7 +173,7 @@ Requirements to enter:
 
 ---
 
-### 7. Archived
+### 7. Retired (retired)
 
 **Purpose:** Retirement of obsolete or unsuccessful APIs.
 
@@ -230,7 +230,7 @@ Maturity lifecycle and implementation status SHOULD be encoded as OpenAPI extens
 
 ```yaml
 x-iri:
-  maturity: graduated
+  maturity: production
   implementation:
     level: optional
 ```
@@ -253,35 +253,35 @@ This enables automated validation and discovery.
 
 Transitions between stages require approval from the IRI governance.
 
-### ->TBD/Unset
+### -> Undetermined
 
 * Fill out the form with details
 
-### TBD/Unset -> Concept
+### Undetermined -> Planned
 
 * Draft specification prepared
 
-### Concept -> Sandbox
+### Planned -> In Development
 
 * Review completed
 
-### Sandbox -> Incubator
+### In Development -> Prototype
 
 * Initial implementation exists
 
-### Incubator → Candidate
+### Prototype → Beta Integration
 
 * Specification stabilized
 * Community agreed on the usefulness
 * Implementation experience documented
 
-### Candidate → Graduated
+### Beta Integration → Production Ready
 
 * Successful evaluation period
 * No significant interoperability issues
 * IRI governance formal approval
 
-### Any Stage → Archived
+### Any Stage → Retired
 
 * No adoption or active development
 * Replaced by alternative
@@ -294,9 +294,9 @@ Transitions between stages require approval from the IRI governance.
 
 Facilities are expected to:
 
-* Implement all Required Graduated APIs (with an exception of implementation level: optional, conditional. For not required, the facility can raise 501 Exception)
+* Implement all Required Production APIs (with an exception of implementation level: optional, conditional. For not required, the facility can raise 501 Exception)
 * Clearly advertise supported APIs
 * Avoid presenting non-stable APIs as official endpoints
-* Maintain backward compatibility for Graduated APIs
+* Maintain backward compatibility for Production APIs
 
-Clients SHOULD rely only on Graduated APIs unless explicitly opting into experimental features.
+Clients SHOULD rely only on Production APIs unless explicitly opting into experimental features.

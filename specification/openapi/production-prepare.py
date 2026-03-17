@@ -78,7 +78,7 @@ def main():
     parser.add_argument("url", help="URL to openapi.json")
     parser.add_argument(
         "--outdir",
-        default="graduated",
+        default="production",
         help="Output directory",
     )
 
