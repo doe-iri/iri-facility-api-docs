@@ -59,6 +59,8 @@ Here is a draft OpenAPI definitions for the job submission and filesystem operat
        - **[6.5.6 JobStateType](./conceptual-model.md#656-enum-jobstatetype)**
        - **[6.5.7 Relationships](./conceptual-model.md#657-relationships)**
      - **[6.6 Filesystem](./conceptual-model.md#66-filesystem-model)**
+ - **[7. New API requests](./new-api-requests.md)**
+
 
 # REST API Specification
 

@@ -1,0 +1,428 @@
+components:
+  schemas:
+    Container:
+      properties:
+        image:
+          type: string
+          minLength: 1
+          title: Image
+          description: The container image to use (e.g., 'docker.io/library/ubuntu:latest')
+          example: docker.io/library/ubuntu:latest
+        volume_mounts:
+          items:
+            $ref: '#/components/schemas/VolumeMount'
+          type: array
+          title: Volume Mounts
+          description: List of volume mounts for the container
+          default: []
+      additionalProperties: true
+      type: object
+      required:
+      - image
+      title: Container
+      description: 'Represents a container specification for job execution.
+
+
+        Implementation notes: The value of gpu_cores_per_process in ResourceSpec should
+        be used to determine
+
+        if the container should be run with GPU support. Likewise, the value of launcher
+        in JobSpec should be used
+
+        to determine if the container should be run with MPI support. The container
+        should by default. be run with
+
+        host networking.'
+    Job:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Unique identifier of the job
+          example: job-12345
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/JobStatus'
+          - type: 'null'
+          description: Current status of the job
+        job_spec:
+          anyOf:
+          - $ref: '#/components/schemas/JobSpec-Output'
+          - type: 'null'
+          description: Specification used to create the job
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      title: Job
+      description: Represents a job in the system.
+    JobAttributes:
+      properties:
+        duration:
+          type: integer
+          minimum: 1.0
+          title: Duration
+          description: Duration in seconds
+          examples:
+          - 30
+          - 60
+          - 120
+        queue_name:
+          type: string
+          minLength: 1
+          title: Queue Name
+          description: Name of the queue or partition to submit the job to
+          example: debug
+        account:
+          type: string
+          minLength: 1
+          title: Account
+          description: Account or project to charge for resource usage
+          example: proj123
+        reservation_id:
+          type: string
+          minLength: 1
+          title: Reservation Id
+          description: ID of a reservation to use for the job
+          example: resv-42
+        custom_attributes:
+          additionalProperties:
+            type: string
+          type: object
+          title: Custom Attributes
+          description: Custom scheduler-specific attributes as key-value pairs
+          default: {}
+          example:
+            constraint: gpu
+      additionalProperties: true
+      type: object
+      title: JobAttributes
+      description: Additional attributes and scheduling parameters for a job.
+    JobSpec-Input:
+      properties:
+        executable:
+          type: string
+          minLength: 1
+          title: Executable
+          description: Path to the executable to run. If container is specified, this
+            will be used as the entrypoint to the container.
+          example: /usr/bin/python
+        container:
+          $ref: '#/components/schemas/Container'
+          description: Container specification for containerized execution
+        arguments:
+          items:
+            type: string
+          type: array
+          title: Arguments
+          description: Command-line arguments to pass to the executable or container
+          default: []
+          example:
+          - -n
+          - '100'
+        directory:
+          type: string
+          minLength: 1
+          title: Directory
+          description: Working directory for the job
+          example: /home/user/work
+        name:
+          type: string
+          minLength: 1
+          title: Name
+          description: Name of the job
+          example: my-job
+        inherit_environment:
+          type: boolean
+          title: Inherit Environment
+          description: Whether to inherit the environment variables from the submission
+            environment
+          default: true
+          example: true
+        environment:
+          additionalProperties:
+            type: string
+          type: object
+          title: Environment
+          description: Environment variables to set for the job. If container is specified,
+            these will be set inside the container.
+          default: {}
+          example:
+            OMP_NUM_THREADS: '4'
+        stdin_path:
+          type: string
+          minLength: 1
+          title: Stdin Path
+          description: Path to file to use as standard input
+          example: /home/user/input.txt
+        stdout_path:
+          type: string
+          minLength: 1
+          title: Stdout Path
+          description: Path to file to write standard output
+          example: /home/user/output.txt
+        stderr_path:
+          type: string
+          minLength: 1
+          title: Stderr Path
+          description: Path to file to write standard error
+          example: /home/user/error.txt
+        resources:
+          $ref: '#/components/schemas/ResourceSpec'
+          description: Resource requirements for the job
+        attributes:
+          $ref: '#/components/schemas/JobAttributes'
+          description: Additional job attributes such as duration, queue, and account
+        pre_launch:
+          type: string
+          minLength: 1
+          title: Pre Launch
+          description: Script or commands to run before launching the job
+          example: module load cuda
+        post_launch:
+          type: string
+          minLength: 1
+          title: Post Launch
+          description: Script or commands to run after the job completes
+          example: echo done
+        launcher:
+          type: string
+          minLength: 1
+          title: Launcher
+          description: Job launcher to use (e.g., 'mpirun', 'srun')
+          example: srun
+      additionalProperties: false
+      type: object
+      title: JobSpec
+      description: Specification for a job.
+    JobSpec-Output:
+      properties:
+        executable:
+          type: string
+          minLength: 1
+          title: Executable
+          description: Path to the executable to run. If container is specified, this
+            will be used as the entrypoint to the container.
+          example: /usr/bin/python
+        container:
+          $ref: '#/components/schemas/Container'
+          description: Container specification for containerized execution
+        arguments:
+          items:
+            type: string
+          type: array
+          title: Arguments
+          description: Command-line arguments to pass to the executable or container
+          default: []
+          example:
+          - -n
+          - '100'
+        directory:
+          type: string
+          minLength: 1
+          title: Directory
+          description: Working directory for the job
+          example: /home/user/work
+        name:
+          type: string
+          minLength: 1
+          title: Name
+          description: Name of the job
+          example: my-job
+        inherit_environment:
+          type: boolean
+          title: Inherit Environment
+          description: Whether to inherit the environment variables from the submission
+            environment
+          default: true
+          example: true
+        environment:
+          additionalProperties:
+            type: string
+          type: object
+          title: Environment
+          description: Environment variables to set for the job. If container is specified,
+            these will be set inside the container.
+          default: {}
+          example:
+            OMP_NUM_THREADS: '4'
+        stdin_path:
+          type: string
+          minLength: 1
+          title: Stdin Path
+          description: Path to file to use as standard input
+          example: /home/user/input.txt
+        stdout_path:
+          type: string
+          minLength: 1
+          title: Stdout Path
+          description: Path to file to write standard output
+          example: /home/user/output.txt
+        stderr_path:
+          type: string
+          minLength: 1
+          title: Stderr Path
+          description: Path to file to write standard error
+          example: /home/user/error.txt
+        resources:
+          $ref: '#/components/schemas/ResourceSpec'
+          description: Resource requirements for the job
+        attributes:
+          $ref: '#/components/schemas/JobAttributes'
+          description: Additional job attributes such as duration, queue, and account
+        pre_launch:
+          type: string
+          minLength: 1
+          title: Pre Launch
+          description: Script or commands to run before launching the job
+          example: module load cuda
+        post_launch:
+          type: string
+          minLength: 1
+          title: Post Launch
+          description: Script or commands to run after the job completes
+          example: echo done
+        launcher:
+          type: string
+          minLength: 1
+          title: Launcher
+          description: Job launcher to use (e.g., 'mpirun', 'srun')
+          example: srun
+      additionalProperties: false
+      type: object
+      title: JobSpec
+      description: Specification for a job.
+    JobState:
+      type: string
+      enum:
+      - new
+      - queued
+      - active
+      - completed
+      - failed
+      - canceled
+      title: JobState
+      description: 'from: https://exaworks.org/psij-python/docs/v/0.9.11/_modules/psij/job_state.html#JobState
+
+
+        An enumeration holding the possible job states.
+
+
+        The possible states are: `NEW`, `QUEUED`, `ACTIVE`, `COMPLETED`, `FAILED`,
+        and `CANCELED`.'
+    JobStatus:
+      properties:
+        state:
+          $ref: '#/components/schemas/JobState'
+          description: Current state of the job
+          example: queued
+        time:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Time
+          description: Timestamp associated with the status (seconds since epoch)
+          example: 1708531200.0
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+          description: Human-readable status message
+          example: Job is waiting in queue
+        exit_code:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Exit Code
+          description: Process exit code if the job has finished
+          example: 0
+        meta_data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Meta Data
+          description: Backend-specific metadata associated with the job status
+      additionalProperties: true
+      type: object
+      required:
+      - state
+      title: JobStatus
+      description: Represents the status of a job.
+    ResourceSpec:
+      properties:
+        node_count:
+          type: integer
+          minimum: 1.0
+          title: Node Count
+          description: Number of compute nodes to allocate
+          example: 2
+        process_count:
+          type: integer
+          minimum: 1.0
+          title: Process Count
+          description: Total number of processes to launch
+          example: 64
+        processes_per_node:
+          type: integer
+          minimum: 1.0
+          title: Processes Per Node
+          description: Number of processes to launch per node
+          example: 32
+        cpu_cores_per_process:
+          type: integer
+          minimum: 1.0
+          title: Cpu Cores Per Process
+          description: Number of CPU cores to allocate per process
+          example: 2
+        gpu_cores_per_process:
+          type: integer
+          minimum: 1.0
+          title: Gpu Cores Per Process
+          description: Number of GPU cores to allocate per process
+          example: 1
+        exclusive_node_use:
+          type: boolean
+          title: Exclusive Node Use
+          description: Whether to request exclusive use of allocated nodes
+          default: true
+          example: true
+        memory:
+          type: integer
+          minimum: 1.0
+          title: Memory
+          description: Amount of memory to allocate in bytes
+          example: 17179869184
+      additionalProperties: true
+      type: object
+      title: ResourceSpec
+      description: Specification of computational resources required for a job.
+    VolumeMount:
+      properties:
+        source:
+          type: string
+          minLength: 1
+          title: Source
+          description: The source path on the host system to mount
+          example: /data/project
+        target:
+          type: string
+          minLength: 1
+          title: Target
+          description: The target path inside the container where the volume will
+            be mounted
+          example: /mnt/data
+        read_only:
+          type: boolean
+          title: Read Only
+          description: Whether the mount should be read-only
+          default: true
+          example: true
+      additionalProperties: true
+      type: object
+      required:
+      - source
+      - target
+      title: VolumeMount
+      description: Represents a volume mount for a container.

@@ -1,0 +1,885 @@
+paths:
+  /api/v1/status/resources:
+    get:
+      tags:
+      - status
+      summary: Get all resources
+      description: Get a list of all resources at this facility. You can optionally
+        filter the returned list by specifying attribtes.
+      operationId: getResources
+      parameters:
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 1
+          title: Name
+      - name: description
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 1
+          title: Description
+      - name: group
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 1
+          title: Group
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 0
+          default: 100
+          title: Limit
+      - name: modified_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: Modified Since
+      - name: resource_type
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/ResourceType'
+      - name: current_status
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Status'
+      - name: capability
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllocationUnit'
+          minItems: 1
+          title: Capability
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Resource'
+                title: Response Getresources
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          headers:
+            WWW-Authenticate:
+              description: Bearer authentication challenge
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '405':
+          description: Method Not Allowed
+          headers:
+            Allow:
+              description: Allowed HTTP methods
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '501':
+          description: Not Implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '304':
+          description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required
+  /api/v1/status/resources/{resource_id}:
+    get:
+      tags:
+      - status
+      summary: Get a specific resource
+      description: Get a specific resource for a given id
+      operationId: getResource
+      parameters:
+      - name: resource_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Resource Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          headers:
+            WWW-Authenticate:
+              description: Bearer authentication challenge
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '405':
+          description: Method Not Allowed
+          headers:
+            Allow:
+              description: Allowed HTTP methods
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '501':
+          description: Not Implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '304':
+          description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required
+  /api/v1/status/incidents:
+    get:
+      tags:
+      - status
+      summary: Get all incidents without their events
+      description: Get a list of all incidents. Each incident will be returned without
+        its events.  You can optionally filter the returned list by specifying attributes.
+      operationId: getIncidents
+      parameters:
+      - name: name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Name
+      - name: description
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Description
+      - name: status
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Status'
+      - name: type
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/IncidentType'
+      - name: from
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: From
+      - name: time
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: Time
+      - name: to
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: To
+      - name: modified_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: Modified Since
+      - name: resource_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Resource Id
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 0
+          default: 100
+          title: Limit
+      - name: resolution
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Resolution'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Incident'
+                title: Response Getincidents
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          headers:
+            WWW-Authenticate:
+              description: Bearer authentication challenge
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '405':
+          description: Method Not Allowed
+          headers:
+            Allow:
+              description: Allowed HTTP methods
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '501':
+          description: Not Implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '304':
+          description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required
+  /api/v1/status/incidents/{incident_id}:
+    get:
+      tags:
+      - status
+      summary: Get a specific incident and its events
+      description: Get a specific incident for a given id. The incident's events will
+        also be included.  You can optionally filter the returned list by specifying
+        attributes.
+      operationId: getIncident
+      parameters:
+      - name: incident_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Incident Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          headers:
+            WWW-Authenticate:
+              description: Bearer authentication challenge
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '405':
+          description: Method Not Allowed
+          headers:
+            Allow:
+              description: Allowed HTTP methods
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '501':
+          description: Not Implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '304':
+          description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required
+  /api/v1/status/incidents/{incident_id}/events:
+    get:
+      tags:
+      - status
+      summary: Get all events for an incident
+      description: Get a list of all events in this incident.  You can optionally
+        filter the returned list by specifying attribtes.
+      operationId: getEventsByIncident
+      parameters:
+      - name: incident_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Incident Id
+      - name: resource_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Resource Id
+      - name: name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Name
+      - name: description
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Description
+      - name: status
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Status'
+      - name: from
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: From
+      - name: time
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: Time
+      - name: to
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: To
+      - name: modified_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: Modified Since
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 0
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+                title: Response Geteventsbyincident
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          headers:
+            WWW-Authenticate:
+              description: Bearer authentication challenge
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '405':
+          description: Method Not Allowed
+          headers:
+            Allow:
+              description: Allowed HTTP methods
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '501':
+          description: Not Implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '304':
+          description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required
+  /api/v1/status/incidents/{incident_id}/events/{event_id}:
+    get:
+      tags:
+      - status
+      summary: Get a specific event
+      description: Get a specific event for a given id
+      operationId: getEventByIncident
+      parameters:
+      - name: incident_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Incident Id
+      - name: event_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Event Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          headers:
+            WWW-Authenticate:
+              description: Bearer authentication challenge
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '405':
+          description: Method Not Allowed
+          headers:
+            Allow:
+              description: Allowed HTTP methods
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '501':
+          description: Not Implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '304':
+          description: Not Modified
+      x-iri:
+        maturity: graduated
+        implementation:
+          level: required

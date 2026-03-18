@@ -1,0 +1,21 @@
+openapi: 3.1.0
+info:
+  title: IRI Facility API reference implementation
+  description: '
+
+    A simple implementation of the IRI facility API using python and the fastApi library.
+
+
+    For more information, see: [https://iri.science/](https://iri.science/)
+
+
+    <img src="https://iri.science/images/doe-icon-old.png" height=50 />
+
+    '
+  termsOfService: https://www.somefacility.gov/terms-of-service
+  contact:
+    name: Facility API contact
+    url: https://www.somefacility.gov/about/contact-us/
+  version: 1.0.0
+servers:
+- url: http://localhost:8000
