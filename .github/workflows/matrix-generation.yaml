@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 env:
-  OFFICIAL_SCHEMA: specification/openapi/openapi_iri_facility_api_v1.yaml
+  OFFICIAL_SCHEMA: specification/openapi/all_spec.yaml
   IRI_API_TOKEN: "12345"
 
 jobs:
