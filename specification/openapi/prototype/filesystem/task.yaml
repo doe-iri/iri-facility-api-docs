@@ -101,7 +101,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: incubator
+        maturity: beta
         implementation:
           level: required
     delete:
@@ -206,7 +206,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: incubator
+        maturity: beta
         implementation:
           level: required
   /api/v1/task:
@@ -307,6 +307,6 @@ paths:
       security:
       - HTTPBearer: []
       x-iri:
-        maturity: incubator
+        maturity: beta
         implementation:
           level: required
