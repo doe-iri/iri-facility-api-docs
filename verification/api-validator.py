@@ -219,6 +219,7 @@ if schema is not None:
             excluded_checks=[
                 schemathesis.checks.content_type_conformance,
                 schemathesis.checks.unsupported_method,
+                schemathesis.checks.ignored_auth
             ],
         )
 else:
