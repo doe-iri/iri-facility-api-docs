@@ -34,7 +34,6 @@ paths:
         required: false
         schema:
           type: integer
-          maximum: 1000
           minimum: 0
           default: 0
           title: Offset
@@ -165,7 +164,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: graduated
+        maturity: production
         implementation:
           level: required
   /api/v1/status/resources/{resource_id}:
@@ -268,7 +267,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: graduated
+        maturity: production
         implementation:
           level: required
   /api/v1/status/incidents:
@@ -362,7 +361,6 @@ paths:
         required: false
         schema:
           type: integer
-          maximum: 1000
           minimum: 0
           default: 0
           title: Offset
@@ -469,7 +467,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: graduated
+        maturity: production
         implementation:
           level: required
   /api/v1/status/incidents/{incident_id}:
@@ -574,23 +572,26 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: graduated
+        maturity: production
         implementation:
           level: required
-  /api/v1/status/incidents/{incident_id}/events:
+  /api/v1/status/events:
     get:
       tags:
       - status
-      summary: Get all events for an incident
-      description: Get a list of all events in this incident.  You can optionally
-        filter the returned list by specifying attribtes.
+      summary: Get all events
+      description: Get a list of all events.  You can optionally filter the returned
+        list by specifying attribtes.
       operationId: getEventsByIncident
       parameters:
       - name: incident_id
-        in: path
-        required: true
+        in: query
+        required: false
         schema:
-          type: string
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Incident Id
       - name: resource_id
         in: query
@@ -669,7 +670,6 @@ paths:
         required: false
         schema:
           type: integer
-          maximum: 1000
           minimum: 0
           default: 0
           title: Offset
@@ -771,10 +771,10 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: graduated
+        maturity: production
         implementation:
           level: required
-  /api/v1/status/incidents/{incident_id}/events/{event_id}:
+  /api/v1/status/events/{event_id}:
     get:
       tags:
       - status
@@ -782,12 +782,6 @@ paths:
       description: Get a specific event for a given id
       operationId: getEventByIncident
       parameters:
-      - name: incident_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Incident Id
       - name: event_id
         in: path
         required: true
@@ -880,6 +874,6 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: graduated
+        maturity: production
         implementation:
           level: required

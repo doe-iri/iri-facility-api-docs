@@ -115,7 +115,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: incubator
+        maturity: beta
         implementation:
           level: required
   /api/v1/compute/job/{resource_id}/{job_id}:
@@ -240,7 +240,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: incubator
+        maturity: beta
         implementation:
           level: required
   /api/v1/compute/status/{resource_id}/{job_id}:
@@ -377,7 +377,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: incubator
+        maturity: beta
         implementation:
           level: required
   /api/v1/compute/status/{resource_id}:
@@ -401,7 +401,6 @@ paths:
         required: false
         schema:
           type: integer
-          maximum: 1000
           minimum: 0
           default: 0
           title: Offset
@@ -538,7 +537,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: incubator
+        maturity: beta
         implementation:
           level: required
   /api/v1/compute/cancel/{resource_id}/{job_id}:
@@ -645,6 +644,6 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: incubator
+        maturity: beta
         implementation:
           level: required

@@ -14,7 +14,6 @@ components:
           type: array
           title: Volume Mounts
           description: List of volume mounts for the container
-          default: []
       additionalProperties: true
       type: object
       required:
@@ -59,8 +58,10 @@ components:
     JobAttributes:
       properties:
         duration:
-          type: integer
-          minimum: 1.0
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
           title: Duration
           description: Duration in seconds
           examples:
@@ -68,20 +69,26 @@ components:
           - 60
           - 120
         queue_name:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Queue Name
           description: Name of the queue or partition to submit the job to
           example: debug
         account:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Account
           description: Account or project to charge for resource usage
           example: proj123
         reservation_id:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Reservation Id
           description: ID of a reservation to use for the job
           example: resv-42
@@ -91,7 +98,6 @@ components:
           type: object
           title: Custom Attributes
           description: Custom scheduler-specific attributes as key-value pairs
-          default: {}
           example:
             constraint: gpu
       additionalProperties: true
@@ -101,14 +107,18 @@ components:
     JobSpec-Input:
       properties:
         executable:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Executable
           description: Path to the executable to run. If container is specified, this
             will be used as the entrypoint to the container.
           example: /usr/bin/python
         container:
-          $ref: '#/components/schemas/Container'
+          anyOf:
+          - $ref: '#/components/schemas/Container'
+          - type: 'null'
           description: Container specification for containerized execution
         arguments:
           items:
@@ -116,19 +126,22 @@ components:
           type: array
           title: Arguments
           description: Command-line arguments to pass to the executable or container
-          default: []
           example:
           - -n
           - '100'
         directory:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Directory
           description: Working directory for the job
           example: /home/user/work
         name:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Name
           description: Name of the job
           example: my-job
@@ -146,48 +159,63 @@ components:
           title: Environment
           description: Environment variables to set for the job. If container is specified,
             these will be set inside the container.
-          default: {}
           example:
             OMP_NUM_THREADS: '4'
         stdin_path:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Stdin Path
           description: Path to file to use as standard input
           example: /home/user/input.txt
         stdout_path:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Stdout Path
           description: Path to file to write standard output
           example: /home/user/output.txt
         stderr_path:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Stderr Path
           description: Path to file to write standard error
           example: /home/user/error.txt
         resources:
-          $ref: '#/components/schemas/ResourceSpec'
+          anyOf:
+          - $ref: '#/components/schemas/ResourceSpec'
+          - type: 'null'
           description: Resource requirements for the job
         attributes:
-          $ref: '#/components/schemas/JobAttributes'
+          anyOf:
+          - $ref: '#/components/schemas/JobAttributes'
+          - type: 'null'
           description: Additional job attributes such as duration, queue, and account
         pre_launch:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Pre Launch
           description: Script or commands to run before launching the job
           example: module load cuda
         post_launch:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Post Launch
           description: Script or commands to run after the job completes
           example: echo done
         launcher:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Launcher
           description: Job launcher to use (e.g., 'mpirun', 'srun')
           example: srun
@@ -198,14 +226,18 @@ components:
     JobSpec-Output:
       properties:
         executable:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Executable
           description: Path to the executable to run. If container is specified, this
             will be used as the entrypoint to the container.
           example: /usr/bin/python
         container:
-          $ref: '#/components/schemas/Container'
+          anyOf:
+          - $ref: '#/components/schemas/Container'
+          - type: 'null'
           description: Container specification for containerized execution
         arguments:
           items:
@@ -213,19 +245,22 @@ components:
           type: array
           title: Arguments
           description: Command-line arguments to pass to the executable or container
-          default: []
           example:
           - -n
           - '100'
         directory:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Directory
           description: Working directory for the job
           example: /home/user/work
         name:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Name
           description: Name of the job
           example: my-job
@@ -243,48 +278,63 @@ components:
           title: Environment
           description: Environment variables to set for the job. If container is specified,
             these will be set inside the container.
-          default: {}
           example:
             OMP_NUM_THREADS: '4'
         stdin_path:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Stdin Path
           description: Path to file to use as standard input
           example: /home/user/input.txt
         stdout_path:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Stdout Path
           description: Path to file to write standard output
           example: /home/user/output.txt
         stderr_path:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Stderr Path
           description: Path to file to write standard error
           example: /home/user/error.txt
         resources:
-          $ref: '#/components/schemas/ResourceSpec'
+          anyOf:
+          - $ref: '#/components/schemas/ResourceSpec'
+          - type: 'null'
           description: Resource requirements for the job
         attributes:
-          $ref: '#/components/schemas/JobAttributes'
+          anyOf:
+          - $ref: '#/components/schemas/JobAttributes'
+          - type: 'null'
           description: Additional job attributes such as duration, queue, and account
         pre_launch:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Pre Launch
           description: Script or commands to run before launching the job
           example: module load cuda
         post_launch:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Post Launch
           description: Script or commands to run after the job completes
           example: echo done
         launcher:
-          type: string
-          minLength: 1
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Launcher
           description: Job launcher to use (e.g., 'mpirun', 'srun')
           example: srun
@@ -297,6 +347,7 @@ components:
       enum:
       - new
       - queued
+      - held
       - active
       - completed
       - failed
@@ -353,32 +404,42 @@ components:
     ResourceSpec:
       properties:
         node_count:
-          type: integer
-          minimum: 1.0
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
           title: Node Count
           description: Number of compute nodes to allocate
           example: 2
         process_count:
-          type: integer
-          minimum: 1.0
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
           title: Process Count
           description: Total number of processes to launch
           example: 64
         processes_per_node:
-          type: integer
-          minimum: 1.0
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
           title: Processes Per Node
           description: Number of processes to launch per node
           example: 32
         cpu_cores_per_process:
-          type: integer
-          minimum: 1.0
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
           title: Cpu Cores Per Process
           description: Number of CPU cores to allocate per process
           example: 2
         gpu_cores_per_process:
-          type: integer
-          minimum: 1.0
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
           title: Gpu Cores Per Process
           description: Number of GPU cores to allocate per process
           example: 1
@@ -389,8 +450,10 @@ components:
           default: true
           example: true
         memory:
-          type: integer
-          minimum: 1.0
+          anyOf:
+          - type: integer
+            minimum: 1.0
+          - type: 'null'
           title: Memory
           description: Amount of memory to allocate in bytes
           example: 17179869184
