@@ -72,7 +72,7 @@ body:
   - type: checkboxes
     id: impl_commit
     attributes:
-      label: Implementation commitment
+      label: Implementation commitment (select one option)
       description: |
         A reference implementation and demo adapter expansion for the IRI API is highly desirable to facilitate testing, validation, and adoption. While not strictly required at the time of proposal, a commitment to provide an implementation within a reasonable timeframe is strongly encouraged.
 
@@ -84,9 +84,7 @@ body:
 
       options:
         - label: I commit to providing a reference Python implementation and demo adapter expansion for the IRI API within a reasonable timeframe after the proposal is accepted.
-          required: true
         - label: I am not able to provide a reference implementation at this time.
-          required: false
 
 
   - type: textarea
