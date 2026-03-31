@@ -107,7 +107,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/chown/{resource_id}:
@@ -218,7 +218,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/file/{resource_id}:
@@ -331,7 +331,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/stat/{resource_id}:
@@ -453,7 +453,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/mkdir/{resource_id}:
@@ -564,7 +564,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/symlink/{resource_id}:
@@ -675,7 +675,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/ls/{resource_id}:
@@ -824,7 +824,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/head/{resource_id}:
@@ -966,7 +966,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/view/{resource_id}:
@@ -1102,7 +1102,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/tail/{resource_id}:
@@ -1247,7 +1247,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/checksum/{resource_id}:
@@ -1360,7 +1360,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/rm/{resource_id}:
@@ -1473,7 +1473,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/compress/{resource_id}:
@@ -1584,7 +1584,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/extract/{resource_id}:
@@ -1695,7 +1695,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/mv/{resource_id}:
@@ -1806,7 +1806,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/cp/{resource_id}:
@@ -1917,7 +1917,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/download/{resource_id}:
@@ -2030,7 +2030,7 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
   /api/v1/filesystem/upload/{resource_id}:
@@ -2149,6 +2149,6 @@ paths:
         '304':
           description: Not Modified
       x-iri:
-        maturity: beta
+        maturity: production
         implementation:
           level: required
