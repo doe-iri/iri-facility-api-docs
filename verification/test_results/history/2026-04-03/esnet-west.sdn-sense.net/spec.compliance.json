@@ -1,12 +1,12 @@
 {
-  "base_url": "https://api.alcf.anl.gov/",
+  "base_url": "https://esnet-west.sdn-sense.net/",
   "counts": {
     "extra": 0,
     "missing": 0,
     "present": 43
   },
   "extra": [],
-  "facility_schema_url": "https://api.alcf.anl.gov//openapi.json",
+  "facility_schema_url": "https://esnet-west.sdn-sense.net//openapi.json",
   "missing": [],
   "official_schema": "specification/openapi/all_spec.yaml",
   "present": [
@@ -73,12 +73,12 @@
     {
       "method": "GET",
       "operationId": "getEventByIncident",
-      "path": "/api/v1/status/events/{event_id}"
+      "path": "/api/v1/status/incidents/{incident_id}/events/{event_id}"
     },
     {
       "method": "GET",
       "operationId": "getEventsByIncident",
-      "path": "/api/v1/status/events"
+      "path": "/api/v1/status/incidents/{incident_id}/events"
     },
     {
       "method": "GET",
