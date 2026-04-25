@@ -1,12 +1,12 @@
 {
-  "base_url": "https://esnet-west.sdn-sense.net/",
+  "base_url": "https://api.alcf.anl.gov/",
   "counts": {
     "extra": 0,
     "missing": 0,
     "present": 43
   },
   "extra": [],
-  "facility_schema_url": "https://esnet-west.sdn-sense.net//openapi.json",
+  "facility_schema_url": "https://api.alcf.anl.gov//openapi.json",
   "missing": [],
   "official_schema": "specification/openapi/all_spec.yaml",
   "present": [
