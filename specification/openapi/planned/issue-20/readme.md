@@ -24,13 +24,13 @@ API Example:
 Examples of logical names: home, scratch, project, campaign, archive, shared, temporary
 
 API Endpoints:
-GET /storage/locations -> return a list of logical names (there is no requirement for all to be supported)
-GET /storage/locations/{resource_id} - with possible parameters
-  logicalpath - one of the logical names;
-  project/allocation - path specific to project/allocation
-  intent — optional (read/write, staging, long-term storage)
+   - GET /storage/locations -> return a list of logical names (there is no requirement for all to be supported)
+   - GET /storage/locations/{resource_id} - with possible parameters
+       - logicalpath - one of the logical names;
+       - project/allocation - path specific to project/allocation
+       - intent — optional (read/write, staging, long-term storage)
 
-
+```
 GET /storage/locations/RESID123?project=ABC123
 {
   "logical_name": "scratch",
@@ -47,7 +47,7 @@ GET /storage/locations/RESID123?project=ABC123
     "execute": true
   }
 }
-
+```
 
 ### Existing implementations
 
