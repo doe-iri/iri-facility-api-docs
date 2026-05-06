@@ -15,6 +15,8 @@ on:
           - ESnet_West
           - NERSC
           - ALCF
+          - OLCF_Open
+          - OLCF_Moderate
 
 permissions:
   contents: write
@@ -46,6 +48,12 @@ jobs:
             type: remote
           - name: ALCF
             site: https://api.alcf.anl.gov/
+            type: remote
+          - name: OLCF_Open
+            site: https://amsc-open.s3m.olcf.ornl.gov/
+            type: remote
+          - name: OLCF_Moderate
+            site: https://amsc-moderate.s3m.olcf.ornl.gov/
             type: remote
 
     steps:
