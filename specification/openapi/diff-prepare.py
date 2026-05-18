@@ -9,11 +9,17 @@ import json
 from pathlib import Path
 from urllib.request import urlopen
 import yaml
+import re
 
-def load_spec(url: str):
-    """ Load an OpenAPI spec from a URL, trying JSON first and falling back to YAML. """
-    with urlopen(url) as resp:
-        data = resp.read().decode("utf-8")
+VERSION_RE = re.compile(r"^v\d+$")
+
+def load_spec(source: str):
+    """ Load an OpenAPI spec from a URL or file, trying JSON first and falling back to YAML. """
+    if source.startswith(("http://", "https://", "file://")):
+        with urlopen(source) as resp:
+            data = resp.read().decode("utf-8")
+    else:
+        data = Path(source).read_text(encoding="utf-8")
 
     try:
         return json.loads(data)
@@ -28,11 +34,11 @@ def load_yaml(path: Path):
     return yaml.safe_load(path.read_text()) or {}
 
 
-def extract_group(path: str) -> str | None:
+def extract_group(path: str, api_version: str) -> str | None:
     """ Extract a group name from the path, e.g. /api/v1/<group>/... """
     parts = path.strip("/").split("/")
 
-    if len(parts) >= 3 and parts[0] == "api" and parts[1] == "v1":
+    if len(parts) >= 3 and parts[0] == "api" and parts[1] == api_version and VERSION_RE.fullmatch(parts[1]):
         return parts[2]
 
     return None
@@ -114,12 +120,12 @@ def diff_topinfo(new_spec: dict, baseline_topinfo: dict):
     return diff
 
 
-def split_paths(diff_paths: dict, outdir: Path):
+def split_paths(diff_paths: dict, outdir: Path, api_version: str):
     """ Split the diff paths into separate files based on their group. """
     grouped = {}
 
     for path, item in diff_paths.items():
-        group = extract_group(path) or "_misc"
+        group = extract_group(path, api_version) or "_misc"
         grouped.setdefault(group, {})[path] = item
 
     for group, paths in grouped.items():
@@ -129,9 +135,14 @@ def split_paths(diff_paths: dict, outdir: Path):
 def main():
     """ Main entry point for the diff and split process. """
     parser = argparse.ArgumentParser()
-    parser.add_argument("url")
+    parser.add_argument("source")
     parser.add_argument("--baseline", default="production")
     parser.add_argument("--outdir", required=True)
+    parser.add_argument(
+        "--api-version",
+        default="v1",
+        help="API version segment to split on, for example v1 or v2.",
+    )
 
     args = parser.parse_args()
 
@@ -139,7 +150,7 @@ def main():
     outdir = Path(args.outdir)
     outdir.mkdir(parents=True, exist_ok=True)
 
-    new_spec = load_spec(args.url)
+    new_spec = load_spec(args.source)
 
     baseline_components = load_yaml(baseline_dir / "_components.yaml").get("components", {})
     baseline_topinfo = load_yaml(baseline_dir / "_topinfo.yaml")
@@ -152,10 +163,9 @@ def main():
                {"components": component_diff} if component_diff else {})
     write_yaml(outdir / "_topinfo.yaml", topinfo_diff)
 
-    split_paths(path_diff, outdir)
+    split_paths(path_diff, outdir, args.api_version)
 
     print(f"Difference written to → {outdir}")
 
 if __name__ == "__main__":
     main()
-

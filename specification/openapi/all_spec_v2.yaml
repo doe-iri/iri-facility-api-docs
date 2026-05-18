@@ -839,7 +839,7 @@ components:
           type: string
           title: Instance
           description: A URI reference identifying this occurrence.
-          example: http://localhost/api/v1/resource/123
+          example: http://localhost/api/v2/resource/123
       additionalProperties: true
       type: object
       required:
@@ -1442,11 +1442,11 @@ info:
   contact:
     name: Facility API contact
     url: https://www.somefacility.gov/about/contact-us/
-  version: 1.0.0
+  version: 2.0.0
 servers:
 - url: https://api.iri.nersc.gov
 paths:
-  /api/v1/account/capabilities:
+  /api/v2/account/capabilities:
     get:
       tags:
       - account
@@ -1583,7 +1583,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/account/capabilities/{capability_id}:
+  /api/v2/account/capabilities/{capability_id}:
     get:
       tags:
       - account
@@ -1696,7 +1696,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/account/projects:
+  /api/v2/account/projects:
     get:
       tags:
       - account
@@ -1798,7 +1798,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/account/projects/{project_id}:
+  /api/v2/account/projects/{project_id}:
     get:
       tags:
       - account
@@ -1903,7 +1903,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/account/projects/{project_id}/project_allocations:
+  /api/v2/account/projects/{project_id}/project_allocations:
     get:
       tags:
       - account
@@ -2012,7 +2012,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/account/projects/{project_id}/project_allocations/{project_allocation_id}:
+  /api/v2/account/projects/{project_id}/project_allocations/{project_allocation_id}:
     get:
       tags:
       - account
@@ -2123,7 +2123,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/account/projects/{project_id}/project_allocations/{project_allocation_id}/user_allocations:
+  /api/v2/account/projects/{project_id}/project_allocations/{project_allocation_id}/user_allocations:
     get:
       tags:
       - account
@@ -2238,7 +2238,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/account/projects/{project_id}/project_allocations/{project_allocation_id}/user_allocations/{user_allocation_id}:
+  /api/v2/account/projects/{project_id}/project_allocations/{project_allocation_id}/user_allocations/{user_allocation_id}:
     get:
       tags:
       - account
@@ -2356,7 +2356,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/compute/resources:
+  /api/v2/compute/resources:
     get:
       tags:
       - compute
@@ -2453,7 +2453,7 @@ paths:
           description: Not Modified
       x-iri:
         maturity: planned
-  /api/v1/compute/job/{resource_id}:
+  /api/v2/compute/job/{resource_id}:
     post:
       tags:
       - compute
@@ -2572,7 +2572,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/compute/job/{resource_id}/{job_id}:
+  /api/v2/compute/job/{resource_id}/{job_id}:
     put:
       tags:
       - compute
@@ -2697,7 +2697,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/compute/status/{resource_id}/{job_id}:
+  /api/v2/compute/status/{resource_id}/{job_id}:
     get:
       tags:
       - compute
@@ -2834,7 +2834,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/compute/status/{resource_id}:
+  /api/v2/compute/status/{resource_id}:
     post:
       tags:
       - compute
@@ -2994,7 +2994,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/compute/cancel/{resource_id}/{job_id}:
+  /api/v2/compute/cancel/{resource_id}/{job_id}:
     delete:
       tags:
       - compute
@@ -3101,7 +3101,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/facility:
+  /api/v2/facility:
     get:
       tags:
       - facility
@@ -3208,7 +3208,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/facility/sites:
+  /api/v2/facility/sites:
     get:
       tags:
       - facility
@@ -3353,7 +3353,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/facility/sites/{site_id}:
+  /api/v2/facility/sites/{site_id}:
     get:
       tags:
       - facility
@@ -3466,7 +3466,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/resources:
+  /api/v2/filesystem/resources:
     get:
       tags:
       - filesystem
@@ -3563,7 +3563,7 @@ paths:
           description: Not Modified
       x-iri:
         maturity: planned
-  /api/v1/filesystem/chmod/{resource_id}:
+  /api/v2/filesystem/chmod/{resource_id}:
     put:
       tags:
       - filesystem
@@ -3674,7 +3674,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/chown/{resource_id}:
+  /api/v2/filesystem/chown/{resource_id}:
     put:
       tags:
       - filesystem
@@ -3785,7 +3785,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/file/{resource_id}:
+  /api/v2/filesystem/file/{resource_id}:
     get:
       tags:
       - filesystem
@@ -3898,7 +3898,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/stat/{resource_id}:
+  /api/v2/filesystem/stat/{resource_id}:
     get:
       tags:
       - filesystem
@@ -4020,7 +4020,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/mkdir/{resource_id}:
+  /api/v2/filesystem/mkdir/{resource_id}:
     post:
       tags:
       - filesystem
@@ -4131,7 +4131,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/symlink/{resource_id}:
+  /api/v2/filesystem/symlink/{resource_id}:
     post:
       tags:
       - filesystem
@@ -4242,7 +4242,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/ls/{resource_id}:
+  /api/v2/filesystem/ls/{resource_id}:
     get:
       tags:
       - filesystem
@@ -4391,7 +4391,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/head/{resource_id}:
+  /api/v2/filesystem/head/{resource_id}:
     get:
       tags:
       - filesystem
@@ -4533,7 +4533,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/view/{resource_id}:
+  /api/v2/filesystem/view/{resource_id}:
     get:
       tags:
       - filesystem
@@ -4669,7 +4669,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/tail/{resource_id}:
+  /api/v2/filesystem/tail/{resource_id}:
     get:
       tags:
       - filesystem
@@ -4814,7 +4814,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/checksum/{resource_id}:
+  /api/v2/filesystem/checksum/{resource_id}:
     get:
       tags:
       - filesystem
@@ -4927,7 +4927,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/rm/{resource_id}:
+  /api/v2/filesystem/rm/{resource_id}:
     delete:
       tags:
       - filesystem
@@ -5040,7 +5040,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/compress/{resource_id}:
+  /api/v2/filesystem/compress/{resource_id}:
     post:
       tags:
       - filesystem
@@ -5151,7 +5151,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/extract/{resource_id}:
+  /api/v2/filesystem/extract/{resource_id}:
     post:
       tags:
       - filesystem
@@ -5262,7 +5262,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/mv/{resource_id}:
+  /api/v2/filesystem/mv/{resource_id}:
     post:
       tags:
       - filesystem
@@ -5373,7 +5373,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/cp/{resource_id}:
+  /api/v2/filesystem/cp/{resource_id}:
     post:
       tags:
       - filesystem
@@ -5484,7 +5484,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/download/{resource_id}:
+  /api/v2/filesystem/download/{resource_id}:
     get:
       tags:
       - filesystem
@@ -5597,7 +5597,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/upload/{resource_id}:
+  /api/v2/filesystem/upload/{resource_id}:
     post:
       tags:
       - filesystem
@@ -5716,7 +5716,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/status/resources:
+  /api/v2/status/resources:
     get:
       tags:
       - status
@@ -5884,7 +5884,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/status/resources/{resource_id}:
+  /api/v2/status/resources/{resource_id}:
     get:
       tags:
       - status
@@ -5987,7 +5987,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/status/incidents:
+  /api/v2/status/incidents:
     get:
       tags:
       - status
@@ -6187,7 +6187,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/status/incidents/{incident_id}:
+  /api/v2/status/incidents/{incident_id}:
     get:
       tags:
       - status
@@ -6292,7 +6292,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/status/events:
+  /api/v2/status/events:
     get:
       tags:
       - status
@@ -6491,7 +6491,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/status/events/{event_id}:
+  /api/v2/status/events/{event_id}:
     get:
       tags:
       - status
@@ -6594,7 +6594,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/task/{task_id}:
+  /api/v2/task/{task_id}:
     get:
       tags:
       - task
@@ -6804,7 +6804,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/task:
+  /api/v2/task:
     get:
       tags:
       - task

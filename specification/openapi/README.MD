@@ -2,7 +2,7 @@
 
 This repository maintains the OpenAPI specification in a modular format. The specification is split into multiple YAML files organized by lifecycle stage.
 
-Three helper scripts are provided to manage the specification lifecycle.
+Three helper scripts are provided to manage the specification lifecycle and versioned build artifacts.
 
 ## Directory Structure
 
@@ -14,6 +14,13 @@ openapi/
   planned/
   prototype/
   retired/
+  v2/
+    production/
+    beta/
+    in_development/
+    planned/
+    prototype/
+    retired/
 ```
 
 Each directory contains modular YAML files such as:
@@ -29,23 +36,26 @@ compute.yaml
 
 ## Script helpers
 
-- `split_spec.py`	Convert a single OpenAPI spec into modular YAML files
-- `diff_spec.py`	Generate differences between a new spec and the production baseline
-- `build_spec.py`	Merge all modular YAML files into a single OpenAPI spec
+- `production-prepare.py`	Convert a single OpenAPI spec into modular YAML files
+- `diff-prepare.py`	Generate differences between a new spec and a modular baseline
+- `build-final-spec.py`	Merge modular YAML files into a single OpenAPI spec
 
 These scripts allow to prepare all specification from an HTTP Endpoint (or local files).
 
-### Split Specification (split_spec.py)
+### Split Specification (`production-prepare.py`)
 
-Split a full OpenAPI specification into modular YAML files for production directory.
-This allows to take production OpenAPI URL and automatically prepare specification.
+Split a full OpenAPI specification into modular YAML files for a target directory.
+This allows taking an implementation OpenAPI URL or local file and preparing modular specification inputs for a specific API major version.
 
 Usage
 ```
-python split_spec.py <openapi_url> --outdir production
+python production-prepare.py <openapi_source> --api-version v1 --outdir production
+python production-prepare.py <openapi_source> --api-version v2 --outdir v2/production
 ```
 
-### Spec difference (diff_spec.py)
+`<openapi_source>` may be a URL, `file:///...` URL, or a local file path.
+
+### Spec difference (`diff-prepare.py`)
 
 Generate only the new API changes compared to the production specification. This is useful when new APIs are introduced and need to prepare spec change.
 What it does? 
@@ -61,10 +71,11 @@ What it does?
 
 Usage
 ```
-python diff_spec.py <openapi_url> --outdir prototype/testfeature/
+python diff-prepare.py <openapi_source> --baseline production --api-version v1 --outdir planned/my-feature
+python diff-prepare.py <openapi_source> --baseline v2/production --api-version v2 --outdir v2/in_development/my-feature
 ```
 
-### Build specification (build_spec.py)
+### Build specification (`build-final-spec.py`)
 
 Merge all modular YAML files into a single OpenAPI specification. This produces the final OpenAPI document.
 
@@ -84,6 +95,14 @@ retired
 
 Usage:
 ```
-python build_spec.py
+python build-final-spec.py
+python build-final-spec.py --dirs production --output all_spec_v1.yaml
+python build-final-spec.py --dirs v2/production --output all_spec_v2.yaml
+python build-final-spec.py --dirs v2/production v2/beta v2/in_development v2/planned v2/prototype v2/retired --output all_spec_v2.yaml
 ```
 
+Recommended artifact flow:
+
+- `all_spec_v1.yaml`: build from `production` after refreshing it from the `iri-facility-api-python` `1.1.0` implementation tag.
+- `all_spec_v2.yaml`: build from the `v2/...` directory tree while v2 evolves independently.
+- `all_spec.yaml`: optional combined lifecycle artifact for the current top-level lifecycle tree.

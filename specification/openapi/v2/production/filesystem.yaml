@@ -1,5 +1,5 @@
 paths:
-  /api/v1/filesystem/resources:
+  /api/v2/filesystem/resources:
     get:
       tags:
       - filesystem
@@ -96,7 +96,7 @@ paths:
           description: Not Modified
       x-iri:
         maturity: planned
-  /api/v1/filesystem/chmod/{resource_id}:
+  /api/v2/filesystem/chmod/{resource_id}:
     put:
       tags:
       - filesystem
@@ -207,7 +207,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/chown/{resource_id}:
+  /api/v2/filesystem/chown/{resource_id}:
     put:
       tags:
       - filesystem
@@ -318,7 +318,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/file/{resource_id}:
+  /api/v2/filesystem/file/{resource_id}:
     get:
       tags:
       - filesystem
@@ -431,7 +431,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/stat/{resource_id}:
+  /api/v2/filesystem/stat/{resource_id}:
     get:
       tags:
       - filesystem
@@ -553,7 +553,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/mkdir/{resource_id}:
+  /api/v2/filesystem/mkdir/{resource_id}:
     post:
       tags:
       - filesystem
@@ -664,7 +664,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/symlink/{resource_id}:
+  /api/v2/filesystem/symlink/{resource_id}:
     post:
       tags:
       - filesystem
@@ -775,7 +775,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/ls/{resource_id}:
+  /api/v2/filesystem/ls/{resource_id}:
     get:
       tags:
       - filesystem
@@ -924,7 +924,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/head/{resource_id}:
+  /api/v2/filesystem/head/{resource_id}:
     get:
       tags:
       - filesystem
@@ -1066,7 +1066,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/view/{resource_id}:
+  /api/v2/filesystem/view/{resource_id}:
     get:
       tags:
       - filesystem
@@ -1202,7 +1202,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/tail/{resource_id}:
+  /api/v2/filesystem/tail/{resource_id}:
     get:
       tags:
       - filesystem
@@ -1347,7 +1347,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/checksum/{resource_id}:
+  /api/v2/filesystem/checksum/{resource_id}:
     get:
       tags:
       - filesystem
@@ -1460,7 +1460,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/rm/{resource_id}:
+  /api/v2/filesystem/rm/{resource_id}:
     delete:
       tags:
       - filesystem
@@ -1573,7 +1573,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/compress/{resource_id}:
+  /api/v2/filesystem/compress/{resource_id}:
     post:
       tags:
       - filesystem
@@ -1684,7 +1684,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/extract/{resource_id}:
+  /api/v2/filesystem/extract/{resource_id}:
     post:
       tags:
       - filesystem
@@ -1795,7 +1795,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/mv/{resource_id}:
+  /api/v2/filesystem/mv/{resource_id}:
     post:
       tags:
       - filesystem
@@ -1906,7 +1906,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/cp/{resource_id}:
+  /api/v2/filesystem/cp/{resource_id}:
     post:
       tags:
       - filesystem
@@ -2017,7 +2017,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/download/{resource_id}:
+  /api/v2/filesystem/download/{resource_id}:
     get:
       tags:
       - filesystem
@@ -2130,7 +2130,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/filesystem/upload/{resource_id}:
+  /api/v2/filesystem/upload/{resource_id}:
     post:
       tags:
       - filesystem

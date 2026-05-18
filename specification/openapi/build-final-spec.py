@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Create a single OpenAPI spec from modular YAML files. """
 
+import argparse
 import yaml
 from pathlib import Path
 import os
@@ -45,11 +46,13 @@ def load_yaml_file(path):
         return yaml.safe_load(f) or {}
 
 
-def build_all():
+def build_all(stage_dirs=None, output_path=OUTPUT_ALL):
     """Build the final OpenAPI spec by merging all modular YAML files."""
     result = {}
 
-    for stage in ORDER:
+    ordered_dirs = stage_dirs or ORDER
+
+    for stage in ordered_dirs:
         stage_dir = BASE / stage
         if not stage_dir.exists():
             continue
@@ -58,11 +61,24 @@ def build_all():
             data = load_yaml_file(file)
             deep_merge(result, data)
 
-    with open(OUTPUT_ALL, "w", encoding="utf-8") as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         yaml.dump(result, f, sort_keys=False)
 
-    print(f"created {OUTPUT_ALL}")
+    print(f"created {output_path}")
 
 
 if __name__ == "__main__":
-    build_all()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--dirs",
+        nargs="+",
+        help="Explicit directories to merge in order. Defaults to the lifecycle stages.",
+    )
+    parser.add_argument(
+        "--output",
+        default=OUTPUT_ALL,
+        help="Output OpenAPI YAML file path.",
+    )
+    args = parser.parse_args()
+
+    build_all(stage_dirs=args.dirs, output_path=args.output)

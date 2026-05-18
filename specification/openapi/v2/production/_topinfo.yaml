@@ -16,6 +16,6 @@ info:
   contact:
     name: Facility API contact
     url: https://www.somefacility.gov/about/contact-us/
-  version: 1.0.0
+  version: 2.0.0
 servers:
 - url: https://api.iri.nersc.gov

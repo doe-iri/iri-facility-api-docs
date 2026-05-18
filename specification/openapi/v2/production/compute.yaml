@@ -1,5 +1,5 @@
 paths:
-  /api/v1/compute/resources:
+  /api/v2/compute/resources:
     get:
       tags:
       - compute
@@ -96,7 +96,7 @@ paths:
           description: Not Modified
       x-iri:
         maturity: planned
-  /api/v1/compute/job/{resource_id}:
+  /api/v2/compute/job/{resource_id}:
     post:
       tags:
       - compute
@@ -215,7 +215,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/compute/job/{resource_id}/{job_id}:
+  /api/v2/compute/job/{resource_id}/{job_id}:
     put:
       tags:
       - compute
@@ -340,7 +340,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/compute/status/{resource_id}/{job_id}:
+  /api/v2/compute/status/{resource_id}/{job_id}:
     get:
       tags:
       - compute
@@ -477,7 +477,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/compute/status/{resource_id}:
+  /api/v2/compute/status/{resource_id}:
     post:
       tags:
       - compute
@@ -637,7 +637,7 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/compute/cancel/{resource_id}/{job_id}:
+  /api/v2/compute/cancel/{resource_id}/{job_id}:
     delete:
       tags:
       - compute

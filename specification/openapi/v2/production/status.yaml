@@ -1,138 +1,90 @@
 paths:
-  /api/v1/compute/resources:
+  /api/v2/status/resources:
     get:
       tags:
-      - compute
-      summary: Get Resources
-      description: Get a list of resources that can be used in this endpoint
-      operationId: getComputeResources
+      - status
+      summary: Get all resources
+      description: Get a list of all resources at this facility. You can optionally
+        filter the returned list by specifying attribtes.
+      operationId: getResources
+      parameters:
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 1
+          title: Name
+      - name: description
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 1
+          title: Description
+      - name: group
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 1
+          title: Group
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 0
+          default: 100
+          title: Limit
+      - name: modified_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: Modified Since
+      - name: resource_type
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/ResourceType'
+      - name: current_status
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Status'
+      - name: capability
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/AllocationUnit'
+          minItems: 1
+          title: Capability
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
+                type: array
                 items:
                   $ref: '#/components/schemas/Resource'
-                type: array
-                title: Response Getcomputeresources
-        '400':
-          description: Invalid request parameters
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '401':
-          description: Unauthorized
-          headers:
-            WWW-Authenticate:
-              description: Bearer authentication challenge
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '405':
-          description: Method Not Allowed
-          headers:
-            Allow:
-              description: Allowed HTTP methods
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '409':
-          description: Conflict
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '422':
-          description: Unprocessable Entity
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '501':
-          description: Not Implemented
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '503':
-          description: Service Unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '504':
-          description: Gateway Timeout
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '304':
-          description: Not Modified
-      x-iri:
-        maturity: planned
-  /api/v1/compute/job/{resource_id}:
-    post:
-      tags:
-      - compute
-      summary: Submit Job
-      description: 'Submit a job on a compute resource
-
-
-        - **resource**: the name of the compute resource to use
-
-        - **job_request**: a PSIJ job spec as defined <a href="https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec">here</a>
-
-
-        This command will attempt to submit a job and return its id.'
-      operationId: launchJob
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: resource_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Resource Id
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/JobSpec'
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Job'
+                title: Response Getresources
         '400':
           description: Invalid request parameters
           content:
@@ -215,140 +167,13 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/compute/job/{resource_id}/{job_id}:
-    put:
-      tags:
-      - compute
-      summary: Update Job
-      description: 'Update a previously submitted job for a resource.
-
-        Note that only some attributes of a scheduled job can be updated. Check the
-        facility documentation for details.
-
-
-        - **resource**: the name of the compute resource to use
-
-        - **job_request**: a PSIJ job spec as defined <a href="https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec">here</a>'
-      operationId: updateJob
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: resource_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Resource Id
-      - name: job_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Job Id
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/JobSpec'
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Job'
-        '400':
-          description: Invalid request parameters
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '401':
-          description: Unauthorized
-          headers:
-            WWW-Authenticate:
-              description: Bearer authentication challenge
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '405':
-          description: Method Not Allowed
-          headers:
-            Allow:
-              description: Allowed HTTP methods
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '409':
-          description: Conflict
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '422':
-          description: Unprocessable Entity
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '501':
-          description: Not Implemented
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '503':
-          description: Service Unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '504':
-          description: Gateway Timeout
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '304':
-          description: Not Modified
-      x-iri:
-        maturity: production
-        implementation:
-          level: required
-  /api/v1/compute/status/{resource_id}/{job_id}:
+  /api/v2/status/resources/{resource_id}:
     get:
       tags:
-      - compute
-      summary: Get Job Status
-      description: Get a job's status
-      operationId: getJob
-      security:
-      - HTTPBearer: []
+      - status
+      summary: Get a specific resource
+      description: Get a specific resource for a given id
+      operationId: getResource
       parameters:
       - name: resource_id
         in: path
@@ -356,45 +181,13 @@ paths:
         schema:
           type: string
           title: Resource Id
-      - name: job_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Job Id
-      - name: historical
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: boolean
-            description: Strict boolean. Only true/false allowed (bool or string).
-            example: true
-          - type: 'null'
-          description: Whether to include historical jobs. Defaults to true
-          default: true
-          title: Historical
-        description: Whether to include historical jobs. Defaults to true
-      - name: include_spec
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: boolean
-            description: Strict boolean. Only true/false allowed (bool or string).
-            example: true
-          - type: 'null'
-          description: Whether to include the job specification. Defaults to false
-          default: false
-          title: Include Spec
-        description: Whether to include the job specification. Defaults to false
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Job'
+                $ref: '#/components/schemas/Resource'
         '400':
           description: Invalid request parameters
           content:
@@ -477,21 +270,91 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/compute/status/{resource_id}:
-    post:
+  /api/v2/status/incidents:
+    get:
       tags:
-      - compute
-      summary: Get Job Statuses
-      description: Get multiple jobs' statuses
-      operationId: getJobs
-      security:
-      - HTTPBearer: []
+      - status
+      summary: Get all incidents without their events
+      description: Get a list of all incidents. Each incident will be returned without
+        its events.  You can optionally filter the returned list by specifying attributes.
+      operationId: getIncidents
       parameters:
-      - name: resource_id
-        in: path
-        required: true
+      - name: name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Name
+      - name: description
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Description
+      - name: status
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Status'
+      - name: type
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/IncidentType'
+      - name: from
+        in: query
+        required: false
         schema:
           type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: From
+      - name: time
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: Time
+      - name: to
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: To
+      - name: modified_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: Modified Since
+      - name: resource_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
           title: Resource Id
       - name: offset
         in: query
@@ -510,41 +373,11 @@ paths:
           minimum: 0
           default: 100
           title: Limit
-      - name: historical
+      - name: resolution
         in: query
         required: false
         schema:
-          anyOf:
-          - type: boolean
-            description: Strict boolean. Only true/false allowed (bool or string).
-            example: true
-          - type: 'null'
-          description: Whether to include historical jobs. Defaults to false
-          default: false
-          title: Historical
-        description: Whether to include historical jobs. Defaults to false
-      - name: include_spec
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: boolean
-            description: Strict boolean. Only true/false allowed (bool or string).
-            example: true
-          - type: 'null'
-          description: Whether to include the job specification. Defaults to false
-          default: false
-          title: Include Spec
-        description: Whether to include the job specification. Defaults to false
-      requestBody:
-        content:
-          application/json:
-            schema:
-              anyOf:
-              - type: object
-                additionalProperties: true
-              - type: 'null'
-              title: Filters
+          $ref: '#/components/schemas/Resolution'
       responses:
         '200':
           description: Successful Response
@@ -553,8 +386,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Job'
-                title: Response Getjobs
+                  $ref: '#/components/schemas/Incident'
+                title: Response Getincidents
         '400':
           description: Invalid request parameters
           content:
@@ -637,31 +470,331 @@ paths:
         maturity: production
         implementation:
           level: required
-  /api/v1/compute/cancel/{resource_id}/{job_id}:
-    delete:
+  /api/v2/status/incidents/{incident_id}:
+    get:
       tags:
-      - compute
-      summary: Cancel Job
-      description: Cancel a job
-      operationId: cancelJob
-      security:
-      - HTTPBearer: []
+      - status
+      summary: Get a specific incident and its events
+      description: Get a specific incident for a given id. The incident's events will
+        also be included.  You can optionally filter the returned list by specifying
+        attributes.
+      operationId: getIncident
       parameters:
-      - name: resource_id
+      - name: incident_id
         in: path
         required: true
         schema:
           type: string
-          title: Resource Id
-      - name: job_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Job Id
+          title: Incident Id
       responses:
-        '204':
+        '200':
           description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incident'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          headers:
+            WWW-Authenticate:
+              description: Bearer authentication challenge
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '405':
+          description: Method Not Allowed
+          headers:
+            Allow:
+              description: Allowed HTTP methods
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '501':
+          description: Not Implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '304':
+          description: Not Modified
+      x-iri:
+        maturity: production
+        implementation:
+          level: required
+  /api/v2/status/events:
+    get:
+      tags:
+      - status
+      summary: Get all events
+      description: Get a list of all events.  You can optionally filter the returned
+        list by specifying attribtes.
+      operationId: getEventsByIncident
+      parameters:
+      - name: incident_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Incident Id
+      - name: resource_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Resource Id
+      - name: name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Name
+      - name: description
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            minLength: 1
+          - type: 'null'
+          title: Description
+      - name: status
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Status'
+      - name: from
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: From
+      - name: time
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: Time
+      - name: to
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: To
+      - name: modified_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+          description: Strict ISO8601 datetime. Only valid ISO8601 datetime strings
+            are accepted.
+          example: '2026-02-21T12:00:00Z'
+          title: Modified Since
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 0
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+                title: Response Geteventsbyincident
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          headers:
+            WWW-Authenticate:
+              description: Bearer authentication challenge
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '405':
+          description: Method Not Allowed
+          headers:
+            Allow:
+              description: Allowed HTTP methods
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '501':
+          description: Not Implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '304':
+          description: Not Modified
+      x-iri:
+        maturity: production
+        implementation:
+          level: required
+  /api/v2/status/events/{event_id}:
+    get:
+      tags:
+      - status
+      summary: Get a specific event
+      description: Get a specific event for a given id
+      operationId: getEventByIncident
+      parameters:
+      - name: event_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Event Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
         '400':
           description: Invalid request parameters
           content:

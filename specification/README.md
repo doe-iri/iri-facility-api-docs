@@ -16,9 +16,10 @@ Contributors: Ilya Baldin, Bjoern Enders, Carol Hawk, Gabor Torok, Justas Balcas
 OpenAPI 3.1 was chosen for documentation of the REST API because it is fully compatible with JSON Schema 2020-12, 
 which improves interoperability and validation in tooling. ([OpenAPI Initiative Publications][1])
 
-Here is the OpenAPI definitions for the IRI Facility API (current agreed specifications):
-- openapi_iri_facility_api_v1.json **[JSON](./openapi/openapi_iri_facility_api_v1.json)**
-- openapi_iri_facility_api_v1.yaml **[YAML](./openapi/openapi_iri_facility_api_v1.yaml)**
+Here are the maintained OpenAPI definitions for the IRI Facility API:
+- all_spec_v1.yaml **[YAML](./openapi/all_spec_v1.yaml)** - official v1 artifact built from the `iri-facility-api-python` `1.1.0` implementation line
+- all_spec_v2.yaml **[YAML](./openapi/all_spec_v2.yaml)** - versioned v2 artifact prepared from the `/api/v2` implementation line
+- all_spec.yaml **[YAML](./openapi/all_spec.yaml)** - combined lifecycle artifact for the top-level modular tree
 
 Here is a draft OpenAPI definitions for the job submission and filesystem operations from NERSC:
 - nersc-openapi-job-draft.json **[JSON](./openapi/nersc-openapi-job-draft.json)**
