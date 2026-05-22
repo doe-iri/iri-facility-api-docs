@@ -8,7 +8,7 @@ import warnings
 import yaml
 import schemathesis
 import pytest
-from hypothesis import settings
+from hypothesis import HealthCheck, settings
 
 # Allow to pass tokens via environment variables
 API_TOKEN = os.environ.get("IRI_API_TOKEN")
@@ -30,7 +30,8 @@ args, _ = parser.parse_known_args()
 # Schemathesis settings for CI mode
 settings.register_profile("ci",
                           max_examples=args.max_examples or 20,
-                          deadline=args.deadline or 30000)
+                          deadline=args.deadline or 30000,
+                          suppress_health_check=[HealthCheck.filter_too_much])
 settings.load_profile("ci")
 
 
