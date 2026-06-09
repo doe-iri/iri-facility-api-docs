@@ -116,3 +116,29 @@ The following user stories are written in the context of the IRI Facility File S
 * The user is able to upload and download small files via the IRI API.
 * The IRI API enforces limits on the amount of data file content viewing operation (head, tail, etc.) can return.
 * Users can only access their own and their groups' files using these APIs.
+
+The following user stories are written in support of the AmSC Infrastructure Resource Orchestration (IRO) functionalities.
+
+[18] AmSC-IRO constructs a Resource Information Model (RIM) by periodically querying APIs across multiple facilities to collect resource and infrastructure information. The RIM captures the following high-level connectivity and relationships, enabling AmSC-IRO to analyze resource availability and determine the infrastructure requirements needed to satisfy End-User service requests.
+* Facility status and status of top-level resources associated with the specific facility, including scheduled and unscheduled outages. 
+* Compute Job Management resources information, including
+  * membership with clusters or resource groups (if multiple clusters or resource groups)
+  * capabilities (per-cluster or resource group)
+  * aggregate availability (per-cluster or resource group)
+  
+* IRI Facility File System resources information, including 
+	 * membership with clusters or resource groups (if multiple clusters or resource groups)
+  * capabilities (per-cluster or resource group)
+  * network mountable volumes and sizes (per-cluster or resource group)
+
+* Data Movement services
+ 	* membership with clusters or resource groups (if multiple clusters or resource groups)
+  * capabilities (per-cluster or resource group)
+  * data access points (Globus data collections and/or SENSE network endpoints)
+ 
+
+[19] AmSC-IRO uses Resource Information Model (RIM) and per-project resource allocations/allowance to direct job submission to a specific facility .
+* AmSC-IRO receives a job submission request with a compute job spec, and optionally data management (access and movement) job specs.
+* AmSC-IRO firstly uses constructed RIM to find one or more candidate facilities that meet the requirements of all the job specs.
+* On behalf of an End-User, AmSC-IRO IRI Workload Agent retrieves per-project resource allocation information to add to its metadata store. It makes final job submission decision baed on the (compute, data and network) allocation/allowance metrics. The allocation metadata information should be near real-time or recently cached.
+
