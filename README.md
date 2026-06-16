@@ -1,4 +1,4 @@
-![Department of Energy - Office of Science](specification/images/doe-logo.jpg)
+![Department of Energy - Office of Science](images/doe-logo.jpg)
 
 The U.S. Department of Energy’s Integrated Research Infrastructure (IRI) is a long-term effort to let researchers 
 seamlessly and securely combine DOE’s world-class experimental facilities, data resources, and advanced computing 
@@ -15,5 +15,7 @@ workflows on top of IRI.
 
 # Contents
 
-## 1. **[IRI Specification](./specification/README.md)**
-## 2. **[IRI Presentations](./presentations)**
+## 1. **[IRI Specification 1.0](./specification-1.0/README.md)**
+## 2. **[IRI Specification 2.0](./specification-2.0/README.md)**
+## 3. **[IRI Request For Comments](./rfc)**
+## 4. **[IRI Presentations](./presentations)**
