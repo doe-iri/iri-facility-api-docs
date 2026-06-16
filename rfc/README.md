@@ -10,7 +10,7 @@ The primary objective of this repository is to provide a transparent, version-co
 
   - **Establish Stability:** Define extensible, long-term identifiers and data models that decouple infrastructure evolution from client-side implementation.
   - **Ensure Interoperability:** Create shared governance for IRI-type namespaces, service definitions, and registration policies.
-  - **Foster Consensus: **Facilitate collaborative review of technical designs, ensuring broad applicability across Department of Energy facilities.
+  - **Foster Consensus:** Facilitate collaborative review of technical designs, ensuring broad applicability across Department of Energy facilities.
 
 ## Scope
 
@@ -24,7 +24,7 @@ This repository contains documents that define the shared language and interacti
 
 This repository follows an open RFC process. Community members and facility representatives are encouraged to:
 
-  1. **Review Existing RFCs: **Examine active documentation and registry entries to understand current standards.
+  1. **Review Existing RFCs:** Examine active documentation and registry entries to understand current standards.
   2. **Propose Changes:** Use the Issue tracker to initiate discussions on new requirements or refinements to existing specifications.
   3. **Draft Proposals:** Contribute new RFC documents via Pull Request, following the established templates and requirements language (RFC 2119/8174).
 
@@ -33,4 +33,4 @@ For more information on the broader DoE IRI project, official reference implemen
 ## Contents
 
 1. **[IRI URN Structure and Registry](./rfc-iri-urn-structure-and-registry.md)**: 
-This document outlines an extensible Uniform Resource Name (URN) structure for Department of Energy (DoE) Integrated Research Infrastructure (IRI) identifiers, designed to decouple data model stability from type taxonomy evolution. It provides guidelines for hierarchical identifier naming, registry management, and validation, facilitating interoperable resource and service typing without requiring frequent OpenAPI schema revisions.
+This document outlines an extensible Uniform Resource Name (URN) structure for Department of Energy (DoE) Integrated Research Infrastructure (IRI) identifiers, designed to decouple data model stability from the evolution of type taxonomies. It provides guidelines for hierarchical identifier naming, registry management, and validation, facilitating interoperable resource and service typing without requiring frequent OpenAPI schema revisions.
