@@ -35,67 +35,67 @@ This memo is intended for discussion and adoption within the DOE IRI specificati
 
 [**1. Introduction**](#1-introduction)
 
-[1.1. Requirements Language](#1-1-requirements-language)
+[1.1. Requirements Language](#11-requirements-language)
 
 [**2. URN Specification for "doe-iri" Namespace ID (NID)**](#2-urn-specification-for-"doe-iri"-namespace-id-\(nid\))
 
-[2.1 Namespace ID](#2-1-namespace-id)
+[2.1 Namespace ID](#21-namespace-id)
 
-[2.2. Terminology](#2-2-terminology)
+[2.2. Terminology](#22-terminology)
 
-[2.3. Design Goals](#2-3-design-goals)
+[2.3. Design Goals](#23-design-goals)
 
-[2.4. Declaration of Syntactic Structure](#2-4-declaration-of-syntactic-structure)
+[2.4. Declaration of Syntactic Structure](#24-declaration-of-syntactic-structure)
 
-[2.5 Domain Values](#2-5-domain-values)
+[2.5 Domain Values](#25-domain-values)
 
-[2.6 Domain Specific String Values](#2-6-domain-specific-string-values)
+[2.6 Domain Specific String Values](#26-domain-specific-string-values)
 
-[2.7. Hierarchical Semantics](#2-7-hierarchical-semantics)
+[2.7. Hierarchical Semantics](#27-hierarchical-semantics)
 
-[2.8. Comparison and Matching Rules](#2-8-comparison-and-matching-rules)
+[2.8. Comparison and Matching Rules](#28-comparison-and-matching-rules)
 
-[2.8.1. Opaque Handling	](#2-8-1-opaque-handling)
+[2.8.1. Opaque Handling	](#281-opaque-handling)
 
-[2.8.2. Exact Matching](#2-8-2-exact-matching)
+[2.8.2. Exact Matching](#282-exact-matching)
 
-[2.8.3. Prefix Matching	](#2-8-3-prefix-matching)
+[2.8.3. Prefix Matching	](#283-prefix-matching)
 
 [**3. Initial Canonical URN Set**](#3-initial-canonical-urn-set)
 
-[3.1. ResourceType URNs](#3-1-resourcetype-urns)
+[3.1. ResourceType URNs](#31-resourcetype-urns)
 
-[3.2. AllocationUnit URNs](#3-2-allocationunit-urns)
+[3.2. AllocationUnit URNs](#32-allocationunit-urns)
 
-[3.3. CompressionType URNs](#3-3-compressiontype-urns)
+[3.3. CompressionType URNs](#33-compressiontype-urns)
 
 [**4. Facility-Local Extensions**](#4-facility-local-extensions)
 
 [**5. Registry Model**](#5-registry-model)
 
-[5.1. Registry Name](#5-1-registry-name)
+[5.1. Registry Name](#51-registry-name)
 
-[5.2. Registry Authority](#5-2-registry-authority)
+[5.2. Registry Authority](#52-registry-authority)
 
-[5.3. Registry Purpose](#5-3-registry-purpose)
+[5.3. Registry Purpose](#53-registry-purpose)
 
-[5.4. Registry Entry Template](#5-4-registry-entry-template)
+[5.4. Registry Entry Template](#54-registry-entry-template)
 
-[5.5. Registration Policy](#5-5-registration-policy)
+[5.5. Registration Policy](#55-registration-policy)
 
-[5.6. Deprecation](#5-6-deprecation)
+[5.6. Deprecation](#56-deprecation)
 
 [**6. Validation**](#6-validation)
 
 [**7. Security Considerations**](#7-security-considerations)
 
-[7.1 Semantic Label Only](#7-1-semantic-label-only)
+[7.1 Semantic Label Only](#71-semantic-label-only)
 
-[7.2 Malformed Input](#7-2-malformed-input)
+[7.2 Malformed Input](#72-malformed-input)
 
-[7.3 Unsafe Parsing](#7-3-unsafe-parsing)
+[7.3 Unsafe Parsing](#73-unsafe-parsing)
 
-[7.4 Over-Interpretation](#7-4-over-interpretation)
+[7.4 Over-Interpretation](#74-over-interpretation)
 
 [**8. Backward Compatibility**](#8-backward-compatibility)
 
