@@ -1,6 +1,8 @@
-# OpenAPI Specification Workflow
+# OpenAPI Specification Workflow (v2)
 
-This repository maintains the OpenAPI specification in a modular format. The specification is split into multiple YAML files organized by lifecycle stage.
+This directory holds the IRI Facility API **v2** OpenAPI specification in a modular format.
+The specification is split into multiple YAML files organized by lifecycle stage. v2 evolves
+independently from v1, which lives in `../../specification-v1/openapi/`.
 
 Three helper scripts are provided to manage the specification lifecycle and versioned build artifacts.
 
@@ -14,14 +16,9 @@ openapi/
   planned/
   prototype/
   retired/
-  v2/
-    production/
-    beta/
-    in_development/
-    planned/
-    prototype/
-    retired/
 ```
+
+Only `production/` exists today; the other lifecycle stages are created on demand.
 
 Each directory contains modular YAML files such as:
 
@@ -41,16 +38,17 @@ compute.yaml
 - `build-final-spec.py`	Merge modular YAML files into a single OpenAPI spec
 
 These scripts allow to prepare all specification from an HTTP Endpoint (or local files).
+They default to the `v2` API version.
 
 ### Split Specification (`production-prepare.py`)
 
 Split a full OpenAPI specification into modular YAML files for a target directory.
-This allows taking an implementation OpenAPI URL or local file and preparing modular specification inputs for a specific API major version.
+This allows taking an implementation OpenAPI URL or local file and preparing modular specification inputs.
 
 Usage
 ```
-python production-prepare.py <openapi_source> --api-version v1 --outdir production
-python production-prepare.py <openapi_source> --api-version v2 --outdir v2/production
+python production-prepare.py <openapi_source> --outdir production
+python production-prepare.py <openapi_source> --api-version v2 --outdir production
 ```
 
 `<openapi_source>` may be a URL, `file:///...` URL, or a local file path.
@@ -58,7 +56,7 @@ python production-prepare.py <openapi_source> --api-version v2 --outdir v2/produ
 ### Spec difference (`diff-prepare.py`)
 
 Generate only the new API changes compared to the production specification. This is useful when new APIs are introduced and need to prepare spec change.
-What it does? 
+What it does?
 
 - Loads the new OpenAPI spec
 - Compares it with the production baseline
@@ -71,8 +69,7 @@ What it does?
 
 Usage
 ```
-python diff-prepare.py <openapi_source> --baseline production --api-version v1 --outdir planned/my-feature
-python diff-prepare.py <openapi_source> --baseline v2/production --api-version v2 --outdir v2/in_development/my-feature
+python diff-prepare.py <openapi_source> --baseline production --outdir in_development/my-feature
 ```
 
 ### Build specification (`build-final-spec.py`)
@@ -96,13 +93,11 @@ retired
 Usage:
 ```
 python build-final-spec.py
-python build-final-spec.py --dirs production --output all_spec_v1.yaml
-python build-final-spec.py --dirs v2/production --output all_spec_v2.yaml
-python build-final-spec.py --dirs v2/production v2/beta v2/in_development v2/planned v2/prototype v2/retired --output all_spec_v2.yaml
+python build-final-spec.py --dirs production --output all_spec_v2.yaml
+python build-final-spec.py --dirs production beta in_development planned prototype retired --output all_spec_v2.yaml
 ```
 
 Recommended artifact flow:
 
-- `all_spec_v1.yaml`: build from `production` after refreshing it from the `iri-facility-api-python` `1.1.0` implementation tag.
-- `all_spec_v2.yaml`: build from the `v2/...` directory tree while v2 evolves independently.
-- `all_spec.yaml`: optional combined lifecycle artifact for the current top-level lifecycle tree.
+- `all_spec_v2.yaml`: build from the `production` directory (and any later lifecycle stages) as v2 evolves.
+  This is the default output of `build-final-spec.py`.
