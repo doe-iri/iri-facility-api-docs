@@ -13,7 +13,7 @@ body:
 
         Please provide clear and complete information to minimize follow-up questions.
 
-        For more details about the API proposal and evaluation process, see the [API proposal guidelines](./specification/new-api-requests.md).
+        For more details about the API proposal and evaluation process, see the [API proposal guidelines](./specification-v1/new-api-requests.md).
 
   - type: markdown
     attributes:
@@ -55,7 +55,7 @@ body:
         - Rationale and use cases
         - Implementation notes (if applicable)
 
-        Preferred location: [sandbox directory](https://github.com/doe-iri/iri-facility-api-docs/tree/main/specification/openapi) . Format directory with issue number and API name, e.g. `sandbox/123-job-management-api/...`.
+        Preferred location: [sandbox directory](https://github.com/doe-iri/iri-facility-api-docs/tree/main/specification-v1/openapi) . Format directory with issue number and API name, e.g. `sandbox/123-job-management-api/...`.
 
         Preferred file types: Markdown for documentation, YAML/JSON for OpenAPI spec.
 

@@ -83,7 +83,7 @@ https://example.org/openapi.json
 ### Compliance verification
 
 ```bash
-python api-validator.py --checkspeccompliance --official-schema ../specification/openapi/all_spec_v1.yaml
+python api-validator.py --checkspeccompliance --official-schema ../specification-v1/openapi/all_spec_v1.yaml
 ```
 
 The validator will do:

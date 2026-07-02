@@ -18,8 +18,9 @@ which improves interoperability and validation in tooling. ([OpenAPI Initiative 
 
 Here are the maintained OpenAPI definitions for the IRI Facility API:
 - all_spec_v1.yaml **[YAML](./openapi/all_spec_v1.yaml)** - official v1 artifact built from the `iri-facility-api-python` `1.1.0` implementation line
-- all_spec_v2.yaml **[YAML](./openapi/all_spec_v2.yaml)** - versioned v2 artifact prepared from the `/api/v2` implementation line
 - all_spec.yaml **[YAML](./openapi/all_spec.yaml)** - combined lifecycle artifact for the top-level modular tree
+
+The v2 specification lives in its own directory: **[IRI Specification 2.0](../specification-v2/README.md)**.
 
 Here is a draft OpenAPI definitions for the job submission and filesystem operations from NERSC:
 - nersc-openapi-job-draft.json **[JSON](./openapi/nersc-openapi-job-draft.json)**
