@@ -101,15 +101,20 @@ paths:
       tags:
       - compute
       summary: Submit Job
-      description: 'Submit a job on a compute resource
-
-
-        - **resource**: the name of the compute resource to use
-
-        - **job_request**: a PSIJ job spec as defined <a href="https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec">here</a>
-
-
-        This command will attempt to submit a job and return its id.'
+      description: "Submit a job on a compute resource\n\n- **resource**: the name\
+        \ of the compute resource to use\n- **job_request**: a PSIJ job spec as defined\
+        \ <a href=\"https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec\"\
+        >here</a>\n- **project/account resolution**:\n  The effective project/account\
+        \ for the submission must be supplied in exactly one place:\n  `job_spec.attributes.account`\
+        \ or the trusted `X-IRI-Facility-Project` request header.\n  If the forwarded\
+        \ header is present and valid, IRI treats its value as the effective facility-native\
+        \ project/account\n  for the downstream submission and related job metadata.\
+        \ If both sources are present, or neither is present,\n  the request is rejected\
+        \ with `400 Bad Request`.\n- **Idempotency-Key**: optional client-generated\
+        \ UUID. A retry with the same key and body\n  returns the original response\
+        \ without re-submitting the job. Same key with a different body\n  returns\
+        \ 422. An in-flight duplicate returns 409.\n\nThis command will attempt to\
+        \ submit a job and return its id."
       operationId: launchJob
       security:
       - HTTPBearer: []
@@ -120,6 +125,14 @@ paths:
         schema:
           type: string
           title: Resource Id
+      - name: Idempotency-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Idempotency-Key
       requestBody:
         required: true
         content:
@@ -220,15 +233,18 @@ paths:
       tags:
       - compute
       summary: Update Job
-      description: 'Update a previously submitted job for a resource.
-
-        Note that only some attributes of a scheduled job can be updated. Check the
-        facility documentation for details.
-
-
-        - **resource**: the name of the compute resource to use
-
-        - **job_request**: a PSIJ job spec as defined <a href="https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec">here</a>'
+      description: "Update a previously submitted job for a resource.\nNote that only\
+        \ some attributes of a scheduled job can be updated. Check the facility documentation\
+        \ for details.\n\n- **resource**: the name of the compute resource to use\n\
+        - **job_request**: a PSIJ job spec as defined <a href=\"https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec\"\
+        >here</a>\n- **project/account resolution**:\n  The effective project/account\
+        \ for the update must be supplied in exactly one place:\n  `job_spec.attributes.account`\
+        \ or the trusted `X-IRI-Facility-Project` request header.\n  If the forwarded\
+        \ header is present and valid, IRI treats its value as the effective facility-native\
+        \ project/account\n  for downstream update handling and job metadata. If both\
+        \ sources are present, or neither is present,\n  the request is rejected with\
+        \ `400 Bad Request`.\n- **Idempotency-Key**: optional client-generated UUID.\
+        \ Same semantics as submit_job."
       operationId: updateJob
       security:
       - HTTPBearer: []
@@ -245,6 +261,14 @@ paths:
         schema:
           type: string
           title: Job Id
+      - name: Idempotency-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Idempotency-Key
       requestBody:
         required: true
         content:
