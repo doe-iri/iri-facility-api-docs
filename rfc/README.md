@@ -33,4 +33,9 @@ For more information on the broader DoE IRI project, official reference implemen
 ## Contents
 
 1. **[IRI URN Structure and Registry](./rfc-iri-urn-structure-and-registry.md)**: 
-This document outlines an extensible Uniform Resource Name (URN) structure for Department of Energy (DoE) Integrated Research Infrastructure (IRI) identifiers, designed to decouple data model stability from the evolution of type taxonomies. It provides guidelines for hierarchical identifier naming, registry management, and validation, facilitating interoperable resource and service typing without requiring frequent OpenAPI schema revisions.
+
+	This document outlines an extensible Uniform Resource Name (URN) structure for Department of Energy (DoE) Integrated Research Infrastructure (IRI) identifiers, designed to decouple data model stability from the evolution of type taxonomies. It provides guidelines for hierarchical identifier naming, registry management, and validation, facilitating interoperable resource and service typing without requiring frequent OpenAPI schema revisions.
+
+2. **[Type-Specific Attributes for IRI Resource Objects](./rfc-type-specific-attributes.md)**:
+
+	This document proposes an optional `attributes` extension for the IRI Facility API Resource object, allowing for the inclusion of resource-specific metadata without modifying the core, stable Resource schema. By using the `resource_type` URN as a selector for specific attribute profiles, this RFC establishes a standard mechanism for facilities to define and expose type-specific properties, such as storage system details, while ensuring backward compatibility and discoverability. The proposal includes guidelines for canonical and facility-local attribute profiles, structural requirements for the `attributes` property, and necessary OpenAPI changes to support this extensible metadata model.
