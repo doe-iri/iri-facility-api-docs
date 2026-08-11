@@ -15,7 +15,8 @@ workflows on top of IRI.
 
 # Contents
 
-## 1. **[IRI Specification 1.0](./specification-v1/README.md)**
-## 2. **[IRI Specification 2.0](./specification-v2/README.md)**
-## 3. **[IRI Request For Comments](./rfc)**
-## 4. **[IRI Presentations](./presentations)**
+## 1. **[IRI Registry](./registry/README.md)**
+## 2. **[IRI Specification 1.0](./specification-v1/README.md)**
+## 3. **[IRI Specification 2.0](./specification-v2/README.md)**
+## 4. **[IRI Request For Comments](./rfc)**
+## 5. **[IRI Presentations](./presentations)**
