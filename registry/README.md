@@ -439,7 +439,7 @@ The registry is governed by specifications that define the syntax, semantics, an
 | Specification | Purpose |
 |---|---|
 | [A URN Namespace for the DoE IRI Project](../rfc/rfc-iri-urn-structure-and-registry.md) | Defines the DOE-IRI URN namespace structure, registration model, extension rules, and conformance requirements. |
-| [Type-Specific Attributes for IRI Resource Objects](../rfc-archive/rfc-type-specific-attributes.md) | Defines the model for type-specific resource attributes. |
+| [Type-Specific Attributes for IRI Resource Objects](../rfc/rfc-type-specific-attributes.md) | Defines the model for type-specific resource attributes. |
 | HAL `_links` Integration for IRI 2.0 | Defines the use of HAL links for resource relationships. |
 | Facility Physical and Logical Topology API Using HAL Links | Defines topology representation using resource relationships. |
 | Separating ResourceDefinition from ResourceState | Defines the separation between relatively stable resource definition and dynamic operational state. |
