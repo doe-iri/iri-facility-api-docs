@@ -16,6 +16,8 @@ workflows on top of IRI.
 # Contents
 
 ## 1. **[IRI Registry](./registry/README.md)**
+
+- [IRI Link Profile Index](./registry/link-profile-root.md)
 ## 2. **[IRI Specification 1.0](./specification-v1/README.md)**
 ## 3. **[IRI Specification 2.0](./specification-v2/README.md)**
 ## 4. **[IRI Request For Comments](./rfc)**

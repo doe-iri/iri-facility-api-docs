@@ -4,7 +4,7 @@
 
 This document defines an extensible URN structure for DoE Integrated Research Infrastructure (IRI) identifiers, following the guidelines in \[RFC8141\].
 
-The proposed format provides stable, hierarchical identifiers for resource types and controlled vocabulary values without requiring the OpenAPI schema to be revised whenever a new subtype or controlled value is introduced. It separates the stability of the data model from the evolution of registered taxonomies.
+The proposed format provides stable, hierarchical identifiers for resource types and controlled vocabulary values without requiring revisions to the OpenAPI schema whenever a new subtype or controlled value is introduced. It separates data-model stability from the evolution of registered taxonomies.
 
 The URN structure defined by this document is intended to be referenced by other IRI specifications, including the IRI `ResourceType` data-model definition. The URN structure can be extended to cover other IRI schema usages as required.
 
@@ -22,8 +22,7 @@ This memo is intended for discussion and adoption within the DOE IRI specificati
 | 0.4 | John MacAuley | May 12, 2026 | Modified URN structure based on feedback. |
 | 0.5 | John MacAuley | Jun 15, 2026 | Incorporated feedback. |
 | 1.0 | John MacAuley | Jun 15, 2026 | Minted version 1.0. |
-
-# 
+| 1.1 | John MacAuley | Aug 14, 2026 | Modified the service resource type to be under the resource URN. |
 
 # Table of Contents
 
@@ -162,7 +161,7 @@ Where:
 * **`urn`** is the literal URN prefix.  
 * **`doe-iri`** is the namespace identifier.  
 * **`<DOMAIN>`** identifies the class of typed thing, and anchor for the domain-specific string.  
-* **`<DOMAIN-SPECIFIC-STRING>`** is an MANDATORY sequence of one or more domain specific segments providing further qualification of the thing.
+* **`<DOMAIN-SPECIFIC-STRING>`** is a MANDATORY sequence of one or more domain-specific segments providing further qualification of the thing.
 
 ## 2.5 Domain Values
 
@@ -179,7 +178,8 @@ This document defines the following initial `DOMAIN` values:
 | Domain | Meaning |
 | :---- | :---- |
 | `allocation` | In HPC an allocation model defines how a facility grants, tracks, limits, and accounts for user or project access to shared computing, storage, and related resources over a defined period. |
-| `compression` | Compression related attributes used for compression or extraction of data. |
+| `compression` | Compression-related attributes used for compression or extraction of data. |
+| `compute` | Controlled attribute vocabulary used to describe compute resources, including attributes such as configured counts, memory capacity, vendor, product, model, version, or clock frequency. |
 | `resource` | Resource types for physical, logical, or virtual infrastructure resources, including website and consumable service resources. |
 | `service` | Controlled attribute vocabulary used to describe service resources, including service technologies, protocols, and APIs. |
 
@@ -219,15 +219,15 @@ The second, third, and fourth values are a subtype of the first value.  Any rela
 
 A producer MAY emit a parent type when a more specific subtype is unavailable, not applicable, sensitive, or intentionally hidden. A consumer SHOULD support fallback handling based on the nearest recognized parent type.
 
-Clients MAY assume that intermediate hierarchy levels of a URN have meaning, if they have specific definitions on their own.
+Clients MAY assume that intermediate hierarchy levels of a URN have meaning if they have specific definitions.
 
 ## 2.8. Comparison and Matching Rules
 
-The following semantics are defined for comparison and matching rules.
+The following semantics apply to comparison and matching rules.
 
 ### 2.8.1. Opaque Handling
 
-By definition the IRI Type URN can be parsed for meaning, and therefore, is not opaque.
+By definition, the IRI Type URN can be parsed for meaning, and therefore, is not opaque.
 
 A generic client MUST treat IRI Type URNs as opaque unless it explicitly implements parsing or hierarchy-aware matching.
 
@@ -314,15 +314,15 @@ This document does not define a separate local namespace. Facility-local values,
 
 To minimize the risk of accidental collision before formal registration, it is RECOMMENDED that facilities prefix the local segment of facility-local URNs with a registered facility or project identifier.
 
-For example, the following URN identifies a facility specific **`DOMAIN`** type:
+For example, the following URN identifies a facility-specific **`DOMAIN`** type:
 
 `urn:doe-iri:<facility-code>:pdu:breaker`
 
-The following is an example of a URN that is semantically defined as a `resource` but is a facility-specific type of resource.
+The following is an example of a URN that is semantically defined as a `resource` but is a facility-specific resource type.
 
 `urn:doe-iri:resource:<facility-code>:scanner`
 
-Lastly, the following is an example of a URN that is semantically defined as a compute `resource` but is a facility-specific type of compute resource.
+Lastly, the following is an example of a URN semantically defined as a compute `resource` but as a facility-specific type of compute resource.
 
 `urn:doe-iri:resource:compute:<facility-code>:fpga`
 
@@ -340,7 +340,7 @@ The registry SHOULD be located in the doe-iri GitHub repository:
 
 ## 5.2. Registry Authority
 
-The registry SHOULD be maintained by the IRI Interfaces Technical Subcommittee as the IRI API governance body.
+The IRI Interfaces Technical Subcommittee SHOULD maintain the registry as the IRI API governance body.
 
 ## 5.3. Registry Purpose
 
@@ -366,7 +366,7 @@ Each registry entry SHOULD include:
 | Description | The semantic meaning of the type. |
 | Parent URN | The parent type, if applicable. |
 | Domain | The domain, such as `allocation`, `compression`, `resource` or `service`. |
-| Status | The lifecycle state, such as active or deprecated. |
+| Status | The lifecycle state, such as `active` or `deprecated`. |
 | Change controller | The organization or process responsible for changes. |
 | Examples | Representative use cases or payload examples. |
 | Notes | Additional usage guidance. |
@@ -413,15 +413,15 @@ However, the following considerations apply.
 
 An IRI Type URN is a semantic label. It is not an authorization artifact, proof of capability, or trust assertion.
 
-Access control decisions MUST NOT rely solely on a type URN unless the value is sourced from a trusted server-side system of record and evaluated as one input within a broader policy decision.
+Access control decisions MUST NOT rely solely on a type URN unless the value comes from a trusted server-side system of record and is evaluated as one input within a broader policy decision.
 
 ## 7.2 Malformed Input
 
-Implementations that accept type URNs from clients SHOULD reject malformed values where validation is required by the application context.
+Implementations that accept type URNs from clients SHOULD reject malformed values when the application context requires validation.
 
 ## 7.3 Unsafe Parsing
 
-Implementations SHOULD treat type URNs as data rather than executable input.
+Implementations SHOULD treat type URNs as data, not executable input.
 
 Systems that map URNs to database queries, policy rules, filesystem paths, class names, or code paths MUST treat URNs as untrusted user input, except when the value is sourced from a trusted system of record and conveyed in a manner resistant to tampering by all intermediate entities that handle it.
 
