@@ -19,7 +19,7 @@ This document defines the `iri:locatedAt` relationship used by DOE-IRI Resource 
 
 ## 2. Semantic Meaning
 
-The `iri:locatedAt` relationship identifies the relatively stable physical and administrative Site associated with a Resource. It provides HAL navigation to the Site representation identified by the Resource's `site_uri` field.
+The `iri:locatedAt` relationship identifies the relatively stable physical and administrative Site associated with a Resource. It provides HAL navigation to the Site representation identified by the Resource's `site_uri` field.  In the future, the Resource's `site_uri` field will be deprecated.
 
 The relationship MUST NOT be interpreted as asserting current process placement, compute hosting, endpoint reachability, health, availability, ownership, or live routing.
 
