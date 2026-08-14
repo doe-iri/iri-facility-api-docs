@@ -84,14 +84,14 @@ DOE-IRI Registry
 │   │   └── Object Storage
 │   │
 │   ├── Compute
-│       ├── Compute System
-│       ├── Compute Node
-│       ├── CPU
-│       └── GPU
+│   │   ├── Compute System
+│   │   ├── Compute Node
+│   │   ├── CPU
+│   │   └── GPU
 │   │
 │   └── Service
-│       ├── DTN Service
-│       └── Inference Service
+│   │   ├── DTN Service
+│   │   └── Inference Service
 │
 ├── Controlled Attribute Vocabularies
 │   ├── Storage
