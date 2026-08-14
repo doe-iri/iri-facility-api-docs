@@ -363,6 +363,7 @@ The resource type selects the applicable semantic profile. The profile defines t
 | Describe a DTN or inference service | [Service Type Registry](urn-registry-type-service.md) |
 | Find service controlled attribute values | [Service Taxonomy and URN Index](urn-registry-type-service-taxonomy.md) |
 | Understand service hosting or configured mount access | [Service relationship profiles](urn-registry-type-service.md#6-service-resource-relationships) |
+| See a complete storage, compute, DTN, and inference topology | [Example HPC facility resource set](examples/hpc-facility-resources.json) |
 | Determine which attributes apply to a resource | The resource's Attribute Profile |
 | Find valid controlled attribute values | Applicable taxonomy/index or Attribute Profile |
 | Understand how two resources relate | Applicable Link Profile |

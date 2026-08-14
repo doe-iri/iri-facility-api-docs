@@ -1,0 +1,277 @@
+[
+  {
+    "id": "pioneer-storage",
+    "name": "Pioneer Parallel Storage",
+    "description": "Fictional parallel storage system serving the Pioneer HPC Facility.",
+    "last_modified": "2026-08-14T12:00:00Z",
+    "current_status": "up",
+    "resource_type": "urn:doe-iri:resource:storage:system",
+    "self_uri": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-storage",
+    "site_uri": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+    "capability_uris": [],
+    "attributes": {
+      "schema_version": "1.0.0",
+      "storage_technology": "urn:doe-iri:storage:system-technology:lustre",
+      "storage_architecture": [
+        "urn:doe-iri:storage:system-architecture:distributed",
+        "urn:doe-iri:storage:system-architecture:clustered"
+      ],
+      "storage_capabilities": [
+        "urn:doe-iri:storage:system-capability:replication",
+        "urn:doe-iri:storage:system-capability:snapshot"
+      ],
+      "media_types": [
+        "urn:doe-iri:storage:media-type:solid-state",
+        "urn:doe-iri:storage:media-type:magnetic-disk"
+      ],
+      "capacity_gib": 25165824,
+      "vendor": "Example Storage Systems",
+      "product": "Pioneer Parallel Array",
+      "version": "6.2"
+    },
+    "_links": {
+      "iri:providesFilesystem": [
+        {
+          "href": "/api/v2/status/resources/pioneer-scratch"
+        }
+      ]
+    }
+  },
+  {
+    "id": "pioneer-scratch",
+    "name": "Pioneer Scratch Filesystem",
+    "description": "High-performance scratch filesystem for active Pioneer workloads.",
+    "last_modified": "2026-08-14T12:00:00Z",
+    "current_status": "up",
+    "resource_type": "urn:doe-iri:resource:storage:filesystem",
+    "self_uri": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-scratch",
+    "site_uri": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+    "capability_uris": [],
+    "attributes": {
+      "schema_version": "1.0.0",
+      "filesystem_scope": "urn:doe-iri:storage:filesystem-scope:network",
+      "filesystem_architecture": [
+        "urn:doe-iri:storage:filesystem-architecture:distributed",
+        "urn:doe-iri:storage:filesystem-architecture:clustered"
+      ],
+      "filesystem_capabilities": [
+        "urn:doe-iri:storage:filesystem-capability:parallel-io",
+        "urn:doe-iri:storage:filesystem-capability:direct-io",
+        "urn:doe-iri:storage:filesystem-capability:data-striping",
+        "urn:doe-iri:storage:filesystem-capability:shared-namespace"
+      ],
+      "filesystem_technology": "urn:doe-iri:storage:filesystem-technology:lustre",
+      "tier": "urn:doe-iri:storage:tier:scratch",
+      "media_types": [
+        "urn:doe-iri:storage:media-type:solid-state",
+        "urn:doe-iri:storage:media-type:magnetic-disk"
+      ]
+    },
+    "_links": {
+      "iri:hasMount": [
+        {
+          "href": "/api/v2/status/resources/pioneer-scratch-mount"
+        }
+      ]
+    }
+  },
+  {
+    "id": "pioneer-scratch-mount",
+    "name": "Pioneer Scratch Mount",
+    "description": "Native Lustre exposure of the scratch filesystem on the Pioneer compute system.",
+    "last_modified": "2026-08-14T12:00:00Z",
+    "current_status": "up",
+    "resource_type": "urn:doe-iri:resource:storage:mount",
+    "self_uri": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-scratch-mount",
+    "site_uri": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+    "capability_uris": [],
+    "attributes": {
+      "schema_version": "1.0.0",
+      "mount_path": "/pioneer/scratch",
+      "access_mode": "urn:doe-iri:storage:mount-access-mode:read-write",
+      "mount_options": [
+        "flock",
+        "lazy_statfs"
+      ]
+    },
+    "_links": {
+      "iri:mountedOn": {
+        "href": "/api/v2/status/resources/pioneer-compute"
+      }
+    }
+  },
+  {
+    "id": "pioneer-compute",
+    "name": "Pioneer HPC System",
+    "description": "Fictional GPU-accelerated compute system at the Pioneer HPC Facility.",
+    "last_modified": "2026-08-14T12:00:00Z",
+    "current_status": "up",
+    "resource_type": "urn:doe-iri:resource:compute:system",
+    "self_uri": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-compute",
+    "site_uri": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+    "capability_uris": [],
+    "attributes": {
+      "schema_version": "1.0.0",
+      "system_capabilities": [
+        "urn:doe-iri:compute:system-capability:batch-scheduling",
+        "urn:doe-iri:compute:system-capability:interactive-access",
+        "urn:doe-iri:compute:system-capability:container-execution",
+        "urn:doe-iri:compute:system-capability:accelerator-support"
+      ],
+      "configured_node_count": 512,
+      "configured_cpu_core_count": 65536,
+      "configured_gpu_count": 2048,
+      "configured_memory_gib": 1048576,
+      "vendor": "Example Computing",
+      "product": "Pioneer EX",
+      "version": "2026.1"
+    },
+    "_links": {
+      "iri:hasNode": [
+        {
+          "href": "/api/v2/status/resources/pioneer-node-001"
+        }
+      ]
+    }
+  },
+  {
+    "id": "pioneer-node-001",
+    "name": "Pioneer Compute Node 001",
+    "description": "Representative GPU compute node in the Pioneer HPC system.",
+    "last_modified": "2026-08-14T12:00:00Z",
+    "current_status": "up",
+    "resource_type": "urn:doe-iri:resource:compute:node",
+    "self_uri": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-node-001",
+    "site_uri": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+    "capability_uris": [],
+    "attributes": {
+      "schema_version": "1.0.0",
+      "node_roles": [
+        "urn:doe-iri:compute:node-role:compute"
+      ],
+      "memory_gib": 2048,
+      "local_storage_gib": 7680,
+      "cpu_socket_count": 2,
+      "cpu_core_count": 128,
+      "gpu_count": 4,
+      "vendor": "Example Computing",
+      "product": "Pioneer GPU Node",
+      "model": "PX-4G"
+    },
+    "_links": {
+      "iri:hasGPU": [
+        {
+          "href": "/api/v2/status/resources/pioneer-node-001-gpu-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "pioneer-node-001-gpu-0",
+    "name": "Pioneer Node 001 GPU 0",
+    "description": "Representative accelerator installed in Pioneer compute node 001.",
+    "last_modified": "2026-08-14T12:00:00Z",
+    "current_status": "up",
+    "resource_type": "urn:doe-iri:resource:compute:gpu",
+    "self_uri": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-node-001-gpu-0",
+    "site_uri": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+    "capability_uris": [],
+    "attributes": {
+      "schema_version": "1.0.0",
+      "programming_interfaces": [
+        "urn:doe-iri:compute:gpu-programming-interface:cuda"
+      ],
+      "memory_gib": 80,
+      "vendor": "Example Accelerators",
+      "model": "EA-80",
+      "architecture": "Example Hopper-class Architecture"
+    }
+  },
+  {
+    "id": "pioneer-dtn",
+    "name": "Pioneer Globus DTN Service",
+    "description": "Managed data-transfer service for moving data into and out of Pioneer scratch storage.",
+    "last_modified": "2026-08-14T12:00:00Z",
+    "current_status": "up",
+    "resource_type": "urn:doe-iri:resource:service:dtn",
+    "self_uri": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-dtn",
+    "site_uri": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+    "capability_uris": [],
+    "attributes": {
+      "schema_version": "1.0.0",
+      "dtn_technology": "urn:doe-iri:service:dtn-technology:globus",
+      "technology_version": "5.4",
+      "transfer_protocols": [
+        "urn:doe-iri:service:transfer-protocol:https",
+        "urn:doe-iri:service:transfer-protocol:gridftp"
+      ],
+      "transfer_endpoints": [
+        {
+          "url": "https://transfer.pioneer.example.gov",
+          "protocol": "urn:doe-iri:service:transfer-protocol:https",
+          "name": "Pioneer Globus HTTPS endpoint"
+        },
+        {
+          "url": "gsiftp://transfer.pioneer.example.gov",
+          "protocol": "urn:doe-iri:service:transfer-protocol:gridftp",
+          "name": "Pioneer Globus GridFTP endpoint"
+        }
+      ]
+    },
+    "_links": {
+      "iri:hostedOn": {
+        "href": "/api/v2/status/resources/pioneer-compute"
+      },
+      "iri:accessesMount": [
+        {
+          "href": "/api/v2/status/resources/pioneer-scratch-mount"
+        }
+      ]
+    }
+  },
+  {
+    "id": "pioneer-inference",
+    "name": "Pioneer Inference Service",
+    "description": "OpenAI-compatible model-invocation service hosted on Pioneer GPU infrastructure.",
+    "last_modified": "2026-08-14T12:00:00Z",
+    "current_status": "up",
+    "resource_type": "urn:doe-iri:resource:service:inference",
+    "self_uri": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-inference",
+    "site_uri": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+    "capability_uris": [],
+    "attributes": {
+      "schema_version": "1.0.0",
+      "inference_technology": "urn:doe-iri:service:inference-technology:vllm",
+      "technology_version": "0.6.3",
+      "inference_apis": [
+        "urn:doe-iri:service:inference-api:openai"
+      ],
+      "inference_endpoints": [
+        {
+          "url": "https://inference.pioneer.example.gov/v1",
+          "api": "urn:doe-iri:service:inference-api:openai",
+          "name": "Pioneer OpenAI-compatible inference endpoint"
+        }
+      ],
+      "served_models": [
+        {
+          "id": "pioneer-llm-8b-instruct",
+          "name": "Pioneer LLM 8B Instruct",
+          "version": "1.0",
+          "model_uri": "https://models.pioneer.example.gov/catalog/pioneer-llm-8b-instruct"
+        },
+        {
+          "id": "pioneer-embedding-1",
+          "name": "Pioneer Scientific Embedding Model",
+          "version": "1.1",
+          "model_uri": "https://models.pioneer.example.gov/catalog/pioneer-embedding-1"
+        }
+      ]
+    },
+    "_links": {
+      "iri:hostedOn": {
+        "href": "/api/v2/status/resources/pioneer-node-001"
+      }
+    }
+  }
+]
