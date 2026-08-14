@@ -58,7 +58,7 @@ urn:doe-iri
 
 # 3. Service Resource Relationships
 
-Relationships between service resources and infrastructure resources are represented using registered IRI link relations. These relationships describe relatively stable topology and configured access without embedding host or storage identifiers in ordinary attributes.
+Registered IRI link relations describe service-domain topology, configured access, and applicable cross-model navigation without embedding host or storage identifiers in ordinary attributes. Their targets may be DOE-IRI Resource representations, relationship resources, or, for `iri:locatedAt`, the Facility API Site representation; the Site target is not a DOE-IRI typed Resource.
 
 | Relationship | Status | Source | Target | Cardinality | Target classification | Target Stability | Authorization Affects Visibility | Description |
 |---|---|---|---|---|---|---|---|---|
@@ -66,7 +66,7 @@ Relationships between service resources and infrastructure resources are represe
 | [`iri:accessesMount`](./link-profile-accesses-mount.md) | `provisional` | `urn:doe-iri:resource:service:dtn` | `urn:doe-iri:resource:storage:mount` | `0..*` targets from a DTN service | Relationship resource | Relatively static relationship resource. The target identifies configured filesystem access topology, not current mount availability, endpoint reachability, credential validity, unrestricted access, or transfer activity. | Yes | The DTN service is configured to access a filesystem through the identified mount relationship resource for transfer operations. It does not imply current mount availability, endpoint reachability, credential validity, unrestricted read or write authorization, or an active transfer. |
 | [`iri:locatedAt`](./link-profile-located-at.md) | `provisional` | Any DOE-IRI `Resource` representation | Facility API Site representation | `1` semantic target | Site API representation | Independently identifiable, relatively stable Site representation | No; `site_uri` already discloses Site identity | The target is the relatively stable physical and administrative Site associated with the source Resource. |
 
-Authorization MAY affect relationship visibility. The absence of a visible link is not proof that the relationship does not exist.
+Authorization MAY affect visibility of `iri:hostedOn` and `iri:accessesMount`; the absence of either visible link is not proof that the relationship does not exist. `iri:locatedAt` MUST NOT be independently authorization-filtered while the required `site_uri` field is returned because that field already discloses Site identity.
 
 ---
 

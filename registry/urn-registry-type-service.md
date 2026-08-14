@@ -127,7 +127,7 @@ The complete index of registered service controlled values is maintained in the 
 
 ## 6. Service Resource Relationships
 
-Relationships between service resources and infrastructure resources are represented using registered IRI link relations. These relationships describe relatively stable topology and configured access without embedding host or storage identifiers in ordinary attributes.
+Registered IRI link relations describe service-domain topology, configured access, and applicable cross-model navigation without embedding host or storage identifiers in ordinary attributes. Their targets may be DOE-IRI Resource representations, relationship resources, or, for `iri:locatedAt`, the Facility API Site representation; the Site target is not a DOE-IRI typed Resource.
 
 | Relationship | Status | Source | Target | Cardinality | Target Stability | Authorization Affects Visibility | Description |
 |---|---|---|---|---|---|---|---|
@@ -137,7 +137,7 @@ Relationships between service resources and infrastructure resources are represe
 
 `iri:hostedOn` does not state that a target is currently healthy, serving requests, selected by a router, or running a particular live replica. `iri:accessesMount` does not imply current mount availability, endpoint reachability, credential validity, unrestricted authorization, or an active transfer. Operational state is separate from these relatively stable relationships.
 
-Authorization MAY affect relationship visibility. The absence of a visible link is not proof that the relationship does not exist.
+Authorization MAY affect visibility of `iri:hostedOn` and `iri:accessesMount`; the absence of either visible link is not proof that the relationship does not exist. `iri:locatedAt` MUST NOT be independently authorization-filtered while the required `site_uri` field is returned because that field already discloses Site identity.
 
 ---
 

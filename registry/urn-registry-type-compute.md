@@ -177,7 +177,7 @@ Only attributes that require a registered controlled vocabulary are represented 
 
 ## 6. Compute Resource Relationships
 
-Relationships between compute resources, and incoming relationships from other resource domains, are represented using registered IRI link relations. These relationships describe topology and containment without embedding one resource definition inside another.
+Registered IRI link relations describe compute-domain topology and applicable cross-model navigation without embedding one representation inside another. Their targets may be DOE-IRI Resource representations or, for `iri:locatedAt`, the Facility API Site representation; the Site target is not a DOE-IRI typed Resource.
 
 | Relationship | Source | Target | Cardinality | Target Stability | Authorization Affects Visibility | Description |
 |---|---|---|---|---|---|---|
@@ -189,7 +189,7 @@ Relationships between compute resources, and incoming relationships from other r
 
 These relationships describe relatively stable resource topology and SHOULD NOT be interpreted as operational availability indicators. Current utilization, health, allocation, and availability belong in the corresponding resource-state representations.
 
-Authorization MAY affect relationship visibility. A facility MAY expose aggregate compute-system information while withholding individual node or processor topology from clients that do not require or are not authorized to discover that level of infrastructure detail.
+Authorization MAY affect visibility only for relationship rows whose Authorization Affects Visibility value is `Yes`. A facility MAY expose aggregate compute-system information while withholding individual node or processor topology from clients that do not require or are not authorized to discover that level of infrastructure detail. `iri:locatedAt` MUST NOT be independently authorization-filtered while the required `site_uri` field is returned because that field already discloses Site identity.
 
 Relationships describe independently identifiable resources and SHOULD NOT be duplicated as ordinary attributes when an IRI link relation is defined for the relationship.
 

@@ -72,7 +72,7 @@ urn:doe-iri
 
 # 3. Compute Resource Relationships
 
-Relationships between compute resources, and incoming relationships from other resource domains, are represented using registered IRI link relations. These relationships describe topology and containment without embedding one resource definition inside another.
+Registered IRI link relations describe compute-domain topology and applicable cross-model navigation without embedding one representation inside another. Their targets may be DOE-IRI Resource representations or, for `iri:locatedAt`, the Facility API Site representation; the Site target is not a DOE-IRI typed Resource.
 
 | Relationship | Source | Target | Cardinality | Target Stability | Authorization Affects Visibility | Description |
 |---|---|---|---|---|---|---|
