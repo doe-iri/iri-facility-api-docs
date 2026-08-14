@@ -42,6 +42,8 @@ urn:doe-iri
 │   ├── system
 │   ├── website
 │   ├── service
+│   │   ├── dtn
+│   │   └── inference
 │   └── unknown
 │
 ├── storage
@@ -49,6 +51,9 @@ urn:doe-iri
 │
 ├── compute
 │   └── controlled compute attribute vocabulary
+│
+├── service
+│   └── controlled service attribute vocabulary
 │
 ├── allocation
 │   └── allocation-unit vocabulary
@@ -79,6 +84,7 @@ The first segment following `urn:doe-iri:` identifies the top-level registry cat
 | `urn:doe-iri:resource` | Resource Types | Namespace for registered types of physical, logical, or virtual infrastructure resources. | `active` |
 | [`urn:doe-iri:storage`](urn-registry-type-storage.md) | Storage Vocabulary | Namespace for the controlled attribute vocabulary used to describe storage resources. | `provisional` |
 | [`urn:doe-iri:compute`](urn-registry-type-compute.md) | Compute Vocabulary | Namespace for the controlled attribute vocabulary used to describe compute resources. | `provisional` |
+| [`urn:doe-iri:service`](urn-registry-type-service.md) | Service Vocabulary | Namespace for the controlled attribute vocabulary used to describe service resources. | `provisional` |
 | `urn:doe-iri:allocation` | Allocation Units | Namespace for units used to express resource quantities in facility allocations. | `active` |
 | `urn:doe-iri:compression` | Compression Types | Namespace for identifiers representing compression algorithms used by IRI APIs. | `active` |
 | `urn:doe-iri:ext` | Extension Authorities | Namespace reserved for delegated facility- or project-specific extensions. | `active` |
@@ -96,12 +102,14 @@ The following base URNs are defined to be compatible with the resource types in 
 | `urn:doe-iri:resource:network` | Network | Generic network resource. | `network` | `active` |
 | `urn:doe-iri:resource:system` | System | Generic system resource type. | `system` | `active` |
 | `urn:doe-iri:resource:website` | Website | Generic website resource type. | `website` | `active` |
-| `urn:doe-iri:resource:service` | Service | Generic service resource type. | `service` | `active` |
+| [`urn:doe-iri:resource:service`](urn-registry-type-service.md) | Service | Generic service resource type. Detailed service resource types and controlled vocabulary values are delegated to the Service Type Registry. | `service` | `active` |
 | `urn:doe-iri:resource:unknown` | Unknown | Fallback resource type used when the resource's more specific type is not known or cannot be represented by a registered resource-type URN. | `unknown` | `active` |
 
 `urn:doe-iri:resource:unknown` SHOULD NOT be used when a more specific registered resource type is known.
 
 Resource-type URNs classify resources. They do not encode containment or topology. A resource's relationship to other resources is represented separately using IRI link relations.
+
+Detailed resource-type and controlled-vocabulary values beneath `urn:doe-iri:resource:service` and `urn:doe-iri:service` are maintained in the [Service Type Registry](urn-registry-type-service.md) and its [Service Taxonomy and URN Index](urn-registry-type-service-taxonomy.md).
 
 ## 5. Allocation Unit Registry
 

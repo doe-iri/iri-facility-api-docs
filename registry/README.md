@@ -83,19 +83,25 @@ DOE-IRI Registry
 │   │   ├── Block Storage
 │   │   └── Object Storage
 │   │
-│   └── Compute
-│       ├── Compute System
-│       ├── Compute Node
-│       ├── CPU
-│       └── GPU
+│   ├── Compute
+│   │   ├── Compute System
+│   │   ├── Compute Node
+│   │   ├── CPU
+│   │   └── GPU
+│   │
+│   └── Service
+│       ├── DTN Service
+│       └── Inference Service
 │
 ├── Controlled Attribute Vocabularies
 │   ├── Storage
-│   └── Compute
+│   ├── Compute
+│   └── Service
 │
 └── Link Profiles
     ├── Storage relationships
-    └── Compute relationships
+    ├── Compute relationships
+    └── Service relationships
 ```
 
 The URN hierarchy is a **semantic classification hierarchy**. It does not imply physical containment, ownership, deployment topology, or runtime relationships between resources.
@@ -182,7 +188,32 @@ The Compute registry defines the resource types used to represent managed comput
 | `iri:hasCPU` | Compute Node | CPU | [link-profile-has-cpu.md](link-profile-has-cpu.md) |
 | `iri:hasGPU` | Compute Node | GPU | [link-profile-has-gpu.md](link-profile-has-gpu.md) |
 
-### 5.3. Additional Resource Domains
+### 5.3. Service
+
+The Service registry defines consumable data-transfer and model-invocation services and the relatively stable infrastructure relationships used to describe their hosting and configured filesystem access.
+
+**Entry points**
+
+| Document | Purpose |
+|---|---|
+| [Service Type Registry](urn-registry-type-service.md) | Defines the `urn:doe-iri:resource:service` resource hierarchy, the `urn:doe-iri:service` controlled-vocabulary branch, and the service resource model. |
+| [Service Taxonomy and URN Index](urn-registry-type-service-taxonomy.md) | Consolidated taxonomy, service controlled attribute URNs, and service resource relationships. |
+
+**Resource attribute profiles**
+
+| Resource Type | Attribute Profile |
+|---|---|
+| DTN Service | [urn-registry-attributes-service-dtn.md](urn-registry-attributes-service-dtn.md) |
+| Inference Service | [urn-registry-attributes-service-inference.md](urn-registry-attributes-service-inference.md) |
+
+**Service relationship profiles**
+
+| Relationship | Source | Target | Link Profile |
+|---|---|---|---|
+| `iri:hostedOn` | DTN Service or Inference Service | Compute System or Compute Node | [link-profile-hosted-on.md](link-profile-hosted-on.md) |
+| `iri:accessesMount` | DTN Service | Filesystem Mount | [link-profile-accesses-mount.md](link-profile-accesses-mount.md) |
+
+### 5.4. Additional Resource Domains
 
 Additional resource domains MAY be introduced beneath `urn:doe-iri:resource` as their refinement models are defined.
 
@@ -192,7 +223,6 @@ Base resource types currently registered by the Root Registry include domains su
 urn:doe-iri:resource:network
 urn:doe-iri:resource:system
 urn:doe-iri:resource:website
-urn:doe-iri:resource:service
 ```
 
 When a domain requires subtype refinement, controlled attributes, or relationship profiles, it SHOULD follow the same documentation structure used by Storage and Compute.
@@ -240,6 +270,9 @@ urn:doe-iri:storage:...
 
 urn:doe-iri:compute:...
     Compute controlled attribute vocabulary
+
+urn:doe-iri:service:...
+    Service controlled attribute vocabulary
 ```
 
 Each resource's attribute profile defines which controlled vocabularies apply and whether an attribute is singular, multi-valued, optional, or required.
@@ -327,6 +360,9 @@ The resource type selects the applicable semantic profile. The profile defines t
 | Find a registered resource type | [Root Registry](urn-registry-root.md) → applicable Resource Type Registry |
 | Describe a storage resource | [Storage Type Registry](urn-registry-type-storage.md) |
 | Describe a compute resource | [Compute Type Registry](urn-registry-type-compute.md) |
+| Describe a DTN or inference service | [Service Type Registry](urn-registry-type-service.md) |
+| Find service controlled attribute values | [Service Taxonomy and URN Index](urn-registry-type-service-taxonomy.md) |
+| Understand service hosting or configured mount access | [Service relationship profiles](urn-registry-type-service.md#6-service-resource-relationships) |
 | Determine which attributes apply to a resource | The resource's Attribute Profile |
 | Find valid controlled attribute values | Applicable taxonomy/index or Attribute Profile |
 | Understand how two resources relate | Applicable Link Profile |

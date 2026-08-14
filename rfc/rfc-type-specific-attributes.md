@@ -111,6 +111,7 @@ Example:
 }
 ```
 
+
 ### **4.2. Core-Field Precedence**
 
 The following fields remain common, normative properties of a `Resource` object:
@@ -173,8 +174,8 @@ Examples:
 urn:doe-iri:resource:compute
 urn:doe-iri:resource:storage:system
 urn:doe-iri:resource:network
-urn:doe-iri:service:website
-urn:doe-iri:service:dtn:globus
+urn:doe-iri:resource:website
+urn:doe-iri:resource:service:dtn
 ```
 
 ## **6\. Attribute Profiles**
@@ -498,4 +499,3 @@ This document requires no IANA action.
   }
 }
 ```
-
