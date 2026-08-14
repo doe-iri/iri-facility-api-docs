@@ -129,10 +129,10 @@ The complete index of registered service controlled values is maintained in the 
 
 Relationships between service resources and infrastructure resources are represented using registered IRI link relations. These relationships describe relatively stable topology and configured access without embedding host or storage identifiers in ordinary attributes.
 
-| Relationship | Source | Target | Cardinality | Target Stability | Authorization Affects Visibility | Description |
-|---|---|---|---|---|---|---|
-| [`iri:hostedOn`](./link-profile-hosted-on.md) | DTN Service or Inference Service | Compute System or Compute Node | `0..*` targets from a service | Relatively static hosting topology | Yes | Indicates that the target provides hosting infrastructure for the source service. |
-| [`iri:accessesMount`](./link-profile-accesses-mount.md) | DTN Service | Filesystem Mount | `0..*` targets from a DTN service | Relatively static configured access topology | Yes | Indicates that the DTN service is configured to access a filesystem through the identified mount relationship resource for transfer operations. |
+| Relationship | Status | Source | Target | Cardinality | Target Stability | Authorization Affects Visibility | Description |
+|---|---|---|---|---|---|---|---|
+| [`iri:hostedOn`](./link-profile-hosted-on.md) | `provisional` | DTN Service or Inference Service | Compute System or Compute Node | `0..*` targets from a service | Static resource representation. The target identifies hosting infrastructure independently of current routing, live replica placement, health, or availability. | Yes | Indicates that the target provides hosting infrastructure for the source service. |
+| [`iri:accessesMount`](./link-profile-accesses-mount.md) | `provisional` | DTN Service | Filesystem Mount | `0..*` targets from a DTN service | Relatively static relationship resource. The target identifies configured filesystem access topology, not current mount availability, endpoint reachability, credential validity, unrestricted access, or transfer activity. | Yes | Indicates that the DTN service is configured to access a filesystem through the identified mount relationship resource for transfer operations. |
 
 `iri:hostedOn` does not state that a target is currently healthy, serving requests, selected by a router, or running a particular live replica. `iri:accessesMount` does not imply current mount availability, endpoint reachability, credential validity, unrestricted authorization, or an active transfer. Operational state is separate from these relatively stable relationships.
 

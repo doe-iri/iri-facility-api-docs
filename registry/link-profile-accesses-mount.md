@@ -7,6 +7,7 @@ This document defines the `iri:accessesMount` relationship used by the DOE-IRI s
 | Field | Definition |
 |---|---|
 | Relationship | `iri:accessesMount` |
+| Status | `provisional` |
 | Semantic meaning | Indicates that the source DTN service is configured to access a filesystem through the identified mount relationship resource for transfer operations. |
 | Source representation type | `urn:doe-iri:resource:service:dtn` |
 | Target representation type | `urn:doe-iri:resource:storage:mount` |

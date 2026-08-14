@@ -7,6 +7,7 @@ This document defines the `iri:hostedOn` relationship used by the DOE-IRI servic
 | Field | Definition |
 |---|---|
 | Relationship | `iri:hostedOn` |
+| Status | `provisional` |
 | Semantic meaning | Indicates that the identified compute system or compute node provides hosting infrastructure for the source service. |
 | Source representation type | `urn:doe-iri:resource:service:dtn` or `urn:doe-iri:resource:service:inference` |
 | Target representation type | `urn:doe-iri:resource:compute:system` or `urn:doe-iri:resource:compute:node` |

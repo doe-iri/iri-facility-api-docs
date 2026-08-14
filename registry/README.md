@@ -90,8 +90,8 @@ DOE-IRI Registry
 │   │   └── GPU
 │   │
 │   └── Service
-│   │   ├── DTN Service
-│   │   └── Inference Service
+│       ├── DTN Service
+│       └── Inference Service
 │
 ├── Controlled Attribute Vocabularies
 │   ├── Storage
@@ -223,7 +223,6 @@ Base resource types currently registered by the Root Registry include domains su
 urn:doe-iri:resource:network
 urn:doe-iri:resource:system
 urn:doe-iri:resource:website
-urn:doe-iri:resource:service
 ```
 
 When a domain requires subtype refinement, controlled attributes, or relationship profiles, it SHOULD follow the same documentation structure used by Storage and Compute.

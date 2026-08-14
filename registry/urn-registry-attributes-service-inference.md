@@ -110,7 +110,7 @@ The `api` value MUST come from the `urn:doe-iri:service:inference-api:*` family.
 
 The `served_models` attribute catalogs models configured to be served by the inference service. Each `ServedModel` has a stable, service-local `id` and a human-readable `name`; `version` and `model_uri` are optional descriptive values.
 
-Each `ServedModel.id` MUST be unique within a `served_models` array. The identifier is the value referenced by the companion state contract's `active_models` entries. Model activity is operational state, so a model appearing in `served_models` is not by itself a claim that it is currently loaded or able to serve requests.
+Each `ServedModel.id` MUST be unique within a `served_models` array. The companion state contract's `active_models` field contains IDs of served models that are currently loaded and available for requests. Model activity is operational state, so a model appearing in `served_models` is not by itself a claim that it is currently loaded or able to serve requests.
 
 ### 4.5. State Exclusions
 
@@ -195,6 +195,11 @@ components:
 
 `InferenceServiceState` is a companion operational-state contract, separate from `InferenceServiceAttributes` and this stable resource definition. It is not an integration statement for the core Facility API OpenAPI.
 
+| Field | Type | Description | Mandatory |
+|---|---|---|---|
+| `schema_version` | string | Version of the state-profile definition (e.g. `"1.0.0"`). | yes |
+| `active_models` | Unique array of strings | IDs of served models that are currently loaded and available for requests. Omission means current model activity is unknown or unreported; an empty array means the service reports no active models. | no |
+
 ```yaml
 InferenceServiceState:
   type: object
@@ -207,12 +212,16 @@ InferenceServiceState:
         - "1.0.0"
     active_models:
       type: array
+      description: >
+        IDs of served models that are currently loaded and available for
+        requests. Omission means current model activity is unknown or
+        unreported; an empty array means the service reports no active models.
       uniqueItems: true
       items:
         type: string
 ```
 
-Each `active_models` item references a `served_models.id` from the corresponding definition instance. Omission of `active_models` means that current model activity is unknown or unreported. An empty `active_models` array means the service reports no active models.
+The `active_models` field contains IDs of served models that are currently loaded and available for requests. Each item references a `served_models.id` from the corresponding definition instance. Omission of `active_models` means that current model activity is unknown or unreported. An empty `active_models` array means the service reports no active models.
 
 ## 7. Example Inference Service Definition and State JSON Instances
 

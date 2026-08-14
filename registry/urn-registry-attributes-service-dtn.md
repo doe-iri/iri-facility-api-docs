@@ -217,6 +217,58 @@ The following Globus DTN service advertises HTTPS and GridFTP transfer protocols
 }
 ```
 
+The following illustrative complete resource representation applies the
+`DtnServiceAttributes` profile inside `attributes` and adds HAL relationships
+for its hosting infrastructure and configured mount access. It is a
+resource-level example, not an instance of `DtnServiceAttributes` alone.
+
+```json
+{
+  "id": "globus-dtn",
+  "name": "Globus DTN Service",
+  "description": "Facility data-transfer service with HTTPS and GridFTP access",
+  "last_modified": "2026-08-13T12:00:00Z",
+  "resource_type": "urn:doe-iri:resource:service:dtn",
+  "self_uri": "https://api.example.gov/api/v2/status/resources/globus-dtn",
+  "site_uri": "https://api.example.gov/api/v2/sites/example-site",
+  "capability_uris": [],
+  "attributes": {
+    "schema_version": "1.0.0",
+    "dtn_technology": "urn:doe-iri:service:dtn-technology:globus",
+    "technology_version": "5.4",
+    "transfer_protocols": [
+      "urn:doe-iri:service:transfer-protocol:https",
+      "urn:doe-iri:service:transfer-protocol:gridftp"
+    ],
+    "transfer_endpoints": [
+      {
+        "url": "https://globus.example.gov",
+        "protocol": "urn:doe-iri:service:transfer-protocol:https",
+        "name": "Globus HTTPS endpoint"
+      },
+      {
+        "url": "gsiftp://globus.example.gov",
+        "protocol": "urn:doe-iri:service:transfer-protocol:gridftp",
+        "name": "Globus GridFTP endpoint"
+      }
+    ]
+  },
+  "_links": {
+    "iri:hostedOn": {
+      "href": "/api/v2/status/resources/perlmutter"
+    },
+    "iri:accessesMount": [
+      {
+        "href": "/api/v2/status/resources/perlmutter-scratch-mount"
+      },
+      {
+        "href": "/api/v2/status/resources/analysis-home-mount"
+      }
+    ]
+  }
+}
+```
+
 The following XRootD DTN service uses the XRootD technology and exposes XRootD and HTTPS endpoints.
 
 ```json
