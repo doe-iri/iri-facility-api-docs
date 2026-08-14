@@ -201,7 +201,7 @@ urn:doe-iri
 
 # 3. Storage Resource Relationships
 
-Relationships between storage resources are represented using registered IRI link relations. These relationships describe topology and access without embedding one resource definition inside another.
+Relationships between storage resources, and incoming relationships from other resource domains, are represented using registered IRI link relations. These relationships describe topology and access without embedding one resource definition inside another.
 
 | Relationship | Source | Target | Cardinality | Target Stability | Authorization Affects Visibility | Description |
 |---|---|---|---|---|---|---|
@@ -211,3 +211,4 @@ Relationships between storage resources are represented using registered IRI lin
 | [`iri:hasMount`](./link-profile-has-mount.md) | Filesystem | Mount | `0..*` | Relatively static | Yes | Indicates that the filesystem is exposed through the identified mount resource. |
 | [`iri:mountedOn`](./link-profile-mounted-on.md) | Mount | Compute System | `1` | Static | Yes | Indicates the consuming system on which the filesystem represented by the mount is exposed. |
 | [`iri:attachedTo`](./link-profile-attached-to.md) | Block Storage | Compute System or Compute Node | `0..1` exclusive / `0..*` shared | Static target; dynamic state separate | Yes | Indicates that the block resource is attached or presented to the identified consuming resource. |
+| [`iri:accessesMount`](./link-profile-accesses-mount.md) | DTN Service | Filesystem Mount | `0..*` targets from a DTN service | Relatively static configured access topology | Yes | Incoming cross-domain relationship indicating that the DTN service is configured to access the identified mount for transfer operations. |
