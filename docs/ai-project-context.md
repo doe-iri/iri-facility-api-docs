@@ -1850,6 +1850,9 @@ model loading, and model activity also remain state.
 
 The Service model registers two link relations:
 
+Both currently registered Service link relations, `iri:hostedOn` and
+`iri:accessesMount`, have lifecycle status `provisional`.
+
 ```text
 DTN Service or Inference Service
         │
