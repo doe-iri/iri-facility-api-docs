@@ -99,7 +99,7 @@ Example:
   "current_status": "up",
   "resource_type": "urn:doe-iri:resource:storage:system",
   "self_uri": "https://api.example.org/api/v2/status/resources/orion",
-  "site_uri": "https://api.example.org/api/v2/sites/example-site",
+  "site_uri": "https://api.example.org/api/v2/facility/sites/example-site",
   "capability_uris": [],
   "attributes": {
     "schema_version": "1.0.0",
@@ -110,7 +110,7 @@ Example:
   },
   "_links": {
     "iri:locatedAt": {
-      "href": "https://api.example.org/api/v2/sites/example-site"
+      "href": "https://api.example.org/api/v2/facility/sites/example-site"
     }
   }
 }
@@ -495,7 +495,7 @@ This document requires no IANA action.
   "current_status": "up",
   "resource_type": "urn:doe-iri:resource:storage:system",
   "self_uri": "https://api.example.org/api/v2/status/resources/orion",
-  "site_uri": "https://api.example.org/api/v2/sites/example-site",
+  "site_uri": "https://api.example.org/api/v2/facility/sites/example-site",
   "capability_uris": [],
   "attributes": {
     "schema_version": "1.0.0",
@@ -506,7 +506,7 @@ This document requires no IANA action.
   },
   "_links": {
     "iri:locatedAt": {
-      "href": "https://api.example.org/api/v2/sites/example-site"
+      "href": "https://api.example.org/api/v2/facility/sites/example-site"
     }
   }
 }

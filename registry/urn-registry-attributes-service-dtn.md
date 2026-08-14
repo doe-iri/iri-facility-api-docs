@@ -230,7 +230,7 @@ resource-level example, not an instance of `DtnServiceAttributes` alone.
   "last_modified": "2026-08-13T12:00:00Z",
   "resource_type": "urn:doe-iri:resource:service:dtn",
   "self_uri": "https://api.example.gov/api/v2/status/resources/globus-dtn",
-  "site_uri": "https://api.example.gov/api/v2/sites/example-site",
+  "site_uri": "https://api.example.gov/api/v2/facility/sites/example-site",
   "capability_uris": [],
   "attributes": {
     "schema_version": "1.0.0",
@@ -255,7 +255,7 @@ resource-level example, not an instance of `DtnServiceAttributes` alone.
   },
   "_links": {
     "iri:locatedAt": {
-      "href": "https://api.example.gov/api/v2/sites/example-site"
+      "href": "https://api.example.gov/api/v2/facility/sites/example-site"
     },
     "iri:hostedOn": {
       "href": "/api/v2/status/resources/perlmutter"
