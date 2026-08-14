@@ -4,13 +4,13 @@
 
 This document defines an extensible URN structure for DoE Integrated Research Infrastructure (IRI) identifiers, following the guidelines in \[RFC8141\].
 
-The proposed format provides a stable, hierarchical identifier for resource and service type values without requiring the OpenAPI schema to be revised whenever a new subtype is introduced. It separates the stability of the data model from the evolution of the type taxonomy.
+The proposed format provides stable, hierarchical identifiers for resource types and controlled vocabulary values without requiring the OpenAPI schema to be revised whenever a new subtype or controlled value is introduced. It separates the stability of the data model from the evolution of registered taxonomies.
 
 The URN structure defined by this document is intended to be referenced by other IRI specifications, including the IRI `ResourceType` data-model definition. The URN structure can be extended to cover other IRI schema usages as required.
 
 # Status of This Memo
 
-This document defines a proposed URN structure for identifying typed IRI concepts, including resource and service types.
+This document defines a proposed URN structure for identifying typed IRI concepts, including resource types and controlled service vocabulary values.
 
 This memo is intended for discussion and adoption within the DOE IRI specification and reference implementations.
 
@@ -107,7 +107,7 @@ This memo is intended for discussion and adoption within the DOE IRI specificati
 
 # 1. Introduction
 
-IRI interfaces need stable identifiers for concepts that may evolve over time. Resource and service typing is one such area: facilities may need to identify broad infrastructure classes such as compute, storage, network, website, and system resources, while also representing more specific concepts such as GPUs, scratch filesystems, object storage, Globus DTN services, XRootD services, and inference services.
+IRI interfaces need stable identifiers for concepts that may evolve over time. Resource typing is one such area: facilities may need to identify broad infrastructure classes such as compute, storage, network, website, system, and service resources, while also representing more specific concepts such as GPUs, scratch filesystems, object storage, DTN services, and inference services. Controlled vocabularies separately identify standardized characteristics such as a DTN service's implementation technology.
 
 A closed enumeration is difficult to evolve because every new type requires a schema change, implementation update, and downstream client regeneration. A URN-based approach \[RFC8141\] allows the schema to remain stable while the type taxonomy evolves through a governed registry.
 
@@ -130,7 +130,7 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **
 For the purposes of this document:
 
 * **IRI Type URN** means a URN that conforms to the syntax defined by this document.  
-* **Domain** means the class of typed thing, such as `resource` or `service`.  
+* **Domain** means the top-level semantic branch, such as `resource` for resource types or `service` for controlled service attribute values.
 * **Domain specific string** means an additional narrowing segment within the URN hierarchy.  
 * **Canonical URN** means a URN published by the IRI specification or registry as the preferred identifier for a type.  
 * **Facility-local URN** means a syntactically valid URN used by a facility before, or without, inclusion in the shared IRI registry.  
@@ -180,8 +180,8 @@ This document defines the following initial `DOMAIN` values:
 | :---- | :---- |
 | `allocation` | In HPC an allocation model defines how a facility grants, tracks, limits, and accounts for user or project access to shared computing, storage, and related resources over a defined period. |
 | `compression` | Compression related attributes used for compression or extraction of data. |
-| `resource` | A physical, logical, or virtual infrastructure resource. |
-| `service` | A service capability, endpoint, API, or functional service exposed to users, workflows, or systems. |
+| `resource` | Resource types for physical, logical, or virtual infrastructure resources, including website and consumable service resources. |
+| `service` | Controlled attribute vocabulary used to describe service resources, including service technologies, protocols, and APIs. |
 
 Future **`<DOMAIN>`** values MAY be defined by a subsequent revision of this document or through an approved registry process.
 
@@ -271,8 +271,8 @@ The existing enum values map to canonical IRI Type URNs as follows:
 
 | Legacy enum | Canonical IRI Type URN |
 | :---- | :---- |
-| `website` | `urn:doe-iri:service:website` |
-| `service` | `urn:doe-iri:service:generic` |
+| `website` | `urn:doe-iri:resource:website` |
+| `service` | `urn:doe-iri:resource:service` |
 | `compute` | `urn:doe-iri:resource:compute` |
 | `system` | `urn:doe-iri:resource:system` |
 | `storage` | `urn:doe-iri:resource:storage` |
@@ -458,5 +458,6 @@ This document does not require action by IANA, however, in the future the IRI In
 | `urn:doe-iri:resource:compute` | Compute | `urn:doe-iri:resource` | active | A compute resource or compute resource collection. |
 | `urn:doe-iri:resource:compute:gpu` | GPU | `urn:doe-iri:resource:compute` | active | A graphics processing unit or GPU-backed compute resource. |
 | `urn:doe-iri:resource:storage:filesystem:scratch` | Scratch filesystem | `urn:doe-iri:resource:storage:filesystem` | active | A filesystem intended for scratch or temporary workflow storage. |
-| `urn:doe-iri:service:dtn:globus` | Globus DTN service | `urn:doe-iri:service:dtn` | active | A data transfer node service exposed through Globus. |
-
+| `urn:doe-iri:resource:service:dtn` | DTN Service | `urn:doe-iri:resource:service` | provisional | A consumable data-transfer service. |
+| `urn:doe-iri:resource:service:inference` | Inference Service | `urn:doe-iri:resource:service` | provisional | A consumable model-invocation service. |
+| `urn:doe-iri:service:dtn-technology:globus` | Globus DTN technology | `urn:doe-iri:service:dtn-technology` | provisional | A controlled attribute value identifying Globus as the DTN service technology or implementation. |
