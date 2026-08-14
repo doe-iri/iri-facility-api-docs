@@ -1,3 +1,7 @@
+.codex/
+AGENTS.md
+docs/
+
 # Compiled class file
 *.class
 
