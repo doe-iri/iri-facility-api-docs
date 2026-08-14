@@ -24,13 +24,13 @@ The root DOE-IRI namespace is registered as follows:
 | Reference | [A URN Namespace for the DoE IRI Project](../rfc/rfc-iri-urn-structure-and-registry.md) |
 | Legacy value | None |
 | Examples | `urn:doe-iri:resource:storage:filesystem`, `urn:doe-iri:resource:compute:system`, `urn:doe-iri:storage:tier:scratch` |
-| Notes | This entry represents the root DOE-IRI URN namespace rather than an independently assignable resource or attribute value. The hierarchy beneath the namespace expresses registered semantic classification. Physical topology, runtime relationships, and operational state are represented separately by the applicable IRI resource and link models. |
+| Notes | This entry represents the root DOE-IRI URN namespace rather than an independently assignable resource or attribute value. Except for administrative delegation segments, the hierarchy beneath the namespace expresses registered semantic classification. Physical topology, runtime relationships, and operational state are represented separately by the applicable IRI resource and link models. |
 
 > **Note:** The governing namespace specification is authoritative for the exact lexical form of the namespace root and subordinate URNs. This registry uses `urn:doe-iri:` as the namespace prefix for assigned values.
 
 ## 2. DOE-IRI Namespace Taxonomy
 
-The following taxonomy shows the currently registered top-level semantic branches beneath the DOE-IRI namespace.
+The following taxonomy shows the currently registered top-level registry branches beneath the DOE-IRI namespace.
 
 ```text
 urn:doe-iri
@@ -62,10 +62,10 @@ urn:doe-iri
 │   └── compression-type vocabulary
 │
 └── ext
-    └── delegated extension authorities
+    └── administrative extension authorities and scope delegations
 ```
 
-The DOE-IRI URN hierarchy is a **semantic registration hierarchy**. Hierarchical placement identifies the category and refinement of a registered value; it does not imply physical containment, ownership, deployment topology, or runtime relationships between resources.
+Except for the administrative `ext` category and Extension URN marker/authority segments, the DOE-IRI URN hierarchy is a **semantic registration hierarchy**. Semantic placement identifies the category and refinement of a registered value; it does not imply physical containment, ownership, deployment topology, or runtime relationships between resources.
 
 For example:
 
@@ -77,7 +77,7 @@ identifies a compute-node resource type, but does not imply that the node is phy
 
 ## 3. Registry Categories
 
-The first segment following `urn:doe-iri:` identifies the top-level registry category. Each category defines a separate semantic subtree within the DOE-IRI namespace.
+The first segment following `urn:doe-iri:` identifies the top-level registry category. Each category except administrative `ext` defines a separate semantic subtree within the DOE-IRI namespace.
 
 | URN | Short name | Purpose | Status |
 |---|---|---|---|
@@ -87,9 +87,9 @@ The first segment following `urn:doe-iri:` identifies the top-level registry cat
 | [`urn:doe-iri:service`](urn-registry-type-service.md) | Service Vocabulary | Namespace for the controlled attribute vocabulary used to describe service resources. | `provisional` |
 | `urn:doe-iri:allocation` | Allocation Units | Namespace for units used to express resource quantities in facility allocations. | `active` |
 | `urn:doe-iri:compression` | Compression Types | Namespace for identifiers representing compression algorithms used by IRI APIs. | `active` |
-| `urn:doe-iri:ext` | Extension Authorities | Namespace reserved for delegated facility- or project-specific extensions. | `active` |
+| `urn:doe-iri:ext` | Extension Administration | Administrative branch for delegated facility- or project-specific extensions; it is not a semantic controlled vocabulary. | `active` |
 
-These categories are separate controlled vocabularies within the DOE-IRI URN namespace. Detailed registries MAY be maintained in separate documents when a category contains a substantial number of registered values.
+These categories are separate DOE-IRI registry branches. Except for the administrative `ext` branch, they are controlled semantic vocabularies. Detailed registries MAY be maintained in separate documents when a category contains a substantial number of registered values.
 
 ## 4. Resource Type Registry
 
@@ -132,35 +132,39 @@ These URNs identify compression algorithms used by IRI APIs.
 | `urn:doe-iri:compression:gzip` | gzip | gzip compression. | `gzip` | `active` |
 | `urn:doe-iri:compression:xz` | xz | xz compression. | `xz` | `active` |
 
-## 7. Delegated Extension Authorities
+## 7. Delegated Extension Administration
 
-The DOE-IRI namespace specification may permit delegated extension subtrees for facility- or project-specific values.
+The `ext` category is an administrative delegation branch, not a semantic resource-type or controlled-value vocabulary. The governing specification defines the canonical extension grammar, validation layers, placement rules, and registration policy. This registry factually records authority-code reservations separately from exact scope delegations.
 
-The registry reserves the `ext` segment for this purpose. An extension authority MUST be registered before values beneath its delegated subtree are treated as assigned DOE-IRI values.
+### 7.1. Authority-Code Reservations
 
-The governing specification defines where an `ext` segment may appear and the rules governing values beneath a delegated authority. This registry records the authorities that have been assigned.
+All five authority-code reservations recorded below are active and permanent. A reservation alone does not constitute an active scope delegation; the governing specification defines the assignment and reassignment policy.
 
-### 7.1. Registered Extension Authorities
-
-| Authority | Organization | Assigned prefix | Scope | Status |
+| Authority code | Organization | Change controller | Status | Reference |
 |---|---|---|---|---|
-| `esnet` | Energy Sciences Network | `urn:doe-iri:ext:esnet:` | TBD by delegation record | `active` |
-| `nersc` | National Energy Research Scientific Computing Center | `urn:doe-iri:ext:nersc:` | TBD by delegation record | `active` |
-| `alcf` | Argonne Leadership Computing Facility | `urn:doe-iri:ext:alcf:` | TBD by delegation record | `active` |
-| `olcf` | Oak Ridge Leadership Computing Facility | `urn:doe-iri:ext:olcf:` | TBD by delegation record | `active` |
-| `slac` | SLAC National Accelerator Laboratory | `urn:doe-iri:ext:slac:` | TBD by delegation record | `active` |
+| `esnet` | Energy Sciences Network | Energy Sciences Network | `active` | Root Registry authority-code reservation |
+| `nersc` | National Energy Research Scientific Computing Center | National Energy Research Scientific Computing Center | `active` | Root Registry authority-code reservation |
+| `alcf` | Argonne Leadership Computing Facility | Argonne Leadership Computing Facility | `active` | Root Registry authority-code reservation |
+| `olcf` | Oak Ridge Leadership Computing Facility | Oak Ridge Leadership Computing Facility | `active` | Root Registry authority-code reservation |
+| `slac` | SLAC National Accelerator Laboratory | SLAC National Accelerator Laboratory | `active` | Root Registry authority-code reservation |
 
-Example shapes defined by the governing specification include:
+### 7.2. Scope Delegations
+
+No delegated scopes are currently assigned. An authority-code reservation does not imply a scope delegation. Scope records use the authority code, exact registered parent, assigned prefix, permitted semantic scope, lifecycle status, and reference fields shown below.
+
+| Authority code | Exact registered parent | Assigned prefix | Permitted semantic scope | Status | Reference |
+|---|---|---|---|---|---|
+| None | None | None | No delegated scopes are currently assigned. | Not applicable | Not applicable |
+
+The following legal shapes are syntactic Extension URNs defined by the governing specification. They are not scope authorizations, local definitions, or assigned DOE-IRI extensions:
 
 ```text
-urn:doe-iri:ext:<authority>:<type>
-urn:doe-iri:resource:ext:<authority>:<type>
-urn:doe-iri:resource:compute:ext:<authority>:<type>
+urn:doe-iri:ext:<authority>:<local-path>
+urn:doe-iri:resource:ext:<authority>:<local-path>
+urn:doe-iri:resource:compute:ext:<authority>:<local-path>
 ```
 
-The registry, rather than string uniqueness alone, is authoritative for determining which extension authorities have been delegated.
-
-A delegated authority controls only the subtree explicitly assigned to it. The authority MUST NOT assume control of adjacent DOE-IRI namespaces or other extension points unless those scopes are separately delegated by the governing registry process.
+The registry is the factual record of active scope delegations; the governing specification defines their effect. The legal shapes above do not authorize a scope or adjacent namespace.
 
 ---
 

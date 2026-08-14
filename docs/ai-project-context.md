@@ -95,7 +95,7 @@ The namespace prefix used by the registry is:
 urn:doe-iri:
 ```
 
-The root registry currently recognizes primary semantic branches including:
+The root registry currently recognizes primary registry branches including:
 
 ```text
 urn:doe-iri:resource
@@ -109,9 +109,11 @@ urn:doe-iri:ext
 
 ## 3.2. Semantic hierarchy, not physical topology
 
-A major design principle is:
+A major design principle for semantic URN segments is:
 
 > The URN hierarchy is a semantic registration/classification hierarchy, not a physical containment hierarchy.
+
+The administrative `ext` category, Extension URN marker, and authority code are explicit exceptions: they express delegated governance rather than semantic classification.
 
 For example:
 
@@ -224,7 +226,7 @@ Registry documents record:
 - references;
 - legacy values;
 - profile links;
-- delegated extension authorities.
+- delegated extension authority-code reservations and exact scope delegations.
 
 The root registry should therefore not duplicate normative grammar and registration-process text from the RFC.
 
@@ -280,12 +282,13 @@ The root registry is the entry point for the DOE-IRI namespace.
 Its purpose is to:
 
 - register the root namespace;
-- show the top-level semantic taxonomy;
+- show the top-level registry taxonomy, distinguishing semantic categories from
+  the administrative `ext` branch;
 - register top-level categories;
 - list base resource-type URNs;
 - list allocation-unit URNs;
 - list compression identifiers;
-- record delegated extension authorities;
+- record extension authority-code reservations and exact scope delegations;
 - delegate detailed subtrees to domain registry documents.
 
 The root registry taxonomy currently follows the conceptual shape:
@@ -318,7 +321,7 @@ urn:doe-iri
 │   └── compression-type vocabulary
 │
 └── ext
-    └── delegated extension authorities
+    └── administrative authority-code reservations and scope delegations
 ```
 
 Base resource types currently discussed:
@@ -1424,7 +1427,7 @@ Check the repository's actual OpenAPI version before relying on OpenAPI-version-
 
 # 23. Extension Authorities
 
-The root registry reserves `ext` for delegated extension authorities.
+The project has adopted the explicit `ext` marker as the sole canonical mechanism for facility- or project-controlled DOE-IRI extensions. The root registry reserves `ext` as an administrative delegation branch, not a semantic controlled vocabulary.
 
 Authorities discussed include:
 
@@ -1436,23 +1439,25 @@ olcf
 slac
 ```
 
-Example shapes from the governing model include:
+The governing model defines the following legal extension shapes:
 
 ```text
-urn:doe-iri:ext:<authority>:<type>
-urn:doe-iri:resource:ext:<authority>:<type>
-urn:doe-iri:resource:compute:ext:<authority>:<type>
+urn:doe-iri:ext:<authority>:<local-path>
+urn:doe-iri:resource:ext:<authority>:<local-path>
+urn:doe-iri:resource:compute:ext:<authority>:<local-path>
 ```
 
 Important principle:
 
-> Registry delegation, not string uniqueness alone, determines whether an extension authority is assigned.
+> An authority-code reservation and an active exact scope delegation, not string uniqueness alone, determine whether an Extension URN is scope-authorized.
 
-An authority controls only the subtree explicitly delegated to it.
+`urn:doe-iri:ext` is the valid administrative category-root exception. In Extension URNs, `ext` and its authority code are structural rather than semantic subtype segments. Shared-parent fallback stops at the nearest recognized shared parent before `ext`; a root-scope extension uses opaque fallback when its local meaning is unknown. Prefixes ending in `:ext` or `:ext:<authority>` are not resource types or controlled values.
 
-Open design consideration:
+The registry records authority-code reservations separately from scope delegations. Every exact registered canonical semantic DOE-IRI URN is structurally eligible as an extension parent; there is no separate extension-point approval registry. An authority controls only the full nonempty suffix subtree explicitly delegated to it; a reservation grants no insertion point, and no active scope is inferred from it. Local leaves beneath an active scope do not require central registration. Promotion creates a new shared URN and may deprecate the former extension with explicit replacement guidance; identifiers are never repurposed.
 
-The governing specification should clearly define where `ext` may legally occur and what scope an authority receives at each location.
+An **Extension URN** is syntax-only: it matches the explicit `ext` form but does not imply registration, scope, or documentation. A **scope-authorized Extension URN** has a reserved authority and active exact parent/authority scope. A **locally defined Extension URN** is scope-authorized and has an authority-assigned, documented suffix. An **assigned DOE-IRI extension** satisfies all three layers.
+
+Validation is layered: syntactic validity, scope authorization, and local definition. General clients retain unknown-extension fallback, while strict contracts may reject scope-unauthorized or scope-authorized-but-undocumented values when assigned DOE-IRI extensions are required. Proven deployed legacy direct-form identifiers require explicit deprecated mappings and MUST NOT be heuristically rewritten.
 
 ---
 

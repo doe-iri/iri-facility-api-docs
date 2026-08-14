@@ -46,9 +46,9 @@ This memo is intended for discussion and adoption within the DOE IRI specificati
 
 [2.4. Declaration of Syntactic Structure](#24-declaration-of-syntactic-structure)
 
-[2.5 Domain Values](#25-domain-values)
+[2.5 Category Values](#25-category-values)
 
-[2.6 Domain Specific String Values](#26-domain-specific-string-values)
+[2.6 Category-Specific String Values](#26-category-specific-string-values)
 
 [2.7. Hierarchical Semantics](#27-hierarchical-semantics)
 
@@ -68,7 +68,7 @@ This memo is intended for discussion and adoption within the DOE IRI specificati
 
 [3.3. CompressionType URNs](#33-compressiontype-urns)
 
-[**4. Facility-Local Extensions**](#4-facility-local-extensions)
+[**4. Delegated Extensions**](#4-delegated-extensions)
 
 [**5. Registry Model**](#5-registry-model)
 
@@ -129,10 +129,15 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **
 For the purposes of this document:
 
 * **IRI Type URN** means a URN that conforms to the syntax defined by this document.  
-* **Domain** means the top-level semantic branch, such as `resource` for resource types or `service` for controlled service attribute values.
-* **Domain specific string** means an additional narrowing segment within the URN hierarchy.  
+* **Category** means the top-level DOE-IRI registry branch, such as `resource` for resource types or `service` for controlled service attribute values.
+* **Category-root URN** means a registered top-level DOE-IRI category such as `urn:doe-iri:resource` or `urn:doe-iri:storage`.
+* **Category-specific string** means an additional narrowing segment within a semantic URN hierarchy.
 * **Canonical URN** means a URN published by the IRI specification or registry as the preferred identifier for a type.  
-* **Facility-local URN** means a syntactically valid URN used by a facility before, or without, inclusion in the shared IRI registry.  
+* **Extension URN** means a URN that syntactically conforms to the explicit `ext` form defined in Section 2.4. This syntax-only term does not imply a registered authority, active scope delegation, or local definition.
+* **Authority code** means a registered, stable, lowercase identifier for the organization that controls an explicitly delegated extension scope.
+* **Scope-authorized Extension URN** means an Extension URN whose authority code is reserved and has an active scope delegation for its exact registered parent-and-authority pair.
+* **Locally defined Extension URN** means a scope-authorized Extension URN whose delegated authority has assigned and documented its local suffix.
+* **Assigned DOE-IRI extension** means a locally defined Extension URN that satisfies syntactic validity, scope authorization, and local definition.
 * **Registry** means the governed list of canonical IRI Type URNs and their semantics.
 
 ## 2.3. Design Goals
@@ -150,53 +155,72 @@ The IRI Type URN structure is intended to satisfy the following goals:
 
 The formal syntax definitions below are given in ABNF \[RFC5234\].
 
-The namespace-specific string (NSS) in the `urn:doe-iri` names hierarchy begins with a domain identifier (**`DOMAIN`**), followed by a delimiter and a domain-dependent string:
+The namespace-specific string (NSS) in the `urn:doe-iri` names hierarchy begins with a category identifier. A category-root URN may stand alone; a semantic URN may add a category-specific path; and an Extension URN uses the explicit delegation form. The following are ABNF productions compatible with RFC 5234:
 
 ```
-DOE-IRI-URN = "urn:doe-iri:" DOMAIN ":" DOMAIN-SPECIFIC-STRING
+DOE-IRI-URN = ADMINISTRATIVE-CATEGORY-ROOT-URN / SEMANTIC-CATEGORY-ROOT-URN / SEMANTIC-URN / EXTENSION-URN
+ADMINISTRATIVE-CATEGORY-ROOT-URN = "urn:doe-iri:" EXTENSION-MARKER
+SEMANTIC-CATEGORY-ROOT-URN = "urn:doe-iri:" SEMANTIC-CATEGORY
+SEMANTIC-URN = SEMANTIC-CATEGORY-ROOT-URN ":" SEMANTIC-PATH
+EXTENSION-URN = EXTENSION-PARENT ":" EXTENSION-MARKER ":" AUTHORITY ":" LOCAL-PATH
+EXTENSION-PARENT = "urn:doe-iri" / SEMANTIC-CATEGORY-ROOT-URN / SEMANTIC-URN
+SEMANTIC-CATEGORY = "allocation" / "compression" / "compute" / "resource" / "service" / "storage"
+EXTENSION-MARKER = %x65.78.74
+AUTHORITY = NON-EXT-AUTHORITY
+SEMANTIC-PATH = NON-EXT-SEGMENT *( ":" NON-EXT-SEGMENT )
+LOCAL-PATH = NON-EXT-SEGMENT *( ":" NON-EXT-SEGMENT )
+NON-EXT-SEGMENT = 1*2SEGMENT-CHAR / NON-EXT-THREE-SEGMENT / 4*SEGMENT-CHAR
+NON-EXT-THREE-SEGMENT = NON-E-SEGMENT-CHAR SEGMENT-CHAR SEGMENT-CHAR / %x65 NON-X-SEGMENT-CHAR SEGMENT-CHAR / %x65 %x78 NON-T-SEGMENT-CHAR
+NON-EXT-AUTHORITY = 1*2AUTHORITY-CHAR / NON-EXT-THREE-AUTHORITY / 4*AUTHORITY-CHAR
+NON-EXT-THREE-AUTHORITY = NON-E-AUTHORITY-CHAR AUTHORITY-CHAR AUTHORITY-CHAR / %x65 NON-X-AUTHORITY-CHAR AUTHORITY-CHAR / %x65 %x78 NON-T-AUTHORITY-CHAR
+SEGMENT-CHAR = ALPHA / DIGIT / "-" / "." / "_" / "~"
+AUTHORITY-CHAR = LOWER / DIGIT / "-"
+NON-E-SEGMENT-CHAR = %x41-5A / %x61-64 / %x66-7A / DIGIT / "-" / "." / "_" / "~"
+NON-X-SEGMENT-CHAR = %x41-5A / %x61-77 / %x79-7A / DIGIT / "-" / "." / "_" / "~"
+NON-T-SEGMENT-CHAR = %x41-5A / %x61-73 / %x75-7A / DIGIT / "-" / "." / "_" / "~"
+NON-E-AUTHORITY-CHAR = %x61-64 / %x66-7A / DIGIT / "-"
+NON-X-AUTHORITY-CHAR = %x61-77 / %x79-7A / DIGIT / "-"
+NON-T-AUTHORITY-CHAR = %x61-73 / %x75-7A / DIGIT / "-"
+LOWER = %x61-7A
 ```
 
 Where:
 
 * **`urn`** is the literal URN prefix.  
 * **`doe-iri`** is the namespace identifier.  
-* **`<DOMAIN>`** identifies the class of typed thing, and anchor for the domain-specific string.  
-* **`<DOMAIN-SPECIFIC-STRING>`** is a MANDATORY sequence of one or more domain-specific segments providing further qualification of the thing.
+* **`<SEMANTIC-CATEGORY>`** identifies a semantic class of typed thing and anchors its category-specific path.
+* **`<SEMANTIC-PATH>`** is a nonempty sequence of non-`ext` semantic segments that provides further qualification of the thing.
+* **`<EXTENSION-MARKER>`** is the exact lowercase reserved segment `ext`.
+* **`<AUTHORITY>`** is one syntactic lowercase authority-code segment; its registration is evaluated separately during scope authorization.
+* **`<LOCAL-PATH>`** is one or more nonempty syntactic local segments; their delegated definition is evaluated separately.
 
-## 2.5 Domain Values
+`EXTENSION-MARKER` uses hexadecimal terminal values because quoted RFC 5234 ABNF strings are case-insensitive; it therefore matches only lowercase `ext`. `NON-EXT-SEGMENT` and `NON-EXT-AUTHORITY` exclude a segment exactly equal to lowercase `ext`, so a syntactically conforming Extension URN cannot also parse as a semantic URN and contains exactly one `ext` marker. `urn:doe-iri:ext` is the valid administrative category-root exception, not an Extension URN and not an extension parent.
 
-**`<DOMAIN>`** has the same syntax as a **\<NID\>** as defined in \[RFC8141\]:
+An Extension URN MUST insert `ext` only at the namespace root or immediately after a semantic category-root URN or semantic URN as defined by the grammar. An authority code and a nonempty local path are REQUIRED syntactic segments. Every exact registered canonical semantic DOE-IRI URN is structurally eligible as an extension parent; the registry does not maintain a separate extension-point approval record. Scope authorization requires an authority-code reservation and an active scope delegation for the exact registered parent and authority. Local definition then completes assignment as a DOE-IRI extension.
 
-```
-DOMAIN = ( ALPHA / DIGIT )  *31( ALPHA / DIGIT / "-" )
-```
+## 2.5 Category Values
 
-**ALPHA** and **DIGIT** are defined in Appendix B of \[RFC5234\].
+The initial semantic category names used by the ABNF above are registered in the following table. `ext` is separately registered as the administrative category-root exception.
 
-This document defines the following initial `DOMAIN` values:
+This document defines the following initial category values:
 
-| Domain | Meaning |
+| Category | Meaning |
 | :---- | :---- |
 | `allocation` | In HPC an allocation model defines how a facility grants, tracks, limits, and accounts for user or project access to shared computing, storage, and related resources over a defined period. |
 | `compression` | Compression-related attributes used for compression or extraction of data. |
 | `compute` | Controlled attribute vocabulary used to describe compute resources, including attributes such as configured counts, memory capacity, vendor, product, model, version, or clock frequency. |
+| `ext` | Administrative delegation branch for registered authority codes and exact scope delegations; it is not a semantic controlled vocabulary. |
 | `resource` | Resource types for physical, logical, or virtual infrastructure resources, including website and consumable service resources. |
 | `service` | Controlled attribute vocabulary used to describe service resources, including service technologies, protocols, and APIs. |
+| `storage` | Controlled attribute vocabulary used to describe storage resources, including storage abstractions, tiers, technologies, protocols, and related characteristics. |
 
-Future **`<DOMAIN>`** values MAY be defined by a subsequent revision of this document or through an approved registry process.
+Future semantic categories require a corresponding revision of the governing grammar and registry records.
 
-## 2.6 Domain Specific String Values
+## 2.6 Category-Specific String Values
 
-The syntax of **`<DOMAIN-SPECIFIC-STRING>`** is dependent on the **`<DOMAIN>`** and MUST be defined by the IRI Interfaces Technical Subcommittee.  This document does not pose any additional restrictions to the **`<DOMAIN-SPECIFIC-STRING>`** other than what is defined in the NSS  
-syntax as defined by \[RFC8141\] or its successor:
+The syntax and meaning of a **`<SEMANTIC-PATH>`** are dependent on the **`<SEMANTIC-CATEGORY>`** and MUST be defined by the IRI Interfaces Technical Subcommittee. The grammar in Section 2.4 restricts the lexical segment form and reserves lowercase `ext`; individual category registries define allowed semantic refinements.
 
-```
-DOMAIN-SPECIFIC-STRING = 1*<URN chars>
-```
-
-**`<URN chars>`** is defined in Section 2.2 of \[RFC8141\].
-
-In addition, we provide the following guidance when defining the **`<DOMAIN-SPECIFIC-STRING>`** token:
+In addition, we provide the following guidance when defining a **`<SEMANTIC-PATH>`**:
 
 * MUST be non-empty.  
 * SHOULD be short, stable, and semantically meaningful.  
@@ -204,7 +228,7 @@ In addition, we provide the following guidance when defining the **`<DOMAIN-SPEC
 
 ## 2.7. Hierarchical Semantics
 
-Each additional URN segment narrows the meaning of the type.
+Each additional segment in a semantic URN narrows the meaning of the type. The administrative `ext` category root, the Extension URN marker, and its authority segment are exceptions: they express delegation structure rather than semantic refinement.
 
 For example:
 
@@ -215,11 +239,15 @@ urn:doe-iri:resource:compute:cpu
 urn:doe-iri:resource:compute:gpu
 ```
 
-The second, third, and fourth values are a subtype of the first value.  Any relationship between the four URNs will be defined by the domain definition.
+The second, third, and fourth values are a subtype of the first value. Any relationship between the four URNs will be defined by the applicable category definition.
 
 A producer MAY emit a parent type when a more specific subtype is unavailable, not applicable, sensitive, or intentionally hidden. A consumer SHOULD support fallback handling based on the nearest recognized parent type.
 
-Clients MAY assume that intermediate hierarchy levels of a URN have meaning if they have specific definitions.
+Clients MAY assume that intermediate semantic hierarchy levels of a URN have meaning if they have specific definitions.
+
+For an Extension URN, ordinary segments before `ext` form the shared semantic hierarchy. The `ext` marker and its authority code are structural delegation segments, not semantic subtype segments. Prefix fallback stops at the nearest recognized shared parent before `ext`; for example, an unfamiliar `urn:doe-iri:resource:compute:ext:nersc:fpga` falls back to `urn:doe-iri:resource:compute`. A root-scope extension has no category-specific shared parent and therefore supports only opaque fallback when its local meaning is unknown.
+
+Prefixes ending in `:ext` or `:ext:<authority>` MUST NOT be treated as resource types, controlled values, or semantic parent types. The suffix hierarchy beneath an active scope is defined by the delegated authority's documentation.
 
 ## 2.8. Comparison and Matching Rules
 
@@ -304,27 +332,21 @@ The existing enum values map to canonical IRI Type URNs as follows:
 | `gzip` | `urn:doe-iri:compression:gzip` |
 | `xz` | `urn:doe-iri:compression:xz` |
 
-# 4. Facility-Local Extensions
+# 4. Delegated Extensions
 
-Facilities MAY define local extensions that conform to the syntax in Section 2\.
+The explicit `ext` form in Section 2.4 is the sole canonical mechanism for facility- or project-controlled DOE-IRI extensions. A facility-local extension MUST use the nearest accurate registered shared parent where possible. Root placement is permitted only through an explicit root-scope delegation and SHOULD be used only when no accurate shared semantic parent exists.
 
-Facility-local extensions SHOULD use the nearest accurate registered parent type where possible. When a local extension becomes useful across multiple facilities, it SHOULD be proposed for inclusion in the shared registry.
+The following are syntactic Extension URNs defined by the specification. They do not imply that the illustrated authority currently holds the required scope delegation or has documented the local suffix.
 
-This document does not define a separate local namespace. Facility-local values, therefore, MUST still conform to the same syntax and validation rules unless a future revision defines a formal extension namespace.
+```text
+urn:doe-iri:ext:nersc:pdu:breaker
+urn:doe-iri:resource:ext:nersc:scanner
+urn:doe-iri:resource:compute:ext:nersc:fpga
+```
 
-To minimize the risk of accidental collision before formal registration, it is RECOMMENDED that facilities prefix the local segment of facility-local URNs with a registered facility or project identifier.
+An organization MUST first obtain an authority-code reservation and an active exact scope delegation before publishing or claiming an assigned DOE-IRI extension. An authority-code reservation identifies the organization and its change controller; it does not grant an insertion point. A scope delegation identifies the authority, exact registered parent, assigned prefix, and permitted semantic scope. An active scope grants the full nonempty local suffix subtree beneath its assigned prefix, but grants neither an adjacent parent scope nor any other extension point. The delegated authority's assignment and documentation of the local suffix supplies the required local definition.
 
-For example, the following URN identifies a facility-specific **`DOMAIN`** type:
-
-`urn:doe-iri:<facility-code>:pdu:breaker`
-
-The following is an example of a URN that is semantically defined as a `resource` but is a facility-specific resource type.
-
-`urn:doe-iri:resource:<facility-code>:scanner`
-
-Lastly, the following is an example of a URN semantically defined as a compute `resource` but as a facility-specific type of compute resource.
-
-`urn:doe-iri:resource:compute:<facility-code>:fpga`
+Individual local leaves beneath an active delegated prefix do not require central registration. The delegated authority MUST document their local meaning. When a local value becomes useful across facilities, a new shared URN SHOULD be proposed. Promotion creates a new shared URN and MAY deprecate the former extension with explicit replacement guidance; the old identifier MUST NOT be repurposed.
 
 # 5. Registry Model
 
@@ -353,7 +375,7 @@ The registry provides:
 * replacement guidance when applicable;  
 * examples of intended usage.
 
-The registry SHOULD also manage the allocation of facility codes needed for Facility-Local Extensions.
+The registry SHOULD maintain authority-code reservations and exact scope-delegation records for Delegated Extensions.
 
 ## 5.4. Registry Entry Template
 
@@ -365,11 +387,13 @@ Each registry entry SHOULD include:
 | Short name | A human-readable label. |
 | Description | The semantic meaning of the type. |
 | Parent URN | The parent type, if applicable. |
-| Domain | The domain, such as `allocation`, `compression`, `resource` or `service`. |
+| Category | The category, such as `allocation`, `compression`, `resource`, or `service`. |
 | Status | The lifecycle state, such as `active` or `deprecated`. |
 | Change controller | The organization or process responsible for changes. |
 | Examples | Representative use cases or payload examples. |
 | Notes | Additional usage guidance. |
+
+An authority-code reservation entry SHOULD additionally identify the authority code, organization, change controller, lifecycle status, and reference. A scope-delegation entry SHOULD identify the authority code, exact registered parent, assigned prefix, permitted semantic scope, lifecycle status, and reference. Authority codes are permanent reservations and MUST NOT be reassigned, including after deprecation.
 
 ## 5.5. Registration Policy
 
@@ -382,7 +406,7 @@ New shared URNs SHOULD be reviewed for:
 * naming consistency;  
 * backward compatibility with existing registered values.
 
-Facility-local URNs MAY be used before registry inclusion, but reusable cross-facility values SHOULD be proposed for shared registration.
+An authority-code reservation plus an active exact parent-and-authority scope delegation gives an Extension URN scope authorization. The delegated authority's assignment and documentation of the local suffix completes its status as an assigned DOE-IRI extension. Local leaves beneath an active scope do not require central registration, but reusable cross-facility values SHOULD be proposed for shared registration. A producer MUST NOT claim a scope-unauthorized or undocumented Extension URN as an assigned DOE-IRI extension.
 
 ## 5.6. Deprecation
 
@@ -395,13 +419,19 @@ A deprecated entry SHOULD include:
 * a recommended replacement URN, if one exists;  
 * migration guidance for producers and consumers.
 
+If a proven legacy direct-form deployment is discovered, the registry MAY record only that exact legacy prefix or value as deprecated and name an explicit `ext` replacement. Such mappings preserve exact-string identity and MUST NOT define equivalence or authorize heuristic rewriting of segments that happen to match an authority code.
+
 # 6. Validation
 
-Systems that accept IRI Type URNs as input SHOULD validate syntax using the rules in Section 2\.
+Validation has three distinct layers:
 
-Systems that publish IRI Type URNs SHOULD emit syntactically valid values.
+1. **Syntactic validity:** the value conforms to the DOE-IRI grammar and, when applicable, the Extension URN production in Section 2.4.
+2. **Scope authorization:** an Extension URN's authority code is reserved and has an active delegation for its exact registered parent and authority pair.
+3. **Local definition:** the delegated authority assigns and documents the meaning of the local suffix.
 
-Systems MAY enforce registry membership in contexts where only canonical shared values are allowed. However, general-purpose IRI clients SHOULD NOT require registry membership unless the applicable API contract explicitly requires it.
+Systems that accept IRI Type URNs as input SHOULD validate syntax using the rules in Section 2\. A syntactically valid Extension URN without scope authorization is scope-unauthorized. A scope-authorized Extension URN without a local definition is scope-authorized but undocumented. Only an Extension URN that satisfies all three layers is an assigned DOE-IRI extension. Systems that publish assigned DOE-IRI extensions MUST satisfy all three layers.
+
+General-purpose clients SHOULD NOT reject an unfamiliar syntactically valid extension solely because it is scope-unauthorized or undocumented; they SHOULD use shared-parent fallback or opaque handling. An API contract that requires assigned DOE-IRI values MAY reject either state explicitly.
 
 # 7. Security Considerations
 
@@ -438,6 +468,8 @@ This document defines an extensible identifier structure. It does not, by itself
 Backward compatibility impacts are introduced only when another specification replaces a closed enumeration with an IRI Type URN string or otherwise requires use of this URN structure.
 
 Specifications that adopt this document SHOULD describe their own migration and compatibility expectations.
+
+The canonical Extension URN form replaces direct authority-code placement as a second syntax. No alias is created by this specification. If evidence establishes a deployed direct-form identifier, it requires an explicit deprecated mapping with an exact `ext` replacement; producers and clients MUST NOT heuristically rewrite it.
 
 # 9. IANA Considerations
 

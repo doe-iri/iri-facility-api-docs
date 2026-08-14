@@ -209,14 +209,18 @@ Each profile SHOULD define:
 
 Canonical profiles SHOULD be published in the DOE-IRI URN Registry or an associated IRI specification repository.
 
-A facility MAY publish a facility-local profile for a valid facility-local IRI Type URN.
+A facility MAY publish a facility-local profile only for a scope-authorized Extension URN under the governing DOE-IRI URN specification. The profile MUST itself serve as, or link to, the delegated authority's local definition of that suffix.
 
 A facility-local profile SHOULD:
 
-1. Use the nearest accurate shared parent type.  
-2. Be documented in a facility-controlled location.  
-3. Identify its facility or project namespace where appropriate.  
-4. Be proposed for shared registration when it becomes useful across multiple facilities.
+1. Use the canonical explicit `ext` form with a registered authority code and a nonempty local path.
+2. Use scope authorization for the exact registered shared parent and authority pair.
+3. Serve as, or link to, the delegated authority's local definition for the suffix.
+4. Use the nearest accurate shared parent type, so an unfamiliar extension falls back to that shared parent before `ext`.
+5. Be documented in a facility-controlled location.
+6. Be proposed for shared registration when it becomes useful across multiple facilities.
+
+An authority-code reservation alone does not authorize a facility-local profile. Neither an undelegated extension nor a scope-authorized but undocumented suffix is an assigned DOE-IRI extension or profile, even if its URN is syntactically valid.
 
 Clients MUST NOT be required to retrieve a profile dynamically in order to process a `Resource` response. A client that does not recognize a profile MUST preserve or ignore the attributes according to its local behavior and MUST NOT reject the entire resource solely because the profile is unfamiliar.
 
@@ -226,7 +230,7 @@ In the event that a client encounters a URN that it cannot resolve or validate:
 
 1. **Unknown-Type Handling:** Clients MUST implement an "unknown-type-handler" pattern, treating unrecognized URNs as opaque objects. Consumers SHOULD NOT fail or reject the Resource object solely due to an unknown `resource_type` or invalid schema.
 
-2. **Resolution Conflicts:** If a client encounters a URN that resolves to conflicting definitions (e.g., a facility-local URN that mimics a canonical URN), the client SHOULD prioritize the registry-published canonical definition if available.
+2. **Resolution Conflicts:** If a client encounters conflicting local documentation for an unassigned extension, or an explicit deprecated legacy mapping that conflicts with local documentation, the client SHOULD prioritize the registry-published canonical definition or mapping if available.
 
 3. **Validation Fallback:** Where canonical validation is unavailable, clients SHOULD implement a "best-effort" validation mode that enforces basic JSON structural requirements (e.g., checking for valid JSON types) rather than full schema validation.
 
