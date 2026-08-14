@@ -254,6 +254,9 @@ resource-level example, not an instance of `DtnServiceAttributes` alone.
     ]
   },
   "_links": {
+    "iri:locatedAt": {
+      "href": "https://api.example.gov/api/v2/sites/example-site"
+    },
     "iri:hostedOn": {
       "href": "/api/v2/status/resources/perlmutter"
     },

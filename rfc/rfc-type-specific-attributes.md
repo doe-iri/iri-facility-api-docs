@@ -107,6 +107,11 @@ Example:
     "filesystem_technology": "lustre",
     "vendor": "HPE",
     "product": "ClusterStor"
+  },
+  "_links": {
+    "iri:locatedAt": {
+      "href": "https://api.example.org/api/v2/sites/example-site"
+    }
   }
 }
 ```
@@ -133,6 +138,8 @@ An `attributes` object MUST NOT redefine or override any common `Resource` prope
 If a profile defines an attribute that appears to overlap semantically with a common property, the common property is authoritative. Profiles SHOULD avoid such duplication.
 
 For example, `attributes.current_status` MUST NOT be used because `current_status` is already a top-level property.
+
+`site_uri` remains required and authoritative. During the additive compatibility period, a producer MAY add a singular `_links["iri:locatedAt"]` HAL link object. When present, its `href` MUST exactly equal `site_uri`. `_links` remains optional in the current Resource schema; deprecating or removing `site_uri` requires a separate approved schema revision.
 
 ### **4.3. Attribute Value Types**
 
@@ -496,6 +503,11 @@ This document requires no IANA action.
     "filesystem_technology": "lustre",
     "vendor": "HPE",
     "product": "ClusterStor"
+  },
+  "_links": {
+    "iri:locatedAt": {
+      "href": "https://api.example.org/api/v2/sites/example-site"
+    }
   }
 }
 ```

@@ -185,6 +185,7 @@ Relationships between compute resources, and incoming relationships from other r
 | [`iri:hasCPU`](./link-profile-has-cpu.md) | Compute Node | CPU | `0..*` | Static | Yes | Indicates that the compute node contains or provides the identified CPU resource. |
 | [`iri:hasGPU`](./link-profile-has-gpu.md) | Compute Node | GPU | `0..*` | Static | Yes | Indicates that the compute node contains or provides the identified GPU resource. |
 | [`iri:hostedOn`](./link-profile-hosted-on.md) | DTN Service or Inference Service | Compute System or Compute Node | `0..*` targets from a service | Static resource representation. The target identifies hosting infrastructure independently of current routing, live replica placement, health, or availability. | Yes | Incoming cross-domain relationship indicating that the target provides hosting infrastructure for the source service. |
+| [`iri:locatedAt`](./link-profile-located-at.md) | Any DOE-IRI Resource | Facility API Site representation | `1` semantic target | Relatively stable Site representation | No; `site_uri` already discloses Site identity | Indicates the relatively stable physical and administrative Site associated with the source Resource. |
 
 These relationships describe relatively stable resource topology and SHOULD NOT be interpreted as operational availability indicators. Current utilization, health, allocation, and availability belong in the corresponding resource-state representations.
 

@@ -99,6 +99,7 @@ DOE-IRI Registry
 │   └── Service
 │
 └── Link Profiles
+    ├── Core resource relationships
     ├── Storage relationships
     ├── Compute relationships
     └── Service relationships
@@ -279,7 +280,7 @@ Each resource's attribute profile defines which controlled vocabularies apply an
 
 ## 7. Link Profiles
 
-Link profiles define the semantics of registered HAL relationships between IRI resources.
+Link profiles define the semantics of registered HAL relationships from IRI Resource representations to applicable API representations.
 
 Each relationship profile documents, at minimum:
 
@@ -293,6 +294,12 @@ Each relationship profile documents, at minimum:
 - Example HAL representation.
 
 Relationships describe topology or navigation and SHOULD NOT be duplicated as ordinary attributes when a registered link relation exists for the same semantic relationship.
+
+**Core resource relationship profiles**
+
+| Relationship | Source | Target | Link Profile |
+|---|---|---|---|
+| `iri:locatedAt` | Any DOE-IRI Resource | Facility API Site representation | [link-profile-located-at.md](link-profile-located-at.md) |
 
 For example:
 

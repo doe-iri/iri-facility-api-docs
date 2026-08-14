@@ -1054,7 +1054,7 @@ components:
         site_uri:
           type: string
           title: Site Uri
-          description: URI of the site where this resource is located
+          description: Required authoritative URI of the site where this resource is located. When `_links.iri:locatedAt` is present, its `href` MUST exactly equal this value.
           readOnly: true
         capability_uris:
           items:

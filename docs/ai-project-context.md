@@ -1955,3 +1955,24 @@ If only one section of this document is read, use this:
 9. Do not invent values when omission is more accurate.
 10. Keep all taxonomy, profile, link, README, and root-registry documentation synchronized.
 ```
+
+---
+
+# 31. `iri:locatedAt` Resource-to-Site Relation (2026-08-14)
+
+`iri:locatedAt` is a provisional, singular HAL relation from any DOE-IRI
+Resource representation to its relatively stable Facility API Site
+representation. It identifies physical and administrative site association;
+it does not assert current process placement, compute hosting, endpoint
+reachability, health, availability, ownership, or live routing.
+
+The existing required `site_uri` remains authoritative during the additive
+compatibility period. A producer MAY expose a singular `iri:locatedAt` link;
+when present, its `href` MUST exactly equal `site_uri`. The Site identity is
+already disclosed by `site_uri`, so the relation MUST NOT be independently
+authorization-filtered while that field is returned. Removing or deprecating
+`site_uri` requires a separate approved schema revision.
+
+`iri:locatedAt` is distinct from `iri:hostedOn`: `locatedAt` applies to any
+Resource and identifies its Site, while `hostedOn` applies only to DTN or
+inference services and identifies compute hosting infrastructure.
