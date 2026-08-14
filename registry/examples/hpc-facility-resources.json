@@ -30,6 +30,9 @@
       "version": "6.2"
     },
     "_links": {
+      "self": {
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-storage"
+      },
       "iri:providesFilesystem": [
         {
           "href": "/api/v2/status/resources/pioneer-scratch"
@@ -68,6 +71,9 @@
       ]
     },
     "_links": {
+      "self": {
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-scratch"
+      },
       "iri:hasMount": [
         {
           "href": "/api/v2/status/resources/pioneer-scratch-mount"
@@ -95,6 +101,9 @@
       ]
     },
     "_links": {
+      "self": {
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-scratch-mount"
+      },
       "iri:mountedOn": {
         "href": "/api/v2/status/resources/pioneer-compute"
       }
@@ -127,6 +136,9 @@
       "version": "2026.1"
     },
     "_links": {
+      "self": {
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-compute"
+      },
       "iri:hasNode": [
         {
           "href": "/api/v2/status/resources/pioneer-node-001"
@@ -159,6 +171,9 @@
       "model": "PX-4G"
     },
     "_links": {
+      "self": {
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-node-001"
+      },
       "iri:hasGPU": [
         {
           "href": "/api/v2/status/resources/pioneer-node-001-gpu-0"
@@ -185,6 +200,11 @@
       "vendor": "Example Accelerators",
       "model": "EA-80",
       "architecture": "Example Hopper-class Architecture"
+    },
+    "_links": {
+      "self": {
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-node-001-gpu-0"
+      }
     }
   },
   {
@@ -219,6 +239,9 @@
       ]
     },
     "_links": {
+      "self": {
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-dtn"
+      },
       "iri:hostedOn": {
         "href": "/api/v2/status/resources/pioneer-compute"
       },
@@ -269,6 +292,9 @@
       ]
     },
     "_links": {
+      "self": {
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-inference"
+      },
       "iri:hostedOn": {
         "href": "/api/v2/status/resources/pioneer-node-001"
       }
