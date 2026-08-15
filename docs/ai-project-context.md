@@ -142,9 +142,9 @@ to represent physical containment.
 Containment/topology is represented through links such as:
 
 ```text
-iri:hasNode
-iri:hasCPU
-iri:hasGPU
+iri:has-node
+iri:has-cpu
+iri:has-gpu
 ```
 
 The same principle applies to storage.
@@ -458,17 +458,17 @@ The primary filesystem model is:
 Storage System
 urn:doe-iri:resource:storage:system
         │
-        │ iri:providesFilesystem
+        │ iri:provides-filesystem
         ▼
 Filesystem
 urn:doe-iri:resource:storage:filesystem
         │
-        │ iri:hasMount
+        │ iri:has-mount
         ▼
 Mount
 urn:doe-iri:resource:storage:mount
         │
-        │ iri:mountedOn
+        │ iri:mounted-on
         ▼
 Compute System
 urn:doe-iri:resource:compute:system
@@ -479,9 +479,9 @@ General provider topology:
 ```text
 Storage System
         │
-        ├── iri:providesFilesystem ──> Filesystem
-        ├── iri:providesBlock ───────> Block Storage
-        └── iri:providesObject ──────> Object Storage
+        ├── iri:provides-filesystem ──> Filesystem
+        ├── iri:provides-block ───────> Block Storage
+        └── iri:provides-object ──────> Object Storage
 ```
 
 Key reasoning:
@@ -508,15 +508,15 @@ These should be separate mount resources referencing the same filesystem.
 Current storage link relations:
 
 ```text
-iri:providesFilesystem
-iri:providesBlock
-iri:providesObject
-iri:hasMount
-iri:mountedOn
-iri:attachedTo
+iri:provides-filesystem
+iri:provides-block
+iri:provides-object
+iri:has-mount
+iri:mounted-on
+iri:attached-to
 ```
 
-## 10.1. iri:providesFilesystem
+## 10.1. iri:provides-filesystem
 
 Source:
 
@@ -548,7 +548,7 @@ Authorization may affect visibility.
 
 The relationship does not imply current filesystem health or availability.
 
-## 10.2. iri:providesBlock
+## 10.2. iri:provides-block
 
 Source:
 
@@ -576,7 +576,7 @@ Resource
 
 Current attachment is not implied.
 
-## 10.3. iri:providesObject
+## 10.3. iri:provides-object
 
 Source:
 
@@ -604,7 +604,7 @@ Resource
 
 Object API endpoints are not the target of this relationship.
 
-## 10.4. iri:hasMount
+## 10.4. iri:has-mount
 
 Source:
 
@@ -632,7 +632,7 @@ Relationship resource
 
 A mount represents exposure/configuration, not current mounted/unmounted state.
 
-## 10.5. iri:mountedOn
+## 10.5. iri:mounted-on
 
 Source:
 
@@ -662,7 +662,7 @@ The relationship identifies the consuming system to which the mount applies.
 
 Current mount state remains separate.
 
-## 10.6. iri:attachedTo
+## 10.6. iri:attached-to
 
 Source:
 
@@ -1167,24 +1167,24 @@ General topology:
 Compute System
 urn:doe-iri:resource:compute:system
         │
-        │ iri:hasNode
+        │ iri:has-node
         ▼
 Compute Node
 urn:doe-iri:resource:compute:node
         │
-        ├── iri:hasCPU ──> CPU
+        ├── iri:has-cpu ──> CPU
         │                  urn:doe-iri:resource:compute:cpu
         │
-        └── iri:hasGPU ──> GPU
+        └── iri:has-gpu ──> GPU
                            urn:doe-iri:resource:compute:gpu
 ```
 
 Current compute relationships:
 
 ```text
-iri:hasNode
-iri:hasCPU
-iri:hasGPU
+iri:has-node
+iri:has-cpu
+iri:has-gpu
 ```
 
 These describe relatively stable topology.
@@ -1294,7 +1294,7 @@ Preferred conceptual pattern:
 ```json
 {
   "_links": {
-    "iri:mountedOn": {
+    "iri:mounted-on": {
       "href": ".../perlmutter"
     }
   }
@@ -1855,20 +1855,20 @@ model loading, and model activity also remain state.
 
 The Service model registers two link relations:
 
-Both currently registered Service link relations, `iri:hostedOn` and
-`iri:accessesMount`, have lifecycle status `provisional`.
+Both currently registered Service link relations, `iri:hosted-on` and
+`iri:accesses-mount`, have lifecycle status `provisional`.
 
 ```text
 DTN Service or Inference Service
         │
-        └── iri:hostedOn ──────> Compute System or Compute Node
+        └── iri:hosted-on ──────> Compute System or Compute Node
 
 DTN Service
         │
-        └── iri:accessesMount ─> Filesystem Mount
+        └── iri:accesses-mount ─> Filesystem Mount
 ```
 
-### iri:hostedOn
+### iri:hosted-on
 
 Source:
 
@@ -1896,11 +1896,11 @@ Target classification:
 Resource
 ```
 
-`iri:hostedOn` describes relatively static hosting topology. It does not state
+`iri:hosted-on` describes relatively static hosting topology. It does not state
 current routing, live replica placement, health, availability, or that the
 target is currently serving requests.
 
-### iri:accessesMount
+### iri:accesses-mount
 
 Source:
 
@@ -1926,15 +1926,15 @@ Target classification:
 Relationship resource
 ```
 
-`iri:accessesMount` means the DTN service is configured to access a filesystem
+`iri:accesses-mount` means the DTN service is configured to access a filesystem
 through the identified mount relationship resource for transfer operations.
 The mount is the target instead of the filesystem because it identifies the
 particular exposure and can carry the path, access mode, protocol, mount
 options, and consuming-system relationship.
 
-Do not infer DTN access by combining `iri:hostedOn` with a mount's
-`iri:mountedOn` link. Co-location on the same compute infrastructure does not
-prove that the service can access that mount. The explicit `iri:accessesMount`
+Do not infer DTN access by combining `iri:hosted-on` with a mount's
+`iri:mounted-on` link. Co-location on the same compute infrastructure does not
+prove that the service can access that mount. The explicit `iri:accesses-mount`
 link is required to represent configured access.
 
 The link does not imply current mount availability, endpoint reachability,
@@ -1963,21 +1963,21 @@ If only one section of this document is read, use this:
 
 ---
 
-# 31. `iri:locatedAt` Resource-to-Site Relation (2026-08-14)
+# 31. `iri:located-at` Resource-to-Site Relation (2026-08-14)
 
-`iri:locatedAt` is a provisional, singular HAL relation from any DOE-IRI
+`iri:located-at` is a provisional, singular HAL relation from any DOE-IRI
 Resource representation to its relatively stable Facility API Site
 representation. It identifies physical and administrative site association;
 it does not assert current process placement, compute hosting, endpoint
 reachability, health, availability, ownership, or live routing.
 
 The existing required `site_uri` remains authoritative during the additive
-compatibility period. A producer MAY expose a singular `iri:locatedAt` link;
+compatibility period. A producer MAY expose a singular `iri:located-at` link;
 when present, its `href` MUST exactly equal `site_uri`. The Site identity is
 already disclosed by `site_uri`, so the relation MUST NOT be independently
 authorization-filtered while that field is returned. Removing or deprecating
 `site_uri` requires a separate approved schema revision.
 
-`iri:locatedAt` is distinct from `iri:hostedOn`: `locatedAt` applies to any
+`iri:located-at` is distinct from `iri:hosted-on`: `locatedAt` applies to any
 Resource and identifies its Site, while `hostedOn` applies only to DTN or
 inference services and identifies compute hosting infrastructure.

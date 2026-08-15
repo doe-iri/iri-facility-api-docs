@@ -34,12 +34,12 @@ For example:
 Storage System
 urn:doe-iri:resource:storage:system
         │
-        │ iri:providesBlock
+        │ iri:provides-block
         ▼
 Block Storage
 urn:doe-iri:resource:storage:block
         │
-        │ iri:attachedTo
+        │ iri:attached-to
         ▼
 Compute System / Compute Node
 ```
@@ -528,7 +528,7 @@ The complete resource model associates the block resource with the storage syste
 Storage System
 urn:doe-iri:resource:storage:system
         │
-        │ iri:providesBlock
+        │ iri:provides-block
         ▼
 Block Storage
 urn:doe-iri:resource:storage:block
@@ -540,12 +540,12 @@ attributes:
     block_provisioning = thin
     capacity_gib = 10240
         │
-        │ iri:attachedTo
+        │ iri:attached-to
         ▼
 Compute System / Compute Node
 ```
 
-The `iri:attachedTo` relationship identifies the consuming resource. Attachment-specific details that can differ between consumers, such as local device paths or host-specific mappings, SHOULD NOT be represented as intrinsic attributes of the block resource.
+The `iri:attached-to` relationship identifies the consuming resource. Attachment-specific details that can differ between consumers, such as local device paths or host-specific mappings, SHOULD NOT be represented as intrinsic attributes of the block resource.
 
 ---
 

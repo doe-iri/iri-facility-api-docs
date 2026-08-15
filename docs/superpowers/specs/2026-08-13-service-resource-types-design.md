@@ -79,8 +79,8 @@ The following new entries will be `provisional`:
 
 - both refined service resource types;
 - all initial service controlled vocabulary values;
-- `iri:hostedOn`;
-- `iri:accessesMount`.
+- `iri:hosted-on`;
+- `iri:accesses-mount`.
 
 The subtype metadata will identify `urn:doe-iri:resource:service` as the parent, IRI v2.0 as the introduction version, and legacy `service` as the broad legacy value. The legacy value does not distinguish the two refinements.
 
@@ -227,7 +227,7 @@ The state schema will not include deployment replicas, GPU inventory or utilizat
 
 ## 6. Relationship Profiles
 
-### 6.1. `iri:hostedOn`
+### 6.1. `iri:hosted-on`
 
 | Field | Design |
 |---|---|
@@ -238,11 +238,11 @@ The state schema will not include deployment replicas, GPU inventory or utilizat
 | Stability | Relatively static hosting topology |
 | Authorization affects visibility | Yes |
 
-`iri:hostedOn` means that the target provides hosting infrastructure for the source service. It does not state that the target is currently healthy, serving requests, selected by a router, or running a particular live replica. Operational failover, scale-to-zero, and temporary placement changes do not by themselves alter the stable relationship.
+`iri:hosted-on` means that the target provides hosting infrastructure for the source service. It does not state that the target is currently healthy, serving requests, selected by a router, or running a particular live replica. Operational failover, scale-to-zero, and temporary placement changes do not by themselves alter the stable relationship.
 
 A provider may expose system-level or node-level topology. Absence of a visible link is not proof that the service has no host.
 
-### 6.2. `iri:accessesMount`
+### 6.2. `iri:accesses-mount`
 
 | Field | Design |
 |---|---|
@@ -253,11 +253,11 @@ A provider may expose system-level or node-level topology. Absence of a visible 
 | Stability | Relatively static configured access topology |
 | Authorization affects visibility | Yes |
 
-`iri:accessesMount` means that a DTN service is configured to access a filesystem through the identified mount relationship resource for transfer operations. The mount is the correct target because it carries the exposure-specific path, protocol, access mode, and consuming-system relationship.
+`iri:accesses-mount` means that a DTN service is configured to access a filesystem through the identified mount relationship resource for transfer operations. The mount is the correct target because it carries the exposure-specific path, protocol, access mode, and consuming-system relationship.
 
 The link does not imply current mount availability, endpoint reachability, credential validity, unrestricted read or write authorization, or an active transfer. It remains stable through ordinary outages, maintenance, failover, and idle periods.
 
-No inverse relation or direct DTN-to-filesystem relation will be registered initially. Co-location through `iri:hostedOn` and `iri:mountedOn` must not be treated as proof that a DTN can use a mount; `iri:accessesMount` expresses the intentional configured access.
+No inverse relation or direct DTN-to-filesystem relation will be registered initially. Co-location through `iri:hosted-on` and `iri:mounted-on` must not be treated as proof that a DTN can use a mount; `iri:accesses-mount` expresses the intentional configured access.
 
 ### 6.3. HAL examples
 
@@ -265,17 +265,17 @@ Each link profile will include singular and plural HAL representations as applic
 
 ```text
 DTN Service
-├── iri:hostedOn ──────> Compute System or Compute Node
-└── iri:accessesMount ─> Filesystem Mount
+├── iri:hosted-on ──────> Compute System or Compute Node
+└── iri:accesses-mount ─> Filesystem Mount
                               │
-                              └── iri:mountedOn ─> Compute System
+                              └── iri:mounted-on ─> Compute System
 ```
 
 and:
 
 ```text
 Inference Service
-└── iri:hostedOn ─> Compute System or Compute Node
+└── iri:hosted-on ─> Compute System or Compute Node
 ```
 
 Authorization-filtered examples and prose will state that absence is not necessarily semantic absence.
@@ -309,7 +309,7 @@ rfc/rfc-type-specific-attributes.md
 docs/ai-project-context.md
 ```
 
-The compute documents will index `iri:hostedOn` as an incoming cross-domain relationship. The storage documents will index `iri:accessesMount` as an incoming cross-domain relationship. Existing user-owned uncommitted edits in overlapping files must be preserved.
+The compute documents will index `iri:hosted-on` as an incoming cross-domain relationship. The storage documents will index `iri:accesses-mount` as an incoming cross-domain relationship. Existing user-owned uncommitted edits in overlapping files must be preserved.
 
 The root registry and registry README will delegate the service subtree to the new domain documents and add navigation to both attribute and relationship profiles.
 
@@ -359,7 +359,7 @@ This change will not:
 - create product-specific DTN resource subtypes;
 - make models, deployments, endpoints, replicas, or accelerators independent service resources;
 - add direct DTN-to-filesystem or inverse mount relationships;
-- extend `iri:mountedOn` to compute-node targets;
+- extend `iri:mounted-on` to compute-node targets;
 - define authentication-method, modality, deployment, rate-limit, or performance vocabularies;
 - encode current service health, traffic, throughput, latency, queue depth, or utilization in stable attributes;
 - integrate `InferenceServiceState` into the core Facility API OpenAPI;

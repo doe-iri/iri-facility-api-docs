@@ -1,12 +1,12 @@
-# Link Profile: `iri:locatedAt`
+# Link Profile: `iri:located-at`
 
-This document defines the `iri:locatedAt` relationship used by DOE-IRI Resource representations.
+This document defines the `iri:located-at` relationship used by DOE-IRI Resource representations.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
-| Relationship | `iri:locatedAt` |
+| Relationship | `iri:located-at` |
 | Status | `provisional` |
 | Semantic meaning | Indicates the relatively stable physical and administrative Site associated with the source Resource. |
 | Source representation type | Any DOE-IRI `Resource` representation. |
@@ -19,11 +19,11 @@ This document defines the `iri:locatedAt` relationship used by DOE-IRI Resource 
 
 ## 2. Semantic Meaning
 
-The `iri:locatedAt` relationship identifies the relatively stable physical and administrative Site associated with a Resource. It provides HAL navigation to the Site representation identified by the Resource's `site_uri` field.  In the future, the Resource's `site_uri` field will be deprecated.
+The `iri:located-at` relationship identifies the relatively stable physical and administrative Site associated with a Resource. It provides HAL navigation to the Site representation identified by the Resource's `site_uri` field.  In the future, the Resource's `site_uri` field will be deprecated.
 
 The relationship MUST NOT be interpreted as asserting current process placement, compute hosting, endpoint reachability, health, availability, ownership, or live routing.
 
-`iri:locatedAt` is distinct from `iri:hostedOn`. `iri:hostedOn` is limited to DTN or inference services and identifies compute systems or nodes that provide hosting infrastructure. `iri:locatedAt` applies to any DOE-IRI Resource and identifies its associated Site.
+`iri:located-at` is distinct from `iri:hosted-on`. `iri:hosted-on` is limited to DTN or inference services and identifies compute systems or nodes that provide hosting infrastructure. `iri:located-at` applies to any DOE-IRI Resource and identifies its associated Site.
 
 ## 3. Source and Target Representation
 
@@ -36,7 +36,7 @@ The target is a Site API representation, not a DOE-IRI typed Resource, state obj
 Each Resource has exactly one semantic Site target under the current required, singular `site_uri` contract:
 
 ```text
-Resource  -- iri:locatedAt -->  Site
+Resource  -- iri:located-at -->  Site
    1                1
 ```
 
@@ -44,13 +44,13 @@ The HAL relation uses a singular link object. It does not define an inverse Site
 
 ## 5. Static and Dynamic Semantics
 
-`iri:locatedAt` describes relatively static site placement or administrative association. The relationship SHOULD remain present across ordinary operational changes, including process placement changes, compute-host changes, endpoint reachability changes, health changes, availability changes, and live-routing changes.
+`iri:located-at` describes relatively static site placement or administrative association. The relationship SHOULD remain present across ordinary operational changes, including process placement changes, compute-host changes, endpoint reachability changes, health changes, availability changes, and live-routing changes.
 
 Operational state remains separate. The relationship changes only when the represented Resource is reassigned or relocated to another represented Site.
 
 ## 6. Authorization and Visibility
 
-The Site identity is already disclosed by the required `site_uri` field. An implementation MUST NOT independently authorization-filter `iri:locatedAt` while returning `site_uri`.
+The Site identity is already disclosed by the required `site_uri` field. An implementation MUST NOT independently authorization-filter `iri:located-at` while returning `site_uri`.
 
 ## 7. Compatibility
 
@@ -59,7 +59,7 @@ This relation is additive. `site_uri` remains required and authoritative under t
 During the compatibility period:
 
 1. Producers retain `site_uri`.
-2. Producers MAY add a singular `_links["iri:locatedAt"]` HAL link object.
+2. Producers MAY add a singular `_links["iri:located-at"]` HAL link object.
 3. Whenever the link is present, its `href` MUST exactly equal `site_uri`.
 4. New registry examples include the link.
 
@@ -71,7 +71,7 @@ Deprecating or removing `site_uri` requires a separate approved schema revision.
 {
   "site_uri": "https://api.example.gov/api/v2/facility/sites/example-site",
   "_links": {
-    "iri:locatedAt": {
+    "iri:located-at": {
       "href": "https://api.example.gov/api/v2/facility/sites/example-site"
     }
   }

@@ -29,13 +29,13 @@ The compute model intentionally separates node identity from CPU and GPU resourc
 ```text
 Compute System
         │
-        │ iri:hasNode
+        │ iri:has-node
         ▼
 Compute Node
 urn:doe-iri:resource:compute:node
         │
-        ├── iri:hasCPU ──> CPU
-        └── iri:hasGPU ──> GPU
+        ├── iri:has-cpu ──> CPU
+        └── iri:has-gpu ──> GPU
 ```
 
 The attributes in this profile describe relatively stable characteristics of the node. Current load, free memory, allocation state, health, and workload activity are dynamic operational information and SHOULD be represented through the appropriate resource-state mechanisms.
@@ -117,7 +117,7 @@ For example:
 
 These values SHOULD NOT be interpreted as current available memory, free local storage, idle CPU cores, or available GPUs. Those values belong in state.
 
-Where CPU and GPU resources are separately exposed through `iri:hasCPU` and `iri:hasGPU`, the aggregate counts MAY be derivable from those relationships. Facilities MAY still publish counts when detailed processor topology is not exposed.
+Where CPU and GPU resources are separately exposed through `iri:has-cpu` and `iri:has-gpu`, the aggregate counts MAY be derivable from those relationships. Facilities MAY still publish counts when detailed processor topology is not exposed.
 
 ### 4.3 Vendor, Product, and Model
 

@@ -58,19 +58,19 @@ The general model is:
 Storage System
 urn:doe-iri:resource:storage:system
         │
-        ├── iri:providesFilesystem ──> Filesystem
+        ├── iri:provides-filesystem ──> Filesystem
         │                               │
-        │                               │ iri:hasMount
+        │                               │ iri:has-mount
         │                               ▼
         │                             Mount
         │                               │
-        │                               │ iri:mountedOn
+        │                               │ iri:mounted-on
         │                               ▼
         │                         Compute System
         │
-        ├── iri:providesBlock ────────> Block Storage
+        ├── iri:provides-block ────────> Block Storage
         │
-        └── iri:providesObject ───────> Object Storage
+        └── iri:provides-object ───────> Object Storage
 ```
 
 This model distinguishes the infrastructure providing storage from the logical storage interfaces presented to consumers.
@@ -93,17 +93,17 @@ Filesystem storage includes an additional resource abstraction because the same 
 Storage System
 urn:doe-iri:resource:storage:system
         │
-        │ iri:providesFilesystem
+        │ iri:provides-filesystem
         ▼
 Filesystem
 urn:doe-iri:resource:storage:filesystem
         │
-        │ iri:hasMount
+        │ iri:has-mount
         ▼
 Mount
 urn:doe-iri:resource:storage:mount
         │
-        │ iri:mountedOn
+        │ iri:mounted-on
         ▼
 Compute System
 urn:doe-iri:resource:compute:system
@@ -121,7 +121,7 @@ The following theoretical example illustrates how a facility named `NERSC` could
 NERSC Storage System
 resource_type = urn:doe-iri:resource:storage:system
 
-        │ iri:providesFilesystem
+        │ iri:provides-filesystem
         │
         ├──────────────────────────────────────┐
         ▼                                      ▼
@@ -134,7 +134,7 @@ tier =                                   tier =
   urn:doe-iri:storage:tier:scratch         urn:doe-iri:storage:tier:home
 
         │                                      │
-        │ iri:hasMount                         │ iri:hasMount
+        │ iri:has-mount                         │ iri:has-mount
         ▼                                      ▼
 
 Perlmutter Scratch Mount                Perlmutter Home Mount
@@ -144,7 +144,7 @@ resource_type =                         resource_type =
 mount_path = /pscratch                  mount_path = /global/homes
 
         │                                      │
-        └──────────── iri:mountedOn ────────────┘
+        └──────────── iri:mounted-on ────────────┘
                             │
                             ▼
                        Perlmutter
@@ -283,18 +283,18 @@ The following table enumerates the controlled storage attribute URNs currently d
 
 ## 6. Storage Resource Relationships
 
-Registered IRI link relations describe storage-domain topology and access plus applicable cross-model navigation without embedding one representation inside another. Their targets may be DOE-IRI Resource representations or, for `iri:locatedAt`, the Facility API Site representation; the Site target is not a DOE-IRI typed Resource.
+Registered IRI link relations describe storage-domain topology and access plus applicable cross-model navigation without embedding one representation inside another. Their targets may be DOE-IRI Resource representations or, for `iri:located-at`, the Facility API Site representation; the Site target is not a DOE-IRI typed Resource.
 
 | Relationship | Source | Target | Cardinality | Target Stability | Authorization Affects Visibility | Description |
 |---|---|---|---|---|---|---|
-| [`iri:providesFilesystem`](./link-profile-provides-filesystem.md) | Storage System | Filesystem | `0..*` | Static | Yes | Indicates that the storage system provides the identified logical filesystem resource. |
-| [`iri:providesBlock`](./link-profile-provides-block.md) | Storage System | Block Storage | `0..*` | Static | Yes | Indicates that the storage system provides the identified logical block-storage resource. |
-| [`iri:providesObject`](./link-profile-provides-object.md) | Storage System | Object Storage | `0..*` | Static | Yes | Indicates that the storage system provides the identified logical object-storage resource. |
-| [`iri:hasMount`](./link-profile-has-mount.md) | Filesystem | Mount | `0..*` | Relatively static | Yes | Indicates that the filesystem is exposed through the identified mount resource. |
-| [`iri:mountedOn`](./link-profile-mounted-on.md) | Mount | Compute System | `1` | Static | Yes | Indicates the consuming system on which the filesystem represented by the mount is exposed. |
-| [`iri:attachedTo`](./link-profile-attached-to.md) | Block Storage | Compute System or Compute Node | `0..1` exclusive / `0..*` shared | Static target; dynamic state separate | Yes | Indicates that the block resource is attached or presented to the identified consuming resource. |
-| [`iri:accessesMount`](./link-profile-accesses-mount.md) | DTN Service | Filesystem Mount | `0..*` targets from a DTN service | Relatively static relationship resource. The target identifies configured filesystem access topology, not current mount availability, endpoint reachability, credential validity, unrestricted access, or transfer activity. | Yes | Incoming cross-domain relationship indicating that the DTN service is configured to access the identified mount for transfer operations. |
-| [`iri:locatedAt`](./link-profile-located-at.md) | Any DOE-IRI Resource | Facility API Site representation | `1` semantic target | Relatively stable Site representation | No; `site_uri` already discloses Site identity | Indicates the relatively stable physical and administrative Site associated with the source Resource. |
+| [`iri:provides-filesystem`](./link-profile-provides-filesystem.md) | Storage System | Filesystem | `0..*` | Static | Yes | Indicates that the storage system provides the identified logical filesystem resource. |
+| [`iri:provides-block`](./link-profile-provides-block.md) | Storage System | Block Storage | `0..*` | Static | Yes | Indicates that the storage system provides the identified logical block-storage resource. |
+| [`iri:provides-object`](./link-profile-provides-object.md) | Storage System | Object Storage | `0..*` | Static | Yes | Indicates that the storage system provides the identified logical object-storage resource. |
+| [`iri:has-mount`](./link-profile-has-mount.md) | Filesystem | Mount | `0..*` | Relatively static | Yes | Indicates that the filesystem is exposed through the identified mount resource. |
+| [`iri:mounted-on`](./link-profile-mounted-on.md) | Mount | Compute System | `1` | Static | Yes | Indicates the consuming system on which the filesystem represented by the mount is exposed. |
+| [`iri:attached-to`](./link-profile-attached-to.md) | Block Storage | Compute System or Compute Node | `0..1` exclusive / `0..*` shared | Static target; dynamic state separate | Yes | Indicates that the block resource is attached or presented to the identified consuming resource. |
+| [`iri:accesses-mount`](./link-profile-accesses-mount.md) | DTN Service | Filesystem Mount | `0..*` targets from a DTN service | Relatively static relationship resource. The target identifies configured filesystem access topology, not current mount availability, endpoint reachability, credential validity, unrestricted access, or transfer activity. | Yes | Incoming cross-domain relationship indicating that the DTN service is configured to access the identified mount for transfer operations. |
+| [`iri:located-at`](./link-profile-located-at.md) | Any DOE-IRI Resource | Facility API Site representation | `1` semantic target | Relatively stable Site representation | No; `site_uri` already discloses Site identity | Indicates the relatively stable physical and administrative Site associated with the source Resource. |
 
 Relationships describe independently identifiable resources and SHOULD NOT be duplicated as ordinary attributes when an IRI link relation is defined for the relationship.
 

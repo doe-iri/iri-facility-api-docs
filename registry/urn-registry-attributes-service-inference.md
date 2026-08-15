@@ -22,7 +22,7 @@ As described in [A URN Namespace for the DoE IRI Project](../rfc/rfc-iri-urn-str
 
 ## 2. Introduction
 
-An inference service is a consumable service through which a facility makes model-invocation operations available. It is distinct from the compute systems or compute nodes that host it; hosting topology is represented separately using `iri:hostedOn`.
+An inference service is a consumable service through which a facility makes model-invocation operations available. It is distinct from the compute systems or compute nodes that host it; hosting topology is represented separately using `iri:hosted-on`.
 
 This profile records relatively stable service definition. Models, deployments, endpoints, replicas, hosts, and accelerators are not independent resource types in this profile. Endpoint URLs and served-model catalog entries are attributes of the inference service because they normally do not require independent IRI identity, lifecycle, relationships, or state.
 

@@ -32,17 +32,17 @@ For example:
 Storage System
 urn:doe-iri:resource:storage:system
         │
-        │ iri:providesFilesystem
+        │ iri:provides-filesystem
         ▼
 Filesystem
 urn:doe-iri:resource:storage:filesystem
         │
-        │ iri:hasMount
+        │ iri:has-mount
         ▼
 Mount
 urn:doe-iri:resource:storage:mount
         │
-        │ iri:mountedOn
+        │ iri:mounted-on
         ▼
 Compute System
 urn:doe-iri:resource:compute:system
@@ -66,7 +66,7 @@ Scratch Filesystem
 
 The filesystem resource remains responsible for describing characteristics of the logical storage resource, such as filesystem technology, architecture, capabilities, protocols, tier, and media types. The mount resource contains only characteristics that are specific to a particular exposure of that filesystem to a consuming system.
 
-The identities of the filesystem and consuming system are represented using IRI resource relationships rather than duplicated as mount attributes. The filesystem relates to the mount using `iri:hasMount`, and the mount relates to the consuming system using `iri:mountedOn`.
+The identities of the filesystem and consuming system are represented using IRI resource relationships rather than duplicated as mount attributes. The filesystem relates to the mount using `iri:has-mount`, and the mount relates to the consuming system using `iri:mounted-on`.
 
 This document defines relatively stable mount configuration characteristics, such as the namespace location, access mode, access protocol, and optional implementation-specific mount options. Dynamic operational information, such as whether the filesystem is currently mounted, accessible, degraded, or unavailable, is outside the scope of this profile and SHOULD be represented through the appropriate resource-state mechanisms.
 
@@ -78,7 +78,7 @@ The taxonomy distinguishes between the mount resource itself and the controlled 
 
 The mount profile also reuses the `urn:doe-iri:storage:filesystem-protocol` vocabulary defined by the Filesystem Attribute Profile. Reusing this vocabulary ensures that a protocol has the same semantic meaning whether it is advertised as a protocol supported by a filesystem or as the protocol used by a particular mount.
 
-The taxonomy does not represent the filesystem being mounted or the consuming system on which it is mounted. Those relationships are expressed separately using `iri:hasMount` and `iri:mountedOn`.
+The taxonomy does not represent the filesystem being mounted or the consuming system on which it is mounted. Those relationships are expressed separately using `iri:has-mount` and `iri:mounted-on`.
 
 Only attributes represented using controlled DOE-IRI URNs appear in the taxonomy. Scalar attributes such as `mount_path` and implementation-specific `mount_options` do not appear as taxonomy branches.
 
@@ -150,19 +150,19 @@ A POSIX-based compute environment might expose a filesystem using paths such as:
 
 Other operating environments MAY use different namespace conventions. Clients therefore SHOULD treat the value as an opaque namespace location unless they understand the conventions of the consuming system.
 
-The `mount_path` identifies the location at which the filesystem is visible on the system referenced by `iri:mountedOn`. It does not identify the filesystem itself and SHOULD NOT be interpreted independently of the mount's resource relationships.
+The `mount_path` identifies the location at which the filesystem is visible on the system referenced by `iri:mounted-on`. It does not identify the filesystem itself and SHOULD NOT be interpreted independently of the mount's resource relationships.
 
 For example:
 
 ```text
 Filesystem
     │
-    │ iri:hasMount
+    │ iri:has-mount
     ▼
 Mount
     mount_path = /scratch
         │
-        │ iri:mountedOn
+        │ iri:mounted-on
         ▼
 Compute System
 ```
@@ -386,7 +386,7 @@ The complete resource model associates this attribute profile with the filesyste
 Filesystem
 urn:doe-iri:resource:storage:filesystem
         │
-        │ iri:hasMount
+        │ iri:has-mount
         ▼
 Mount
 urn:doe-iri:resource:storage:mount
@@ -396,7 +396,7 @@ attributes:
     access_mode = read-write
     filesystem_protocol = nfs
         │
-        │ iri:mountedOn
+        │ iri:mounted-on
         ▼
 Compute System
 urn:doe-iri:resource:compute:system

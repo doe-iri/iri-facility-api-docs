@@ -34,7 +34,7 @@ For example:
 Storage System
 urn:doe-iri:resource:storage:system
         │
-        │ iri:providesObject
+        │ iri:provides-object
         ▼
 Object Storage
 urn:doe-iri:resource:storage:object
@@ -60,7 +60,7 @@ The taxonomy defined in this section identifies the DOE-IRI URN namespaces and c
 
 The taxonomy distinguishes between the resource being described and the controlled characteristics used to describe that resource. The `urn:doe-iri:resource:storage:object` namespace identifies the resource type itself, while values beneath the `urn:doe-iri:storage` namespace identify standardized characteristics such as object-storage APIs, implementation technologies, consistency semantics, capabilities, storage tiers, and physical media.
 
-The taxonomy is not intended to represent the relationship between an object storage resource and the storage system that provides it. That relationship is represented separately using the `iri:providesObject` IRI link relation.
+The taxonomy is not intended to represent the relationship between an object storage resource and the storage system that provides it. That relationship is represented separately using the `iri:provides-object` IRI link relation.
 
 Only attributes represented using controlled DOE-IRI URNs appear in the taxonomy. Scalar or structured attributes such as `access_endpoints` do not appear as taxonomy branches.
 
@@ -553,7 +553,7 @@ The complete resource model associates the object resource with the storage syst
 Storage System
 urn:doe-iri:resource:storage:system
         │
-        │ iri:providesObject
+        │ iri:provides-object
         ▼
 Object Storage
 urn:doe-iri:resource:storage:object

@@ -113,7 +113,7 @@ For example:
 urn:doe-iri:resource:compute:node
 ```
 
-classifies a resource as a compute node. Its membership in a compute system is represented separately through a registered link relation such as `iri:hasNode`.
+classifies a resource as a compute node. Its membership in a compute system is represented separately through a registered link relation such as `iri:has-node`.
 
 ## 4. Root Registry
 
@@ -154,12 +154,12 @@ The Storage registry defines the resource types used to represent storage infras
 
 | Relationship | Source | Target | Link Profile |
 |---|---|---|---|
-| `iri:providesFilesystem` | Storage System | Filesystem | [link-profile-provides-filesystem.md](link-profile-provides-filesystem.md) |
-| `iri:providesBlock` | Storage System | Block Storage | [link-profile-provides-block.md](link-profile-provides-block.md) |
-| `iri:providesObject` | Storage System | Object Storage | [link-profile-provides-object.md](link-profile-provides-object.md) |
-| `iri:hasMount` | Filesystem | Filesystem Mount | [link-profile-has-mount.md](link-profile-has-mount.md) |
-| `iri:mountedOn` | Filesystem Mount | Compute System | [link-profile-mounted-on.md](link-profile-mounted-on.md) |
-| `iri:attachedTo` | Block Storage | Compute System or Compute Node | [link-profile-attached-to.md](link-profile-attached-to.md) |
+| `iri:provides-filesystem` | Storage System | Filesystem | [link-profile-provides-filesystem.md](link-profile-provides-filesystem.md) |
+| `iri:provides-block` | Storage System | Block Storage | [link-profile-provides-block.md](link-profile-provides-block.md) |
+| `iri:provides-object` | Storage System | Object Storage | [link-profile-provides-object.md](link-profile-provides-object.md) |
+| `iri:has-mount` | Filesystem | Filesystem Mount | [link-profile-has-mount.md](link-profile-has-mount.md) |
+| `iri:mounted-on` | Filesystem Mount | Compute System | [link-profile-mounted-on.md](link-profile-mounted-on.md) |
+| `iri:attached-to` | Block Storage | Compute System or Compute Node | [link-profile-attached-to.md](link-profile-attached-to.md) |
 
 ### 5.2. Compute
 
@@ -185,9 +185,9 @@ The Compute registry defines the resource types used to represent managed comput
 
 | Relationship | Source | Target | Link Profile |
 |---|---|---|---|
-| `iri:hasNode` | Compute System | Compute Node | [link-profile-has-node.md](link-profile-has-node.md) |
-| `iri:hasCPU` | Compute Node | CPU | [link-profile-has-cpu.md](link-profile-has-cpu.md) |
-| `iri:hasGPU` | Compute Node | GPU | [link-profile-has-gpu.md](link-profile-has-gpu.md) |
+| `iri:has-node` | Compute System | Compute Node | [link-profile-has-node.md](link-profile-has-node.md) |
+| `iri:has-cpu` | Compute Node | CPU | [link-profile-has-cpu.md](link-profile-has-cpu.md) |
+| `iri:has-gpu` | Compute Node | GPU | [link-profile-has-gpu.md](link-profile-has-gpu.md) |
 
 ### 5.3. Service
 
@@ -211,8 +211,8 @@ The Service registry defines consumable data-transfer and model-invocation servi
 
 | Relationship | Source | Target | Link Profile |
 |---|---|---|---|
-| `iri:hostedOn` | DTN Service or Inference Service | Compute System or Compute Node | [link-profile-hosted-on.md](link-profile-hosted-on.md) |
-| `iri:accessesMount` | DTN Service | Filesystem Mount | [link-profile-accesses-mount.md](link-profile-accesses-mount.md) |
+| `iri:hosted-on` | DTN Service or Inference Service | Compute System or Compute Node | [link-profile-hosted-on.md](link-profile-hosted-on.md) |
+| `iri:accesses-mount` | DTN Service | Filesystem Mount | [link-profile-accesses-mount.md](link-profile-accesses-mount.md) |
 
 ### 5.4. Additional Resource Domains
 
@@ -299,22 +299,22 @@ Relationships describe topology or navigation and SHOULD NOT be duplicated as or
 
 | Relationship | Source | Target | Link Profile |
 |---|---|---|---|
-| `iri:locatedAt` | Any DOE-IRI Resource | Facility API Site representation | [link-profile-located-at.md](link-profile-located-at.md) |
+| `iri:located-at` | Any DOE-IRI Resource | Facility API Site representation | [link-profile-located-at.md](link-profile-located-at.md) |
 
 For example:
 
 ```text
 Storage System
     │
-    │ iri:providesFilesystem
+    │ iri:provides-filesystem
     ▼
 Filesystem
     │
-    │ iri:hasMount
+    │ iri:has-mount
     ▼
 Filesystem Mount
     │
-    │ iri:mountedOn
+    │ iri:mounted-on
     ▼
 Compute System
 ```
@@ -324,13 +324,13 @@ and:
 ```text
 Compute System
     │
-    │ iri:hasNode
+    │ iri:has-node
     ▼
 Compute Node
     │
-    ├── iri:hasCPU ──> CPU
+    ├── iri:has-cpu ──> CPU
     │
-    └── iri:hasGPU ──> GPU
+    └── iri:has-gpu ──> GPU
 ```
 
 ## 8. How the Documents Relate
@@ -352,7 +352,7 @@ urn:doe-iri:resource:storage
                     │     ...
                     │
                     └── Relationships
-                          iri:hasMount
+                          iri:has-mount
                               │
                               └── link-profile-has-mount.md
 ```
@@ -447,7 +447,7 @@ urn:doe-iri:resource:storage:filesystem
 classifies a resource, while:
 
 ```text
-iri:hasMount
+iri:has-mount
 ```
 
 describes a relationship from that filesystem to a mount resource.

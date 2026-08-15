@@ -22,7 +22,7 @@ As described in [A URN Namespace for the DoE IRI Project](../rfc/rfc-iri-urn-str
 
 ## 2. Introduction
 
-A DTN service is a consumable service through which a facility makes data-transfer operations available. It is distinct from the compute system or compute node that hosts it; hosting topology is represented separately using `iri:hostedOn`. A DTN service may also be configured to access filesystem mounts for transfer operations through `iri:accessesMount`.
+A DTN service is a consumable service through which a facility makes data-transfer operations available. It is distinct from the compute system or compute node that hosts it; hosting topology is represented separately using `iri:hosted-on`. A DTN service may also be configured to access filesystem mounts for transfer operations through `iri:accesses-mount`.
 
 This profile records relatively stable service configuration. Endpoint URLs are attributes of the DTN service rather than independent IRI resources because they normally do not require independent identity, lifecycle, relationships, or state. If a future use case requires those properties, an endpoint may be defined as a separate resource type in a future profile version.
 
@@ -254,13 +254,13 @@ resource-level example, not an instance of `DtnServiceAttributes` alone.
     ]
   },
   "_links": {
-    "iri:locatedAt": {
+    "iri:located-at": {
       "href": "https://api.example.gov/api/v2/facility/sites/example-site"
     },
-    "iri:hostedOn": {
+    "iri:hosted-on": {
       "href": "/api/v2/status/resources/perlmutter"
     },
-    "iri:accessesMount": [
+    "iri:accesses-mount": [
       {
         "href": "/api/v2/status/resources/perlmutter-scratch-mount"
       },

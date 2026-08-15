@@ -30,7 +30,7 @@ A GPU resource represents a graphics processing unit or similar highly parallel 
 Compute Node
 urn:doe-iri:resource:compute:node
         │
-        │ iri:hasGPU
+        │ iri:has-gpu
         ▼
 GPU
 urn:doe-iri:resource:compute:gpu

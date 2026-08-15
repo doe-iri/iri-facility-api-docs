@@ -1,4 +1,4 @@
-# `iri:locatedAt` Link Relationship Design
+# `iri:located-at` Link Relationship Design
 
 ## Status
 
@@ -13,7 +13,7 @@ Date: 2026-08-14
 Register and document this provisional link relation:
 
 ```text
-iri:locatedAt
+iri:located-at
 ```
 
 The relation allows any DOE-IRI `Resource` representation to navigate to the
@@ -23,7 +23,7 @@ The relation allows any DOE-IRI `Resource` representation to navigate to the
 
 | Property | Decision |
 |---|---|
-| Relation | `iri:locatedAt` |
+| Relation | `iri:located-at` |
 | Lifecycle | `provisional` |
 | Source | Any DOE-IRI `Resource` representation |
 | Target | The associated Facility API `Site` representation |
@@ -38,7 +38,7 @@ Site associated with a Resource. It does not assert current process placement,
 compute hosting, endpoint reachability, health, availability, ownership, or
 live routing.
 
-`iri:locatedAt` is distinct from `iri:hostedOn`. The latter is limited to DTN
+`iri:located-at` is distinct from `iri:hosted-on`. The latter is limited to DTN
 or inference services and identifies compute systems or nodes that provide
 hosting infrastructure.
 
@@ -50,7 +50,7 @@ under the current Facility API schema.
 During the compatibility period:
 
 1. Producers retain `site_uri`.
-2. Producers may add a singular `_links["iri:locatedAt"]` HAL link object.
+2. Producers may add a singular `_links["iri:located-at"]` HAL link object.
 3. Whenever the link is present, its `href` must exactly equal `site_uri`.
 4. New registry examples include the link.
 5. Deprecating or removing `site_uri` requires a separate approved schema
@@ -66,7 +66,7 @@ represented Site.
 {
   "site_uri": "https://api.example.gov/api/v2/facility/sites/example-site",
   "_links": {
-    "iri:locatedAt": {
+    "iri:located-at": {
       "href": "https://api.example.gov/api/v2/facility/sites/example-site"
     }
   }
@@ -81,4 +81,4 @@ contract is required and singular.
 This change includes the link profile, registry navigation and relationship
 indexes, common Resource documentation, and complete Resource examples. It does
 not add an inverse Site-to-Resource link relation, deprecate `site_uri`, alter
-the Site schema, or change the meaning of `iri:hostedOn`.
+the Site schema, or change the meaning of `iri:hosted-on`.

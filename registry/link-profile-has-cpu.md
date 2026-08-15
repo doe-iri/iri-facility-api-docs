@@ -1,12 +1,12 @@
-# Link Profile: `iri:hasCPU`
+# Link Profile: `iri:has-cpu`
 
-This document defines the `iri:hasCPU` relationship used by the DOE-IRI compute resource model.
+This document defines the `iri:has-cpu` relationship used by the DOE-IRI compute resource model.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
-| Relationship | `iri:hasCPU` |
+| Relationship | `iri:has-cpu` |
 | Semantic meaning | Indicates that the compute node contains, provides, or is associated with the identified CPU resource. |
 | Source representation type | `urn:doe-iri:resource:compute:node` |
 | Target representation type | `urn:doe-iri:resource:compute:cpu` |
@@ -18,7 +18,7 @@ This document defines the `iri:hasCPU` relationship used by the DOE-IRI compute 
 
 ## 2. Semantic Meaning
 
-The `iri:hasCPU` relationship identifies CPU resources associated with the source compute node.
+The `iri:has-cpu` relationship identifies CPU resources associated with the source compute node.
 
 CPU-specific characteristics such as processor architecture, core count, thread count, clock characteristics, vendor, and model belong to the target CPU resource rather than being embedded into the link relationship.
 
@@ -43,7 +43,7 @@ The target is a resource representation, not a state object, operation entry poi
 A compute node MAY expose zero, one, or multiple CPU resources:
 
 ```text
-Compute Node  -- iri:hasCPU -->  CPU
+Compute Node  -- iri:has-cpu -->  CPU
      1                0..*
 ```
 
@@ -66,7 +66,7 @@ Absence of visible CPU targets MUST NOT be interpreted as evidence that the node
 ```json
 {
   "_links": {
-    "iri:hasCPU": [
+    "iri:has-cpu": [
       {
         "href": "/api/v2/status/resources/node-001-cpu-0"
       },

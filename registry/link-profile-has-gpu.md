@@ -1,12 +1,12 @@
-# Link Profile: `iri:hasGPU`
+# Link Profile: `iri:has-gpu`
 
-This document defines the `iri:hasGPU` relationship used by the DOE-IRI compute resource model.
+This document defines the `iri:has-gpu` relationship used by the DOE-IRI compute resource model.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
-| Relationship | `iri:hasGPU` |
+| Relationship | `iri:has-gpu` |
 | Semantic meaning | Indicates that the compute node contains, provides, or is associated with the identified GPU resource. |
 | Source representation type | `urn:doe-iri:resource:compute:node` |
 | Target representation type | `urn:doe-iri:resource:compute:gpu` |
@@ -18,7 +18,7 @@ This document defines the `iri:hasGPU` relationship used by the DOE-IRI compute 
 
 ## 2. Semantic Meaning
 
-The `iri:hasGPU` relationship identifies GPU or accelerator resources associated with the source compute node.
+The `iri:has-gpu` relationship identifies GPU or accelerator resources associated with the source compute node.
 
 GPU-specific characteristics such as device memory, programming interfaces, vendor, model, and vendor-defined architecture belong to the target GPU resource rather than being embedded into the relationship.
 
@@ -43,7 +43,7 @@ The target is a resource representation, not a state object, operation entry poi
 A compute node MAY expose zero, one, or multiple GPU resources:
 
 ```text
-Compute Node  -- iri:hasGPU -->  GPU
+Compute Node  -- iri:has-gpu -->  GPU
      1                0..*
 ```
 
@@ -66,7 +66,7 @@ Absence of visible GPU targets MUST NOT be interpreted as evidence that no accel
 ```json
 {
   "_links": {
-    "iri:hasGPU": [
+    "iri:has-gpu": [
       {
         "href": "/api/v2/status/resources/node-001-gpu-0"
       },

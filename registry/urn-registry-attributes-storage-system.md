@@ -32,17 +32,17 @@ For example, a storage system may provide one or more filesystem resources, each
 Storage System
 urn:doe-iri:resource:storage:system
         │
-        │ iri:providesFilesystem
+        │ iri:provides-filesystem
         ▼
 Filesystem
 urn:doe-iri:resource:storage:filesystem
         │
-        │ iri:hasMount
+        │ iri:has-mount
         ▼
 Mount
 urn:doe-iri:resource:storage:mount
         │
-        │ iri:mountedOn
+        │ iri:mounted-on
         ▼
 Compute System
 urn:doe-iri:resource:compute:system

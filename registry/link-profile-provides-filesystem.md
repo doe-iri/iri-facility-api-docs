@@ -1,12 +1,12 @@
-# Link Profile: `iri:providesFilesystem`
+# Link Profile: `iri:provides-filesystem`
 
-This document defines the `iri:providesFilesystem` relationship used by the DOE-IRI storage resource model.
+This document defines the `iri:provides-filesystem` relationship used by the DOE-IRI storage resource model.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
-| Relationship | `iri:providesFilesystem` |
+| Relationship | `iri:provides-filesystem` |
 | Semantic meaning | Indicates that a storage system provides the identified logical filesystem resource. |
 | Source representation type | `urn:doe-iri:resource:storage:system` |
 | Target representation type | `urn:doe-iri:resource:storage:filesystem` |
@@ -18,7 +18,7 @@ This document defines the `iri:providesFilesystem` relationship used by the DOE-
 
 ## 2. Semantic Meaning
 
-The `iri:providesFilesystem` relationship indicates that the source storage system provides, hosts, or otherwise makes available the identified logical filesystem resource.
+The `iri:provides-filesystem` relationship indicates that the source storage system provides, hosts, or otherwise makes available the identified logical filesystem resource.
 
 The relationship separates infrastructure identity from logical storage identity. Characteristics of the storage infrastructure belong to the source `urn:doe-iri:resource:storage:system` resource, while characteristics of the logical filesystem belong to the target `urn:doe-iri:resource:storage:filesystem` resource.
 
@@ -45,7 +45,7 @@ The target is a logical storage resource, not a mount, state object, operation e
 A storage system MAY provide zero, one, or multiple filesystem resources. The forward cardinality is therefore:
 
 ```text
-Storage System  -- iri:providesFilesystem -->  Filesystem
+Storage System  -- iri:provides-filesystem -->  Filesystem
       1                          0..*
 ```
 
@@ -68,7 +68,7 @@ If the source storage system is visible but a target filesystem is not discovera
 ```json
 {
   "_links": {
-    "iri:providesFilesystem": [
+    "iri:provides-filesystem": [
       { "href": "/api/v2/status/resources/scratch" },
       { "href": "/api/v2/status/resources/home" }
     ]

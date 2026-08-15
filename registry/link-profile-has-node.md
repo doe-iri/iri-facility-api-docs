@@ -1,12 +1,12 @@
-# Link Profile: `iri:hasNode`
+# Link Profile: `iri:has-node`
 
-This document defines the `iri:hasNode` relationship used by the DOE-IRI compute resource model.
+This document defines the `iri:has-node` relationship used by the DOE-IRI compute resource model.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
-| Relationship | `iri:hasNode` |
+| Relationship | `iri:has-node` |
 | Semantic meaning | Indicates that the identified compute node participates in or is managed as part of the source compute system. |
 | Source representation type | `urn:doe-iri:resource:compute:system` |
 | Target representation type | `urn:doe-iri:resource:compute:node` |
@@ -18,7 +18,7 @@ This document defines the `iri:hasNode` relationship used by the DOE-IRI compute
 
 ## 2. Semantic Meaning
 
-The `iri:hasNode` relationship indicates that the source compute system contains, manages, or otherwise presents the identified compute node as part of the system's represented topology.
+The `iri:has-node` relationship indicates that the source compute system contains, manages, or otherwise presents the identified compute node as part of the system's represented topology.
 
 The relationship separates system identity from node identity. System-level characteristics belong to the source compute-system resource, while node-specific characteristics belong to the target compute-node resource.
 
@@ -45,7 +45,7 @@ The target is a resource representation, not a state object, operation entry poi
 A compute system MAY expose zero, one, or multiple node resources:
 
 ```text
-Compute System  -- iri:hasNode -->  Compute Node
+Compute System  -- iri:has-node -->  Compute Node
       1                  0..*
 ```
 
@@ -55,13 +55,13 @@ No inverse-cardinality requirement is imposed by this link profile.
 
 ## 5. Static and Dynamic Semantics
 
-`iri:hasNode` describes relatively stable compute topology. The relationship SHOULD remain present across ordinary operational state changes such as node allocation, maintenance, drain, failure, or temporary unavailability.
+`iri:has-node` describes relatively stable compute topology. The relationship SHOULD remain present across ordinary operational state changes such as node allocation, maintenance, drain, failure, or temporary unavailability.
 
 Current node health, workload activity, allocation state, and availability SHOULD be represented through the node's state resource.
 
 ## 6. Authorization and Visibility
 
-Authorization MAY affect visibility of node topology. A provider MAY expose a compute system while omitting individual `iri:hasNode` targets for requesters that are not permitted to discover node-level infrastructure details.
+Authorization MAY affect visibility of node topology. A provider MAY expose a compute system while omitting individual `iri:has-node` targets for requesters that are not permitted to discover node-level infrastructure details.
 
 The absence of visible node targets MUST NOT be interpreted as proof that the compute system contains no nodes.
 
@@ -70,7 +70,7 @@ The absence of visible node targets MUST NOT be interpreted as proof that the co
 ```json
 {
   "_links": {
-    "iri:hasNode": [
+    "iri:has-node": [
       {
         "href": "/api/v2/status/resources/node-001"
       },

@@ -1,12 +1,12 @@
-# Link Profile: `iri:hasMount`
+# Link Profile: `iri:has-mount`
 
-This document defines the `iri:hasMount` relationship used by the DOE-IRI storage resource model.
+This document defines the `iri:has-mount` relationship used by the DOE-IRI storage resource model.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
-| Relationship | `iri:hasMount` |
+| Relationship | `iri:has-mount` |
 | Semantic meaning | Indicates that a filesystem is exposed through the identified mount relationship resource. |
 | Source representation type | `urn:doe-iri:resource:storage:filesystem` |
 | Target representation type | `urn:doe-iri:resource:storage:mount` |
@@ -18,7 +18,7 @@ This document defines the `iri:hasMount` relationship used by the DOE-IRI storag
 
 ## 2. Semantic Meaning
 
-The `iri:hasMount` relationship indicates that the source filesystem is exposed through the identified mount resource.
+The `iri:has-mount` relationship indicates that the source filesystem is exposed through the identified mount resource.
 
 A mount is modeled as a relationship resource because it carries information that belongs neither solely to the filesystem nor solely to the consuming compute system. Typical mount-specific characteristics include the namespace location, access mode, filesystem protocol, and implementation-specific mount options.
 
@@ -40,14 +40,14 @@ urn:doe-iri:resource:storage:mount
 
 The mount target represents the relationship/configuration through which the filesystem is exposed. It is not a second filesystem representation and is not itself the consuming compute system.
 
-The consuming system is identified by the mount resource's `iri:mountedOn` relationship.
+The consuming system is identified by the mount resource's `iri:mounted-on` relationship.
 
 ## 4. Cardinality
 
 A filesystem MAY have zero, one, or multiple mount resources:
 
 ```text
-Filesystem  -- iri:hasMount -->  Mount
+Filesystem  -- iri:has-mount -->  Mount
     1                0..*
 ```
 
@@ -59,7 +59,7 @@ Each mount resource SHOULD describe one filesystem-to-consuming-system exposure.
 
 The mount target represents relatively stable exposure configuration.
 
-The existence of `iri:hasMount` MUST NOT be interpreted as proof that the mount is currently active, reachable, healthy, or usable. Current mount status belongs in the mount resource's state representation.
+The existence of `iri:has-mount` MUST NOT be interpreted as proof that the mount is currently active, reachable, healthy, or usable. Current mount status belongs in the mount resource's state representation.
 
 ## 6. Authorization and Visibility
 
@@ -74,7 +74,7 @@ The absence of visible mount targets MUST NOT be interpreted as proof that the f
 ```json
 {
   "_links": {
-    "iri:hasMount": [
+    "iri:has-mount": [
       { "href": "/api/v2/status/resources/perlmutter-scratch-mount" },
       { "href": "/api/v2/status/resources/analysis-scratch-mount" }
     ]

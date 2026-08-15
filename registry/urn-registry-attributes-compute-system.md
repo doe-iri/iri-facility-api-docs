@@ -32,7 +32,7 @@ For example:
 Compute System
 urn:doe-iri:resource:compute:system
         │
-        │ iri:hasNode
+        │ iri:has-node
         ▼
 Compute Node
 urn:doe-iri:resource:compute:node

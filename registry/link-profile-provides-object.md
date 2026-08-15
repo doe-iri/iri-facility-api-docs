@@ -1,12 +1,12 @@
-# Link Profile: `iri:providesObject`
+# Link Profile: `iri:provides-object`
 
-This document defines the `iri:providesObject` relationship used by the DOE-IRI storage resource model.
+This document defines the `iri:provides-object` relationship used by the DOE-IRI storage resource model.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
-| Relationship | `iri:providesObject` |
+| Relationship | `iri:provides-object` |
 | Semantic meaning | Indicates that a storage system provides the identified logical object-storage resource. |
 | Source representation type | `urn:doe-iri:resource:storage:system` |
 | Target representation type | `urn:doe-iri:resource:storage:object` |
@@ -18,11 +18,11 @@ This document defines the `iri:providesObject` relationship used by the DOE-IRI 
 
 ## 2. Semantic Meaning
 
-The `iri:providesObject` relationship indicates that the source storage system provides the identified logical object-storage resource.
+The `iri:provides-object` relationship indicates that the source storage system provides the identified logical object-storage resource.
 
 The relationship separates storage infrastructure from the logical object service or namespace consumed through object-storage APIs. Object-specific characteristics such as supported APIs, access endpoints, implementation technology, consistency semantics, capabilities, tier, and backing media belong to the target object resource.
 
-Service endpoints are not the target of `iri:providesObject`; they are access characteristics of the object-storage resource unless separately modeled as resources by a future profile.
+Service endpoints are not the target of `iri:provides-object`; they are access characteristics of the object-storage resource unless separately modeled as resources by a future profile.
 
 ## 3. Source and Target Representation
 
@@ -45,7 +45,7 @@ The target is the logical object-storage resource, not an individual bucket, obj
 A storage system MAY provide zero, one, or multiple object-storage resources:
 
 ```text
-Storage System  -- iri:providesObject -->  Object Storage
+Storage System  -- iri:provides-object -->  Object Storage
       1                       0..*
 ```
 
@@ -55,7 +55,7 @@ No inverse-cardinality requirement is imposed by this link profile.
 
 The relationship describes relatively stable storage topology.
 
-Endpoint reachability, request latency, utilization, capacity availability, and service health are dynamic characteristics and SHOULD be represented through the relevant state mechanisms rather than by treating `iri:providesObject` as an availability indicator.
+Endpoint reachability, request latency, utilization, capacity availability, and service health are dynamic characteristics and SHOULD be represented through the relevant state mechanisms rather than by treating `iri:provides-object` as an availability indicator.
 
 ## 6. Authorization and Visibility
 
@@ -68,7 +68,7 @@ Absence of the link or a particular target MUST NOT be interpreted as proof that
 ```json
 {
   "_links": {
-    "iri:providesObject": [
+    "iri:provides-object": [
       { "href": "/api/v2/status/resources/science-object-store" }
     ]
   }

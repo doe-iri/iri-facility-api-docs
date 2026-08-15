@@ -30,7 +30,7 @@ A CPU resource represents a central processing unit or processor package associa
 Compute Node
 urn:doe-iri:resource:compute:node
         │
-        │ iri:hasCPU
+        │ iri:has-cpu
         ▼
 CPU
 urn:doe-iri:resource:compute:cpu

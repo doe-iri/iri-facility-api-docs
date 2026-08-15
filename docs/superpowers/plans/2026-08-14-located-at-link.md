@@ -1,8 +1,8 @@
-# `iri:locatedAt` Link Relationship Implementation Plan
+# `iri:located-at` Link Relationship Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Register `iri:locatedAt` and add it consistently to DOE-IRI registry indexes, the common Resource contract, and complete Resource examples.
+**Goal:** Register `iri:located-at` and add it consistently to DOE-IRI registry indexes, the common Resource contract, and complete Resource examples.
 
 **Architecture:** Add one generic provisional Resource-to-Site HAL link profile. Preserve required `site_uri` as the compatibility field, require equality whenever the new singular link is present, and index the relation across the Storage, Compute, and Service domains without changing domain-specific topology semantics.
 
@@ -12,12 +12,12 @@
 
 ## Global Constraints
 
-- Register the exact relation name `iri:locatedAt` with lifecycle `provisional`.
+- Register the exact relation name `iri:located-at` with lifecycle `provisional`.
 - Source is any DOE-IRI `Resource`; target is the associated Facility API `Site` representation.
 - The current semantic cardinality is exactly one because `site_uri` is required and singular.
-- Retain `site_uri`; whenever `_links["iri:locatedAt"]` is present, its `href` MUST exactly equal `site_uri`.
+- Retain `site_uri`; whenever `_links["iri:located-at"]` is present, its `href` MUST exactly equal `site_uri`.
 - The target is a Site API representation, not a DOE-IRI typed `Resource`, state object, operation entry point, or relationship resource.
-- Keep `iri:locatedAt` distinct from service-to-compute `iri:hostedOn`.
+- Keep `iri:located-at` distinct from service-to-compute `iri:hosted-on`.
 - Do not add an inverse relation, deprecate `site_uri`, change the Site schema, or invent authorization-filtered absence that contradicts visible `site_uri`.
 - Preserve unrelated user changes and follow the repository's existing link-profile and index formats.
 - Use `registry_editor` for implementation and `registry_maintainer` for deterministic validation.
@@ -44,13 +44,13 @@
 
 **Interfaces:**
 - Consumes: Required and singular `Resource.site_uri`, Site `self_uri`, and the approved design specification.
-- Produces: A discoverable link profile and examples whose `iri:locatedAt.href` values equal their enclosing Resource's `site_uri`.
+- Produces: A discoverable link profile and examples whose `iri:located-at.href` values equal their enclosing Resource's `site_uri`.
 
 - [ ] **Step 1: Run the failing contract checks**
 
 ```bash
 test -e registry/link-profile-located-at.md
-jq -e 'all(.[]; ._links["iri:locatedAt"].href == .site_uri)' registry/examples/hpc-facility-resources.json
+jq -e 'all(.[]; ._links["iri:located-at"].href == .site_uri)' registry/examples/hpc-facility-resources.json
 ```
 
 Expected: both checks fail because the profile and links do not yet exist.
@@ -74,12 +74,12 @@ existing column format.
 Update the `site_uri` descriptions in both OpenAPI artifacts and the common
 Resource discussion in `rfc/rfc-type-specific-attributes.md`. State that
 `site_uri` remains required and authoritative and that a present
-`iri:locatedAt` href must equal it. Do not make `_links` required in the current
+`iri:located-at` href must equal it. Do not make `_links` required in the current
 OpenAPI schema.
 
 - [ ] **Step 5: Update complete Resource examples**
 
-Add singular `iri:locatedAt` link objects to all eight objects in
+Add singular `iri:located-at` link objects to all eight objects in
 `registry/examples/hpc-facility-resources.json`, the complete DTN Resource
 example, and both complete Resource examples in the type-specific-attributes
 RFC. Preserve existing links and ensure every added href exactly equals the
@@ -88,13 +88,13 @@ same object's `site_uri`.
 - [ ] **Step 6: Record the architectural decision**
 
 Append a concise dated section to `docs/ai-project-context.md` capturing the
-relation semantics, compatibility rule, and distinction from `iri:hostedOn`.
+relation semantics, compatibility rule, and distinction from `iri:hosted-on`.
 
 - [ ] **Step 7: Run focused verification**
 
 ```bash
 test -e registry/link-profile-located-at.md
-jq -e 'length == 8 and all(.[]; ._links["iri:locatedAt"].href == .site_uri)' registry/examples/hpc-facility-resources.json
+jq -e 'length == 8 and all(.[]; ._links["iri:located-at"].href == .site_uri)' registry/examples/hpc-facility-resources.json
 cmp <(sed -n '998,1076p' specification-v2/openapi/production/_components.yaml) <(sed -n '998,1076p' specification-v2/openapi/all_spec_v2.yaml)
 git diff --check
 ```
@@ -119,7 +119,7 @@ repository-compatible parsers.
 
 - [ ] **Step 2: Validate relation invariants**
 
-Confirm all eight HPC resources have singular `iri:locatedAt` objects whose
+Confirm all eight HPC resources have singular `iri:located-at` objects whose
 only required member is `href`, and that every href equals `site_uri`. Confirm
 the complete RFC and DTN examples make the same equality claim.
 

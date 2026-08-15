@@ -4,7 +4,7 @@
 
 **Goal:** Register DTN and inference service resource types with complete attributes, controlled vocabularies, relationships, navigation, state guidance, and governing-specification alignment.
 
-**Architecture:** Add a focused Service domain alongside the existing Compute and Storage registries. Resource classification uses `urn:doe-iri:resource:service:*`, controlled characteristics use `urn:doe-iri:service:*`, topology uses `iri:hostedOn` and `iri:accessesMount`, and live inference model activation stays in a companion state schema rather than the resource definition.
+**Architecture:** Add a focused Service domain alongside the existing Compute and Storage registries. Resource classification uses `urn:doe-iri:resource:service:*`, controlled characteristics use `urn:doe-iri:service:*`, topology uses `iri:hosted-on` and `iri:accesses-mount`, and live inference model activation stays in a companion state schema rather than the resource definition.
 
 **Tech Stack:** Markdown registry documents, OpenAPI-compatible YAML schema fragments, JSON and HAL examples, shell-based repository checks.
 
@@ -69,7 +69,7 @@ urn:doe-iri:service:inference-api
 urn:doe-iri:service:inference-technology
 ```
 
-Index `iri:hostedOn` for both service types and `iri:accessesMount` for DTN only. State explicitly that endpoints are attributes and that operational state is separate.
+Index `iri:hosted-on` for both service types and `iri:accesses-mount` for DTN only. State explicitly that endpoints are attributes and that operational state is separate.
 
 - [ ] **Step 4: Create the consolidated taxonomy and exact URN index**
 
@@ -329,18 +329,18 @@ test -e registry/link-profile-accesses-mount.md
 
 Expected: both checks fail because neither link profile exists.
 
-- [ ] **Step 2: Create `iri:hostedOn` metadata and semantics**
+- [ ] **Step 2: Create `iri:hosted-on` metadata and semantics**
 
 Use source types DTN or inference service, target types compute system or compute node, cardinality `0..*`, target classification Resource, relatively static topology, and authorization-filtered visibility. Explain that the link does not represent current routing, live replica placement, health, or availability.
 
-- [ ] **Step 3: Add `iri:hostedOn` HAL examples**
+- [ ] **Step 3: Add `iri:hosted-on` HAL examples**
 
 Include a singular system target and plural node targets:
 
 ```json
 {
   "_links": {
-    "iri:hostedOn": [
+    "iri:hosted-on": [
       { "href": "/api/v2/status/resources/node-001" },
       { "href": "/api/v2/status/resources/node-002" }
     ]
@@ -348,11 +348,11 @@ Include a singular system target and plural node targets:
 }
 ```
 
-- [ ] **Step 4: Create `iri:accessesMount` metadata and semantics**
+- [ ] **Step 4: Create `iri:accesses-mount` metadata and semantics**
 
 Use DTN service as the only source, filesystem mount as the target, cardinality `0..*`, target classification Relationship Resource, relatively static configured access topology, and authorization-filtered visibility. State that the link does not imply current mount availability, endpoint reachability, credential validity, unrestricted access, or active transfer activity.
 
-- [ ] **Step 5: Add `iri:accessesMount` HAL examples and cross-relation guidance**
+- [ ] **Step 5: Add `iri:accesses-mount` HAL examples and cross-relation guidance**
 
 Include plural mount targets. Explain why the mount is more precise than a direct filesystem target, why `hostedOn` plus `mountedOn` must not be used to infer DTN access, and why no inverse is initially registered.
 
@@ -404,20 +404,20 @@ Link `urn:doe-iri:resource:service` to `urn-registry-type-service.md`, show `dtn
 
 Add Service beside Storage and Compute in the documentation tree. Add entry points, both resource attribute profiles, both relationship profiles, the service controlled-vocabulary branch, and appropriate “Where do I start?” navigation.
 
-- [ ] **Step 4: Add incoming `iri:hostedOn` references to Compute**
+- [ ] **Step 4: Add incoming `iri:hosted-on` references to Compute**
 
-Update the compute type registry and taxonomy relationship sections to identify service source types, compute-system-or-node targets, `0..*` service-side cardinality, relative stability, authorization filtering, and the link-profile document. Do not alter existing `iri:hasNode`, `iri:hasCPU`, or `iri:hasGPU` semantics.
+Update the compute type registry and taxonomy relationship sections to identify service source types, compute-system-or-node targets, `0..*` service-side cardinality, relative stability, authorization filtering, and the link-profile document. Do not alter existing `iri:has-node`, `iri:has-cpu`, or `iri:has-gpu` semantics.
 
-- [ ] **Step 5: Add incoming `iri:accessesMount` references to Storage**
+- [ ] **Step 5: Add incoming `iri:accesses-mount` references to Storage**
 
-Update the storage type registry and taxonomy relationship sections to identify DTN source, mount target, `0..*` DTN-side cardinality, relative stability, authorization filtering, and the link-profile document. Do not alter `iri:hasMount` or `iri:mountedOn` semantics.
+Update the storage type registry and taxonomy relationship sections to identify DTN source, mount target, `0..*` DTN-side cardinality, relative stability, authorization filtering, and the link-profile document. Do not alter `iri:has-mount` or `iri:mounted-on` semantics.
 
 - [ ] **Step 6: Verify navigation and cross-domain consistency**
 
 ```bash
 rg -n 'urn-registry-type-service|attributes-service-(dtn|inference)|link-profile-(hosted-on|accesses-mount)' registry/README.md registry/urn-registry-root.md
-rg -n 'iri:hostedOn' registry/urn-registry-type-compute.md registry/urn-registry-type-compute-taxonomy.md
-rg -n 'iri:accessesMount' registry/urn-registry-type-storage.md registry/urn-registry-type-storage-taxonomy.md
+rg -n 'iri:hosted-on' registry/urn-registry-type-compute.md registry/urn-registry-type-compute-taxonomy.md
+rg -n 'iri:accesses-mount' registry/urn-registry-type-storage.md registry/urn-registry-type-storage-taxonomy.md
 ```
 
 Expected: root navigation includes the Service domain and both incoming cross-domain relationships are indexed by their target domains.

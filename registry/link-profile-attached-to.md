@@ -1,12 +1,12 @@
-# Link Profile: `iri:attachedTo`
+# Link Profile: `iri:attached-to`
 
-This document defines the `iri:attachedTo` relationship used by the DOE-IRI storage resource model.
+This document defines the `iri:attached-to` relationship used by the DOE-IRI storage resource model.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
-| Relationship | `iri:attachedTo` |
+| Relationship | `iri:attached-to` |
 | Semantic meaning | Indicates that a logical block-storage resource is configured to be presented or attached to the identified consuming compute resource. |
 | Source representation type | `urn:doe-iri:resource:storage:block` |
 | Target representation type | `urn:doe-iri:resource:compute:system` or `urn:doe-iri:resource:compute:node` |
@@ -18,7 +18,7 @@ This document defines the `iri:attachedTo` relationship used by the DOE-IRI stor
 
 ## 2. Semantic Meaning
 
-The `iri:attachedTo` relationship indicates that the source logical block-storage resource is configured to be presented or attached to the identified consuming compute system or compute node.
+The `iri:attached-to` relationship indicates that the source logical block-storage resource is configured to be presented or attached to the identified consuming compute system or compute node.
 
 The relationship deliberately describes configured topology rather than current attachment state. This preserves the separation between relatively stable resource relationships and dynamic operational state.
 
@@ -61,7 +61,7 @@ urn:doe-iri:storage:block-access-mode:exclusive
 the resource SHOULD have at most one configured consuming target:
 
 ```text
-Block Storage  -- iri:attachedTo -->  Compute Resource
+Block Storage  -- iri:attached-to -->  Compute Resource
       1                    0..1
 ```
 
@@ -74,7 +74,7 @@ urn:doe-iri:storage:block-access-mode:shared
 the resource MAY identify multiple consuming targets:
 
 ```text
-Block Storage  -- iri:attachedTo -->  Compute Resource
+Block Storage  -- iri:attached-to -->  Compute Resource
       1                    0..*
 ```
 
@@ -82,7 +82,7 @@ A shared access mode indicates that multiple attachments are supported; it does 
 
 ## 5. Static and Dynamic Semantics
 
-This link profile defines `iri:attachedTo` as configured or intended presentation topology.
+This link profile defines `iri:attached-to` as configured or intended presentation topology.
 
 The link MUST NOT be interpreted as a live assertion that the block device is currently attached, logged in, mapped, healthy, or accessible.
 
@@ -101,7 +101,7 @@ Exclusive attachment example:
 ```json
 {
   "_links": {
-    "iri:attachedTo": [
+    "iri:attached-to": [
       { "href": "/api/v2/status/resources/compute-node-123" }
     ]
   }
@@ -113,7 +113,7 @@ Shared attachment example:
 ```json
 {
   "_links": {
-    "iri:attachedTo": [
+    "iri:attached-to": [
       { "href": "/api/v2/status/resources/compute-node-123" },
       { "href": "/api/v2/status/resources/compute-node-124" }
     ]

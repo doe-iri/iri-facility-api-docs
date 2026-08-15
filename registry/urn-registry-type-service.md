@@ -59,16 +59,16 @@ The general model is:
 DTN Service
 urn:doe-iri:resource:service:dtn
         │
-        ├── iri:hostedOn ──────> Compute System or Compute Node
+        ├── iri:hosted-on ──────> Compute System or Compute Node
         │
-        └── iri:accessesMount ─> Filesystem Mount
+        └── iri:accesses-mount ─> Filesystem Mount
                                       │
-                                      └── iri:mountedOn ─> Compute System
+                                      └── iri:mounted-on ─> Compute System
 
 Inference Service
 urn:doe-iri:resource:service:inference
         │
-        └── iri:hostedOn ──────> Compute System or Compute Node
+        └── iri:hosted-on ──────> Compute System or Compute Node
 ```
 
 Physical topology is expressed by these link relations, not by deeper resource-type nesting. A service may be hosted across multiple nodes or systems, and co-location does not by itself prove a DTN can access a mount.
@@ -127,17 +127,17 @@ The complete index of registered service controlled values is maintained in the 
 
 ## 6. Service Resource Relationships
 
-Registered IRI link relations describe service-domain topology, configured access, and applicable cross-model navigation without embedding host or storage identifiers in ordinary attributes. Their targets may be DOE-IRI Resource representations, relationship resources, or, for `iri:locatedAt`, the Facility API Site representation; the Site target is not a DOE-IRI typed Resource.
+Registered IRI link relations describe service-domain topology, configured access, and applicable cross-model navigation without embedding host or storage identifiers in ordinary attributes. Their targets may be DOE-IRI Resource representations, relationship resources, or, for `iri:located-at`, the Facility API Site representation; the Site target is not a DOE-IRI typed Resource.
 
 | Relationship | Status | Source | Target | Cardinality | Target Stability | Authorization Affects Visibility | Description |
 |---|---|---|---|---|---|---|---|
-| [`iri:hostedOn`](./link-profile-hosted-on.md) | `provisional` | DTN Service or Inference Service | Compute System or Compute Node | `0..*` targets from a service | Static resource representation. The target identifies hosting infrastructure independently of current routing, live replica placement, health, or availability. | Yes | Indicates that the target provides hosting infrastructure for the source service. |
-| [`iri:accessesMount`](./link-profile-accesses-mount.md) | `provisional` | DTN Service | Filesystem Mount | `0..*` targets from a DTN service | Relatively static relationship resource. The target identifies configured filesystem access topology, not current mount availability, endpoint reachability, credential validity, unrestricted access, or transfer activity. | Yes | Indicates that the DTN service is configured to access a filesystem through the identified mount relationship resource for transfer operations. |
-| [`iri:locatedAt`](./link-profile-located-at.md) | `provisional` | Any DOE-IRI Resource | Facility API Site representation | `1` semantic target | Independently identifiable, relatively stable Site representation | No; `site_uri` already discloses Site identity | Indicates the relatively stable physical and administrative Site associated with the source Resource. |
+| [`iri:hosted-on`](./link-profile-hosted-on.md) | `provisional` | DTN Service or Inference Service | Compute System or Compute Node | `0..*` targets from a service | Static resource representation. The target identifies hosting infrastructure independently of current routing, live replica placement, health, or availability. | Yes | Indicates that the target provides hosting infrastructure for the source service. |
+| [`iri:accesses-mount`](./link-profile-accesses-mount.md) | `provisional` | DTN Service | Filesystem Mount | `0..*` targets from a DTN service | Relatively static relationship resource. The target identifies configured filesystem access topology, not current mount availability, endpoint reachability, credential validity, unrestricted access, or transfer activity. | Yes | Indicates that the DTN service is configured to access a filesystem through the identified mount relationship resource for transfer operations. |
+| [`iri:located-at`](./link-profile-located-at.md) | `provisional` | Any DOE-IRI Resource | Facility API Site representation | `1` semantic target | Independently identifiable, relatively stable Site representation | No; `site_uri` already discloses Site identity | Indicates the relatively stable physical and administrative Site associated with the source Resource. |
 
-`iri:hostedOn` does not state that a target is currently healthy, serving requests, selected by a router, or running a particular live replica. `iri:accessesMount` does not imply current mount availability, endpoint reachability, credential validity, unrestricted authorization, or an active transfer. Operational state is separate from these relatively stable relationships.
+`iri:hosted-on` does not state that a target is currently healthy, serving requests, selected by a router, or running a particular live replica. `iri:accesses-mount` does not imply current mount availability, endpoint reachability, credential validity, unrestricted authorization, or an active transfer. Operational state is separate from these relatively stable relationships.
 
-Authorization MAY affect visibility of `iri:hostedOn` and `iri:accessesMount`; the absence of either visible link is not proof that the relationship does not exist. `iri:locatedAt` MUST NOT be independently authorization-filtered while the required `site_uri` field is returned because that field already discloses Site identity.
+Authorization MAY affect visibility of `iri:hosted-on` and `iri:accesses-mount`; the absence of either visible link is not proof that the relationship does not exist. `iri:located-at` MUST NOT be independently authorization-filtered while the required `site_uri` field is returned because that field already discloses Site identity.
 
 ---
 

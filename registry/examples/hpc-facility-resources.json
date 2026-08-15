@@ -33,10 +33,10 @@
       "self": {
         "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-storage"
       },
-      "iri:locatedAt": {
+      "iri:located-at": {
         "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
       },
-      "iri:providesFilesystem": [
+      "iri:provides-filesystem": [
         {
           "href": "/api/v2/status/resources/pioneer-scratch"
         }
@@ -77,10 +77,10 @@
       "self": {
         "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-scratch"
       },
-      "iri:locatedAt": {
+      "iri:located-at": {
         "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
       },
-      "iri:hasMount": [
+      "iri:has-mount": [
         {
           "href": "/api/v2/status/resources/pioneer-scratch-mount"
         }
@@ -110,10 +110,10 @@
       "self": {
         "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-scratch-mount"
       },
-      "iri:locatedAt": {
+      "iri:located-at": {
         "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
       },
-      "iri:mountedOn": {
+      "iri:mounted-on": {
         "href": "/api/v2/status/resources/pioneer-compute"
       }
     }
@@ -148,10 +148,10 @@
       "self": {
         "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-compute"
       },
-      "iri:locatedAt": {
+      "iri:located-at": {
         "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
       },
-      "iri:hasNode": [
+      "iri:has-node": [
         {
           "href": "/api/v2/status/resources/pioneer-node-001"
         }
@@ -186,10 +186,10 @@
       "self": {
         "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-node-001"
       },
-      "iri:locatedAt": {
+      "iri:located-at": {
         "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
       },
-      "iri:hasGPU": [
+      "iri:has-gpu": [
         {
           "href": "/api/v2/status/resources/pioneer-node-001-gpu-0"
         }
@@ -220,7 +220,7 @@
       "self": {
         "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-node-001-gpu-0"
       },
-      "iri:locatedAt": {
+      "iri:located-at": {
         "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
       }
     }
@@ -260,13 +260,13 @@
       "self": {
         "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-dtn"
       },
-      "iri:locatedAt": {
+      "iri:located-at": {
         "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
       },
-      "iri:hostedOn": {
+      "iri:hosted-on": {
         "href": "/api/v2/status/resources/pioneer-compute"
       },
-      "iri:accessesMount": [
+      "iri:accesses-mount": [
         {
           "href": "/api/v2/status/resources/pioneer-scratch-mount"
         }
@@ -316,10 +316,10 @@
       "self": {
         "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-inference"
       },
-      "iri:locatedAt": {
+      "iri:located-at": {
         "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
       },
-      "iri:hostedOn": {
+      "iri:hosted-on": {
         "href": "/api/v2/status/resources/pioneer-node-001"
       }
     }

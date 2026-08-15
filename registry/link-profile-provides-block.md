@@ -1,12 +1,12 @@
-# Link Profile: `iri:providesBlock`
+# Link Profile: `iri:provides-block`
 
-This document defines the `iri:providesBlock` relationship used by the DOE-IRI storage resource model.
+This document defines the `iri:provides-block` relationship used by the DOE-IRI storage resource model.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
-| Relationship | `iri:providesBlock` |
+| Relationship | `iri:provides-block` |
 | Semantic meaning | Indicates that a storage system provides the identified logical block-storage resource. |
 | Source representation type | `urn:doe-iri:resource:storage:system` |
 | Target representation type | `urn:doe-iri:resource:storage:block` |
@@ -18,7 +18,7 @@ This document defines the `iri:providesBlock` relationship used by the DOE-IRI s
 
 ## 2. Semantic Meaning
 
-The `iri:providesBlock` relationship indicates that the source storage system provides the identified logical block-storage resource.
+The `iri:provides-block` relationship indicates that the source storage system provides the identified logical block-storage resource.
 
 The relationship separates the infrastructure that implements storage from the logical volume presented for consumption. Storage-system characteristics belong to the source resource, while block-specific characteristics such as protocol, provisioning model, access mode, capabilities, logical capacity, tier, and backing media belong to the target block resource.
 
@@ -45,7 +45,7 @@ The target represents the logical block-storage resource itself, not an attachme
 A storage system MAY provide zero, one, or multiple block-storage resources:
 
 ```text
-Storage System  -- iri:providesBlock -->  Block Storage
+Storage System  -- iri:provides-block -->  Block Storage
       1                      0..*
 ```
 
@@ -53,7 +53,7 @@ No inverse-cardinality requirement is imposed by this link profile.
 
 ## 5. Static and Dynamic Semantics
 
-`iri:providesBlock` describes relatively stable provider topology.
+`iri:provides-block` describes relatively stable provider topology.
 
 Current attachment, I/O activity, path health, utilization, and availability are dynamic concerns and SHOULD NOT be encoded by adding or removing this relationship solely because operational state changes.
 
@@ -68,7 +68,7 @@ An omitted target MUST NOT be interpreted as evidence that the storage system pr
 ```json
 {
   "_links": {
-    "iri:providesBlock": [
+    "iri:provides-block": [
       { "href": "/api/v2/status/resources/project-volume-001" }
     ]
   }

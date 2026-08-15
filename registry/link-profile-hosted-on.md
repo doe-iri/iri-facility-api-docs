@@ -1,12 +1,12 @@
-# Link Profile: `iri:hostedOn`
+# Link Profile: `iri:hosted-on`
 
-This document defines the `iri:hostedOn` relationship used by the DOE-IRI service resource model.
+This document defines the `iri:hosted-on` relationship used by the DOE-IRI service resource model.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
-| Relationship | `iri:hostedOn` |
+| Relationship | `iri:hosted-on` |
 | Status | `provisional` |
 | Semantic meaning | Indicates that the identified compute system or compute node provides hosting infrastructure for the source service. |
 | Source representation type | `urn:doe-iri:resource:service:dtn` or `urn:doe-iri:resource:service:inference` |
@@ -19,7 +19,7 @@ This document defines the `iri:hostedOn` relationship used by the DOE-IRI servic
 
 ## 2. Semantic Meaning
 
-The `iri:hostedOn` relationship indicates that the target compute system or compute node provides hosting infrastructure for the source DTN or inference service.
+The `iri:hosted-on` relationship indicates that the target compute system or compute node provides hosting infrastructure for the source DTN or inference service.
 
 The relationship separates consumable service identity from the identity of the infrastructure on which the service is hosted. A DTN service does not identify an individual host or compute node, and an inference service does not identify a deployment, endpoint, replica, or accelerator.
 
@@ -48,7 +48,7 @@ The target is a compute resource representation, not a state object, operation e
 A service MAY identify zero, one, or multiple hosting infrastructure resources:
 
 ```text
-Service  -- iri:hostedOn -->  Compute System or Compute Node
+Service  -- iri:hosted-on -->  Compute System or Compute Node
    1                0..*
 ```
 
@@ -58,13 +58,13 @@ No inverse-cardinality requirement is imposed by this link profile.
 
 ## 5. Static and Dynamic Semantics
 
-`iri:hostedOn` describes relatively static hosting topology. The relationship SHOULD remain present across ordinary operational state changes such as service degradation, infrastructure maintenance, node failure, temporary unavailability, routing changes, or replica changes.
+`iri:hosted-on` describes relatively static hosting topology. The relationship SHOULD remain present across ordinary operational state changes such as service degradation, infrastructure maintenance, node failure, temporary unavailability, routing changes, or replica changes.
 
 Current health, availability, request routing, replica placement, workload activity, and endpoint reachability SHOULD be represented through the applicable resource-state mechanisms.
 
 ## 6. Authorization and Visibility
 
-Authorization MAY affect visibility of service-hosting topology. A provider MAY expose a service while omitting individual `iri:hostedOn` targets for requesters that are not permitted to discover the relevant compute infrastructure.
+Authorization MAY affect visibility of service-hosting topology. A provider MAY expose a service while omitting individual `iri:hosted-on` targets for requesters that are not permitted to discover the relevant compute infrastructure.
 
 The absence of visible targets MUST NOT be interpreted as proof that the service has no hosting infrastructure.
 
@@ -75,7 +75,7 @@ A service hosted on one compute system can use a singular link object:
 ```json
 {
   "_links": {
-    "iri:hostedOn": {
+    "iri:hosted-on": {
       "href": "/api/v2/status/resources/perlmutter"
     }
   }
@@ -87,7 +87,7 @@ A service hosted across multiple compute nodes can use an array of link objects:
 ```json
 {
   "_links": {
-    "iri:hostedOn": [
+    "iri:hosted-on": [
       { "href": "/api/v2/status/resources/node-001" },
       { "href": "/api/v2/status/resources/node-002" }
     ]

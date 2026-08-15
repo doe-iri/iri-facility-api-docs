@@ -58,15 +58,15 @@ The general model is:
 Compute System
 urn:doe-iri:resource:compute:system
         │
-        │ iri:hasNode
+        │ iri:has-node
         ▼
 Compute Node
 urn:doe-iri:resource:compute:node
         │
-        ├── iri:hasCPU ──> CPU
+        ├── iri:has-cpu ──> CPU
         │                  urn:doe-iri:resource:compute:cpu
         │
-        └── iri:hasGPU ──> GPU
+        └── iri:has-gpu ──> GPU
                            urn:doe-iri:resource:compute:gpu
 ```
 
@@ -88,7 +88,7 @@ The following theoretical example illustrates a compute system containing two no
 Compute System
 resource_type = urn:doe-iri:resource:compute:system
 
-        │ iri:hasNode
+        │ iri:has-node
         │
         ├───────────────────────────────┐
         ▼                               ▼
@@ -99,12 +99,12 @@ resource_type =                  resource_type =
   compute:node                     compute:node
 
         │                               │
-        ├── iri:hasCPU                  ├── iri:hasCPU
+        ├── iri:has-cpu                  ├── iri:has-cpu
         │       │                       │       │
         │       ▼                       │       ▼
         │      CPU                     CPU
         │
-        └── iri:hasGPU                  └── iri:hasGPU
+        └── iri:has-gpu                  └── iri:has-gpu
                 │                               │
                 ▼                               ▼
                GPU                             GPU
@@ -177,19 +177,19 @@ Only attributes that require a registered controlled vocabulary are represented 
 
 ## 6. Compute Resource Relationships
 
-Registered IRI link relations describe compute-domain topology and applicable cross-model navigation without embedding one representation inside another. Their targets may be DOE-IRI Resource representations or, for `iri:locatedAt`, the Facility API Site representation; the Site target is not a DOE-IRI typed Resource.
+Registered IRI link relations describe compute-domain topology and applicable cross-model navigation without embedding one representation inside another. Their targets may be DOE-IRI Resource representations or, for `iri:located-at`, the Facility API Site representation; the Site target is not a DOE-IRI typed Resource.
 
 | Relationship | Source | Target | Cardinality | Target Stability | Authorization Affects Visibility | Description |
 |---|---|---|---|---|---|---|
-| [`iri:hasNode`](./link-profile-has-node.md) | Compute System | Compute Node | `0..*` | Static | Yes | Indicates that the identified compute node participates in or is managed as part of the compute system. |
-| [`iri:hasCPU`](./link-profile-has-cpu.md) | Compute Node | CPU | `0..*` | Static | Yes | Indicates that the compute node contains or provides the identified CPU resource. |
-| [`iri:hasGPU`](./link-profile-has-gpu.md) | Compute Node | GPU | `0..*` | Static | Yes | Indicates that the compute node contains or provides the identified GPU resource. |
-| [`iri:hostedOn`](./link-profile-hosted-on.md) | DTN Service or Inference Service | Compute System or Compute Node | `0..*` targets from a service | Static resource representation. The target identifies hosting infrastructure independently of current routing, live replica placement, health, or availability. | Yes | Incoming cross-domain relationship indicating that the target provides hosting infrastructure for the source service. |
-| [`iri:locatedAt`](./link-profile-located-at.md) | Any DOE-IRI Resource | Facility API Site representation | `1` semantic target | Relatively stable Site representation | No; `site_uri` already discloses Site identity | Indicates the relatively stable physical and administrative Site associated with the source Resource. |
+| [`iri:has-node`](./link-profile-has-node.md) | Compute System | Compute Node | `0..*` | Static | Yes | Indicates that the identified compute node participates in or is managed as part of the compute system. |
+| [`iri:has-cpu`](./link-profile-has-cpu.md) | Compute Node | CPU | `0..*` | Static | Yes | Indicates that the compute node contains or provides the identified CPU resource. |
+| [`iri:has-gpu`](./link-profile-has-gpu.md) | Compute Node | GPU | `0..*` | Static | Yes | Indicates that the compute node contains or provides the identified GPU resource. |
+| [`iri:hosted-on`](./link-profile-hosted-on.md) | DTN Service or Inference Service | Compute System or Compute Node | `0..*` targets from a service | Static resource representation. The target identifies hosting infrastructure independently of current routing, live replica placement, health, or availability. | Yes | Incoming cross-domain relationship indicating that the target provides hosting infrastructure for the source service. |
+| [`iri:located-at`](./link-profile-located-at.md) | Any DOE-IRI Resource | Facility API Site representation | `1` semantic target | Relatively stable Site representation | No; `site_uri` already discloses Site identity | Indicates the relatively stable physical and administrative Site associated with the source Resource. |
 
 These relationships describe relatively stable resource topology and SHOULD NOT be interpreted as operational availability indicators. Current utilization, health, allocation, and availability belong in the corresponding resource-state representations.
 
-Authorization MAY affect visibility only for relationship rows whose Authorization Affects Visibility value is `Yes`. A facility MAY expose aggregate compute-system information while withholding individual node or processor topology from clients that do not require or are not authorized to discover that level of infrastructure detail. `iri:locatedAt` MUST NOT be independently authorization-filtered while the required `site_uri` field is returned because that field already discloses Site identity.
+Authorization MAY affect visibility only for relationship rows whose Authorization Affects Visibility value is `Yes`. A facility MAY expose aggregate compute-system information while withholding individual node or processor topology from clients that do not require or are not authorized to discover that level of infrastructure detail. `iri:located-at` MUST NOT be independently authorization-filtered while the required `site_uri` field is returned because that field already discloses Site identity.
 
 Relationships describe independently identifiable resources and SHOULD NOT be duplicated as ordinary attributes when an IRI link relation is defined for the relationship.
 
