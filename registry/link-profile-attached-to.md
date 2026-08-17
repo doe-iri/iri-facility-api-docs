@@ -123,4 +123,4 @@ Shared attachment example:
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: attachedTo*
+*DOE Integrated Research Infrastructure — Link Profile: attached-to*

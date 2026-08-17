@@ -77,4 +77,4 @@ An omitted target MUST NOT be interpreted as evidence that the storage system pr
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: providesBlock*
+*DOE Integrated Research Infrastructure — Link Profile: provides-block*

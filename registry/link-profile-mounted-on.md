@@ -79,4 +79,4 @@ Because `iri:mounted-on` is required for the semantic completeness of a mount re
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: mountedOn*
+*DOE Integrated Research Infrastructure — Link Profile: mounted-on*

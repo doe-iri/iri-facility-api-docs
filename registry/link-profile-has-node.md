@@ -51,13 +51,13 @@ Compute System  -- iri:has-node -->  Compute Node
 
 The use of `0..*` permits facilities to expose aggregate system information without exposing individual node topology.
 
-No inverse-cardinality requirement is imposed by this link profile.
+This link profile imposes no inverse-cardinality requirement.
 
 ## 5. Static and Dynamic Semantics
 
 `iri:has-node` describes relatively stable compute topology. The relationship SHOULD remain present across ordinary operational state changes such as node allocation, maintenance, drain, failure, or temporary unavailability.
 
-Current node health, workload activity, allocation state, and availability SHOULD be represented through the node's state resource.
+The node's state resource SHOULD represent current node health, workload activity, allocation state, and availability.
 
 ## 6. Authorization and Visibility
 
@@ -84,4 +84,4 @@ The absence of visible node targets MUST NOT be interpreted as proof that the co
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: hasNode*
+*DOE Integrated Research Infrastructure — Link Profile: has-node*

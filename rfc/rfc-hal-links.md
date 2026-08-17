@@ -179,6 +179,31 @@ target representation. The DOE-IRI Link Profile Index defines the semantics of
 an `iri:*` relation itself. A producer MUST NOT use the HAL `profile` property
 to redefine or replace the registered semantics of a link relation.
 
+RFC 6906 explicitly describes profiles as a mechanism for signaling additional 
+semantics beyond those defined by the media type, and should be primarily treated
+as identifiers.  A client must recognize a profile from the URI alone. The URI may 
+be dereferenceable and provide human- or machine-readable documentation, and 
+RFC 6906 recommends making it dereferenceable when clients may encounter unknown 
+profiles, but the protocol does not require dereferencing.
+
+```json
+{
+  "_links": {
+    "iri:has-mount": {
+      "href": "https://api.example.org/api/v2/status/resources/frontier-orion-scratch-mount",
+      "title": "Frontier mount of Orion scratch filesystem",
+      "type": "application/hal+json",
+      "profile": "https://example.org/iri/profiles/mount-relationship"
+    },
+    "service-desc": {
+      "href": "https://api.example.org/openapi.json",
+      "type": "application/json",
+      "title": "IRI Facility API OpenAPI description"
+    }
+  }
+}
+```
+
 Similarly, `service-desc` is a link relation, not Link Object metadata. It can
 identify the machine-readable contract that describes how API operations are
 invoked, while the other advertised relations identify which resources or
@@ -474,7 +499,14 @@ The following example illustrates the layered discovery model. It assumes that
 `iri:has-mount` is a registered DOE-IRI relation whose profile permits the source
 resource to link to a resource representing a mount relationship. The HAL
 `profile` property describes the target representation; it does not define the
-semantics of `iri:has-mount` itself.
+semantics of `iri:has-mount` itself.  
+
+RFC 6906 explicitly describes profiles as a mechanism for signaling additional 
+semantics beyond those defined by the media type, and should be primarily treated
+as identifiers.  A client must recognize a profile from the URI alone. The URI may 
+be dereferenceable and provide human- or machine-readable documentation, and 
+RFC 6906 recommends making it dereferenceable when clients may encounter unknown 
+profiles, but the protocol does not require dereferencing.
 
 ```json
 {
@@ -500,6 +532,15 @@ is located, `type` and `profile` provide hints about the target representation,
 and `service-desc` identifies a machine-readable description of the service
 context. The governing OpenAPI description remains authoritative for operation
 invocation semantics.
+
+| Field           | Meaning                                                                     |
+| --------------- | --------------------------------------------------------------------------- |
+| `iri:has-mount` | **What relationship exists**: the current resource has a mount relationship.|
+| `href`          | **Where to get the target resource** representing that relationship.        |
+| `type`          | **Serialization/media type expected** when retrieving it: HAL JSON.         |
+| `profile`       | **The more-specific semantic contract that HAL resource follows**.          |
+| `title`         | A human-readable description for the relationship.                          |
+
 
 ## 11. References
 

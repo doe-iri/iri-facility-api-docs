@@ -74,4 +74,4 @@ Removing or changing `project_uri` requires a subsequent OpenAPI change.
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: hasProject*
+*DOE Integrated Research Infrastructure — Link Profile: has-project*

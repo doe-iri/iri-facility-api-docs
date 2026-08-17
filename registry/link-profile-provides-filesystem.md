@@ -53,15 +53,15 @@ No inverse-cardinality requirement is imposed by this link profile.
 
 ## 5. Static and Dynamic Semantics
 
-The relationship represents relatively stable storage topology. It describes which logical filesystem resources are provided by a storage system.
+The relationship represents a relatively stable storage topology. It describes which logical filesystem resources a storage system provides.
 
 The relationship MUST NOT be used to indicate whether the filesystem is currently healthy, reachable, writable, mounted, or available for new work. Such information is operational state and SHOULD be represented through the applicable resource-state mechanism.
 
 ## 6. Authorization and Visibility
 
-Authorization MAY affect whether the relationship or an individual target is visible to a requester.
+Authorization MAY affect whether a requester can see the relationship or an individual target.
 
-If the source storage system is visible but a target filesystem is not discoverable by the requester, the provider MAY omit that target from the relationship. The absence of a target MUST NOT be interpreted as proof that no additional filesystem resources exist.
+If the source storage system is visible but the requester cannot discover a target filesystem, the provider MAY omit that target from the relationship. The absence of a target MUST NOT be interpreted as proof that no additional filesystem resources exist.
 
 ## 7. HAL Representation
 
@@ -78,4 +78,4 @@ If the source storage system is visible but a target filesystem is not discovera
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: providesFilesystem*
+*DOE Integrated Research Infrastructure — Link Profile: provides-filesystem*

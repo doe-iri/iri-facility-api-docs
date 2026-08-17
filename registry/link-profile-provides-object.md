@@ -53,7 +53,7 @@ No inverse-cardinality requirement is imposed by this link profile.
 
 ## 5. Static and Dynamic Semantics
 
-The relationship describes relatively stable storage topology.
+The relationship describes a relatively stable storage topology.
 
 Endpoint reachability, request latency, utilization, capacity availability, and service health are dynamic characteristics and SHOULD be represented through the relevant state mechanisms rather than by treating `iri:provides-object` as an availability indicator.
 
@@ -77,4 +77,4 @@ Absence of the link or a particular target MUST NOT be interpreted as proof that
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: providesObject*
+*DOE Integrated Research Infrastructure — Link Profile: provides-object*

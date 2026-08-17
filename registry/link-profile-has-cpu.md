@@ -80,4 +80,4 @@ Absence of visible CPU targets MUST NOT be interpreted as evidence that the node
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: hasCPU*
+*DOE Integrated Research Infrastructure — Link Profile: has-cpu*

@@ -80,4 +80,4 @@ Absence of visible GPU targets MUST NOT be interpreted as evidence that no accel
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: hasGPU*
+*DOE Integrated Research Infrastructure — Link Profile: has-gpu*

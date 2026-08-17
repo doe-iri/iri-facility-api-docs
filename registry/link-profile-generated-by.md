@@ -77,4 +77,4 @@ Removing or changing `incident_uri` requires a subsequent OpenAPI change.
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: generatedBy*
+*DOE Integrated Research Infrastructure — Link Profile: generated-by*

@@ -80,4 +80,4 @@ Deprecating or removing `site_uri` requires a separate approved schema revision.
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: locatedAt*
+*DOE Integrated Research Infrastructure — Link Profile: located-at*

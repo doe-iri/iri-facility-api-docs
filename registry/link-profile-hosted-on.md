@@ -54,7 +54,7 @@ Service  -- iri:hosted-on -->  Compute System or Compute Node
 
 The use of `0..*` permits facilities to represent services without exposing hosting topology and to represent services hosted across multiple systems or nodes.
 
-No inverse-cardinality requirement is imposed by this link profile.
+This link profile imposes no inverse-cardinality requirement.
 
 ## 5. Static and Dynamic Semantics
 
@@ -97,4 +97,4 @@ A service hosted across multiple compute nodes can use an array of link objects:
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: hostedOn*
+*DOE Integrated Research Infrastructure — Link Profile: hosted-on*

@@ -78,4 +78,4 @@ Removing or changing `site_uris` requires a subsequent OpenAPI change.
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: hasSite*
+*DOE Integrated Research Infrastructure — Link Profile: has-site*

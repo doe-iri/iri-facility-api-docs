@@ -78,4 +78,4 @@ Removing or changing `resource_uris` requires a subsequent OpenAPI change.
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: hasResource*
+*DOE Integrated Research Infrastructure — Link Profile: has-resource*

@@ -87,4 +87,4 @@ The mount target is more precise than a direct filesystem target because it iden
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: accessesMount*
+*DOE Integrated Research Infrastructure — Link Profile: accesses-mount*

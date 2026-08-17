@@ -4,7 +4,7 @@ This document is the **registry of assigned DOE-IRI URN values**. The governing 
 
 The governing DOE-IRI URN specification defines the namespace syntax, matching and equivalence rules, registration process, extension rules, and conformance requirements. This registry records the values assigned under that specification, their semantic placement within the DOE-IRI hierarchy, and their current lifecycle status.
 
-This document defines the root of the DOE-IRI registry and delegates detailed subtrees to their corresponding registry documents where appropriate.
+This document defines the root of the DOE-IRI registry and, where appropriate, delegates detailed subtrees to their corresponding registry documents.
 
 ## 1. Registry Entry Metadata
 
@@ -14,7 +14,7 @@ The root DOE-IRI namespace is registered as follows:
 |---|---|
 | URN | `urn:doe-iri:` |
 | Short name | DOE-IRI Namespace |
-| Description | Root namespace for Uniform Resource Names defined and managed by the DOE Integrated Research Infrastructure (IRI) project. Registered resource types, controlled vocabulary values, allocation units, algorithm identifiers, extension authorities, and other DOE-IRI semantic identifiers are assigned beneath this namespace. |
+| Description | Root namespace for Uniform Resource Names defined and managed by the DOE Integrated Research Infrastructure (IRI) project. This namespace includes registered resource types, controlled vocabulary values, allocation units, algorithm identifiers, extension authorities, and other DOE-IRI semantic identifiers. |
 | Parent URN | None. This is the root of the DOE-IRI registered semantic hierarchy. |
 | Status | `active` |
 | Introduced | IRI v2.0 |
@@ -24,7 +24,7 @@ The root DOE-IRI namespace is registered as follows:
 | Reference | [A URN Namespace for the DoE IRI Project](../rfc/rfc-iri-urn-structure-and-registry.md) |
 | Legacy value | None |
 | Examples | `urn:doe-iri:resource:storage:filesystem`, `urn:doe-iri:resource:compute:system`, `urn:doe-iri:storage:tier:scratch` |
-| Notes | This entry represents the root DOE-IRI URN namespace rather than an independently assignable resource or attribute value. Except for administrative delegation segments, the hierarchy beneath the namespace expresses registered semantic classification. Physical topology, runtime relationships, and operational state are represented separately by the applicable IRI resource and link models. |
+| Notes | This entry represents the root DOE-IRI URN namespace rather than an independently assignable resource or attribute value. Except for administrative delegation segments, the hierarchy beneath the namespace expresses registered semantic classification. The applicable IRI resource and link models represent physical topology, runtime relationships, and operational state separately. |
 
 > **Note:** The governing namespace specification is authoritative for the exact lexical form of the namespace root and subordinate URNs. This registry uses `urn:doe-iri:` as the namespace prefix for assigned values.
 

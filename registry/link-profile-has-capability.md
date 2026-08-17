@@ -108,4 +108,4 @@ ProjectAllocation example:
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: hasCapability*
+*DOE Integrated Research Infrastructure — Link Profile: has-capability*

@@ -59,7 +59,7 @@ Live capacity, queue state, health, allocation balance, and schedulability are d
 
 ## 6. Authorization and Visibility
 
-Authorization MAY affect visibility of the operation affordance. A provider MAY omit `iri:submit-job` when the requester is not authorized to discover or use the entry point. Conversely, visibility of the link does not grant permission and does not guarantee that a submission will be accepted.
+Authorization MAY affect visibility of the operation affordance. A provider MAY omit `iri:submit-job` when the requester is not authorized to discover or use the entry point. Conversely, link visibility does not grant permission and does not guarantee that a submission will be accepted.
 
 ## 7. OpenAPI Contract
 
@@ -82,4 +82,4 @@ OpenAPI remains authoritative for the method, path parameter semantics, `JobSpec
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: submitJob*
+*DOE Integrated Research Infrastructure — Link Profile: submit-job*

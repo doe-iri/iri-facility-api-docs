@@ -74,4 +74,4 @@ Removing or changing `project_allocation_uri` requires a subsequent OpenAPI chan
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: hasProjectAllocation*
+*DOE Integrated Research Infrastructure — Link Profile: has-project-allocation*

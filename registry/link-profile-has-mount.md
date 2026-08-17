@@ -57,7 +57,7 @@ Each mount resource SHOULD describe one filesystem-to-consuming-system exposure.
 
 ## 5. Static and Dynamic Semantics
 
-The mount target represents relatively stable exposure configuration.
+The mount target represents a relatively stable exposure configuration.
 
 The existence of `iri:has-mount` MUST NOT be interpreted as proof that the mount is currently active, reachable, healthy, or usable. Current mount status belongs in the mount resource's state representation.
 
@@ -84,4 +84,4 @@ The absence of visible mount targets MUST NOT be interpreted as proof that the f
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: hasMount*
+*DOE Integrated Research Infrastructure — Link Profile: has-mount*
