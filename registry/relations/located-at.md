@@ -1,12 +1,26 @@
-# Link Profile: `iri:located-at`
+# IRI Link Relation: `located-at`
+
+**Relation URI:** `https://iri.science/rels/located-at`<br>
+**CURIE:** `iri:located-at`<br>
+**Status:** Provisional<br>
+**Version:** 1.0.0<br>
+**Source representation type:** Any DOE-IRI `Resource` representation.<br>
+**Source resource type:** Any registered DOE-IRI resource type (`urn:doe-iri:resource:*`)<br>
+**Target representation type:** Facility API `Site` representation identified by the source Resource's `site_uri`.
 
 This document defines the `iri:located-at` relationship used by DOE-IRI Resource representations.
+
+The canonical relation URI is `https://iri.science/rels/located-at`. With the
+canonical IRI CURIE template `https://iri.science/rels/{rel}`, `iri:located-at`
+expands to that URI. The relation URI identifies the link-relation semantics
+and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:located-at` |
+| Relation URI | `https://iri.science/rels/located-at` |
 | Status | `provisional` |
 | Semantic meaning | Indicates the relatively stable physical and administrative Site associated with the source Resource. |
 | Source representation type | Any DOE-IRI `Resource` representation. |
@@ -80,4 +94,4 @@ Deprecating or removing `site_uri` requires a separate approved schema revision.
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: located-at*
+*DOE Integrated Research Infrastructure — Link Relation: located-at*

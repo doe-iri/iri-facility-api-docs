@@ -1,12 +1,28 @@
-# Link Profile: `iri:attached-to`
+# IRI Link Relation: `attached-to`
+
+**Relation URI:** `https://iri.science/rels/attached-to`<br>
+**CURIE:** `iri:attached-to`<br>
+**Status:** Draft<br>
+**Version:** 1.0.0<br>
+**Source representation type:** `urn:doe-iri:resource:storage:block`<br>
+**Target representation type:** `urn:doe-iri:resource:compute:system` or `urn:doe-iri:resource:compute:node`<br>
+**Target representation profile:** `https://iri.science/profiles/compute/system` or `https://iri.science/profiles/compute/node`
+
 
 This document defines the `iri:attached-to` relationship used by the DOE-IRI storage resource model.
+
+The canonical relation URI is `https://iri.science/rels/attached-to`. With the
+canonical IRI CURIE template `https://iri.science/rels/{rel}`,
+`iri:attached-to` expands to that URI. The relation URI identifies the
+semantics of this link relation; it is distinct from any RFC 6906 profile URI
+associated with a target representation.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:attached-to` |
+| Relation URI | `https://iri.science/rels/attached-to` |
 | Semantic meaning | Indicates that a logical block-storage resource is configured to be presented or attached to the identified consuming compute resource. |
 | Source representation type | `urn:doe-iri:resource:storage:block` |
 | Target representation type | `urn:doe-iri:resource:compute:system` or `urn:doe-iri:resource:compute:node` |
@@ -82,7 +98,7 @@ A shared access mode indicates that multiple attachments are supported; it does 
 
 ## 5. Static and Dynamic Semantics
 
-This link profile defines `iri:attached-to` as configured or intended presentation topology.
+This link-relation definition defines `iri:attached-to` as configured or intended presentation topology.
 
 The link MUST NOT be interpreted as a live assertion that the block device is currently attached, logged in, mapped, healthy, or accessible.
 
@@ -123,4 +139,4 @@ Shared attachment example:
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: attached-to*
+*DOE Integrated Research Infrastructure — Link Relation: attached-to*

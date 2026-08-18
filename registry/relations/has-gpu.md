@@ -1,12 +1,27 @@
-# Link Profile: `iri:has-gpu`
+# IRI Link Relation: `has-gpu`
+
+**Relation URI:** `https://iri.science/rels/has-gpu`\
+**CURIE:** `iri:has-gpu`\
+**Status:** Draft\
+**Version:** 1.0.0<br>
+**Source representation type:** `urn:doe-iri:resource:compute:node`<br>
+**Source resource type:** `urn:doe-iri:resource:compute:node`<br>
+**Target representation type:** `urn:doe-iri:resource:compute:gpu`<br>
+**Target resource type:** `urn:doe-iri:resource:compute:gpu`
 
 This document defines the `iri:has-gpu` relationship used by the DOE-IRI compute resource model.
+
+The canonical relation URI is `https://iri.science/rels/has-gpu`. With the
+canonical IRI CURIE template `https://iri.science/rels/{rel}`, `iri:has-gpu`
+expands to that URI. The relation URI identifies the link-relation semantics
+and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:has-gpu` |
+| Relation URI | `https://iri.science/rels/has-gpu` |
 | Semantic meaning | Indicates that the compute node contains, provides, or is associated with the identified GPU resource. |
 | Source representation type | `urn:doe-iri:resource:compute:node` |
 | Target representation type | `urn:doe-iri:resource:compute:gpu` |
@@ -80,4 +95,4 @@ Absence of visible GPU targets MUST NOT be interpreted as evidence that no accel
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: has-gpu*
+*DOE Integrated Research Infrastructure — Link Relation: has-gpu*

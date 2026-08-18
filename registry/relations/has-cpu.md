@@ -1,12 +1,27 @@
-# Link Profile: `iri:has-cpu`
+# IRI Link Relation: `has-cpu`
+
+**Relation URI:** `https://iri.science/rels/has-cpu`\
+**CURIE:** `iri:has-cpu`\
+**Status:** Draft\
+**Version:** 1.0.0<br>
+**Source representation type:** `urn:doe-iri:resource:compute:node`<br>
+**Source resource type:** `urn:doe-iri:resource:compute:node`<br>
+**Target representation type:** `urn:doe-iri:resource:compute:cpu`<br>
+**Target resource type:** `urn:doe-iri:resource:compute:cpu`
 
 This document defines the `iri:has-cpu` relationship used by the DOE-IRI compute resource model.
+
+The canonical relation URI is `https://iri.science/rels/has-cpu`. With the
+canonical IRI CURIE template `https://iri.science/rels/{rel}`, `iri:has-cpu`
+expands to that URI. The relation URI identifies the link-relation semantics
+and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:has-cpu` |
+| Relation URI | `https://iri.science/rels/has-cpu` |
 | Semantic meaning | Indicates that the compute node contains, provides, or is associated with the identified CPU resource. |
 | Source representation type | `urn:doe-iri:resource:compute:node` |
 | Target representation type | `urn:doe-iri:resource:compute:cpu` |
@@ -80,4 +95,4 @@ Absence of visible CPU targets MUST NOT be interpreted as evidence that the node
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: has-cpu*
+*DOE Integrated Research Infrastructure — Link Relation: has-cpu*

@@ -4,7 +4,7 @@
 
 **Goal:** Replace every registered multiword DOE-IRI custom HAL relation identifier with its lowercase kebab-case spelling across the registry, RFCs, OpenAPI descriptions, examples, and active supporting documentation.
 
-**Architecture:** The Link Profile Index and individual profiles are migrated first as the authoritative registry layer. RFC, OpenAPI-description, example, context, and historical design consumers then adopt those exact names. A final cross-document validation proves lexical consistency without changing relation semantics or unrelated identifiers.
+**Architecture:** The Link Relation Index and individual definitions are migrated first as the authoritative registry layer. RFC, OpenAPI-description, example, context, and historical design consumers then adopt those exact names. A final cross-document validation proves lexical consistency without changing relation semantics or unrelated identifiers.
 
 **Tech Stack:** Markdown, JSON, OpenAPI YAML, Ruby validation scripts, ripgrep, Git diff checks.
 
@@ -17,7 +17,7 @@
 - Do not add aliases, deprecated duplicate relations, or simultaneous camelCase/kebab-case registrations.
 - Do not change resource or controlled-value URNs, JSON property names, API paths, OpenAPI `operationId` values, standard Web Linking relations, or programming-language symbols merely because they are camelCase.
 - Do not change relationship semantics, direction, source or target type, cardinality, lifecycle, stability, target classification, authorization, or visibility.
-- Do not rename link-profile files; all existing profile filenames already conform.
+- Do not rename relation identifiers; all existing relation filenames already conform.
 - Preserve the current dirty working tree in place. Do not reset, restore from `HEAD`, stage, commit, or overwrite unrelated edits.
 - The approved migration design and this plan may retain former identifiers only in explicit former-to-canonical migration tables.
 - Ignore historical runtime reports beneath `.superpowers/`; do not edit another plan's SDD workspace.
@@ -28,8 +28,8 @@
 
 **Files:**
 
-- Modify: `registry/link-profile-root.md`
-- Modify: all 22 existing `registry/link-profile-*.md` relation profiles
+- Modify: `registry/relations/README.md`
+- Modify: all 22 existing `registry/relations/*.md` relation profiles
 - Modify: `registry/README.md`
 - Modify: `registry/examples/hpc-facility-resources.json`
 - Modify: `registry/urn-registry-type-storage.md`
@@ -158,7 +158,7 @@ a hyphen (`-`). DOE-IRI custom relation identifiers MUST NOT use camelCase,
 PascalCase, underscores, or whitespace.
 ```
 
-Immediately clarify that the rule does not apply to JSON property names, DOE-IRI URNs, OpenAPI `operationId` values, API paths, programming-language symbols, or standard registered Web Linking relations. Do not duplicate the rule in registry pages or individual profiles.
+Immediately clarify that the rule does not apply to JSON property names, DOE-IRI URNs, OpenAPI `operationId` values, API paths, programming-language symbols, or standard registered Web Linking relations. Do not duplicate the rule in registry pages or individual definitions.
 
 - [x] **Step 4: Validate RFC, OpenAPI, and consumer documents**
 
@@ -199,7 +199,7 @@ Run the uppercase heuristic repository-wide, excluding `.git/` and ignored `.sup
 
 - [x] **Step 2: Validate the complete registered relation set**
 
-Verify that `registry/link-profile-root.md` contains exactly these canonical relations and no others:
+Verify that `registry/relations/README.md` contains exactly these canonical relations and no others:
 
 ```text
 iri:accesses-mount

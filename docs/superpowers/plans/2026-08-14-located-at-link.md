@@ -4,7 +4,7 @@
 
 **Goal:** Register `iri:located-at` and add it consistently to DOE-IRI registry indexes, the common Resource contract, and complete Resource examples.
 
-**Architecture:** Add one generic provisional Resource-to-Site HAL link profile. Preserve required `site_uri` as the compatibility field, require equality whenever the new singular link is present, and index the relation across the Storage, Compute, and Service domains without changing domain-specific topology semantics.
+**Architecture:** Add one generic provisional Resource-to-Site HAL link-relation definition. Preserve required `site_uri` as the compatibility field, require equality whenever the new singular link is present, and index the relation across the Storage, Compute, and Service domains without changing domain-specific topology semantics.
 
 **Tech Stack:** Markdown registry documents, OpenAPI-compatible YAML, JSON/HAL examples, and shell-based consistency checks.
 
@@ -19,7 +19,7 @@
 - The target is a Site API representation, not a DOE-IRI typed `Resource`, state object, operation entry point, or relationship resource.
 - Keep `iri:located-at` distinct from service-to-compute `iri:hosted-on`.
 - Do not add an inverse relation, deprecate `site_uri`, change the Site schema, or invent authorization-filtered absence that contradicts visible `site_uri`.
-- Preserve unrelated user changes and follow the repository's existing link-profile and index formats.
+- Preserve unrelated user changes and follow the repository's existing link-relation-definition and index formats.
 - Use `registry_editor` for implementation and `registry_maintainer` for deterministic validation.
 
 ---
@@ -27,7 +27,7 @@
 ### Task 1: Register the Relation and Update Resource Examples
 
 **Files:**
-- Create: `registry/link-profile-located-at.md`
+- Create: `registry/relations/located-at.md`
 - Modify: `registry/README.md`
 - Modify: `registry/urn-registry-type-storage.md`
 - Modify: `registry/urn-registry-type-storage-taxonomy.md`
@@ -44,20 +44,20 @@
 
 **Interfaces:**
 - Consumes: Required and singular `Resource.site_uri`, Site `self_uri`, and the approved design specification.
-- Produces: A discoverable link profile and examples whose `iri:located-at.href` values equal their enclosing Resource's `site_uri`.
+- Produces: A discoverable link-relation definition and examples whose `iri:located-at.href` values equal their enclosing Resource's `site_uri`.
 
 - [ ] **Step 1: Run the failing contract checks**
 
 ```bash
-test -e registry/link-profile-located-at.md
+test -e registry/relations/located-at.md
 jq -e 'all(.[]; ._links["iri:located-at"].href == .site_uri)' registry/examples/hpc-facility-resources.json
 ```
 
 Expected: both checks fail because the profile and links do not yet exist.
 
-- [ ] **Step 2: Create the complete link profile**
+- [ ] **Step 2: Create the complete link-relation definition**
 
-Follow the established link-profile metadata format and include the exact
+Follow the established link-relation metadata format and include the exact
 source, target, cardinality, stability, authorization, classification,
 compatibility, non-implication, and singular HAL example decisions from the
 design specification.
@@ -66,7 +66,7 @@ design specification.
 
 Add a generic/core relationship entry to `registry/README.md`, plus compatible
 rows in the Storage, Compute, and Service registry and taxonomy relationship
-tables. Link every row to `link-profile-located-at.md` and preserve each table's
+tables. Link every row to `relations/located-at.md` and preserve each table's
 existing column format.
 
 - [ ] **Step 4: Document the additive common-Resource contract**
@@ -93,7 +93,7 @@ relation semantics, compatibility rule, and distinction from `iri:hosted-on`.
 - [ ] **Step 7: Run focused verification**
 
 ```bash
-test -e registry/link-profile-located-at.md
+test -e registry/relations/located-at.md
 jq -e 'length == 8 and all(.[]; ._links["iri:located-at"].href == .site_uri)' registry/examples/hpc-facility-resources.json
 cmp <(sed -n '998,1076p' specification-v2/openapi/production/_components.yaml) <(sed -n '998,1076p' specification-v2/openapi/all_spec_v2.yaml)
 git diff --check

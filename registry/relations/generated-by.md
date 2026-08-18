@@ -1,12 +1,26 @@
-# Link Profile: `iri:generated-by`
+# IRI Link Relation: `generated-by`
+
+**Relation URI:** `https://iri.science/rels/generated-by`<br>
+**CURIE:** `iri:generated-by`<br>
+**Status:** Provisional<br>
+**Version:** 1.0.0<br>
+**Source representation type:** Facility API `Event` representation.<br>
+**Target representation type:** Facility API `Incident` representation identified by the source Event's `incident_uri`.
+**Target representation profile:** `https://iri.science/profiles/storage/mount`
 
 This document defines the `iri:generated-by` relationship used by Facility API Event representations.
+
+The canonical relation URI is `https://iri.science/rels/generated-by`. With
+the canonical IRI CURIE template `https://iri.science/rels/{rel}`,
+`iri:generated-by` expands to that URI. The relation URI identifies the
+link-relation semantics and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:generated-by` |
+| Relation URI | `https://iri.science/rels/generated-by` |
 | Status | `provisional` |
 | Semantic meaning | Identifies the Incident with which the source Event is associated. |
 | Source representation type | Facility API `Event` representation. |
@@ -77,4 +91,4 @@ Removing or changing `incident_uri` requires a subsequent OpenAPI change.
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: generated-by*
+*DOE Integrated Research Infrastructure — Link Relation: generated-by*

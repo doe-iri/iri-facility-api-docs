@@ -1,0 +1,41 @@
+# DOE-IRI Link Relation Index
+
+This page is the authoritative navigation index for every currently defined
+DOE-IRI link relation. It groups the registered relationships by domain and
+links to the definition that specifies each relationship's semantics.
+
+The linked definition remains authoritative for the relationship's full
+stability semantics, authorization and visibility rules, target
+classification, volatility, and HAL representation details. This index is
+intended for navigation and summary only.
+
+| Domain | Relationship | Semantic meaning | Source representation | Target representation | Cardinality | Definition |
+|---|---|---|---|---|---|---|
+| Core | `iri:located-at` | Indicates the relatively stable physical and administrative Site associated with the source Resource. | Any DOE-IRI `Resource` representation. | Facility API `Site` representation identified by the source Resource's `site_uri`. | Exactly one semantic target under the current required, singular `site_uri` contract. | [`iri:located-at`](./located-at.md) |
+| Status | `iri:generated-by` | Identifies the Incident with which the source Event is associated. | Facility API `Event` representation. | Facility API `Incident` representation identified by the source Event's `incident_uri`. | `0..1` target from an Event representation. | [`iri:generated-by`](./generated-by.md) |
+| Status | `iri:has-event` | Identifies Events recorded as part of the source Incident. | Facility API `Incident` representation. | Facility API `Event` representation identified by the source Incident's `event_uris`. | `0..*` targets from an Incident representation. | [`iri:has-event`](./has-event.md) |
+| Status | `iri:impacts` | Identifies the DOE-IRI Resource to which the source Event applies. | Facility API `Event` representation. | DOE-IRI `Resource` representation identified by the source Event's `resource_uri`. | Exactly `1` target under the current required `resource_uri` contract. | [`iri:impacts`](./impacts.md) |
+| Status | `iri:may-impact` | Identifies DOE-IRI Resources that may be affected by the source Incident. | Facility API `Incident` representation. | DOE-IRI `Resource` representation identified by the source Incident's `resource_uris`. | `0..*` targets from an Incident representation. | [`iri:may-impact`](./may-impact.md) |
+| Facility | `iri:has-resource` | Identifies DOE-IRI Resources hosted at the source Site. | Facility API `Site` representation. | DOE-IRI `Resource` representation identified by the source Site's `resource_uris`. | `0..*` targets from a Site representation. | [`iri:has-resource`](./has-resource.md) |
+| Facility | `iri:has-site` | Identifies Sites associated with the source Facility. | Facility API `Facility` representation. | Facility API `Site` representation identified by the source Facility's `site_uris`. | `0..*` targets from a Facility representation. | [`iri:has-site`](./has-site.md) |
+| Allocation | `iri:has-project` | Identifies the Project to which the source ProjectAllocation belongs. | Facility API `ProjectAllocation` representation. | Facility API `Project` representation identified by the source ProjectAllocation's `project_uri`. | Exactly `1` target under the current required `project_uri` contract. | [`iri:has-project`](./has-project.md) |
+| Allocation | `iri:has-capability` | Identifies a Capability associated with the source; a Resource provides it and a ProjectAllocation applies to it. | DOE-IRI `Resource` representation or Facility API `ProjectAllocation` representation. | Facility API `Capability` representation identified by `capability_uris` on a Resource or `capability_uri` on a ProjectAllocation. | Resource: `0..*`; ProjectAllocation: exactly `1`. | [`iri:has-capability`](./has-capability.md) |
+| Allocation | `iri:has-project-allocation` | Identifies the ProjectAllocation of which the source UserAllocation is a part. | Facility API `UserAllocation` representation. | Facility API `ProjectAllocation` representation identified by the source UserAllocation's `project_allocation_uri`. | Exactly `1` target under the current required `project_allocation_uri` contract. | [`iri:has-project-allocation`](./has-project-allocation.md) |
+| Storage | `iri:provides-filesystem` | Indicates that a storage system provides the identified logical filesystem resource. | `urn:doe-iri:resource:storage:system` | `urn:doe-iri:resource:storage:filesystem` | `0..*` targets from a storage-system resource. | [`iri:provides-filesystem`](./provides-filesystem.md) |
+| Storage | `iri:provides-block` | Indicates that a storage system provides the identified logical block-storage resource. | `urn:doe-iri:resource:storage:system` | `urn:doe-iri:resource:storage:block` | `0..*` targets from a storage-system resource. | [`iri:provides-block`](./provides-block.md) |
+| Storage | `iri:provides-object` | Indicates that a storage system provides the identified logical object-storage resource. | `urn:doe-iri:resource:storage:system` | `urn:doe-iri:resource:storage:object` | `0..*` targets from a storage-system resource. | [`iri:provides-object`](./provides-object.md) |
+| Storage | `iri:has-mount` | Indicates that a filesystem is exposed through the identified mount relationship resource. | `urn:doe-iri:resource:storage:filesystem` | `urn:doe-iri:resource:storage:mount` | `0..*` targets from a filesystem resource. | [`iri:has-mount`](./has-mount.md) |
+| Storage | `iri:mounted-on` | Identifies the consuming compute system on which the filesystem represented by the mount resource is exposed. | `urn:doe-iri:resource:storage:mount` | `urn:doe-iri:resource:compute:system` | Exactly `1` target for a valid mount resource. | [`iri:mounted-on`](./mounted-on.md) |
+| Storage | `iri:attached-to` | Indicates that a logical block-storage resource is configured to be presented or attached to the identified consuming compute resource. | `urn:doe-iri:resource:storage:block` | `urn:doe-iri:resource:compute:system` or `urn:doe-iri:resource:compute:node` | `0..1` for an `exclusive` block resource; `0..*` for a `shared` block resource. | [`iri:attached-to`](./attached-to.md) |
+| Compute | `iri:has-node` | Indicates that the identified compute node participates in or is managed as part of the source compute system. | `urn:doe-iri:resource:compute:system` | `urn:doe-iri:resource:compute:node` | `0..*` targets from a compute-system resource. | [`iri:has-node`](./has-node.md) |
+| Compute | `iri:has-cpu` | Indicates that the compute node contains, provides, or is associated with the identified CPU resource. | `urn:doe-iri:resource:compute:node` | `urn:doe-iri:resource:compute:cpu` | `0..*` targets from a compute-node resource. | [`iri:has-cpu`](./has-cpu.md) |
+| Compute | `iri:has-gpu` | Indicates that the compute node contains, provides, or is associated with the identified GPU resource. | `urn:doe-iri:resource:compute:node` | `urn:doe-iri:resource:compute:gpu` | `0..*` targets from a compute-node resource. | [`iri:has-gpu`](./has-gpu.md) |
+| Compute | `iri:submit-job` | Identifies the applicable job-submission operation entry point for the source compute system. | `urn:doe-iri:resource:compute:system` | Resource-specific job-submission operation entry point; current operation: `POST /api/v2/compute/job/{resource_id}`, `operationId: launchJob`. | `0..1` target from a compute-system resource. | [`iri:submit-job`](./submit-job.md) |
+| Service | `iri:hosted-on` | Indicates that the identified compute system or compute node provides hosting infrastructure for the source service. | `urn:doe-iri:resource:service:dtn` or `urn:doe-iri:resource:service:inference` | `urn:doe-iri:resource:compute:system` or `urn:doe-iri:resource:compute:node` | `0..*` targets from a service resource. | [`iri:hosted-on`](./hosted-on.md) |
+| Service | `iri:accesses-mount` | Indicates that the source DTN service is configured to access a filesystem through the identified mount relationship resource for transfer operations. | `urn:doe-iri:resource:service:dtn` | `urn:doe-iri:resource:storage:mount` | `0..*` targets from a DTN service resource. | [`iri:accesses-mount`](./accesses-mount.md) |
+
+[Back to the DOE-IRI Registry README](./README.md)
+
+---
+
+*DOE Integrated Research Infrastructure — Link Relation Index*

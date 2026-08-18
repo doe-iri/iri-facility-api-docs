@@ -1,12 +1,26 @@
-# Link Profile: `iri:has-capability`
+# IRI Link Relation: `has-capability`
+
+**Relation URI:** `https://iri.science/rels/has-capability`\
+**CURIE:** `iri:has-capability`\
+**Status:** Provisional\
+**Version:** 1.0.0<br>
+**Source representation type:** DOE-IRI `Resource` representation or Facility API `ProjectAllocation` representation.<br>
+**Source resource type:** Any registered DOE-IRI resource type (`urn:doe-iri:resource:*`) when the source is a Resource; not applicable when the source is a ProjectAllocation.<br>
+**Target representation type:** Facility API `Capability` representation identified by `capability_uris` on a Resource or `capability_uri` on a ProjectAllocation.
 
 This document defines the `iri:has-capability` relationship used by Facility API Resource and ProjectAllocation representations.
+
+The canonical relation URI is `https://iri.science/rels/has-capability`. With
+the canonical IRI CURIE template `https://iri.science/rels/{rel}`,
+`iri:has-capability` expands to that URI. The relation URI identifies the
+link-relation semantics and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:has-capability` |
+| Relation URI | `https://iri.science/rels/has-capability` |
 | Status | `provisional` |
 | Semantic meaning | Identifies a Capability associated with the source. For a Resource, the Capability is provided by that Resource; for a ProjectAllocation, it is the Capability to which the allocation applies. |
 | Source representation type | DOE-IRI `Resource` representation or Facility API `ProjectAllocation` representation. |
@@ -108,4 +122,4 @@ ProjectAllocation example:
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: has-capability*
+*DOE Integrated Research Infrastructure — Link Relation: has-capability*

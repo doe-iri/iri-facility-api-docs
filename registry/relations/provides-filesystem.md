@@ -1,12 +1,27 @@
-# Link Profile: `iri:provides-filesystem`
+# IRI Link Relation: `provides-filesystem`
+
+**Relation URI:** `https://iri.science/rels/provides-filesystem`<br>
+**CURIE:** `iri:provides-filesystem`<br>
+**Status:** Draft<br>
+**Version:** 1.0.0<br>
+**Source representation type:** `urn:doe-iri:resource:storage:system`<br>
+**Source resource type:** `urn:doe-iri:resource:storage:system`<br>
+**Target representation type:** `urn:doe-iri:resource:storage:filesystem`<br>
+**Target resource type:** `urn:doe-iri:resource:storage:filesystem`
 
 This document defines the `iri:provides-filesystem` relationship used by the DOE-IRI storage resource model.
+
+The canonical relation URI is `https://iri.science/rels/provides-filesystem`.
+With the canonical IRI CURIE template `https://iri.science/rels/{rel}`,
+`iri:provides-filesystem` expands to that URI. The relation URI identifies the
+link-relation semantics and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:provides-filesystem` |
+| Relation URI | `https://iri.science/rels/provides-filesystem` |
 | Semantic meaning | Indicates that a storage system provides the identified logical filesystem resource. |
 | Source representation type | `urn:doe-iri:resource:storage:system` |
 | Target representation type | `urn:doe-iri:resource:storage:filesystem` |
@@ -49,7 +64,7 @@ Storage System  -- iri:provides-filesystem -->  Filesystem
       1                          0..*
 ```
 
-No inverse-cardinality requirement is imposed by this link profile.
+No inverse-cardinality requirement is imposed by this link-relation definition.
 
 ## 5. Static and Dynamic Semantics
 
@@ -78,4 +93,4 @@ If the source storage system is visible but the requester cannot discover a targ
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: provides-filesystem*
+*DOE Integrated Research Infrastructure — Link Relation: provides-filesystem*

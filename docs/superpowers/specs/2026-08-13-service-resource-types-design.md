@@ -261,7 +261,7 @@ No inverse relation or direct DTN-to-filesystem relation will be registered init
 
 ### 6.3. HAL examples
 
-Each link profile will include singular and plural HAL representations as applicable. Domain examples will show:
+Each link-relation definition will include singular and plural HAL representations as applicable. Domain examples will show:
 
 ```text
 DTN Service
@@ -289,8 +289,8 @@ registry/urn-registry-type-service.md
 registry/urn-registry-type-service-taxonomy.md
 registry/urn-registry-attributes-service-dtn.md
 registry/urn-registry-attributes-service-inference.md
-registry/link-profile-hosted-on.md
-registry/link-profile-accesses-mount.md
+registry/relations/hosted-on.md
+registry/relations/accesses-mount.md
 ```
 
 The inference attribute document will contain a clearly separate companion operational-state section and schema. No new registry-wide state-profile filename convention will be introduced by this change.
@@ -347,7 +347,7 @@ Before completion:
 2. Search for stale uses of `urn:doe-iri:service:*` as resource types and reconcile all relevant occurrences.
 3. Verify that resource-type trees and tables contain the same entries.
 4. Verify that service attribute profiles and the consolidated service taxonomy contain the same controlled values.
-5. Verify that service, compute, and storage relationship indexes agree with the two link profiles.
+5. Verify that service, compute, and storage relationship indexes agree with the two link-relation definitions.
 6. Validate schema fragments to the extent supported by repository tooling and inspect all examples for schema consistency.
 7. Confirm that `served_models` and `active_models` remain in definition and state respectively.
 8. Review the complete git diff and confirm that pre-existing user changes were neither reverted nor accidentally included in an implementation commit.

@@ -78,7 +78,7 @@ contract is required and singular.
 
 ## 5. Scope
 
-This change includes the link profile, registry navigation and relationship
+This change includes the link-relation definition, registry navigation and relationship
 indexes, common Resource documentation, and complete Resource examples. It does
 not add an inverse Site-to-Resource link relation, deprecate `site_uri`, alter
 the Site schema, or change the meaning of `iri:hosted-on`.

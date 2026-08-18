@@ -26,9 +26,9 @@ not apply to JSON property names, DOE-IRI URNs, OpenAPI `operationId` values,
 API paths, programming-language symbols, or standard registered Web Linking
 relations.
 
-The Link Profile Index records the assigned names and links to the profiles
+The Link Relation Index records the assigned names and links to the profiles
 that define their full semantics. The naming rule is not duplicated in the
-index or individual profiles.
+index or individual definitions.
 
 ## 3. Registered Relation Mapping
 
@@ -70,8 +70,8 @@ The nine conversions discovered beyond the request's minimum list are
 The migration updates every occurrence where a string denotes a DOE-IRI HAL
 relation, including:
 
-- the DOE-IRI Link Profile Index;
-- all 22 individual link profiles;
+- the DOE-IRI Link Relation Index;
+- all 22 individual link-relation definitions;
 - registry README navigation, type registries, taxonomy indexes, attribute
   profiles, diagrams, and the example HPC facility document;
 - `rfc/rfc-hal-links.md` and `rfc/rfc-type-specific-attributes.md`;
@@ -80,7 +80,7 @@ relation, including:
 - architectural context and active design/implementation-plan documents.
 
 All existing individual profile filenames already use lowercase kebab-case,
-including `link-profile-has-cpu.md` and `link-profile-has-gpu.md`. No file is
+including `relations/has-cpu.md` and `relations/has-gpu.md`. No file is
 renamed, and relative profile paths remain stable.
 
 The illustrative CURIE template remains unchanged. A relation local name such
@@ -138,7 +138,7 @@ Completion requires all of the following:
    active repository occurrences.
 2. Run the uppercase relation heuristic and inspect every match; active
    registry/specification content must contain no camelCase `iri:*` name.
-3. Confirm the Link Profile Index still contains exactly 22 custom relations:
+3. Confirm the Link Relation Index still contains exactly 22 custom relations:
    21 lowercase kebab-case multiword names and `iri:impacts`.
 4. Confirm every index link resolves and all 22 existing profile filenames
    remain present.

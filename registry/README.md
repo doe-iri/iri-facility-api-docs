@@ -98,7 +98,7 @@ DOE-IRI Registry
 │   ├── Compute
 │   └── Service
 │
-└── Link Profiles
+└── Link Relation Definitions
     ├── Core resource relationships
     ├── Storage relationships
     ├── Compute relationships
@@ -150,16 +150,16 @@ The Storage registry defines the resource types used to represent storage infras
 | Block Storage | [urn-registry-attributes-storage-block.md](urn-registry-attributes-storage-block.md) |
 | Object Storage | [urn-registry-attributes-storage-object.md](urn-registry-attributes-storage-object.md) |
 
-**Storage relationship profiles**
+**Storage relationship definitions**
 
-| Relationship | Source | Target | Link Profile |
+| Relationship | Source | Target | Definition |
 |---|---|---|---|
-| `iri:provides-filesystem` | Storage System | Filesystem | [link-profile-provides-filesystem.md](link-profile-provides-filesystem.md) |
-| `iri:provides-block` | Storage System | Block Storage | [link-profile-provides-block.md](link-profile-provides-block.md) |
-| `iri:provides-object` | Storage System | Object Storage | [link-profile-provides-object.md](link-profile-provides-object.md) |
-| `iri:has-mount` | Filesystem | Filesystem Mount | [link-profile-has-mount.md](link-profile-has-mount.md) |
-| `iri:mounted-on` | Filesystem Mount | Compute System | [link-profile-mounted-on.md](link-profile-mounted-on.md) |
-| `iri:attached-to` | Block Storage | Compute System or Compute Node | [link-profile-attached-to.md](link-profile-attached-to.md) |
+| `iri:provides-filesystem` | Storage System | Filesystem | [relations/provides-filesystem.md](relations/provides-filesystem.md) |
+| `iri:provides-block` | Storage System | Block Storage | [relations/provides-block.md](relations/provides-block.md) |
+| `iri:provides-object` | Storage System | Object Storage | [relations/provides-object.md](relations/provides-object.md) |
+| `iri:has-mount` | Filesystem | Filesystem Mount | [relations/has-mount.md](relations/has-mount.md) |
+| `iri:mounted-on` | Filesystem Mount | Compute System | [relations/mounted-on.md](relations/mounted-on.md) |
+| `iri:attached-to` | Block Storage | Compute System or Compute Node | [relations/attached-to.md](relations/attached-to.md) |
 
 ### 5.2. Compute
 
@@ -181,13 +181,13 @@ The Compute registry defines the resource types used to represent managed comput
 | CPU | [urn-registry-attributes-compute-cpu.md](urn-registry-attributes-compute-cpu.md) |
 | GPU | [urn-registry-attributes-compute-gpu.md](urn-registry-attributes-compute-gpu.md) |
 
-**Compute relationship profiles**
+**Compute relationship definitions**
 
-| Relationship | Source | Target | Link Profile |
+| Relationship | Source | Target | Definition |
 |---|---|---|---|
-| `iri:has-node` | Compute System | Compute Node | [link-profile-has-node.md](link-profile-has-node.md) |
-| `iri:has-cpu` | Compute Node | CPU | [link-profile-has-cpu.md](link-profile-has-cpu.md) |
-| `iri:has-gpu` | Compute Node | GPU | [link-profile-has-gpu.md](link-profile-has-gpu.md) |
+| `iri:has-node` | Compute System | Compute Node | [relations/has-node.md](relations/has-node.md) |
+| `iri:has-cpu` | Compute Node | CPU | [relations/has-cpu.md](relations/has-cpu.md) |
+| `iri:has-gpu` | Compute Node | GPU | [relations/has-gpu.md](relations/has-gpu.md) |
 
 ### 5.3. Service
 
@@ -207,12 +207,12 @@ The Service registry defines consumable data-transfer and model-invocation servi
 | DTN Service | [urn-registry-attributes-service-dtn.md](urn-registry-attributes-service-dtn.md) |
 | Inference Service | [urn-registry-attributes-service-inference.md](urn-registry-attributes-service-inference.md) |
 
-**Service relationship profiles**
+**Service relationship definitions**
 
-| Relationship | Source | Target | Link Profile |
+| Relationship | Source | Target | Definition |
 |---|---|---|---|
-| `iri:hosted-on` | DTN Service or Inference Service | Compute System or Compute Node | [link-profile-hosted-on.md](link-profile-hosted-on.md) |
-| `iri:accesses-mount` | DTN Service | Filesystem Mount | [link-profile-accesses-mount.md](link-profile-accesses-mount.md) |
+| `iri:hosted-on` | DTN Service or Inference Service | Compute System or Compute Node | [relations/hosted-on.md](relations/hosted-on.md) |
+| `iri:accesses-mount` | DTN Service | Filesystem Mount | [relations/accesses-mount.md](relations/accesses-mount.md) |
 
 ### 5.4. Additional Resource Domains
 
@@ -226,7 +226,9 @@ urn:doe-iri:resource:system
 urn:doe-iri:resource:website
 ```
 
-When a domain requires subtype refinement, controlled attributes, or relationship profiles, it SHOULD follow the same documentation structure used by Storage and Compute.
+When a domain requires subtype refinement, controlled attributes, or
+relationship definitions, it SHOULD follow the same documentation structure
+used by Storage and Compute.
 
 ## 6. Controlled Attribute Vocabularies
 
@@ -278,11 +280,14 @@ urn:doe-iri:service:...
 
 Each resource's attribute profile defines which controlled vocabularies apply and whether an attribute is singular, multi-valued, optional, or required.
 
-## 7. Link Profiles
+## 7. Link Relation Definitions
 
-Link profiles define the semantics of registered HAL relationships from IRI Resource representations to applicable API representations.
+Link-relation definitions define the semantics of registered HAL relationships
+from IRI Resource representations to applicable API representations.
+The [DOE-IRI Link Relation Index](relations/README.md) is the authoritative
+navigation entry point for registered `iri:*` relations.
 
-Each relationship profile documents, at minimum:
+Each relationship definition documents, at minimum:
 
 - Semantic meaning.
 - Source representation type.
@@ -295,11 +300,11 @@ Each relationship profile documents, at minimum:
 
 Relationships describe topology or navigation and SHOULD NOT be duplicated as ordinary attributes when a registered link relation exists for the same semantic relationship.
 
-**Core resource relationship profiles**
+**Core resource relationship definitions**
 
-| Relationship | Source | Target | Link Profile |
+| Relationship | Source | Target | Definition |
 |---|---|---|---|
-| `iri:located-at` | Any DOE-IRI Resource | Facility API Site representation | [link-profile-located-at.md](link-profile-located-at.md) |
+| `iri:located-at` | Any DOE-IRI Resource | Facility API Site representation | [relations/located-at.md](relations/located-at.md) |
 
 For example:
 
@@ -354,10 +359,13 @@ urn:doe-iri:resource:storage
                     └── Relationships
                           iri:has-mount
                               │
-                              └── link-profile-has-mount.md
+                              └── relations/has-mount.md
 ```
 
-The resource type selects the applicable semantic profile. The profile defines the characteristics of that type, including any controlled URN values. Link profiles define how instances of that type relate to other IRI resources.
+The resource type selects the applicable semantic profile. The profile defines
+the characteristics of that type, including any controlled URN values.
+Link-relation definitions define how instances of that type relate to other IRI
+resources.
 
 ## 9. Where Do I Start?
 
@@ -369,12 +377,12 @@ The resource type selects the applicable semantic profile. The profile defines t
 | Describe a compute resource | [Compute Type Registry](urn-registry-type-compute.md) |
 | Describe a DTN or inference service | [Service Type Registry](urn-registry-type-service.md) |
 | Find service controlled attribute values | [Service Taxonomy and URN Index](urn-registry-type-service-taxonomy.md) |
-| Understand service hosting or configured mount access | [Service relationship profiles](urn-registry-type-service.md#6-service-resource-relationships) |
+| Understand service hosting or configured mount access | [Service relationship definitions](urn-registry-type-service.md#6-service-resource-relationships) |
 | See a complete storage, compute, DTN, and inference topology | [Example HPC facility resource set](examples/hpc-facility-resources.json) |
 | Determine which attributes apply to a resource | The resource's Attribute Profile |
 | Find valid controlled attribute values | Applicable taxonomy/index or Attribute Profile |
-| Understand how two resources relate | Applicable Link Profile |
-| Determine whether information belongs in definition or state | Resource model guidance and applicable Attribute/Link Profile |
+| Understand how two resources relate | Applicable link-relation definition |
+| Determine whether information belongs in definition or state | Resource model guidance and applicable attribute profile or link-relation definition |
 | Register a new DOE-IRI URN | Governing DOE-IRI URN specification |
 | Define a facility-specific extension | Root Registry extension-authority section and governing URN specification |
 
@@ -397,7 +405,7 @@ urn-registry-type-<domain>-taxonomy.md
 urn-registry-attributes-<domain>-<type>.md
     Attribute profile for a specific resource type
 
-link-profile-<relation>.md
+relations/<relation>.md
     Semantic definition of an IRI link relation
 ```
 
@@ -410,8 +418,8 @@ urn-registry-type-compute.md
 urn-registry-attributes-storage-filesystem.md
 urn-registry-attributes-compute-node.md
 
-link-profile-has-mount.md
-link-profile-has-node.md
+relations/has-mount.md
+relations/has-node.md
 ```
 
 ### 10.2. Registry Status

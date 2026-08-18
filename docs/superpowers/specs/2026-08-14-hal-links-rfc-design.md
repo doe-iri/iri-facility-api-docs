@@ -30,7 +30,7 @@ OpenAPI defines how an operation is invoked.
 ```
 
 The DOE-IRI URN Registry is authoritative for resource-type and
-controlled-value URNs. The DOE-IRI Link Profile Index and its linked profiles
+controlled-value URNs. The DOE-IRI Link Relation Index and its linked definitions
 are authoritative for `iri:*` relation names and semantics. Link relations are
 not DOE-IRI URNs, and the RFC must not create a second relation registry.
 
@@ -87,7 +87,7 @@ Use standard Web Linking relations where their established semantics fit:
 identity. A transient `TaskSubmitResponse` does not require `self`; it uses
 `monitor` for the resulting Task.
 
-These standard relations are not added to the DOE-IRI Link Profile Index as
+These standard relations are not added to the DOE-IRI Link Relation Index as
 IRI-specific relations.
 
 ## 6. DOE-IRI URI-Migration Relations
@@ -179,7 +179,7 @@ non-normative example:
 "curies": [
   {
     "name": "iri",
-    "href": "https://example.org/iri/rels/{rel}",
+    "href": "https://iri.science/rels/{rel}",
     "templated": true
   }
 ]
@@ -188,7 +188,7 @@ non-normative example:
 The RFC must state that the `example.org` URI must not be copied into an
 implementation. A deployed CURIE template must be stable and expand to
 documentation for the corresponding registered relation. CURIE expansion does
-not assign or redefine a relation; the DOE-IRI Link Profile Index remains
+not assign or redefine a relation; the DOE-IRI Link Relation Index remains
 authoritative. This work does not establish a canonical DOE-IRI expansion URI.
 
 ## 10. OpenAPI 3.1 Schema
@@ -289,23 +289,23 @@ relationship, or resource-type values.
 Modify:
 
 - `rfc/rfc-hal-links.md`
-- `registry/link-profile-root.md`
+- `registry/relations/README.md`
 
 Create:
 
-- `registry/link-profile-generated-by.md`
-- `registry/link-profile-has-event.md`
-- `registry/link-profile-impacts.md`
-- `registry/link-profile-may-impact.md`
-- `registry/link-profile-has-resource.md`
-- `registry/link-profile-has-site.md`
-- `registry/link-profile-has-project.md`
-- `registry/link-profile-has-capability.md`
-- `registry/link-profile-has-project-allocation.md`
-- `registry/link-profile-submit-job.md`
+- `registry/relations/generated-by.md`
+- `registry/relations/has-event.md`
+- `registry/relations/impacts.md`
+- `registry/relations/may-impact.md`
+- `registry/relations/has-resource.md`
+- `registry/relations/has-site.md`
+- `registry/relations/has-project.md`
+- `registry/relations/has-capability.md`
+- `registry/relations/has-project-allocation.md`
+- `registry/relations/submit-job.md`
 
 Do not modify production OpenAPI files, URN registry files,
-`docs/ai-project-context.md`, or unrelated link profiles.
+`docs/ai-project-context.md`, or unrelated link-relation definitions.
 
 ## 14. Validation
 
@@ -317,7 +317,7 @@ Validation must confirm:
   index;
 - all resource-type and controlled-value URNs used by examples are registered;
 - JSON and YAML examples parse;
-- the ten new profiles and index agree on lifecycle, source, target,
+- the ten new definitions and index agree on lifecycle, source, target,
   cardinality, and target classification;
 - legacy scalar/array mappings match the RFC table;
 - the CURIE URI is clearly illustrative and non-normative;

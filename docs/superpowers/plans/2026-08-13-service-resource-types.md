@@ -311,23 +311,23 @@ git commit -m "docs: define inference service attributes and state"
 ### Task 4: Service Relationship Profiles
 
 **Files:**
-- Create: `registry/link-profile-hosted-on.md`
-- Create: `registry/link-profile-accesses-mount.md`
-- Reference: `registry/link-profile-has-node.md`
-- Reference: `registry/link-profile-mounted-on.md`
+- Create: `registry/relations/hosted-on.md`
+- Create: `registry/relations/accesses-mount.md`
+- Reference: `registry/relations/has-node.md`
+- Reference: `registry/relations/mounted-on.md`
 
 **Interfaces:**
 - Consumes: Service resource types from Task 1, compute and mount target types, and link semantics from the design.
 - Produces: Normative semantic contracts for relationship indexes and HAL examples.
 
-- [ ] **Step 1: Run the failing link-profile checks**
+- [ ] **Step 1: Run the failing link-relation-definition checks**
 
 ```bash
-test -e registry/link-profile-hosted-on.md
-test -e registry/link-profile-accesses-mount.md
+test -e registry/relations/hosted-on.md
+test -e registry/relations/accesses-mount.md
 ```
 
-Expected: both checks fail because neither link profile exists.
+Expected: both checks fail because neither link-relation definition exists.
 
 - [ ] **Step 2: Create `iri:hosted-on` metadata and semantics**
 
@@ -356,18 +356,18 @@ Use DTN service as the only source, filesystem mount as the target, cardinality 
 
 Include plural mount targets. Explain why the mount is more precise than a direct filesystem target, why `hostedOn` plus `mountedOn` must not be used to infer DTN access, and why no inverse is initially registered.
 
-- [ ] **Step 6: Verify link-profile contract fields**
+- [ ] **Step 6: Verify link-relation-definition contract fields**
 
 ```bash
-rg -n 'Source representation type|Target representation type|Cardinality|Target stability|Authorization affects visibility|Target classification|Relationship volatility|_links' registry/link-profile-hosted-on.md registry/link-profile-accesses-mount.md
+rg -n 'Source representation type|Target representation type|Cardinality|Target stability|Authorization affects visibility|Target classification|Relationship volatility|_links' registry/relations/hosted-on.md registry/relations/accesses-mount.md
 ```
 
-Expected: every required link-profile field and HAL representation is present in both documents.
+Expected: every required link-relation-definition field and HAL representation is present in both documents.
 
-- [ ] **Step 7: Commit both link profiles**
+- [ ] **Step 7: Commit both link-relation definitions**
 
 ```bash
-git add registry/link-profile-hosted-on.md registry/link-profile-accesses-mount.md
+git add registry/relations/hosted-on.md registry/relations/accesses-mount.md
 git commit -m "docs: define service topology relationships"
 ```
 
@@ -406,16 +406,16 @@ Add Service beside Storage and Compute in the documentation tree. Add entry poin
 
 - [ ] **Step 4: Add incoming `iri:hosted-on` references to Compute**
 
-Update the compute type registry and taxonomy relationship sections to identify service source types, compute-system-or-node targets, `0..*` service-side cardinality, relative stability, authorization filtering, and the link-profile document. Do not alter existing `iri:has-node`, `iri:has-cpu`, or `iri:has-gpu` semantics.
+Update the compute type registry and taxonomy relationship sections to identify service source types, compute-system-or-node targets, `0..*` service-side cardinality, relative stability, authorization filtering, and the link-relation definition. Do not alter existing `iri:has-node`, `iri:has-cpu`, or `iri:has-gpu` semantics.
 
 - [ ] **Step 5: Add incoming `iri:accesses-mount` references to Storage**
 
-Update the storage type registry and taxonomy relationship sections to identify DTN source, mount target, `0..*` DTN-side cardinality, relative stability, authorization filtering, and the link-profile document. Do not alter `iri:has-mount` or `iri:mounted-on` semantics.
+Update the storage type registry and taxonomy relationship sections to identify DTN source, mount target, `0..*` DTN-side cardinality, relative stability, authorization filtering, and the link-relation definition. Do not alter `iri:has-mount` or `iri:mounted-on` semantics.
 
 - [ ] **Step 6: Verify navigation and cross-domain consistency**
 
 ```bash
-rg -n 'urn-registry-type-service|attributes-service-(dtn|inference)|link-profile-(hosted-on|accesses-mount)' registry/README.md registry/urn-registry-root.md
+rg -n 'urn-registry-type-service|attributes-service-(dtn|inference)|relations/(hosted-on|accesses-mount)' registry/README.md registry/urn-registry-root.md
 rg -n 'iri:hosted-on' registry/urn-registry-type-compute.md registry/urn-registry-type-compute-taxonomy.md
 rg -n 'iri:accesses-mount' registry/urn-registry-type-storage.md registry/urn-registry-type-storage-taxonomy.md
 ```
@@ -517,8 +517,8 @@ ruby -e 'missing=[]; ARGV.each { |file| text=File.read(file); text.scan(/\[[^\]]
   registry/urn-registry-type-service-taxonomy.md \
   registry/urn-registry-attributes-service-dtn.md \
   registry/urn-registry-attributes-service-inference.md \
-  registry/link-profile-hosted-on.md \
-  registry/link-profile-accesses-mount.md \
+  registry/relations/hosted-on.md \
+  registry/relations/accesses-mount.md \
   registry/urn-registry-type-compute.md \
   registry/urn-registry-type-compute-taxonomy.md \
   registry/urn-registry-type-storage.md \
@@ -537,8 +537,8 @@ registry/urn-registry-type-service.md
 registry/urn-registry-type-service-taxonomy.md
 registry/urn-registry-attributes-service-dtn.md
 registry/urn-registry-attributes-service-inference.md
-registry/link-profile-hosted-on.md
-registry/link-profile-accesses-mount.md
+registry/relations/hosted-on.md
+registry/relations/accesses-mount.md
 registry/urn-registry-type-compute.md
 registry/urn-registry-type-compute-taxonomy.md
 registry/urn-registry-type-storage.md
@@ -582,10 +582,10 @@ Expected: every registered value is present in the consolidated taxonomy and exa
 - [ ] **Step 4: Check relationship agreement**
 
 ```bash
-rg -n 'iri:(hostedOn|accessesMount)' registry/README.md registry/urn-registry-type-service.md registry/urn-registry-type-service-taxonomy.md registry/urn-registry-type-compute.md registry/urn-registry-type-compute-taxonomy.md registry/urn-registry-type-storage.md registry/urn-registry-type-storage-taxonomy.md registry/link-profile-hosted-on.md registry/link-profile-accesses-mount.md
+rg -n 'iri:(hostedOn|accessesMount)' registry/README.md registry/urn-registry-type-service.md registry/urn-registry-type-service-taxonomy.md registry/urn-registry-type-compute.md registry/urn-registry-type-compute-taxonomy.md registry/urn-registry-type-storage.md registry/urn-registry-type-storage-taxonomy.md registry/relations/hosted-on.md registry/relations/accesses-mount.md
 ```
 
-Expected: `hostedOn` appears in Service and Compute indexes; `accessesMount` appears in Service and Storage indexes; source and target types agree with the link profiles.
+Expected: `hostedOn` appears in Service and Compute indexes; `accessesMount` appears in Service and Storage indexes; source and target types agree with the link-relation definitions.
 
 - [ ] **Step 5: Check definition/state separation and examples**
 
@@ -620,8 +620,8 @@ git add \
   registry/urn-registry-type-service-taxonomy.md \
   registry/urn-registry-attributes-service-dtn.md \
   registry/urn-registry-attributes-service-inference.md \
-  registry/link-profile-hosted-on.md \
-  registry/link-profile-accesses-mount.md \
+  registry/relations/hosted-on.md \
+  registry/relations/accesses-mount.md \
   registry/urn-registry-type-compute.md \
   registry/urn-registry-type-compute-taxonomy.md \
   registry/urn-registry-type-storage.md \

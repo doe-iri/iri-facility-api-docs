@@ -4,7 +4,7 @@
 
 **Goal:** Replace the broad HAL draft with a concise registry-consistent RFC and register the ten IRI link relations required by the approved URI-migration and `submitJob` design.
 
-**Architecture:** The RFC defines HAL representation, migration, compatibility, agentic/RAG motivation, CURIE usage, and reusable OpenAPI 3.1 components. The Link Profile Index and ten dedicated profiles define the new `iri:*` semantics; existing registered profiles remain authoritative and production OpenAPI files remain unchanged.
+**Architecture:** The RFC defines HAL representation, migration, compatibility, agentic/RAG motivation, CURIE usage, and reusable OpenAPI 3.1 components. The Link Relation Index and ten dedicated definitions define the new `iri:*` semantics; existing registered definitions remain authoritative and production OpenAPI files remain unchanged.
 
 **Tech Stack:** Markdown RFC and registry documents, OpenAPI 3.1 YAML examples, HAL JSON examples, shell/Ruby structural validation.
 
@@ -13,14 +13,14 @@
 ## Global Constraints
 
 - Do not introduce or retain `ResourceDefinition`, `ResourceState`, or a required definition/state split in `rfc/rfc-hal-links.md`.
-- Treat the DOE-IRI URN Registry and Link Profile Index as authoritative.
+- Treat the DOE-IRI URN Registry and Link Relation Index as authoritative.
 - Use exact registered resource-type and controlled-value URNs.
 - Register all ten new IRI relations as `provisional`.
 - Use standard `self`, `help`, and `monitor` without adding them to the DOE-IRI link index.
 - Keep the agentic/RAG rationale concise and independent of resource/state separation.
 - Keep the CURIE example explicitly illustrative; do not establish a canonical DOE-IRI relation URI.
 - Do not modify production OpenAPI v1 or v2 files.
-- Do not modify URN registry files, project context, or unrelated link profiles.
+- Do not modify URN registry files, project context, or unrelated link-relation definitions.
 - Use `apply_patch` for edits and preserve unrelated work.
 - Do not stage or commit unless the user separately requests it.
 
@@ -29,13 +29,13 @@
 ### Task 1: Register Status and Facility URI-Migration Relations
 
 **Files:**
-- Create: `registry/link-profile-generated-by.md`
-- Create: `registry/link-profile-has-event.md`
-- Create: `registry/link-profile-impacts.md`
-- Create: `registry/link-profile-may-impact.md`
-- Create: `registry/link-profile-has-resource.md`
-- Create: `registry/link-profile-has-site.md`
-- Modify: `registry/link-profile-root.md`
+- Create: `registry/relations/generated-by.md`
+- Create: `registry/relations/has-event.md`
+- Create: `registry/relations/impacts.md`
+- Create: `registry/relations/may-impact.md`
+- Create: `registry/relations/has-resource.md`
+- Create: `registry/relations/has-site.md`
+- Modify: `registry/relations/README.md`
 
 **Interfaces:**
 - Consumes: Current Event, Incident, Site, Facility, and Resource URI-property semantics from the OpenAPI and conceptual model.
@@ -45,7 +45,7 @@
 
 ```bash
 for rel in generated-by has-event impacts may-impact has-resource has-site; do
-  test -f "registry/link-profile-${rel}.md"
+  test -f "registry/relations/${rel}.md"
 done
 ```
 
@@ -73,7 +73,7 @@ the relationship is absent.
 
 - [x] **Step 3: Add six index rows**
 
-Add Core/Status/Facility rows to `registry/link-profile-root.md`. Each row must
+Add Core/Status/Facility rows to `registry/relations/README.md`. Each row must
 link to the corresponding profile and copy its exact source, target,
 cardinality, and concise semantic meaning.
 
@@ -81,11 +81,11 @@ cardinality, and concise semantic meaning.
 
 ```bash
 for rel in generated-by has-event impacts may-impact has-resource has-site; do
-  test -f "registry/link-profile-${rel}.md"
+  test -f "registry/relations/${rel}.md"
 done
 rg -n 'iri:(generatedBy|hasEvent|impacts|mayImpact|hasResource|hasSite)' \
-  registry/link-profile-root.md registry/link-profile-*.md
-git diff --check -- registry/link-profile-root.md registry/link-profile-*.md
+  registry/relations/README.md registry/relations/*.md
+git diff --check -- registry/relations/README.md registry/relations/*.md
 ```
 
 Expected: all six files exist, every relation is indexed, and the diff check
@@ -96,11 +96,11 @@ prints no errors.
 ### Task 2: Register Allocation and Job-Submission Relations
 
 **Files:**
-- Create: `registry/link-profile-has-project.md`
-- Create: `registry/link-profile-has-capability.md`
-- Create: `registry/link-profile-has-project-allocation.md`
-- Create: `registry/link-profile-submit-job.md`
-- Modify: `registry/link-profile-root.md`
+- Create: `registry/relations/has-project.md`
+- Create: `registry/relations/has-capability.md`
+- Create: `registry/relations/has-project-allocation.md`
+- Create: `registry/relations/submit-job.md`
+- Modify: `registry/relations/README.md`
 
 **Interfaces:**
 - Consumes: Current ProjectAllocation, UserAllocation, Capability, Resource, and compute-system contracts.
@@ -110,7 +110,7 @@ prints no errors.
 
 ```bash
 for rel in has-project has-capability has-project-allocation submit-job; do
-  test -f "registry/link-profile-${rel}.md"
+  test -f "registry/relations/${rel}.md"
 done
 ```
 
@@ -150,20 +150,20 @@ response, error, and security behavior.
 
 - [x] **Step 4: Add four index rows**
 
-Add Allocation and Compute rows to `registry/link-profile-root.md`, matching
+Add Allocation and Compute rows to `registry/relations/README.md`, matching
 each profile exactly.
 
 - [x] **Step 5: Run the focused registration checks**
 
 ```bash
 for rel in has-project has-capability has-project-allocation submit-job; do
-  test -f "registry/link-profile-${rel}.md"
+  test -f "registry/relations/${rel}.md"
 done
 rg -n 'iri:(hasProject|hasCapability|hasProjectAllocation|submitJob)' \
-  registry/link-profile-root.md registry/link-profile-*.md
+  registry/relations/README.md registry/relations/*.md
 rg -n 'POST /api/v2/compute/job/\{resource_id\}|operationId.*launchJob' \
-  registry/link-profile-submit-job.md
-git diff --check -- registry/link-profile-root.md registry/link-profile-*.md
+  registry/relations/submit-job.md
+git diff --check -- registry/relations/README.md registry/relations/*.md
 ```
 
 Expected: all four files exist, relations are indexed, operation metadata is
@@ -177,7 +177,7 @@ present, and the diff check prints no errors.
 - Replace: `rfc/rfc-hal-links.md`
 
 **Interfaces:**
-- Consumes: The approved design, the complete Link Profile Index, ten new profiles, existing registered topology profiles, and current OpenAPI URI fields.
+- Consumes: The approved design, the complete Link Relation Index, ten new definitions, existing registered topology definitions, and current OpenAPI URI fields.
 - Produces: A concise normative RFC describing HAL representation and additive URI migration without changing production schemas.
 
 - [x] **Step 1: Run the failing RFC contract**
@@ -243,7 +243,7 @@ the non-normative template:
 ```json
 {
   "name": "iri",
-  "href": "https://example.org/iri/rels/{rel}",
+  "href": "https://iri.science/rels/{rel}",
   "templated": true
 }
 ```
@@ -277,7 +277,7 @@ Use current `/api/v2/...` paths and no unregistered URNs or relations.
 ! rg -n 'ResourceDefinition|ResourceState|ResourceCapacityState|companion separation' \
   rfc/rfc-hal-links.md
 test "$(wc -l < rfc/rfc-hal-links.md)" -lt 600
-rg -n 'agent|RAG|curies|https://example.org/iri/rels/\{rel\}' rfc/rfc-hal-links.md
+rg -n 'agent|RAG|curies|https://iri.science/rels/\{rel\}' rfc/rfc-hal-links.md
 rg -n 'self_uri|site_uri|incident_uri|event_uris|resource_uri|support_uri|project_uri|capability_uri|project_allocation_uri|task_uri' \
   rfc/rfc-hal-links.md
 git diff --check -- rfc/rfc-hal-links.md
@@ -292,8 +292,8 @@ agentic/CURIE/migration content present, and no diff errors.
 
 **Files:**
 - Validate: `rfc/rfc-hal-links.md`
-- Validate: `registry/link-profile-root.md`
-- Validate: the ten new `registry/link-profile-*.md` files
+- Validate: `registry/relations/README.md`
+- Validate: the ten new `registry/relations/*.md` files
 - Preserve: all `specification-v1/**` and `specification-v2/**` files
 
 **Interfaces:**
@@ -315,7 +315,7 @@ Expected: every complete example parses.
 
 - [x] **Step 3: Validate index/profile equality**
 
-Check that all ten relations occur exactly once in the Link Profile Index and
+Check that all ten relations occur exactly once in the Link Relation Index and
 that index source, target, cardinality, lifecycle, and target classification
 match their profile metadata.
 

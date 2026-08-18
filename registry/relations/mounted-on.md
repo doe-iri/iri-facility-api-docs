@@ -1,12 +1,27 @@
-# Link Profile: `iri:mounted-on`
+# IRI Link Relation: `mounted-on`
+
+**Relation URI:** `https://iri.science/rels/mounted-on`<br>
+**CURIE:** `iri:mounted-on`<br>
+**Status:** Draft<br>
+**Version:** 1.0.0<br>
+**Source representation type:** `urn:doe-iri:resource:storage:mount`<br>
+**Source resource type:** `urn:doe-iri:resource:storage:mount`<br>
+**Target representation type:** `urn:doe-iri:resource:compute:system`<br>
+**Target resource type:** `urn:doe-iri:resource:compute:system`
 
 This document defines the `iri:mounted-on` relationship used by the DOE-IRI storage resource model.
+
+The canonical relation URI is `https://iri.science/rels/mounted-on`. With the
+canonical IRI CURIE template `https://iri.science/rels/{rel}`,
+`iri:mounted-on` expands to that URI. The relation URI identifies the
+link-relation semantics and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:mounted-on` |
+| Relation URI | `https://iri.science/rels/mounted-on` |
 | Semantic meaning | Identifies the consuming compute system on which the filesystem represented by the mount resource is exposed. |
 | Source representation type | `urn:doe-iri:resource:storage:mount` |
 | Target representation type | `urn:doe-iri:resource:compute:system` |
@@ -79,4 +94,4 @@ Because `iri:mounted-on` is required for the semantic completeness of a mount re
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: mounted-on*
+*DOE Integrated Research Infrastructure — Link Relation: mounted-on*

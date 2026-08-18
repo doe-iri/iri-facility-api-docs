@@ -22,7 +22,7 @@
   distinct validation levels; an assigned DOE-IRI extension satisfies all
   three.
 - Preserve the current user-owned RFC history row and `compute` domain addition exactly while integrating the new RFC changes.
-- Do not modify or stage the concurrent root README or link-profile-index changes.
+- Do not modify or stage the concurrent root README or link-relation-index changes.
 - Do not commit: the working tree contains overlapping user-owned RFC edits that must remain user-owned.
 - Use `registry_editor` for implementation, `registry_architect` for read-only semantic review, and `registry_maintainer` for deterministic validation.
 
@@ -123,7 +123,7 @@ Expected: all checks succeed.
 
 **Files:**
 - Validate: the four Task 1 semantic documents
-- Preserve: `README.md` and `registry/link-profile-root.md`
+- Preserve: `README.md` and `registry/relations/README.md`
 
 **Interfaces:**
 - Consumes: Task 1's governing rules, registry records, and supporting guidance.

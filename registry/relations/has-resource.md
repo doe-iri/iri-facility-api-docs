@@ -1,12 +1,26 @@
-# Link Profile: `iri:has-resource`
+# IRI Link Relation: `has-resource`
+
+**Relation URI:** `https://iri.science/rels/has-resource`\
+**CURIE:** `iri:has-resource`\
+**Status:** Provisional\
+**Version:** 1.0.0<br>
+**Source representation type:** Facility API `Site` representation.<br>
+**Target representation type:** DOE-IRI `Resource` representation identified by the source Site's `resource_uris`.<br>
+**Target resource type:** Any registered DOE-IRI resource type (`urn:doe-iri:resource:*`)
 
 This document defines the `iri:has-resource` relationship used by Facility API Site representations.
+
+The canonical relation URI is `https://iri.science/rels/has-resource`. With
+the canonical IRI CURIE template `https://iri.science/rels/{rel}`,
+`iri:has-resource` expands to that URI. The relation URI identifies the
+link-relation semantics and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:has-resource` |
+| Relation URI | `https://iri.science/rels/has-resource` |
 | Status | `provisional` |
 | Semantic meaning | Identifies DOE-IRI Resources hosted at the source Site. |
 | Source representation type | Facility API `Site` representation. |
@@ -78,4 +92,4 @@ Removing or changing `resource_uris` requires a subsequent OpenAPI change.
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: has-resource*
+*DOE Integrated Research Infrastructure — Link Relation: has-resource*

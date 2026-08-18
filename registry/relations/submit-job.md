@@ -1,12 +1,26 @@
-# Link Profile: `iri:submit-job`
+# IRI Link Relation: `submit-job`
+
+**Relation URI:** `https://iri.science/rels/submit-job`<br>
+**CURIE:** `iri:submit-job`<br>
+**Status:** Provisional<br>
+**Version:** 1.0.0<br>
+**Source representation type:** `urn:doe-iri:resource:compute:system`<br>
+**Source resource type:** `urn:doe-iri:resource:compute:system`<br>
+**Target representation type:** Resource-specific job-submission operation entry point. The current OpenAPI operation is `POST /api/v2/compute/job/{resource_id}` with `operationId: launchJob`.
 
 This document defines the `iri:submit-job` operation-affordance relationship used by DOE-IRI compute-system Resource representations.
+
+The canonical relation URI is `https://iri.science/rels/submit-job`. With the
+canonical IRI CURIE template `https://iri.science/rels/{rel}`, `iri:submit-job`
+expands to that URI. The relation URI identifies the link-relation semantics
+and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:submit-job` |
+| Relation URI | `https://iri.science/rels/submit-job` |
 | Status | `provisional` |
 | Semantic meaning | Identifies the applicable job-submission operation entry point for the source compute system. |
 | Source representation type | `urn:doe-iri:resource:compute:system` |
@@ -82,4 +96,4 @@ OpenAPI remains authoritative for the method, path parameter semantics, `JobSpec
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: submit-job*
+*DOE Integrated Research Infrastructure — Link Relation: submit-job*

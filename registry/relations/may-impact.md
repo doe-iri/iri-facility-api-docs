@@ -1,12 +1,26 @@
-# Link Profile: `iri:may-impact`
+# IRI Link Relation: `may-impact`
+
+**Relation URI:** `https://iri.science/rels/may-impact`<br>
+**CURIE:** `iri:may-impact`<br>
+**Status:** Provisional<br>
+**Version:** 1.0.0<br>
+**Source representation type:** Facility API `Incident` representation.<br>
+**Target representation type:** DOE-IRI `Resource` representation identified by the source Incident's `resource_uris`.<br>
+**Target resource type:** Any registered DOE-IRI resource type (`urn:doe-iri:resource:*`)
 
 This document defines the `iri:may-impact` relationship used by Facility API Incident representations.
+
+The canonical relation URI is `https://iri.science/rels/may-impact`. With the
+canonical IRI CURIE template `https://iri.science/rels/{rel}`, `iri:may-impact`
+expands to that URI. The relation URI identifies the link-relation semantics
+and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:may-impact` |
+| Relation URI | `https://iri.science/rels/may-impact` |
 | Status | `provisional` |
 | Semantic meaning | Identifies DOE-IRI Resources that may be affected by the source Incident. |
 | Source representation type | Facility API `Incident` representation. |
@@ -78,4 +92,4 @@ Removing or changing `resource_uris` requires a subsequent OpenAPI change.
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: may-impact*
+*DOE Integrated Research Infrastructure — Link Relation: may-impact*

@@ -1,12 +1,27 @@
-# Link Profile: `iri:provides-block`
+# IRI Link Relation: `provides-block`
+
+**Relation URI:** `https://iri.science/rels/provides-block`<br>
+**CURIE:** `iri:provides-block`<br>
+**Status:** Draft<br>
+**Version:** 1.0.0<br>
+**Source representation type:** `urn:doe-iri:resource:storage:system`<br>
+**Source resource type:** `urn:doe-iri:resource:storage:system`<br>
+**Target representation type:** `urn:doe-iri:resource:storage:block`<br>
+**Target resource type:** `urn:doe-iri:resource:storage:block`
 
 This document defines the `iri:provides-block` relationship used by the DOE-IRI storage resource model.
+
+The canonical relation URI is `https://iri.science/rels/provides-block`. With
+the canonical IRI CURIE template `https://iri.science/rels/{rel}`,
+`iri:provides-block` expands to that URI. The relation URI identifies the
+link-relation semantics and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:provides-block` |
+| Relation URI | `https://iri.science/rels/provides-block` |
 | Semantic meaning | Indicates that a storage system provides the identified logical block-storage resource. |
 | Source representation type | `urn:doe-iri:resource:storage:system` |
 | Target representation type | `urn:doe-iri:resource:storage:block` |
@@ -49,7 +64,7 @@ Storage System  -- iri:provides-block -->  Block Storage
       1                      0..*
 ```
 
-No inverse-cardinality requirement is imposed by this link profile.
+No inverse-cardinality requirement is imposed by this link-relation definition.
 
 ## 5. Static and Dynamic Semantics
 
@@ -77,4 +92,4 @@ An omitted target MUST NOT be interpreted as evidence that the storage system pr
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: provides-block*
+*DOE Integrated Research Infrastructure — Link Relation: provides-block*

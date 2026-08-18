@@ -1,5 +1,8 @@
 # Attribute Profile: `urn:doe-iri:resource:storage:mount`
 
+**Profile URI:** `https://iri.science/profiles/storage/mount`\
+**IRI Resource Type:** `urn:doe-iri:resource:storage:mount`
+
 This document is for the `urn:doe-iri:resource:storage:mount` resource type hierarchy.
 
 ## 1. Registry Metadata
@@ -53,15 +56,15 @@ This separation allows a filesystem to be defined once while being exposed diffe
 ```text
 Scratch Filesystem
         │
-        ├── hasMount ──> Mount A
+        ├── iri:has-mount ──> Mount A
         │                 mount_path = /scratch
         │                     │
-        │                     └── mountedOn ──> Compute System A
+        │                     └── iri:mounted-on ──> Compute System A
         │
-        └── hasMount ──> Mount B
+        └── iri:has-mount ──> Mount B
                           mount_path = /global/scratch
                               │
-                              └── mountedOn ──> Compute System B
+                              └── iri:mounted-on ──> Compute System B
 ```
 
 The filesystem resource remains responsible for describing characteristics of the logical storage resource, such as filesystem technology, architecture, capabilities, protocols, tier, and media types. The mount resource contains only characteristics that are specific to a particular exposure of that filesystem to a consuming system.
@@ -198,12 +201,12 @@ Filesystem
     ├── Mount A
     │     access_mode = read-write
     │         │
-    │         └── mountedOn ──> Compute System A
+    │         └── iri:mounted-on ──> Compute System A
     │
     └── Mount B
           access_mode = read-only
               │
-              └── mountedOn ──> Analysis System
+              └── iri:mounted-on ──> Analysis System
 ```
 
 Clients SHOULD NOT infer filesystem-level write capabilities or authorization policy solely from the `access_mode` value.

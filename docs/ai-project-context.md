@@ -251,7 +251,7 @@ urn-registry-type-<domain>-taxonomy.md
 urn-registry-attributes-<domain>-<type>.md
     Attribute profile for a specific resource type.
 
-link-profile-<relation>.md
+relations/<relation>.md
     Semantic definition of an IRI link relation.
 ```
 
@@ -267,8 +267,8 @@ urn-registry-type-compute-taxonomy.md
 urn-registry-attributes-storage-filesystem.md
 urn-registry-attributes-compute-node.md
 
-link-profile-has-mount.md
-link-profile-has-node.md
+relations/has-mount.md
+relations/has-node.md
 ```
 
 The repository README should function primarily as a navigation map rather than restating every registry value.
@@ -1240,9 +1240,9 @@ Before extending these vocabularies, inspect the current repository versions of 
 
 ---
 
-# 17. Link Profile Documentation Standard
+# 17. Link Relation Definition Standard
 
-Each link profile should include a metadata section with at least:
+Each link-relation definition should include a metadata section with at least:
 
 | Field | Meaning |
 |---|---|
@@ -1320,7 +1320,7 @@ Preferred README sections:
    - Compute.
    - future domains.
 6. Controlled Attribute Vocabularies.
-7. Link Profiles.
+7. Link Relation Definitions.
 8. How the Documents Relate.
 9. Where Do I Start?
 10. Registry Conventions.
@@ -1635,7 +1635,7 @@ When adding a new domain such as network or another future domain:
    - domain type registry;
    - taxonomy/index;
    - subtype attribute profiles;
-   - link profiles.
+   - link-relation definitions.
 10. Update:
    - root registry;
    - README;

@@ -1,12 +1,27 @@
-# Link Profile: `iri:hosted-on`
+# IRI Link Relation: `hosted-on`
+
+**Relation URI:** `https://iri.science/rels/hosted-on`<br>
+**CURIE:** `iri:hosted-on`<br>
+**Status:** Provisional<br>
+**Version:** 1.0.0<br>
+**Source representation type:** `urn:doe-iri:resource:service:dtn` or `urn:doe-iri:resource:service:inference`<br>
+**Source resource type:** `urn:doe-iri:resource:service:dtn` or `urn:doe-iri:resource:service:inference`<br>
+**Target representation type:** `urn:doe-iri:resource:compute:system` or `urn:doe-iri:resource:compute:node`<br>
+**Target resource type:** `urn:doe-iri:resource:compute:system` or `urn:doe-iri:resource:compute:node`
 
 This document defines the `iri:hosted-on` relationship used by the DOE-IRI service resource model.
+
+The canonical relation URI is `https://iri.science/rels/hosted-on`. With the
+canonical IRI CURIE template `https://iri.science/rels/{rel}`, `iri:hosted-on`
+expands to that URI. The relation URI identifies the link-relation semantics
+and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:hosted-on` |
+| Relation URI | `https://iri.science/rels/hosted-on` |
 | Status | `provisional` |
 | Semantic meaning | Indicates that the identified compute system or compute node provides hosting infrastructure for the source service. |
 | Source representation type | `urn:doe-iri:resource:service:dtn` or `urn:doe-iri:resource:service:inference` |
@@ -54,7 +69,7 @@ Service  -- iri:hosted-on -->  Compute System or Compute Node
 
 The use of `0..*` permits facilities to represent services without exposing hosting topology and to represent services hosted across multiple systems or nodes.
 
-This link profile imposes no inverse-cardinality requirement.
+This link-relation definition imposes no inverse-cardinality requirement.
 
 ## 5. Static and Dynamic Semantics
 
@@ -97,4 +112,4 @@ A service hosted across multiple compute nodes can use an array of link objects:
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: hosted-on*
+*DOE Integrated Research Infrastructure — Link Relation: hosted-on*

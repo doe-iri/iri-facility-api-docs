@@ -1,12 +1,27 @@
-# Link Profile: `iri:has-node`
+# IRI Link Relation: `has-node`
+
+**Relation URI:** `https://iri.science/rels/has-node`\
+**CURIE:** `iri:has-node`\
+**Status:** Draft\
+**Version:** 1.0.0<br>
+**Source representation type:** `urn:doe-iri:resource:compute:system`<br>
+**Source resource type:** `urn:doe-iri:resource:compute:system`<br>
+**Target representation type:** `urn:doe-iri:resource:compute:node`<br>
+**Target resource type:** `urn:doe-iri:resource:compute:node`
 
 This document defines the `iri:has-node` relationship used by the DOE-IRI compute resource model.
+
+The canonical relation URI is `https://iri.science/rels/has-node`. With the
+canonical IRI CURIE template `https://iri.science/rels/{rel}`, `iri:has-node`
+expands to that URI. The relation URI identifies the link-relation semantics
+and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:has-node` |
+| Relation URI | `https://iri.science/rels/has-node` |
 | Semantic meaning | Indicates that the identified compute node participates in or is managed as part of the source compute system. |
 | Source representation type | `urn:doe-iri:resource:compute:system` |
 | Target representation type | `urn:doe-iri:resource:compute:node` |
@@ -51,7 +66,7 @@ Compute System  -- iri:has-node -->  Compute Node
 
 The use of `0..*` permits facilities to expose aggregate system information without exposing individual node topology.
 
-This link profile imposes no inverse-cardinality requirement.
+This link-relation definition imposes no inverse-cardinality requirement.
 
 ## 5. Static and Dynamic Semantics
 
@@ -84,4 +99,4 @@ The absence of visible node targets MUST NOT be interpreted as proof that the co
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: has-node*
+*DOE Integrated Research Infrastructure — Link Relation: has-node*

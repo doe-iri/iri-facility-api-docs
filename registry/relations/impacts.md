@@ -1,12 +1,26 @@
-# Link Profile: `iri:impacts`
+# IRI Link Relation: `impacts`
+
+**Relation URI:** `https://iri.science/rels/impacts`<br>
+**CURIE:** `iri:impacts`<br>
+**Status:** Provisional<br>
+**Version:** 1.0.0<br>
+**Source representation type:** Facility API `Event` representation.<br>
+**Target representation type:** DOE-IRI `Resource` representation identified by the source Event's `resource_uri`.<br>
+**Target resource type:** Any registered DOE-IRI resource type (`urn:doe-iri:resource:*`)
 
 This document defines the `iri:impacts` relationship used by Facility API Event representations.
+
+The canonical relation URI is `https://iri.science/rels/impacts`. With the
+canonical IRI CURIE template `https://iri.science/rels/{rel}`, `iri:impacts`
+expands to that URI. The relation URI identifies the link-relation semantics
+and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:impacts` |
+| Relation URI | `https://iri.science/rels/impacts` |
 | Status | `provisional` |
 | Semantic meaning | Identifies the DOE-IRI Resource to which the source Event applies. |
 | Source representation type | Facility API `Event` representation. |
@@ -74,4 +88,4 @@ Removing or changing `resource_uri` requires a subsequent OpenAPI change.
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: impacts*
+*DOE Integrated Research Infrastructure — Link Relation: impacts*

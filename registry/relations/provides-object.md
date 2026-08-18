@@ -1,12 +1,27 @@
-# Link Profile: `iri:provides-object`
+# IRI Link Relation: `provides-object`
+
+**Relation URI:** `https://iri.science/rels/provides-object`<br>
+**CURIE:** `iri:provides-object`<br>
+**Status:** Draft<br>
+**Version:** 1.0.0<br>
+**Source representation type:** `urn:doe-iri:resource:storage:system`<br>
+**Source resource type:** `urn:doe-iri:resource:storage:system`<br>
+**Target representation type:** `urn:doe-iri:resource:storage:object`<br>
+**Target resource type:** `urn:doe-iri:resource:storage:object`
 
 This document defines the `iri:provides-object` relationship used by the DOE-IRI storage resource model.
+
+The canonical relation URI is `https://iri.science/rels/provides-object`. With
+the canonical IRI CURIE template `https://iri.science/rels/{rel}`,
+`iri:provides-object` expands to that URI. The relation URI identifies the
+link-relation semantics and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:provides-object` |
+| Relation URI | `https://iri.science/rels/provides-object` |
 | Semantic meaning | Indicates that a storage system provides the identified logical object-storage resource. |
 | Source representation type | `urn:doe-iri:resource:storage:system` |
 | Target representation type | `urn:doe-iri:resource:storage:object` |
@@ -49,7 +64,7 @@ Storage System  -- iri:provides-object -->  Object Storage
       1                       0..*
 ```
 
-No inverse-cardinality requirement is imposed by this link profile.
+No inverse-cardinality requirement is imposed by this link-relation definition.
 
 ## 5. Static and Dynamic Semantics
 
@@ -77,4 +92,4 @@ Absence of the link or a particular target MUST NOT be interpreted as proof that
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: provides-object*
+*DOE Integrated Research Infrastructure — Link Relation: provides-object*

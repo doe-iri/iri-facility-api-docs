@@ -22,9 +22,9 @@ This document is a proposed IRI Facility API RFC. The key words **MUST**,
 described in BCP 14 when, and only when, they appear in all capitals. The
 authoritative source for DOE-IRI resource-type and controlled-value URNs is
 the [DOE-IRI URN Registry](../registry/urn-registry-root.md). The
-[DOE-IRI Link Profile Index](../registry/link-profile-root.md) is the
+[DOE-IRI Link Relation Index](../registry/relations/README.md) is the
 authoritative navigation index for registered `iri:*` names; each linked
-profile is authoritative for that relation's complete semantics.
+definition is authoritative for that relation's complete semantics.
 
 This document proposes an IRI Facility API extension and is intended for adoption
 in the DOE IRI specification version 2.0 and reference implementations.
@@ -155,7 +155,7 @@ A HAL-enabled representation places relations in `_links`. Each relation value
 is either one link object or an array of link objects. A link object MUST have
 `href`; a producer MUST NOT emit `"href": null`. Relation-specific cardinality,
 target classification, volatility, authorization behavior, and omission
-semantics are defined by the applicable registered link profile.
+semantics are defined by the applicable registered link-relation definition.
 
 Use a singular object for a singular relation and an array for a plural
 relation. A representation with its own canonical identity MUST expose `self`.
@@ -173,11 +173,12 @@ HAL link information has distinct semantic roles:
 - A `service-desc` relation MAY identify a machine-readable service description
   applicable to the link context, such as an OpenAPI description.
 
-The HAL Link Object `profile` property and a DOE-IRI link-relation profile serve
-different purposes. The HAL `profile` property hints at the profile of the
-target representation. The DOE-IRI Link Profile Index defines the semantics of
-an `iri:*` relation itself. A producer MUST NOT use the HAL `profile` property
-to redefine or replace the registered semantics of a link relation.
+The HAL Link Object `profile` property and a DOE-IRI link-relation URI serve
+different purposes. The HAL `profile` property identifies the profile of the
+target representation. The DOE-IRI Link Relation Index and linked definitions
+define the semantics of an `iri:*` relation itself. A producer MUST NOT use the
+HAL `profile` property to redefine or replace the registered semantics of a
+link relation.
 
 RFC 6906 explicitly describes profiles as a mechanism for signaling additional 
 semantics beyond those defined by the media type, and should be primarily treated
@@ -193,7 +194,7 @@ profiles, but the protocol does not require dereferencing.
       "href": "https://api.example.org/api/v2/status/resources/frontier-orion-scratch-mount",
       "title": "Frontier mount of Orion scratch filesystem",
       "type": "application/hal+json",
-      "profile": "https://example.org/iri/profiles/mount-relationship"
+      "profile": "https://iri.science/profiles/storage/mount"
     },
     "service-desc": {
       "href": "https://api.example.org/openapi.json",
@@ -210,8 +211,8 @@ invoked, while the other advertised relations identify which resources or
 operation entry points are relevant. A `service-desc` link does not redefine
 those relations or grant authorization to invoke the described operations.
 
-HAL CURIEs MAY abbreviate registered DOE-IRI relation documentation. The
-following is illustrative and non-normative:
+HAL CURIEs MAY abbreviate registered DOE-IRI relation identifiers. The
+canonical IRI CURIE declaration is:
 
 ```json
 {
@@ -219,7 +220,7 @@ following is illustrative and non-normative:
     "curies": [
       {
         "name": "iri",
-        "href": "https://example.org/iri/rels/{rel}",
+        "href": "https://iri.science/rels/{rel}",
         "templated": true
       }
     ]
@@ -227,11 +228,10 @@ following is illustrative and non-normative:
 }
 ```
 
-The `example.org` URI MUST NOT be copied into a deployment. A deployed
-template MUST be stable and expand to documentation for the corresponding
-registered relation. CURIE expansion does not assign or redefine a relation;
-the Link Profile Index remains authoritative. This RFC establishes no canonical
-DOE-IRI CURIE expansion URI.
+The template expands `iri:<relation>` to
+`https://iri.science/rels/<relation>`. CURIE expansion does not assign or
+redefine a relation; the Link Relation Index and linked definitions remain
+authoritative.
 
 ## 4. Authoritative Relation Sources
 
@@ -245,10 +245,11 @@ Use standard Web Linking relations when their established semantics apply:
 | `service-desc` | Machine-readable service description applicable to the context, such as an OpenAPI description. |
 
 For every `iri:*` relation, a producer and consumer MUST use the exact
-registered name in the Link Profile Index and the complete semantics in its
-linked profile. Link relations are not DOE-IRI URNs, and this RFC does not
+registered name in the Link Relation Index and the complete semantics in its
+linked definition. Link relations are not DOE-IRI URNs, and this RFC does not
 create another relation registry. Relevant registered topology relations, such
-as `iri:provides-filesystem`, retain their profile-defined meanings.
+as `iri:provides-filesystem`, retain the meanings specified by their linked
+definitions.
 
 DOE-IRI custom link relation identifiers MUST use lowercase ASCII letters,
 digits, and hyphens. Multiword relation identifiers MUST separate words with
@@ -312,7 +313,7 @@ invoke it.
 ## 7. OpenAPI 3.1 Schema
 
 The following reusable components describe the HAL wire shape. The generic
-schema permits a singular object or an array; relation profiles remain
+schema permits a singular object or an array; relation definitions remain
 authoritative for semantic cardinality. `curies` is permitted as an array of
 `HalLink` objects. Standard relations such as `service-desc` require no
 relation-specific schema property because they are represented as keys within
@@ -496,8 +497,8 @@ response is `Job`. The second, independent object illustrates a
 ### 10.4 Topology relationship with target profile and service description
 
 The following example illustrates the layered discovery model. It assumes that
-`iri:has-mount` is a registered DOE-IRI relation whose profile permits the source
-resource to link to a resource representing a mount relationship. The HAL
+`iri:has-mount` is a registered DOE-IRI relation whose definition permits the
+source resource to link to a resource representing a mount relationship. The HAL
 `profile` property describes the target representation; it does not define the
 semantics of `iri:has-mount` itself.  
 
@@ -515,7 +516,7 @@ profiles, but the protocol does not require dereferencing.
       "href": "https://api.example.org/api/v2/status/resources/frontier-orion-scratch-mount",
       "title": "Frontier mount of Orion scratch filesystem",
       "type": "application/hal+json",
-      "profile": "https://example.org/iri/profiles/mount-relationship"
+      "profile": "https://iri.science/profiles/storage/mount"
     },
     "service-desc": {
       "href": "https://api.example.org/openapi.json",
@@ -549,5 +550,5 @@ invocation semantics.
 3. RFC 8631, *Link Relation Types for Web Services*.
 4. JSON Hypertext Application Language, `draft-kelly-json-hal`.
 5. OpenAPI Specification 3.1.
-6. [DOE-IRI Link Profile Index](../registry/link-profile-root.md).
+6. [DOE-IRI Link Relation Index](../registry/relations/README.md).
 7. [IRI Facility API OpenAPI v2](../specification-v2/openapi/all_spec_v2.yaml).

@@ -1,12 +1,25 @@
-# Link Profile: `iri:has-event`
+# IRI Link Relation: `has-event`
+
+**Relation URI:** `https://iri.science/rels/has-event`\
+**CURIE:** `iri:has-event`\
+**Status:** Provisional\
+**Version:** 1.0.0<br>
+**Source representation type:** Facility API `Incident` representation.<br>
+**Target representation type:** Facility API `Event` representation identified by the source Incident's `event_uris`.
 
 This document defines the `iri:has-event` relationship used by Facility API Incident representations.
+
+The canonical relation URI is `https://iri.science/rels/has-event`. With the
+canonical IRI CURIE template `https://iri.science/rels/{rel}`, `iri:has-event`
+expands to that URI. The relation URI identifies the link-relation semantics
+and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:has-event` |
+| Relation URI | `https://iri.science/rels/has-event` |
 | Status | `provisional` |
 | Semantic meaning | Identifies Events recorded as part of the source Incident. |
 | Source representation type | Facility API `Incident` representation. |
@@ -78,4 +91,4 @@ Removing or changing `event_uris` requires a subsequent OpenAPI change.
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: has-event*
+*DOE Integrated Research Infrastructure — Link Relation: has-event*

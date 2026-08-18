@@ -1,12 +1,26 @@
-# Link Profile: `iri:has-project-allocation`
+# IRI Link Relation: `has-project-allocation`
+
+**Relation URI:** `https://iri.science/rels/has-project-allocation`\
+**CURIE:** `iri:has-project-allocation`\
+**Status:** Provisional\
+**Version:** 1.0.0<br>
+**Source representation type:** Facility API `UserAllocation` representation.<br>
+**Target representation type:** Facility API `ProjectAllocation` representation identified by the source UserAllocation's `project_allocation_uri`.
 
 This document defines the `iri:has-project-allocation` relationship used by Facility API UserAllocation representations.
+
+The canonical relation URI is
+`https://iri.science/rels/has-project-allocation`. With the canonical IRI CURIE
+template `https://iri.science/rels/{rel}`, `iri:has-project-allocation`
+expands to that URI. The relation URI identifies the link-relation semantics
+and is distinct from any target representation profile.
 
 ## 1. Relationship Metadata
 
 | Field | Definition |
 |---|---|
 | Relationship | `iri:has-project-allocation` |
+| Relation URI | `https://iri.science/rels/has-project-allocation` |
 | Status | `provisional` |
 | Semantic meaning | Identifies the ProjectAllocation of which the source UserAllocation is a part. |
 | Source representation type | Facility API `UserAllocation` representation. |
@@ -74,4 +88,4 @@ Removing or changing `project_allocation_uri` requires a subsequent OpenAPI chan
 
 ---
 
-*DOE Integrated Research Infrastructure — Link Profile: has-project-allocation*
+*DOE Integrated Research Infrastructure — Link Relation: has-project-allocation*
