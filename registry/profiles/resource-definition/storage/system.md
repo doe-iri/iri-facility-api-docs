@@ -1,10 +1,24 @@
-# Attribute Profile: `urn:doe-iri:resource:storage:system`
+# IRI Storage System Resource Definition Profile
+
+**Profile URI:** `https://iri.science/profiles/resource-definition/storage/system`  
+**Base Profile:** `https://iri.science/profiles/status/resource`  
+**Resource Type:** `urn:doe-iri:resource:storage:system`  
+**Status:** Draft  
+**Version:** 1.0.0
+
+## Profile Applicability
+
+This profile applies when `resource_type` is
+`urn:doe-iri:resource:storage:system` and MUST be used together with the
+[IRI Status Resource Profile](../../status/resource.md). The authoritative
+URN record is [Resource Type URNs](../../../urns/resource-types.md).
 
 This document is for the `urn:doe-iri:resource:storage:system` resource type hierarchy.
 
-## 1. Registry Metadata
+## 1. Profile Context
 
-As described in [A URN Namespace for the DoE IRI Project](../rfc/rfc-iri-urn-structure-and-registry.md), the following metadata is recorded:
+The following retained context identifies the type to which this profile applies;
+registration metadata and lifecycle are authoritative in the URN registry.
 
 | Field | Description |
 |---|---|

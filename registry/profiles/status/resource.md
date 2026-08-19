@@ -514,20 +514,31 @@ The existence of a Capability relationship MUST NOT itself be interpreted as:
 - permission to invoke an operation;
 - a guarantee that the Capability can currently be consumed.
 
-### 8.2 Type-Specific Attributes
+### 8.2 Resource Definition Profiles
 
-The `resource_type` value determines the semantic Resource class and MAY identify additional type-specific attributes defined by the applicable IRI registry specifications.
+The common Resource profile defines semantics applicable to every IRI Resource
+representation. A registered `resource_type` MAY select an additional Resource
+Definition profile for type-specific, relatively stable attributes,
+relationships, and operation affordances.
 
 For example:
 
 ```json
 {
   "resource_type":
-    "urn:doe-iri:resource:storage:filesystem:scratch"
+    "urn:doe-iri:resource:compute:system"
 }
 ```
 
-identifies the representation as a scratch-filesystem Resource and permits clients that understand that registered type to interpret applicable storage/filesystem-specific attributes.
+identifies the applicable Resource Definition profile as:
+
+```text
+https://iri.science/profiles/resource-definition/compute/system
+```
+
+The Resource Type registration is authoritative in
+[Resource Type URNs](../../urns/resource-types.md), and the selected Resource
+Definition profile specializes rather than replaces this common profile.
 
 A generic client MUST remain capable of processing the common Resource representation even when it does not understand the Resource's most-specific type.
 
@@ -936,6 +947,8 @@ A representation conforms to the IRI Status Resource Profile when:
 17. when both `capability_uris` and `_links["iri:has-capability"]` are present, they identify the same targets;
 18. applicable operation entry points are discovered through advertised links rather than inferred from Resource identifiers or Resource Type URNs;
 19. clients are not required to infer or construct related-resource or operation URLs.
+20. when a Resource Definition profile applies, it supplements this common
+    profile and does not replace it.
 
 A conforming representation MAY contain additional properties and links where permitted by the applicable IRI API specification.
 

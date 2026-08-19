@@ -1,24 +1,18 @@
-# Attribute Profile: `urn:doe-iri:resource:compute:gpu`
+# IRI GPU Resource Definition Profile
 
-This document is for the `urn:doe-iri:resource:compute:gpu` resource type hierarchy.
+**Profile URI:** `https://iri.science/profiles/resource-definition/compute/gpu`  
+**Base Profile:** `https://iri.science/profiles/status/resource`  
+**Resource Type:** `urn:doe-iri:resource:compute:gpu`  
+**Status:** Draft  
+**Version:** 1.0.0
 
-## 1. Registry Metadata
+## 1. Profile Applicability
 
-As described in [A URN Namespace for the DoE IRI Project](../rfc/rfc-iri-urn-structure-and-registry.md), the following metadata is recorded:
-
-| Field | Description |
-|---|---|
-| URN | `urn:doe-iri:resource:compute:gpu` |
-| Short name | GPU |
-| Description | This namespace collects GPU-related type definitions. |
-| Parent URN | `urn:doe-iri:resource:compute` |
-| Status | `provisional` |
-| Introduced | IRI v2.0 |
-| Change controller | IRI technical subcommittee. |
-| Reference | Proposed type extensions for GPU resources. |
-| Legacy value | `compute` enumeration. |
-| Examples | `urn:doe-iri:resource:compute:gpu` |
-| Notes | These attributes are proposed for describing GPU or similar highly parallel accelerator resources associated with compute nodes. |
+This profile applies to an IRI Resource representation whose `resource_type` is
+`urn:doe-iri:resource:compute:gpu`. It specializes the [IRI Status Resource
+Profile](../../status/resource.md); a conforming representation MUST also
+satisfy that base profile. The authoritative registration record for this
+Resource Type URN is in [Resource Type URNs](../../../urns/resource-types.md).
 
 ## 2. Introduction
 

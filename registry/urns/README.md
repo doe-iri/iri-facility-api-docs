@@ -1,10 +1,13 @@
-# DOE-IRI URN Root Registry
+# DOE-IRI URN Registry
 
-This document is the **registry of assigned DOE-IRI URN values**. The governing namespace specification is defined in [A URN Namespace for the DoE IRI Project](../rfc/rfc-iri-urn-structure-and-registry.md).
+This directory is the **registry of assigned DOE-IRI URN values**. The governing namespace specification is defined in [A URN Namespace for the DoE IRI Project](../../rfc/rfc-iri-urn-structure-and-registry.md).
 
 The governing DOE-IRI URN specification defines the namespace syntax, matching and equivalence rules, registration process, extension rules, and conformance requirements. This registry records the values assigned under that specification, their semantic placement within the DOE-IRI hierarchy, and their current lifecycle status.
 
-This document defines the root of the DOE-IRI registry and, where appropriate, delegates detailed subtrees to their corresponding registry documents.
+This document records the namespace root and registry branches. [Resource Type
+URNs](resource-types.md) is authoritative for assigned Resource Type URNs,
+and [Controlled Attribute URNs](attributes.md) is authoritative for controlled
+attribute values.
 
 ## 1. Registry Entry Metadata
 
@@ -21,7 +24,7 @@ The root DOE-IRI namespace is registered as follows:
 | Deprecated | Not applicable |
 | Replacement URN | Not applicable |
 | Change controller | IRI technical subcommittee. |
-| Reference | [A URN Namespace for the DoE IRI Project](../rfc/rfc-iri-urn-structure-and-registry.md) |
+| Reference | [A URN Namespace for the DoE IRI Project](../../rfc/rfc-iri-urn-structure-and-registry.md) |
 | Legacy value | None |
 | Examples | `urn:doe-iri:resource:storage:filesystem`, `urn:doe-iri:resource:compute:system`, `urn:doe-iri:storage:tier:scratch` |
 | Notes | This entry represents the root DOE-IRI URN namespace rather than an independently assignable resource or attribute value. Except for administrative delegation segments, the hierarchy beneath the namespace expresses registered semantic classification. The applicable IRI resource and link models represent physical topology, runtime relationships, and operational state separately. |
@@ -82,9 +85,9 @@ The first segment following `urn:doe-iri:` identifies the top-level registry cat
 | URN | Short name | Purpose | Status |
 |---|---|---|---|
 | `urn:doe-iri:resource` | Resource Types | Namespace for registered types of physical, logical, or virtual infrastructure resources. | `active` |
-| [`urn:doe-iri:storage`](urn-registry-type-storage.md) | Storage Vocabulary | Namespace for the controlled attribute vocabulary used to describe storage resources. | `provisional` |
-| [`urn:doe-iri:compute`](urn-registry-type-compute.md) | Compute Vocabulary | Namespace for the controlled attribute vocabulary used to describe compute resources. | `provisional` |
-| [`urn:doe-iri:service`](urn-registry-type-service.md) | Service Vocabulary | Namespace for the controlled attribute vocabulary used to describe service resources. | `provisional` |
+| [`urn:doe-iri:storage`](attributes.md) | Storage Vocabulary | Namespace for the controlled attribute vocabulary used to describe storage resources. | `provisional` |
+| [`urn:doe-iri:compute`](attributes.md) | Compute Vocabulary | Namespace for the controlled attribute vocabulary used to describe compute resources. | `provisional` |
+| [`urn:doe-iri:service`](attributes.md) | Service Vocabulary | Namespace for the controlled attribute vocabulary used to describe service resources. | `provisional` |
 | `urn:doe-iri:allocation` | Allocation Units | Namespace for units used to express resource quantities in facility allocations. | `active` |
 | `urn:doe-iri:compression` | Compression Types | Namespace for identifiers representing compression algorithms used by IRI APIs. | `active` |
 | `urn:doe-iri:ext` | Extension Administration | Administrative branch for delegated facility- or project-specific extensions; it is not a semantic controlled vocabulary. | `active` |
@@ -97,19 +100,20 @@ The following base URNs are defined to be compatible with the resource types in 
 
 | URN | Short name | Description | Legacy value | Status |
 |---|---|---|---|---|
-| [`urn:doe-iri:resource:compute`](urn-registry-type-compute.md) | Compute | Generic compute resource. | `compute` | `active` |
-| [`urn:doe-iri:resource:storage`](urn-registry-type-storage.md) | Storage | Generic storage resource. | `storage` | `active` |
+| [`urn:doe-iri:resource:compute`](resource-types.md) | Compute | Generic compute resource. | `compute` | `active` |
+| [`urn:doe-iri:resource:storage`](resource-types.md) | Storage | Generic storage resource. | `storage` | `active` |
 | `urn:doe-iri:resource:network` | Network | Generic network resource. | `network` | `active` |
 | `urn:doe-iri:resource:system` | System | Generic system resource type. | `system` | `active` |
 | `urn:doe-iri:resource:website` | Website | Generic website resource type. | `website` | `active` |
-| [`urn:doe-iri:resource:service`](urn-registry-type-service.md) | Service | Generic service resource type. Detailed service resource types and controlled vocabulary values are delegated to the Service Type Registry. | `service` | `active` |
+| [`urn:doe-iri:resource:service`](resource-types.md) | Service | Generic service resource type. Detailed service resource types are registered in the Resource Type URN index. | `service` | `active` |
 | `urn:doe-iri:resource:unknown` | Unknown | Fallback resource type used when the resource's more specific type is not known or cannot be represented by a registered resource-type URN. | `unknown` | `active` |
 
 `urn:doe-iri:resource:unknown` SHOULD NOT be used when a more specific registered resource type is known.
 
 Resource-type URNs classify resources. They do not encode containment or topology. A resource's relationship to other resources is represented separately using IRI link relations.
 
-Detailed resource-type and controlled-vocabulary values beneath `urn:doe-iri:resource:service` and `urn:doe-iri:service` are maintained in the [Service Type Registry](urn-registry-type-service.md) and its [Service Taxonomy and URN Index](urn-registry-type-service-taxonomy.md).
+Detailed resource-type and controlled-vocabulary values are maintained in
+[Resource Type URNs](resource-types.md) and [Controlled Attribute URNs](attributes.md).
 
 ## 5. Allocation Unit Registry
 

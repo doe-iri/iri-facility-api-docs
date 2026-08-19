@@ -1,503 +1,71 @@
 # DOE IRI Registry
 
-> Registry documentation for the resource types, controlled attribute vocabularies, attribute profiles, and hypermedia relationships used by the Department of Energy Integrated Research Infrastructure (IRI) Facility API.
-
-The DOE IRI Registry provides the registered semantic identifiers used to describe IRI resources while keeping the core API representation implementation-independent. It separates **resource classification**, **type-specific characteristics**, and **resource relationships** so that each area can evolve without requiring every registry change to modify the core OpenAPI schema.
-
-At a high level:
+The DOE IRI Registry records semantic identifiers and representation conventions
+used by the IRI Facility API. It keeps resource classification, relatively
+stable resource definition, relationships, and operational state distinct.
 
 ```text
-Resource Type  →  Attributes  →  Relationships
+Resource Type  →  Resource Definition  →  Relationships
+                         │
+                         └── operational state is separate
 ```
 
-Operational state is modeled separately from these relatively stable resource definitions.
-
-## 1. What Is the DOE IRI Registry?
-
-The registry records the identifiers and semantic definitions used by the IRI Facility API.
-
-It is intentionally separate from the specifications that define how those identifiers are structured and registered:
+## Registry structure
 
 ```text
-Specifications
-    Define the rules.
-
-Registries
-    Record the values assigned under those rules.
+registry/
+├── profiles/
+│   ├── status/resource.md
+│   └── resource-definition/<domain>/<type>.md
+├── urns/
+│   ├── README.md
+│   ├── resource-types.md
+│   └── attributes.md
+└── relations/
 ```
 
-The governing specifications define matters such as URN syntax, registration procedures, extension rules, HAL relationship semantics, and conformance requirements. The registry records the resource types, controlled vocabulary values, and link relations assigned under those rules.
-
-The root of the registered URN namespace is:
-
-```text
-urn:doe-iri:
-```
-
-The [DOE-IRI URN Root Registry](urn-registry-root.md) is the authoritative entry point for the registered namespace hierarchy.
-
-## 2. Resource Model
-
-IRI resource representations use three independently extensible semantic layers.
-
-| Layer | Answers | Representation |
-|---|---|---|
-| **Resource Type** | What kind of resource is this? | `resource_type` containing a registered `urn:doe-iri:resource:*` URN |
-| **Attributes** | What relatively stable characteristics does the resource have? | Type-specific `attributes`, including registered controlled URN values where appropriate. |
-| **Relationships** | How is the resource related to other resources? | Registered HAL `_links` relations. |
-
-Conceptually:
-
-```text
-Resource Definition
-│
-├── resource_type ──> What kind of resource is this?
-│
-├── attributes ─────> What characteristics does it have?
-│
-└── _links ─────────> How is it related to other resources?
-```
-
-This separation allows:
-
-- New resource types to be registered without changing the core resource schema.
-- Type-specific attribute profiles to evolve independently.
-- Controlled attribute vocabularies to grow without introducing new JSON property names.
-- New link relations to be registered without embedding topology into resource definitions.
-
-## 3. Registry Structure
-
-The registry is organized hierarchically by semantic domain.
-
-```text
-DOE-IRI Registry
-│
-├── Root URN Registry
-│
-├── Resource Type Registries
-│   │
-│   ├── Storage
-│   │   ├── Storage System
-│   │   ├── Filesystem
-│   │   ├── Filesystem Mount
-│   │   ├── Block Storage
-│   │   └── Object Storage
-│   │
-│   ├── Compute
-│   │   ├── Compute System
-│   │   ├── Compute Node
-│   │   ├── CPU
-│   │   └── GPU
-│   │
-│   └── Service
-│       ├── DTN Service
-│       └── Inference Service
-│
-├── Controlled Attribute Vocabularies
-│   ├── Storage
-│   ├── Compute
-│   └── Service
-│
-└── Link Relation Definitions
-    ├── Core resource relationships
-    ├── Storage relationships
-    ├── Compute relationships
-    └── Service relationships
-```
-
-The URN hierarchy is a **semantic classification hierarchy**. It does not imply physical containment, ownership, deployment topology, or runtime relationships between resources.
-
-For example:
-
-```text
-urn:doe-iri:resource:compute:node
-```
-
-classifies a resource as a compute node. Its membership in a compute system is represented separately through a registered link relation such as `iri:has-node`.
-
-## 4. Root Registry
-
-| Document | Purpose |
+| Location | Authority |
 |---|---|
-| [DOE-IRI URN Root Registry](urn-registry-root.md) | Defines the registered top-level `urn:doe-iri:` semantic branches, base resource-type URNs, allocation units, compression identifiers, and delegated extension authorities. |
+| [profiles/status/resource.md](profiles/status/resource.md) | Common semantics for every IRI Resource representation. |
+| [profiles/resource-definition/](profiles/resource-definition/) | Type-specific Resource Definition semantics selected by `resource_type`. |
+| [urns/resource-types.md](urns/resource-types.md) | Assigned Resource Type URNs. |
+| [urns/attributes.md](urns/attributes.md) | Assigned controlled attribute URNs. |
+| [relations/](relations/README.md) | Registered relation names and their complete semantics. |
 
-The Root Registry is the starting point for discovering registered DOE-IRI identifiers.
+A Resource Type URN is not a profile URI. A Resource Definition profile is
+selected by the Resource's `resource_type`, and supplements rather than
+replaces the [IRI Status Resource Profile](profiles/status/resource.md). For
+example, a Resource whose type is
+`urn:doe-iri:resource:compute:system` conforms both to the common Resource
+profile and to
+`https://iri.science/profiles/resource-definition/compute/system`.
 
-The governing URN specification, rather than the Root Registry, defines namespace syntax, matching and equivalence rules, registration procedures, and extension rules.
+URN registry documents record assigned identifiers. Resource Definition
+profiles define type-specific representation semantics, including stable
+attributes and applicable relationships. The governing specifications define
+URN syntax and registration rules; they are not duplicated here.
 
-## 5. Resource Type Registries
+## Resource model
 
-Resource Type Registries define the registered type hierarchy for a resource domain and provide navigation to the applicable attribute and relationship documentation.
+Resource Type URNs classify a resource. Type-specific attributes describe
+relatively stable characteristics. Registered HAL link relations express
+topology and navigation. Dynamic facts such as current health, capacity,
+utilization, availability, transfer activity, and workload activity are state,
+not Resource Definition attributes.
 
-### 5.1. Storage
+The Resource Type hierarchy is semantic, not a containment tree. For example,
+compute systems, nodes, CPUs, and GPUs are sibling resource types; their
+topology uses `iri:has-node`, `iri:has-cpu`, and `iri:has-gpu`.
 
-The Storage registry defines the resource types used to represent storage infrastructure and logical storage resources.
+## Start here
 
-**Entry points**
-
-| Document | Purpose |
+| I want to… | Start here |
 |---|---|
-| [Storage Type Registry](urn-registry-type-storage.md) | Defines the `urn:doe-iri:resource:storage` resource hierarchy and the storage resource model. |
-| [Storage Taxonomy and URN Index](urn-registry-type-storage-taxonomy.md) | Consolidated taxonomy, storage controlled attribute URNs, and storage resource relationships. |
-
-**Resource attribute profiles**
-
-| Resource Type | Attribute Profile |
-|---|---|
-| Storage System | [urn-registry-attributes-storage-system.md](urn-registry-attributes-storage-system.md) |
-| Filesystem | [urn-registry-attributes-storage-filesystem.md](urn-registry-attributes-storage-filesystem.md) |
-| Filesystem Mount | [urn-registry-attributes-storage-mount.md](urn-registry-attributes-storage-mount.md) |
-| Block Storage | [urn-registry-attributes-storage-block.md](urn-registry-attributes-storage-block.md) |
-| Object Storage | [urn-registry-attributes-storage-object.md](urn-registry-attributes-storage-object.md) |
-
-**Storage relationship definitions**
-
-| Relationship | Source | Target | Definition |
-|---|---|---|---|
-| `iri:provides-filesystem` | Storage System | Filesystem | [relations/provides-filesystem.md](relations/provides-filesystem.md) |
-| `iri:provides-block` | Storage System | Block Storage | [relations/provides-block.md](relations/provides-block.md) |
-| `iri:provides-object` | Storage System | Object Storage | [relations/provides-object.md](relations/provides-object.md) |
-| `iri:has-mount` | Filesystem | Filesystem Mount | [relations/has-mount.md](relations/has-mount.md) |
-| `iri:mounted-on` | Filesystem Mount | Compute System | [relations/mounted-on.md](relations/mounted-on.md) |
-| `iri:attached-to` | Block Storage | Compute System or Compute Node | [relations/attached-to.md](relations/attached-to.md) |
-
-### 5.2. Compute
-
-The Compute registry defines the resource types used to represent managed compute systems, individual nodes, and processing devices.
-
-**Entry points**
-
-| Document | Purpose |
-|---|---|
-| [Compute Type Registry](urn-registry-type-compute.md) | Defines the `urn:doe-iri:resource:compute` resource hierarchy and the compute resource model. |
-| [Compute Taxonomy and URN Index](urn-registry-type-compute-taxonomy.md) | Consolidated taxonomy, compute controlled attribute URNs, and compute resource relationships. |
-
-**Resource attribute profiles**
-
-| Resource Type | Attribute Profile |
-|---|---|
-| Compute System | [urn-registry-attributes-compute-system.md](urn-registry-attributes-compute-system.md) |
-| Compute Node | [urn-registry-attributes-compute-node.md](urn-registry-attributes-compute-node.md) |
-| CPU | [urn-registry-attributes-compute-cpu.md](urn-registry-attributes-compute-cpu.md) |
-| GPU | [urn-registry-attributes-compute-gpu.md](urn-registry-attributes-compute-gpu.md) |
-
-**Compute relationship definitions**
-
-| Relationship | Source | Target | Definition |
-|---|---|---|---|
-| `iri:has-node` | Compute System | Compute Node | [relations/has-node.md](relations/has-node.md) |
-| `iri:has-cpu` | Compute Node | CPU | [relations/has-cpu.md](relations/has-cpu.md) |
-| `iri:has-gpu` | Compute Node | GPU | [relations/has-gpu.md](relations/has-gpu.md) |
-
-### 5.3. Service
-
-The Service registry defines consumable data-transfer and model-invocation services and the relatively stable infrastructure relationships used to describe their hosting and configured filesystem access.
-
-**Entry points**
-
-| Document | Purpose |
-|---|---|
-| [Service Type Registry](urn-registry-type-service.md) | Defines the `urn:doe-iri:resource:service` resource hierarchy, the `urn:doe-iri:service` controlled-vocabulary branch, and the service resource model. |
-| [Service Taxonomy and URN Index](urn-registry-type-service-taxonomy.md) | Consolidated taxonomy, service controlled attribute URNs, and service resource relationships. |
-
-**Resource attribute profiles**
-
-| Resource Type | Attribute Profile |
-|---|---|
-| DTN Service | [urn-registry-attributes-service-dtn.md](urn-registry-attributes-service-dtn.md) |
-| Inference Service | [urn-registry-attributes-service-inference.md](urn-registry-attributes-service-inference.md) |
-
-**Service relationship definitions**
-
-| Relationship | Source | Target | Definition |
-|---|---|---|---|
-| `iri:hosted-on` | DTN Service or Inference Service | Compute System or Compute Node | [relations/hosted-on.md](relations/hosted-on.md) |
-| `iri:accesses-mount` | DTN Service | Filesystem Mount | [relations/accesses-mount.md](relations/accesses-mount.md) |
-
-### 5.4. Additional Resource Domains
-
-Additional resource domains MAY be introduced beneath `urn:doe-iri:resource` as their refinement models are defined.
-
-Base resource types currently registered by the Root Registry include domains such as:
-
-```text
-urn:doe-iri:resource:network
-urn:doe-iri:resource:system
-urn:doe-iri:resource:website
-```
-
-When a domain requires subtype refinement, controlled attributes, or
-relationship definitions, it SHOULD follow the same documentation structure
-used by Storage and Compute.
-
-## 6. Controlled Attribute Vocabularies
-
-Some resource attributes use registered URNs rather than unrestricted strings.
-
-A controlled attribute URN identifies a standardized characteristic of a resource; it does not identify the resource itself.
-
-For example:
-
-```text
-Resource type:
-    urn:doe-iri:resource:storage:filesystem
-
-Attribute:
-    tier
-
-Controlled value:
-    urn:doe-iri:storage:tier:scratch
-```
-
-Compare this with:
-
-```text
-Resource type:
-    urn:doe-iri:resource:compute:cpu
-
-Attribute:
-    cpu_architecture
-
-Controlled value:
-    urn:doe-iri:compute:cpu-architecture:x86-64
-```
-
-Controlled vocabulary namespaces are separate from resource-type namespaces:
-
-```text
-urn:doe-iri:resource:...
-    Resource classification
-
-urn:doe-iri:storage:...
-    Storage controlled attribute vocabulary
-
-urn:doe-iri:compute:...
-    Compute controlled attribute vocabulary
-
-urn:doe-iri:service:...
-    Service controlled attribute vocabulary
-```
-
-Each resource's attribute profile defines which controlled vocabularies apply and whether an attribute is singular, multi-valued, optional, or required.
-
-## 7. Link Relation Definitions
-
-Link-relation definitions define the semantics of registered HAL relationships
-from IRI Resource representations to applicable API representations.
-The [DOE-IRI Link Relation Index](relations/README.md) is the authoritative
-navigation entry point for registered `iri:*` relations.
-
-Each relationship definition documents, at minimum:
-
-- Semantic meaning.
-- Source representation type.
-- Target representation type.
-- Cardinality.
-- Whether the target represents static topology or dynamic state.
-- Whether authorization may affect relationship visibility.
-- Whether the target is a resource, state object, operation entry point, or relationship resource.
-- Example HAL representation.
-
-Relationships describe topology or navigation and SHOULD NOT be duplicated as ordinary attributes when a registered link relation exists for the same semantic relationship.
-
-**Core resource relationship definitions**
-
-| Relationship | Source | Target | Definition |
-|---|---|---|---|
-| `iri:located-at` | Any DOE-IRI Resource | Facility API Site representation | [relations/located-at.md](relations/located-at.md) |
-
-For example:
-
-```text
-Storage System
-    │
-    │ iri:provides-filesystem
-    ▼
-Filesystem
-    │
-    │ iri:has-mount
-    ▼
-Filesystem Mount
-    │
-    │ iri:mounted-on
-    ▼
-Compute System
-```
-
-and:
-
-```text
-Compute System
-    │
-    │ iri:has-node
-    ▼
-Compute Node
-    │
-    ├── iri:has-cpu ──> CPU
-    │
-    └── iri:has-gpu ──> GPU
-```
-
-## 8. How the Documents Relate
-
-The following example shows how the registry documentation for a filesystem resource connects.
-
-```text
-urn:doe-iri:resource:storage
-        │
-        └── urn:doe-iri:resource:storage:filesystem
-                    │
-                    ├── Attribute Profile
-                    │     urn-registry-attributes-storage-filesystem.md
-                    │
-                    ├── Controlled Attributes
-                    │     urn:doe-iri:storage:filesystem-technology:lustre
-                    │     urn:doe-iri:storage:tier:scratch
-                    │     urn:doe-iri:storage:media-type:solid-state
-                    │     ...
-                    │
-                    └── Relationships
-                          iri:has-mount
-                              │
-                              └── relations/has-mount.md
-```
-
-The resource type selects the applicable semantic profile. The profile defines
-the characteristics of that type, including any controlled URN values.
-Link-relation definitions define how instances of that type relate to other IRI
-resources.
-
-## 9. Where Do I Start?
-
-| I want to... | Start here |
-|---|---|
-| Understand the DOE-IRI URN namespace | [Root Registry](urn-registry-root.md) |
-| Find a registered resource type | [Root Registry](urn-registry-root.md) → applicable Resource Type Registry |
-| Describe a storage resource | [Storage Type Registry](urn-registry-type-storage.md) |
-| Describe a compute resource | [Compute Type Registry](urn-registry-type-compute.md) |
-| Describe a DTN or inference service | [Service Type Registry](urn-registry-type-service.md) |
-| Find service controlled attribute values | [Service Taxonomy and URN Index](urn-registry-type-service-taxonomy.md) |
-| Understand service hosting or configured mount access | [Service relationship definitions](urn-registry-type-service.md#6-service-resource-relationships) |
-| See a complete storage, compute, DTN, and inference topology | [Example HPC facility resource set](examples/hpc-facility-resources.json) |
-| Determine which attributes apply to a resource | The resource's Attribute Profile |
-| Find valid controlled attribute values | Applicable taxonomy/index or Attribute Profile |
-| Understand how two resources relate | Applicable link-relation definition |
-| Determine whether information belongs in definition or state | Resource model guidance and applicable attribute profile or link-relation definition |
-| Register a new DOE-IRI URN | Governing DOE-IRI URN specification |
-| Define a facility-specific extension | Root Registry extension-authority section and governing URN specification |
-
-## 10. Registry Conventions
-
-### 10.1. File Naming
-
-Registry documentation follows a predictable naming convention:
-
-```text
-urn-registry-root.md
-    Root DOE-IRI namespace registry
-
-urn-registry-type-<domain>.md
-    Resource-type registry and model for a domain
-
-urn-registry-type-<domain>-taxonomy.md
-    Consolidated taxonomy and URN index for a domain
-
-urn-registry-attributes-<domain>-<type>.md
-    Attribute profile for a specific resource type
-
-relations/<relation>.md
-    Semantic definition of an IRI link relation
-```
-
-Examples:
-
-```text
-urn-registry-type-storage.md
-urn-registry-type-compute.md
-
-urn-registry-attributes-storage-filesystem.md
-urn-registry-attributes-compute-node.md
-
-relations/has-mount.md
-relations/has-node.md
-```
-
-### 10.2. Registry Status
-
-Registry entries use lifecycle status values such as:
-
-| Status | Meaning |
-|---|---|
-| `active` | Assigned and approved for current use. |
-| `provisional` | Assigned for evaluation or refinement and subject to change. |
-| `deprecated` | Retained for compatibility but no longer preferred for new use. |
-
-A deprecated value SHOULD identify its preferred replacement when one exists.
-
-### 10.3. URNs and Link Relations
-
-DOE-IRI URNs and IRI link relations serve different purposes.
-
-```text
-URN
-    Identifies a registered semantic value.
-
-Link relation
-    Identifies the semantic relationship between representations.
-```
-
-For example:
-
-```text
-urn:doe-iri:resource:storage:filesystem
-```
-
-classifies a resource, while:
-
-```text
-iri:has-mount
-```
-
-describes a relationship from that filesystem to a mount resource.
-
-### 10.4. Definition and State
-
-Registry attribute profiles SHOULD describe relatively stable resource characteristics.
-
-Examples of definition information include:
-
-- Resource type.
-- Technology.
-- Architecture.
-- Capabilities.
-- Configured capacity.
-- Topology relationships.
-
-Examples of operational state include:
-
-- Current availability.
-- Health.
-- Utilization.
-- Free or used capacity.
-- Current throughput.
-- Current attachment or mount status.
-
-Dynamic state SHOULD NOT be encoded by changing relatively stable type or topology semantics solely because current operating conditions change.
-
-## 11. Governing Specifications
-
-The registry is governed by specifications that define the syntax, semantics, and registration rules under which registry values are assigned.
-
-| Specification | Purpose |
-|---|---|
-| [A URN Namespace for the DoE IRI Project](../rfc/rfc-iri-urn-structure-and-registry.md) | Defines the DOE-IRI URN namespace structure, registration model, extension rules, and conformance requirements. |
-| [Type-Specific Attributes for IRI Resource Objects](../rfc/rfc-type-specific-attributes.md) | Defines the model for type-specific resource attributes. |
-| HAL `_links` Integration for IRI 2.0 | Defines the use of HAL links for resource relationships. |
-| Facility Physical and Logical Topology API Using HAL Links | Defines topology representation using resource relationships. |
-| Separating ResourceDefinition from ResourceState | Defines the separation between relatively stable resource definition and dynamic operational state. |
-
-Where a registry document and a governing specification appear to conflict, the governing specification defines the registration and conformance rules; the registry defines the currently assigned values.
-
----
+| Understand the DOE-IRI namespace | [URN Registry](urns/README.md) |
+| Find a Resource Type | [Resource Type URNs](urns/resource-types.md) |
+| Find a controlled attribute value | [Controlled Attribute URNs](urns/attributes.md) |
+| Describe a typed Resource | Its linked Resource Definition profile |
+| Understand a relationship | [Link Relation Index](relations/README.md) |
+| Understand the common Resource representation | [IRI Status Resource Profile](profiles/status/resource.md) |
 
 *IRI specification — DOE Integrated Research Infrastructure*

@@ -1,10 +1,24 @@
-# Attribute Profile: `urn:doe-iri:resource:service:dtn`
+# IRI DTN Service Resource Definition Profile
+
+**Profile URI:** `https://iri.science/profiles/resource-definition/service/dtn`  
+**Base Profile:** `https://iri.science/profiles/status/resource`  
+**Resource Type:** `urn:doe-iri:resource:service:dtn`  
+**Status:** Draft  
+**Version:** 1.0.0
+
+## Profile Applicability
+
+This profile applies when `resource_type` is `urn:doe-iri:resource:service:dtn`.
+It specializes the [IRI Status Resource Profile](../../status/resource.md),
+which a conforming representation MUST also satisfy. The authoritative URN
+record is [Resource Type URNs](../../../urns/resource-types.md).
 
 This document defines attributes for the `urn:doe-iri:resource:service:dtn` resource type.
 
-## 1. Registry Metadata
+## 1. Profile Context
 
-As described in [A URN Namespace for the DoE IRI Project](../rfc/rfc-iri-urn-structure-and-registry.md), the following metadata is recorded:
+The following retained context identifies the profile's Resource Type; its
+registration is authoritative in the URN registry.
 
 | Field | Description |
 |---|---|
@@ -15,7 +29,7 @@ As described in [A URN Namespace for the DoE IRI Project](../rfc/rfc-iri-urn-str
 | Status | `provisional` |
 | Introduced | IRI v2.0 |
 | Change controller | IRI technical subcommittee. |
-| Reference | [Service Resource Types Design](../docs/superpowers/specs/2026-08-13-service-resource-types-design.md). |
+| Reference | [Service Resource Types Design](../../../../docs/superpowers/specs/2026-08-13-service-resource-types-design.md). |
 | Legacy value | `service` enumeration. The broad legacy value does not distinguish this refinement. |
 | Examples | `urn:doe-iri:resource:service:dtn` |
 | Notes | This profile defines relatively stable characteristics of a consumable DTN service. |
@@ -53,7 +67,8 @@ urn:doe-iri
         └── sftp
 ```
 
-The complete service resource and controlled-vocabulary index is maintained in the [Service Taxonomy and URN Index](urn-registry-type-service-taxonomy.md).
+The complete controlled-vocabulary index is maintained in [Controlled Attribute
+URNs](../../../urns/attributes.md).
 
 ## 4. DTN Service Attribute Profile
 

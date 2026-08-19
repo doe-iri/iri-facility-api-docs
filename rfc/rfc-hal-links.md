@@ -21,7 +21,7 @@ This document is a proposed IRI Facility API RFC. The key words **MUST**,
 **MUST NOT**, **SHOULD**, **SHOULD NOT**, and **MAY** are to be interpreted as
 described in BCP 14 when, and only when, they appear in all capitals. The
 authoritative source for DOE-IRI resource-type and controlled-value URNs is
-the [DOE-IRI URN Registry](../registry/urn-registry-root.md). The
+the [DOE-IRI URN Registry](../registry/urns/README.md). The
 [DOE-IRI Link Relation Index](../registry/relations/README.md) is the
 authoritative navigation index for registered `iri:*` names; each linked
 definition is authoritative for that relation's complete semantics.
