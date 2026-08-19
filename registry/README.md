@@ -1,13 +1,10 @@
 # DOE IRI Registry
 
 The DOE IRI Registry records semantic identifiers and representation conventions
-used by the IRI Facility API. It keeps resource classification, relatively
-stable resource definition, relationships, and operational state distinct.
+used by the IRI Facility API. It keeps resource classification, resource definition, and relationships distinct.
 
 ```text
 Resource Type  →  Resource Definition  →  Relationships
-                         │
-                         └── operational state is separate
 ```
 
 ## Registry structure
