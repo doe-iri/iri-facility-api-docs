@@ -1,0 +1,300 @@
+paths:
+  /api/v2/storage/locations/{resource_id}:
+    get:
+      tags:
+      - storage
+      summary: Get resolved storage locations for a resource
+      description: 'Return the resolved storage paths for the authenticated user at
+        the specified resource. The response includes both placement and access semantics
+        for that resource context, so it can be used in place of a separate mounts
+        endpoint. Optionally filter by logical name, project/allocation, and intent.
+
+
+        Intent semantics:
+
+        - `staging`: excludes archive (too slow for staging workflows)
+
+        - `long-term-storage`: returns only archive
+
+        - `write`: excludes paths that are read-only in a compute-job context
+
+        - `read`: no filtering'
+      operationId: getStorageLocations
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: resource_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Resource Id
+      - name: logicalpath
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/LogicalName'
+          - type: 'null'
+          description: Filter to a specific logical filesystem tier
+          title: Logicalpath
+        description: Filter to a specific logical filesystem tier
+      - name: project
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Project or allocation identifier for project-scoped paths
+          title: Project
+        description: Project or allocation identifier for project-scoped paths
+      - name: allocation
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Allocation identifier (alternative to project)
+          title: Allocation
+        description: Allocation identifier (alternative to project)
+      - name: intent
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/StorageIntent'
+          - type: 'null'
+          description: Intended use to guide which locations are returned
+          title: Intent
+        description: Intended use to guide which locations are returned
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StorageInstance'
+                title: Response Getstoragelocations
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          headers:
+            WWW-Authenticate:
+              description: Bearer authentication challenge
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '405':
+          description: Method Not Allowed
+          headers:
+            Allow:
+              description: Allowed HTTP methods
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '501':
+          description: Not Implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '304':
+          description: Not Modified
+      x-iri:
+        maturity: in_development
+        implementation:
+          level: optional
+  /api/v2/storage/access-endpoints/{resource_id}:
+    get:
+      tags:
+      - storage
+      summary: Get data access endpoints for a storage resource
+      description: 'Return the list of data access endpoints for the given storage
+        resource for the authenticated user. Each entry describes a protocol (Globus,
+        XRootD, S3, ...) and the connection details needed to use it. Adapters may
+        use the authenticated identity to include user-specific paths (e.g. home directories,
+        per-user Globus collections). Protocol-specific fields (endpoint_id, uri,
+        bucket, etc.) are present only for the relevant protocol; unrelated fields
+        are omitted.
+
+
+        Optionally filter by protocol and/or endpoint ID.'
+      operationId: getStorageAccessEndpoints
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: resource_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Resource Id
+      - name: protocol
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/AccessProtocol'
+          - type: 'null'
+          description: Filter by access protocol
+          title: Protocol
+        description: Filter by access protocol
+      - name: endpoint_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by endpoint ID
+          title: Endpoint Id
+        description: Filter by endpoint ID
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessEndpoint'
+                title: Response Getstorageaccessendpoints
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          headers:
+            WWW-Authenticate:
+              description: Bearer authentication challenge
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '405':
+          description: Method Not Allowed
+          headers:
+            Allow:
+              description: Allowed HTTP methods
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '501':
+          description: Not Implemented
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '304':
+          description: Not Modified
+      x-iri:
+        maturity: in_development
+        implementation:
+          level: required

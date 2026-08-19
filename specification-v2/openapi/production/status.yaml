@@ -60,7 +60,25 @@ paths:
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/ResourceType'
+          type: string
+          minLength: 15
+          pattern: ^urn:doe-iri:[A-Za-z0-9][A-Za-z0-9-]{0,31}:(?:[A-Za-z0-9._~-]|%[0-9A-Fa-f]{2}|[!$&'()*+,;=@]|/)+(?::(?:[A-Za-z0-9._~-]|%[0-9A-Fa-f]{2}|[!$&'()*+,;=@]|/)+)*$
+          description: DOE IRI resource type URN (urn:doe-iri:<domain>:<nss>). Facility-local
+            extensions accepted. Matching is by URN prefix, so a canonical/parent
+            URN (e.g. urn:doe-iri:resource:storage) returns resources of that type
+            and of any more specific child type (e.g. urn:doe-iri:resource:storage:system);
+            a full child URN matches only that exact type.
+          examples:
+          - urn:doe-iri:resource:compute
+          - urn:doe-iri:resource:storage
+          - urn:doe-iri:resource:storage:system
+          - urn:doe-iri:service:generic
+          title: Resource Type
+        description: DOE IRI resource type URN (urn:doe-iri:<domain>:<nss>). Facility-local
+          extensions accepted. Matching is by URN prefix, so a canonical/parent URN
+          (e.g. urn:doe-iri:resource:storage) returns resources of that type and of
+          any more specific child type (e.g. urn:doe-iri:resource:storage:system);
+          a full child URN matches only that exact type.
       - name: current_status
         in: query
         required: false
@@ -72,7 +90,13 @@ paths:
         schema:
           type: array
           items:
-            $ref: '#/components/schemas/AllocationUnit'
+            type: string
+            minLength: 24
+            pattern: ^urn:doe-iri:allocation:(?:[A-Za-z0-9._~-]|%[0-9A-Fa-f]{2}|[!$&'()*+,;=@]|/)+(?::(?:[A-Za-z0-9._~-]|%[0-9A-Fa-f]{2}|[!$&'()*+,;=@]|/)+)*$
+            description: DOE IRI allocation-unit URN.
+            examples:
+            - urn:doe-iri:allocation:compute:node-hours
+            - urn:doe-iri:allocation:storage:bytes
           minItems: 1
           title: Capability
       responses:
