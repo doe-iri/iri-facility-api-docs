@@ -121,9 +121,9 @@ These URNs identify units used to express resource quantities in allocation obje
 
 | URN | Short name | Description | Legacy value | Status |
 |---|---|---|---|---|
-| `urn:doe-iri:allocation:node-hours` | Node-hours | Compute allocation measured in node-hours. | `node-hours` | `active` |
-| `urn:doe-iri:allocation:bytes` | Bytes | Storage allocation measured in bytes. | `bytes` | `active` |
-| `urn:doe-iri:allocation:inodes` | Inodes | Storage allocation measured in filesystem inodes. | `inodes` | `active` |
+| `urn:doe-iri:allocation:compute:node-hours` | Node-hours | Compute allocation measured in node-hours. | `node-hours` | `active` |
+| `urn:doe-iri:allocation:storage:bytes` | Bytes | Storage allocation measured in bytes. | `bytes` | `active` |
+| `urn:doe-iri:allocation:storage:inodes` | Inodes | Storage allocation measured in filesystem inodes. | `inodes` | `active` |
 
 ## 6. Compression Type Registry
 

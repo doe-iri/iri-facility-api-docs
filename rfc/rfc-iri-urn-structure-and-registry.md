@@ -282,7 +282,7 @@ urn:doe-iri:resource:storage
 is a semantic parent of:
 
 ```
-urn:doe-iri:resource:storage:filesystem:scratch
+urn:doe-iri:resource:storage:filesystem
 ```
 
 But `urn:doe-iri:resource:stor` is not a valid semantic parent of any type.
@@ -489,7 +489,7 @@ This document does not require action by IANA, however, in the future the IRI In
 | :---- | :---- | :---- | :---- | :---- |
 | `urn:doe-iri:resource:compute` | Compute | `urn:doe-iri:resource` | active | A compute resource or compute resource collection. |
 | `urn:doe-iri:resource:compute:gpu` | GPU | `urn:doe-iri:resource:compute` | active | A graphics processing unit or GPU-backed compute resource. |
-| `urn:doe-iri:resource:storage:filesystem:scratch` | Scratch filesystem | `urn:doe-iri:resource:storage:filesystem` | active | A filesystem intended for scratch or temporary workflow storage. |
+| `urn:doe-iri:resource:storage:filesystem` | Filesystem | `urn:doe-iri:resource:storage` | provisional | A logical storage resource with files, directories, and filesystem access semantics. |
 | `urn:doe-iri:resource:service:dtn` | DTN Service | `urn:doe-iri:resource:service` | provisional | A consumable data-transfer service. |
 | `urn:doe-iri:resource:service:inference` | Inference Service | `urn:doe-iri:resource:service` | provisional | A consumable model-invocation service. |
 | `urn:doe-iri:service:dtn-technology:globus` | Globus DTN technology | `urn:doe-iri:service:dtn-technology` | provisional | A controlled attribute value identifying Globus as the DTN service technology or implementation. |

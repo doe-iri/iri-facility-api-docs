@@ -219,7 +219,6 @@ urn:doe-iri:resource:compute:gpu
 
 urn:doe-iri:resource:storage:system
 urn:doe-iri:resource:storage:filesystem
-urn:doe-iri:resource:storage:filesystem:scratch
 
 urn:doe-iri:resource:service:dtn
 urn:doe-iri:resource:service:inference
@@ -235,8 +234,6 @@ For example:
 urn:doe-iri:resource:storage
         │
         └── filesystem
-              │
-              └── scratch
 ```
 
 corresponds to:
@@ -245,47 +242,41 @@ corresponds to:
 urn:doe-iri:resource:storage
 
 urn:doe-iri:resource:storage:filesystem
-
-urn:doe-iri:resource:storage:filesystem:scratch
 ```
 
 A Resource classified as:
 
 ```text
-urn:doe-iri:resource:storage:filesystem:scratch
+urn:doe-iri:resource:storage:filesystem
 ```
 
 is therefore also within the semantic hierarchy rooted at:
 
 ```text
-urn:doe-iri:resource:storage:filesystem
-```
-
-and:
-
-```text
 urn:doe-iri:resource:storage
 ```
 
-when those intermediate hierarchy levels are registered and semantically defined.
+because that parent hierarchy level is registered and semantically defined.
 
 ### 5.3 Producer Requirements
 
 A producer SHOULD emit the most specific registered Resource Type URN that accurately describes the Resource.
 
-For example, a scratch filesystem SHOULD normally use:
+For example, a scratch filesystem SHOULD use the registered filesystem Resource
+Type and identify its scratch tier through the applicable type-specific
+attributes:
 
-```text
-urn:doe-iri:resource:storage:filesystem:scratch
+```json
+{
+  "resource_type": "urn:doe-iri:resource:storage:filesystem",
+  "attributes": {
+    "tier": "urn:doe-iri:storage:tier:scratch"
+  }
+}
 ```
 
-rather than only:
-
-```text
-urn:doe-iri:resource:storage
-```
-
-when the more-specific classification is known and appropriate to disclose.
+The Resource Type identifies the Resource as a filesystem; the `tier` attribute
+identifies its intended scratch lifecycle or usage tier.
 
 A producer MAY emit a recognized parent Resource Type when:
 
@@ -307,24 +298,17 @@ A hierarchy-aware client SHOULD fall back to the nearest recognized semantic par
 For example, if a client does not understand:
 
 ```text
-urn:doe-iri:resource:storage:filesystem:scratch
+urn:doe-iri:resource:storage:filesystem
 ```
 
 but understands:
 
 ```text
-urn:doe-iri:resource:storage:filesystem
-```
-
-it SHOULD process the Resource using its known filesystem behavior where that behavior is applicable.
-
-If the client understands only:
-
-```text
 urn:doe-iri:resource:storage
 ```
 
-it MAY fall back to generic storage behavior.
+it SHOULD fall back to generic storage behavior where that behavior is
+applicable.
 
 A client that does not implement DOE-IRI hierarchy parsing MUST treat an unfamiliar Resource Type URN as an opaque semantic identifier.
 
@@ -341,7 +325,7 @@ urn:doe-iri:resource:storage
 is a semantic parent of:
 
 ```text
-urn:doe-iri:resource:storage:filesystem:scratch
+urn:doe-iri:resource:storage:filesystem
 ```
 
 but:
@@ -837,7 +821,7 @@ https://iri.science/profiles/status/resource
     ↓
 WHAT semantic representation contract applies
 
-urn:doe-iri:resource:storage:filesystem:scratch
+urn:doe-iri:resource:storage:filesystem
     ↓
 WHAT KIND of IRI Resource is represented
 ```
@@ -913,7 +897,7 @@ urn:doe-iri:resource:storage
 may be exposed instead of:
 
 ```text
-urn:doe-iri:resource:storage:filesystem:scratch
+urn:doe-iri:resource:storage:filesystem
 ```
 
 when policy permits disclosure of the broad Resource class but not the more-specific subtype.
