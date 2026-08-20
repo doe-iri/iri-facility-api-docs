@@ -44,11 +44,14 @@ URN syntax and registration rules; they are not duplicated here.
 
 ## Resource model
 
-Resource Type URNs classify a resource. Type-specific attributes describe
-relatively stable characteristics. Registered HAL link relations express
-topology and navigation. Dynamic facts such as current health, capacity,
-utilization, availability, transfer activity, and workload activity are state,
-not Resource Definition attributes.
+Resource Type URNs classify a Resource. Resource Definition Profiles define
+additional type-specific semantics selected by `resource_type`. A profile may
+define configuration, descriptive metadata, capabilities, quantitative values,
+or time-varying observations as appropriate to that Resource type. Registered
+HAL link relations express topology and navigation.
+
+IRI v2 does not require a separate Resource Definition / Resource State
+representation model.
 
 The Resource Type hierarchy is semantic, not a containment tree. For example,
 compute systems, nodes, CPUs, and GPUs are sibling resource types; their

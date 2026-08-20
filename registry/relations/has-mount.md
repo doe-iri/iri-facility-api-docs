@@ -57,7 +57,7 @@ from the profile URI associated with a target mount representation.
 | Target stability | Relatively static relationship resource. The target represents configured filesystem exposure, not current mount health or availability. |
 | Authorization affects visibility | Yes. Mount resources MAY be omitted when the requester is not authorized to discover the mount or its associated consuming system. |
 | Target classification | Relationship resource |
-| Relationship volatility | Configuration/topology. Mount definitions may be added or removed as filesystem exposure changes, but operational mounted/unmounted state belongs in state. |
+| Relationship volatility | Configuration/topology. Mount definitions may be added or removed as filesystem exposure changes; ordinary mounted/unmounted condition changes do not by themselves change the relationship. |
 
 ## 3. Semantic Meaning
 
@@ -125,8 +125,9 @@ filesystem.
 The mount target represents a relatively stable exposure configuration.
 
 The existence of `iri:has-mount` MUST NOT be interpreted as proof that the
-mount is currently active, reachable, healthy, or usable. Current mount status
-belongs in the mount resource's state representation.
+mount is currently active, reachable, healthy, or usable. Current mount
+condition is outside the semantics of this relation and, when represented, is
+governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 7. Authorization and Visibility
 

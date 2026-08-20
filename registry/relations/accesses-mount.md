@@ -31,7 +31,7 @@ profile.
 | Target stability | Relatively static relationship resource. The target identifies configured filesystem access topology, not current mount availability, endpoint reachability, credential validity, unrestricted access, or transfer activity. |
 | Authorization affects visibility | Yes. The relationship or individual mount targets MAY be omitted when the requester is not authorized to discover the configured access topology. |
 | Target classification | Relationship resource |
-| Relationship volatility | Relatively static configured access topology. Changes when DTN access configuration changes; operational mount and transfer state is separate. |
+| Relationship volatility | Relatively static configured access topology. Changes when DTN access configuration changes, not merely when mount or transfer conditions change. |
 
 ## 2. Semantic Meaning
 
@@ -55,7 +55,7 @@ The relationship MUST target a resource whose `resource_type` is:
 urn:doe-iri:resource:storage:mount
 ```
 
-The mount target is a relationship resource representing configured filesystem exposure. It is not a direct filesystem target, state object, operation entry point, or endpoint.
+The mount target is a relationship resource representing configured filesystem exposure. It is not a direct filesystem target, operation entry point, or endpoint.
 
 A representation of the target mount resource MAY advertise the profile
 `https://iri.science/profiles/resource-definition/storage/mount`. That profile identifies the
@@ -80,7 +80,7 @@ No inverse relation is initially registered. A visible mount does not by itself 
 
 `iri:accesses-mount` describes relatively static configured access topology. The relationship SHOULD remain present across ordinary operational state changes such as temporary mount unavailability, endpoint failure, credential expiration, authorization changes, or periods without transfer activity.
 
-Current mount status, endpoint reachability, credential validity, authorization outcomes, and active transfer activity SHOULD be represented through the applicable resource-state or transfer-state mechanisms.
+Current mount status, endpoint reachability, credential validity, authorization outcomes, and active transfer activity are outside the semantics of this relation. When represented, they are governed by the applicable IRI API, security, and Resource Definition Profile contracts.
 
 ## 6. Authorization and Visibility
 

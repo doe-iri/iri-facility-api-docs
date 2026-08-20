@@ -64,7 +64,7 @@ urn:doe-iri:resource:compute:system
 
 This separation allows the same storage infrastructure to provide multiple logical storage resources without duplicating infrastructure-level information and allows those logical resources to be independently described, discovered, and related to consuming systems.
 
-This document defines the attributes applicable specifically to the storage-system resource. These attributes describe relatively stable characteristics of the storage infrastructure. Characteristics specific to filesystem, block, or object resources are defined by their respective attribute profiles. Dynamic operational information, such as current utilization, available capacity, health, or service availability, is outside the scope of this profile and is represented through the appropriate resource-state mechanisms.
+This document defines the attributes applicable specifically to the storage-system resource. These attributes describe configured characteristics of the storage infrastructure. Characteristics specific to filesystem, block, or object resources are defined by their respective attribute profiles. This version of the profile does not define current utilization, available capacity, health, or service availability. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Taxonomy
 
@@ -118,7 +118,7 @@ The profile separates the identity of the storage resource from the characterist
 
 Except for schema_version, attributes in this profile are optional. The absence of an optional attribute indicates that the information has not been provided and MUST NOT be interpreted as implying a particular value or capability. Clients SHOULD rely only on attributes explicitly advertised by the resource.
 
-The attributes defined by this profile describe relatively stable characteristics of the storage system. Dynamic operational information, such as current utilization, available capacity, health, performance, or service availability, is outside the scope of this attribute profile and SHOULD be represented through the corresponding resource state mechanisms.
+The attributes defined by this profile describe configured characteristics of the storage system. This version of the profile does not define current utilization, available capacity, health, performance, or service availability. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 The following table defines the attributes included in version 1.0.0 of the Storage System Attribute Profile.
 
@@ -230,7 +230,7 @@ Filesystem
 
 Although the same architectural term may apply at both levels, the values describe different resources. A distributed storage system means the underlying storage infrastructure is distributed across multiple systems or nodes, whereas a distributed filesystem means the filesystem's data, metadata, or filesystem services are distributed across multiple systems.
 
-Clients SHOULD NOT infer storage capabilities, availability characteristics, performance, or logical storage resources solely from a `storage_architecture` value. Those characteristics SHOULD be advertised explicitly through their corresponding attributes, state resources, or IRI resource relationships.
+Clients SHOULD NOT infer storage capabilities, availability characteristics, performance, or logical storage resources solely from a `storage_architecture` value. Those characteristics SHOULD be advertised explicitly through applicable Resource attributes or IRI resource relationships, as defined by the governing contracts.
 
 ### 4.3. Storage System Capabilities
 
@@ -292,7 +292,7 @@ Object capability
     "What capabilities are exposed by this object resource?"
 ```
 
-The `storage_capabilities` attribute SHOULD describe relatively stable capabilities of the storage infrastructure and SHOULD NOT be used to represent current operational condition or availability. For example, support for replication is a capability of the resource, while whether replication is currently healthy or degraded is operational state and SHOULD be represented by the corresponding state resource.
+The `storage_capabilities` attribute SHOULD describe capabilities of the storage infrastructure and SHOULD NOT be interpreted as current operational condition or availability. For example, support for replication is a capability of the Resource, while current replication health is a distinct time-varying observation. If represented, its semantics and update behavior are governed by the applicable IRI API contract and Resource Definition Profile.
 
 Capabilities also SHOULD NOT be inferred solely from the value of `storage_technology`. Although a particular technology may commonly support specific features, a facility SHOULD explicitly advertise only capabilities that are supported and applicable to the deployed storage system.
 

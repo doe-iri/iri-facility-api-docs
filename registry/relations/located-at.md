@@ -28,7 +28,7 @@ and is distinct from any target representation profile.
 | Cardinality | Exactly one semantic target under the current required, singular `site_uri` contract. |
 | Target stability | Independently identifiable, relatively stable Site representation. |
 | Authorization affects visibility | No. Site identity is already disclosed by required `site_uri`; an implementation MUST NOT independently authorization-filter this link while returning that field. |
-| Target classification | Site API representation; not a DOE-IRI typed `Resource`, state object, operation entry point, or relationship resource. |
+| Target classification | Site API representation; not a DOE-IRI typed `Resource`, operation entry point, or relationship resource. |
 | Relationship volatility | Relatively static site placement or administrative association. It changes only when the represented Resource is reassigned or relocated to another represented Site. |
 
 ## 2. Semantic Meaning
@@ -43,7 +43,7 @@ The relationship MUST NOT be interpreted as asserting current process placement,
 
 The relationship MAY originate from any DOE-IRI `Resource` representation and MUST target the Facility API `Site` representation identified by that Resource's `site_uri`.
 
-The target is a Site API representation, not a DOE-IRI typed Resource, state object, operation entry point, or relationship resource.
+The target is a Site API representation, not a DOE-IRI typed Resource, operation entry point, or relationship resource.
 
 ## 4. Cardinality
 
@@ -60,7 +60,7 @@ The HAL relation uses a singular link object. It does not define an inverse Site
 
 `iri:located-at` describes relatively static site placement or administrative association. The relationship SHOULD remain present across ordinary operational changes, including process placement changes, compute-host changes, endpoint reachability changes, health changes, availability changes, and live-routing changes.
 
-Operational state remains separate. The relationship changes only when the represented Resource is reassigned or relocated to another represented Site.
+Ordinary operational changes do not alter this relation. The relationship changes only when the represented Resource is reassigned or relocated to another represented Site.
 
 ## 6. Authorization and Visibility
 

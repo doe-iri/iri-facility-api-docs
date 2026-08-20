@@ -28,7 +28,7 @@ link-relation semantics and is distinct from any target representation profile.
 | Cardinality | Resource: `0..*` targets; ProjectAllocation: exactly `1` target under the current required `capability_uri` contract. |
 | Target stability | API resource representation. The target identifies a capability in a relatively stable Resource association or stable allocation association. |
 | Authorization affects visibility | Yes. The relationship or individual Capability targets MAY be omitted when the requester is not authorized to discover them; absence does not generally prove that no Capability association exists. |
-| Target classification | API resource; not a DOE-IRI typed `Resource`, state object, operation entry point, or relationship resource. |
+| Target classification | API resource; not a DOE-IRI typed `Resource`, operation entry point, or relationship resource. |
 | Relationship volatility | Resource membership changes when configured capabilities change. ProjectAllocation membership is a stable accounting association that changes only when the represented allocation is reassigned or replaced. |
 
 ## 2. Semantic Meaning
@@ -47,7 +47,7 @@ The relationship MAY originate from either of the following source representatio
 - A DOE-IRI `Resource` representation, targeting the Facility API `Capability` representations named by its `capability_uris` array.
 - A Facility API `ProjectAllocation` representation, targeting the Facility API `Capability` representation named by its required `capability_uri`.
 
-The targets are independently identifiable API resources, not DOE-IRI typed Resources, state objects, operation entry points, or relationship resources.
+The targets are independently identifiable API resources, not DOE-IRI typed Resources, operation entry points, or relationship resources.
 
 ## 4. Cardinality
 

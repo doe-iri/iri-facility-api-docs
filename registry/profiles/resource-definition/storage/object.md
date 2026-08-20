@@ -62,11 +62,11 @@ urn:doe-iri:resource:storage:object
 
 This separation allows a storage system to provide multiple logical object-storage resources without duplicating infrastructure-level characteristics. Each object resource can independently describe the API through which it is accessed, the endpoint or endpoints available to consumers, the implementation technology, supported capabilities, and other resource-specific characteristics.
 
-Access endpoints are modeled as attributes of the object resource rather than as independent IRI resources. An endpoint describes where and through which API a consumer accesses the object resource, but normally does not require an independent resource identity, lifecycle, or state.
+Access endpoints are modeled as attributes of the object resource rather than as independent IRI resources. An endpoint describes where and through which API a consumer accesses the object resource, but normally does not require independent resource identity, lifecycle, or relationships.
 
-If a future IRI use case requires an endpoint to have independently discoverable identity, relationships, configuration, or operational state, the endpoint MAY be promoted to a separately defined resource type in a future profile version.
+If a future IRI use case requires an endpoint to have independently discoverable identity, relationships, or configuration, the endpoint MAY be promoted to a separately defined resource type in a future profile version.
 
-This document defines relatively stable characteristics of object storage resources. Dynamic operational information, such as current utilization, request rate, latency, health, available capacity, or service availability, is outside the scope of this profile and SHOULD be represented through the appropriate resource-state mechanisms.
+This document defines configured characteristics of object storage resources. This version of the profile does not define current utilization, request rate, latency, health, available capacity, or service availability. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Taxonomy
 
@@ -129,7 +129,7 @@ The profile separates the identity of the object storage resource from the chara
 
 Except for `schema_version`, attributes in this profile are optional. The absence of an optional attribute indicates that the information has not been provided and MUST NOT be interpreted as implying a particular value or capability. Clients SHOULD rely only on characteristics explicitly advertised by the resource.
 
-The attributes defined by this profile describe relatively stable characteristics of the object resource. Dynamic operational information SHOULD be represented through the corresponding resource-state mechanisms.
+The attributes defined by this profile describe configured characteristics of the object resource. The semantics of any time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 The following table defines the attributes included in version `1.0.0` of the Object Storage Attribute Profile.
 
@@ -234,7 +234,7 @@ The presence of an endpoint does not imply that an unauthenticated consumer is a
 
 Endpoint URLs SHOULD identify the service endpoint rather than an individual object URL.
 
-Dynamic endpoint availability is operational state and SHOULD NOT be inferred solely from the presence of an endpoint in this attribute profile.
+Current endpoint availability is a time-varying observation and SHOULD NOT be inferred solely from the presence of an endpoint in this attribute profile.
 
 ### 4.3. Object Storage Technology
 
@@ -335,7 +335,7 @@ The `object_capabilities` attribute SHOULD describe capabilities actually expose
 
 Clients SHOULD NOT infer capabilities solely from the object technology or API. A technology may support a capability while that capability is disabled, restricted, or unavailable for a particular logical object resource.
 
-Capabilities describe relatively stable functionality and SHOULD NOT be used to represent current operational state.
+Capabilities describe functionality and SHOULD NOT be interpreted as current operational condition.
 
 The capability vocabulary is intended to be extensible. Additional capability URNs SHOULD be registered when they identify meaningful, implementation-independent functionality that an IRI consumer may need to discover or reason about.
 
@@ -584,7 +584,7 @@ attributes:
     tier = project
 ```
 
-The endpoint identifies **where and how the logical object resource is accessed**. It does not represent a separate storage resource unless an IRI use case requires independent endpoint identity, configuration, relationships, lifecycle, or state.
+The endpoint identifies **where and how the logical object resource is accessed**. It does not represent a separate storage resource unless an IRI use case requires independent endpoint identity, configuration, relationships, or lifecycle.
 
 ---
 

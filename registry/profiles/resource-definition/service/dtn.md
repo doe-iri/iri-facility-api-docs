@@ -38,7 +38,7 @@ registration is authoritative in the URN registry.
 
 A DTN service is a consumable service through which a facility makes data-transfer operations available. It is distinct from the compute system or compute node that hosts it; hosting topology is represented separately using `iri:hosted-on`. A DTN service may also be configured to access filesystem mounts for transfer operations through `iri:accesses-mount`.
 
-This profile records relatively stable service configuration. Endpoint URLs are attributes of the DTN service rather than independent IRI resources because they normally do not require independent identity, lifecycle, relationships, or state. If a future use case requires those properties, an endpoint may be defined as a separate resource type in a future profile version.
+This profile records service configuration. Endpoint URLs are attributes of the DTN service rather than independent IRI resources because they normally do not require independent identity, lifecycle, or relationships. If a future use case requires those properties, an endpoint may be defined as a separate resource type in a future profile version.
 
 The profile distinguishes a DTN technology or implementation from the transfer protocols it supports. A technology identifies the software or service implementation providing the DTN; a protocol identifies an interface through which transfers can be requested or performed. A DTN may advertise multiple transfer protocols regardless of its technology.
 
@@ -120,9 +120,9 @@ Each `TransferEndpoint` contains:
 
 The `protocol` value MUST come from `urn:doe-iri:service:transfer-protocol:*`. An endpoint is configured access information, not a claim that it is currently reachable, available to a particular consumer, or authorized for a particular transfer.
 
-### 4.4. State Exclusions
+### 4.4. Time-Varying and Security Information
 
-This profile excludes endpoint health, current endpoint reachability, active transfers, queues, throughput, credentials, and current availability from the stable resource definition. Those dynamic operational facts SHOULD be represented through the applicable resource-state, transfer-state, and security or access-control mechanisms.
+This version of the profile does not define endpoint health, current endpoint reachability, active transfers, queues, throughput, credentials, or current availability. If time-varying values are represented, their semantics and update behavior are governed by the applicable IRI API contract and Resource Definition Profile. Credentials and authorization remain governed by the applicable security and access-control contracts.
 
 ## 5. DTN Service JSON Schema
 
@@ -313,7 +313,7 @@ The following XRootD DTN service uses the XRootD technology and exposes XRootD a
 }
 ```
 
-The examples describe configured service definition, not operational state. Endpoint health, active transfers, queues, throughput, credentials, and current availability remain outside this profile.
+The examples describe configured service attributes and do not assert endpoint health, active transfers, queue depth, throughput, credentials, or current availability.
 
 ---
 

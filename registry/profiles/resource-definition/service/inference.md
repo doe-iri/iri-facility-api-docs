@@ -39,7 +39,7 @@ registration is authoritative in the URN registry.
 
 An inference service is a consumable service through which a facility makes model-invocation operations available. It is distinct from the compute systems or compute nodes that host it; hosting topology is represented separately using `iri:hosted-on`.
 
-This profile records relatively stable service definition. Models, deployments, endpoints, replicas, hosts, and accelerators are not independent resource types in this profile. Endpoint URLs and served-model catalog entries are attributes of the inference service because they normally do not require independent IRI identity, lifecycle, relationships, or state.
+This profile records configured service semantics. Models, deployments, endpoints, replicas, hosts, and accelerators are not independent resource types in this profile. Endpoint URLs and served-model catalog entries are attributes of the inference service because they normally do not require independent IRI identity, lifecycle, or relationships.
 
 The profile distinguishes inference APIs from inference technologies. An API identifies an invocation interface exposed to consumers; a technology identifies the implementation providing the service. A technology can expose one or more APIs, and an API can be exposed by more than one technology.
 
@@ -126,11 +126,11 @@ The `api` value MUST come from the `urn:doe-iri:service:inference-api:*` family.
 
 The `served_models` attribute catalogs models configured to be served by the inference service. Each `ServedModel` has a stable, service-local `id` and a human-readable `name`; `version` and `model_uri` are optional descriptive values.
 
-Each `ServedModel.id` MUST be unique within a `served_models` array. The companion state contract's `active_models` field contains IDs of served models that are currently loaded and available for requests. Model activity is operational state, so a model appearing in `served_models` is not by itself a claim that it is currently loaded or able to serve requests.
+Each `ServedModel.id` MUST be unique within a `served_models` array. A model appearing in `served_models` is not by itself a claim that it is currently loaded or able to serve requests. If the applicable IRI API contract represents current model activity using `active_models`, each item MUST reference a `served_models.id` from the corresponding Resource.
 
-### 4.5. State Exclusions
+### 4.5. Time-Varying Observations
 
-This profile excludes current endpoint reachability, health, availability, request rate, queue depth, active replicas, model loading, and current model activity from the stable resource definition. Those dynamic operational facts SHOULD be represented through applicable resource-state mechanisms.
+This version of the profile does not define current endpoint reachability, health, availability, request rate, queue depth, active replicas, model loading, or current model activity. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 5. Inference Service JSON Schema
 
@@ -207,39 +207,7 @@ components:
             $ref: '#/components/schemas/ServedModel'
 ```
 
-## 6. Companion Inference Service Operational-State Schema
-
-`InferenceServiceState` is a companion operational-state contract, separate from `InferenceServiceAttributes` and this stable resource definition. It is not an integration statement for the core Facility API OpenAPI.
-
-| Field | Type | Description | Mandatory |
-|---|---|---|---|
-| `schema_version` | string | Version of the state-profile definition (e.g. `"1.0.0"`). | yes |
-| `active_models` | Unique array of strings | IDs of served models that are currently loaded and available for requests. Omission means current model activity is unknown or unreported; an empty array means the service reports no active models. | no |
-
-```yaml
-InferenceServiceState:
-  type: object
-  required:
-    - schema_version
-  properties:
-    schema_version:
-      type: string
-      enum:
-        - "1.0.0"
-    active_models:
-      type: array
-      description: >
-        IDs of served models that are currently loaded and available for
-        requests. Omission means current model activity is unknown or
-        unreported; an empty array means the service reports no active models.
-      uniqueItems: true
-      items:
-        type: string
-```
-
-The `active_models` field contains IDs of served models that are currently loaded and available for requests. Each item references a `served_models.id` from the corresponding definition instance. Omission of `active_models` means that current model activity is unknown or unreported. An empty `active_models` array means the service reports no active models.
-
-## 7. Example Inference Service Definition and State JSON Instances
+## 6. Example Inference Service Attributes
 
 The following vLLM inference service advertises an OpenAI-compatible endpoint and catalogs two models. This definition instance describes configured service characteristics, not current model activity.
 
@@ -271,17 +239,6 @@ The following vLLM inference service advertises an OpenAI-compatible endpoint an
       "version": "0.3",
       "model_uri": "https://models.example.gov/mistral-7b-instruct-v0.3"
     }
-  ]
-}
-```
-
-The following separate operational-state instance reports one currently active model. Its ID exactly matches a `served_models.id` in the definition instance above.
-
-```json
-{
-  "schema_version": "1.0.0",
-  "active_models": [
-    "llama-3.1-8b-instruct"
   ]
 }
 ```

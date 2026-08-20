@@ -53,7 +53,7 @@ and MUST target:
 urn:doe-iri:resource:storage:object
 ```
 
-The target is the logical object-storage resource, not an individual bucket, object, endpoint URL, state object, or operation entry point.
+The target is the logical object-storage Resource, not an individual bucket, object, endpoint URL, or operation entry point.
 
 ## 4. Cardinality
 
@@ -70,7 +70,7 @@ No inverse-cardinality requirement is imposed by this link-relation definition.
 
 The relationship describes a relatively stable storage topology.
 
-Endpoint reachability, request latency, utilization, capacity availability, and service health are dynamic characteristics and SHOULD be represented through the relevant state mechanisms rather than by treating `iri:provides-object` as an availability indicator.
+Endpoint reachability, request latency, utilization, capacity availability, and service health are outside the semantics of this relation. When represented, they are governed by the applicable IRI API contract and Resource Definition Profile; clients MUST NOT treat `iri:provides-object` as an availability indicator.
 
 ## 6. Authorization and Visibility
 

@@ -64,7 +64,7 @@ The block resource describes relatively stable characteristics of the logical st
 
 Information specific to a particular consuming system, such as the device name under which the block resource appears—for example `/dev/nvme1n1`—is not an intrinsic characteristic of the block resource and SHOULD NOT be represented by this profile. Such information is specific to an attachment and MAY be represented through relationship metadata or a future block-attachment resource if independent attachment identity and configuration are required.
 
-Dynamic operational information, such as whether a volume is currently attached, current I/O throughput, latency, health, or utilization, is outside the scope of this profile and SHOULD be represented through the appropriate resource-state mechanisms.
+This version of the profile does not define whether a volume is currently attached or its current I/O throughput, latency, health, or utilization. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Taxonomy
 
@@ -131,7 +131,7 @@ The profile separates the identity of the block resource from both the character
 
 Except for `schema_version`, attributes in this profile are optional. The absence of an optional attribute indicates that the information has not been provided and MUST NOT be interpreted as implying a particular value or capability. Clients SHOULD rely only on characteristics explicitly advertised by the resource.
 
-The attributes defined by this profile describe relatively stable characteristics of the block resource. Dynamic operational information SHOULD be represented through the corresponding resource-state mechanisms.
+The attributes defined by this profile describe configured characteristics of the block resource. The semantics of any time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 The following table defines the attributes included in version `1.0.0` of the Block Storage Attribute Profile.
 
@@ -278,10 +278,10 @@ block_provisioning
     How backing capacity is allocated
 
 current physical consumption
-    Dynamic state
+    Time-varying operational value
 ```
 
-Current allocated capacity, consumed capacity, pool utilization, or remaining capacity are operational values and SHOULD be represented through the appropriate resource-state mechanisms.
+This version of the profile does not define current allocated capacity, consumed capacity, pool utilization, or remaining capacity. If represented, their semantics and update behavior are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ### 4.5. Block Storage Capabilities
 
@@ -311,7 +311,7 @@ The `block_capabilities` attribute SHOULD describe capabilities actually exposed
 
 For example, a storage platform may support snapshots at the infrastructure level while snapshots are disabled or unavailable for a particular logical volume. In that case, the block resource SHOULD NOT advertise the snapshot capability.
 
-Capabilities describe relatively stable functionality and SHOULD NOT represent current operational condition. For example, support for multipath is a capability, while the number of currently healthy paths is an operational state.
+Capabilities describe functionality and SHOULD NOT be interpreted as current operational condition. For example, support for multipath is a capability, while the number of currently healthy paths is a distinct time-varying observation.
 
 The capability vocabulary is intended to be extensible. Additional capability URNs SHOULD be registered when they identify meaningful, implementation-independent functionality that IRI clients need to discover or reason about.
 
@@ -345,10 +345,10 @@ block_provisioning = thin
     Physical capacity allocated as needed
 
 physical capacity currently consumed
-    Dynamic state
+    Time-varying operational value
 ```
 
-Values describing current consumption, remaining physical capacity, storage-pool utilization, or other changing capacity information SHOULD be represented through the appropriate resource-state mechanisms.
+If current consumption, remaining physical capacity, storage-pool utilization, or other changing capacity information is represented, its semantics and update behavior are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ### 4.7. Storage Tier
 

@@ -27,7 +27,7 @@ associated with a target representation.
 | Source representation type | `urn:doe-iri:resource:storage:block` |
 | Target representation type | `urn:doe-iri:resource:compute:system` or `urn:doe-iri:resource:compute:node` |
 | Cardinality | `0..1` for an `exclusive` block resource; `0..*` for a `shared` block resource. |
-| Target stability | Static resource representation. The target identifies the consuming compute resource. Current attachment state is dynamic and MUST be represented separately. |
+| Target stability | Static resource representation. The target identifies the consuming compute resource. Current attachment condition is outside the semantics of this relation and, when represented, is governed by the applicable IRI API contract. |
 | Authorization affects visibility | Yes. Attachment topology MAY be filtered when the requester is not authorized to discover the consuming compute resource. |
 | Target classification | Resource |
 | Relationship volatility | Configuration/topology. This profile treats the link as configured/presented attachment, not as a live attached/detached state indicator. |
@@ -36,9 +36,9 @@ associated with a target representation.
 
 The `iri:attached-to` relationship indicates that the source logical block-storage resource is configured to be presented or attached to the identified consuming compute system or compute node.
 
-The relationship deliberately describes configured topology rather than current attachment state. This preserves the separation between relatively stable resource relationships and dynamic operational state.
+The relationship deliberately describes configured topology rather than asserting the current attachment condition.
 
-Host-specific presentation details such as a local device path, device identifier, multipath status, or current attachment health do not belong on the target compute resource and SHOULD be represented through an attachment-specific representation or state mechanism if required.
+Host-specific presentation details such as a local device path, device identifier, multipath status, or current attachment health are outside the semantics of this relation. When represented, they are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Source and Target Representation
 
@@ -60,9 +60,9 @@ or:
 urn:doe-iri:resource:compute:node
 ```
 
-The target is the consuming compute resource definition, not a state object or operation entry point.
+The target is the consuming compute Resource representation, not an operation entry point.
 
-If future use cases require attachment-specific identity, configuration, lifecycle, or state, a dedicated block-attachment relationship resource SHOULD be introduced rather than overloading either the block or compute resource.
+If future use cases require attachment-specific identity, configuration, or lifecycle, a dedicated block-attachment relationship resource SHOULD be introduced rather than overloading either the block or compute resource.
 
 ## 4. Cardinality
 
@@ -102,7 +102,7 @@ This link-relation definition defines `iri:attached-to` as configured or intende
 
 The link MUST NOT be interpreted as a live assertion that the block device is currently attached, logged in, mapped, healthy, or accessible.
 
-Current attachment status, active paths, device mapping, and I/O health are dynamic information and SHOULD be represented through the applicable state mechanism.
+Current attachment status, active paths, device mapping, and I/O health are outside the semantics of this relation. When represented, they are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 6. Authorization and Visibility
 

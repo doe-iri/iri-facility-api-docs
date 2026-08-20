@@ -41,7 +41,7 @@ The relationship expresses assessed or potential scope. It does not assert that 
 
 The relationship MAY originate only from a Facility API `Incident` representation and MUST target DOE-IRI `Resource` representations identified by that Incident's `resource_uris`.
 
-The targets are Resources, not state objects, operation entry points, or relationship resources.
+The targets are Resources, not operation entry points or relationship resources.
 
 ## 4. Cardinality
 

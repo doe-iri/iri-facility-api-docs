@@ -29,7 +29,7 @@ and is distinct from any target representation profile.
 | Target stability | Static resource representation. The target identifies a CPU resource independent of current utilization, frequency, health, or allocation. |
 | Authorization affects visibility | Yes. CPU-level topology MAY be omitted when the requester is not authorized to discover processor-level details. |
 | Target classification | Resource |
-| Relationship volatility | Relatively static hardware/topology relationship. Operational CPU state is separate. |
+| Relationship volatility | Relatively static hardware/topology relationship. Ordinary CPU operational changes do not change the relationship. |
 
 ## 2. Semantic Meaning
 
@@ -51,7 +51,7 @@ and MUST target:
 urn:doe-iri:resource:compute:cpu
 ```
 
-The target is a resource representation, not a state object, operation entry point, or relationship resource.
+The target is a Resource representation, not an operation entry point or relationship resource.
 
 ## 4. Cardinality
 
@@ -68,7 +68,7 @@ A facility MAY expose aggregate CPU counts on the node without exposing individu
 
 The relationship describes relatively stable processor topology. It SHOULD NOT change solely because CPU cores are allocated, idle, unavailable to a particular user, frequency-throttled, or otherwise affected by dynamic operational conditions.
 
-Current utilization, frequency, health, temperature, allocation, or availability belongs in state.
+Current utilization, frequency, health, temperature, allocation condition, or availability is outside the semantics of this relation. When represented, it is governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 6. Authorization and Visibility
 

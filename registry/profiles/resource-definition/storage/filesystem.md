@@ -68,7 +68,7 @@ This document defines attributes applicable specifically to filesystem resources
 
 Infrastructure-level characteristics are defined by the Storage System Attribute Profile. Information describing how a filesystem is exposed to a particular consuming system is represented by mount resources and corresponding IRI link relations.
 
-Dynamic operational information, such as current utilization, available capacity, health, performance, or service availability, is outside the scope of this profile and is represented through the appropriate resource-state mechanisms.
+This version of the profile does not define current utilization, available capacity, health, performance, or service availability. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Taxonomy
 
@@ -139,7 +139,7 @@ The profile separates the identity of the filesystem resource from the character
 
 Except for `schema_version`, attributes in this profile are optional. The absence of an optional attribute indicates that the information has not been provided and MUST NOT be interpreted as implying a particular value or capability. Clients SHOULD rely only on attributes explicitly advertised by the resource.
 
-The attributes defined by this profile describe relatively stable characteristics of the filesystem. Dynamic operational information SHOULD be represented through the corresponding resource-state mechanisms.
+The attributes defined by this profile describe configured characteristics of the filesystem. The semantics of any time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 The following table defines the attributes included in version `1.0.0` of the Filesystem Attribute Profile.
 
@@ -233,7 +233,7 @@ For example:
 
 The `filesystem_capabilities` attribute SHOULD describe capabilities actually exposed by the filesystem resource. Clients SHOULD NOT infer capabilities solely from `filesystem_technology`, because deployment configuration may affect which capabilities are available.
 
-Capabilities SHOULD describe relatively stable functionality and SHOULD NOT represent current operational condition. For example, support for parallel I/O is a capability, while current I/O throughput is an operational state.
+Capabilities SHOULD describe functionality and SHOULD NOT be interpreted as current operational condition. For example, support for parallel I/O is a capability, while current I/O throughput is a distinct time-varying observation.
 
 The capability vocabulary is intended to be extensible. Additional capability URNs SHOULD be registered when they identify implementation-independent functionality that an IRI client may need to discover or reason about.
 
@@ -342,7 +342,7 @@ Filesystem
         magnetic-disk
 ```
 
-A client SHOULD NOT infer filesystem performance, retention policy, purge interval, durability, or media type solely from the `tier` value. Facilities SHOULD advertise such characteristics independently when corresponding attributes or state representations are defined.
+A client SHOULD NOT infer filesystem performance, retention policy, purge interval, durability, or media type solely from the `tier` value. Facilities SHOULD advertise such characteristics independently when they are defined by the applicable IRI API contract and Resource Definition Profile.
 
 ### 4.7. Storage Media Types
 

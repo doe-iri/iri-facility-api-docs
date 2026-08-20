@@ -82,7 +82,7 @@ The filesystem resource remains responsible for describing characteristics of th
 
 The identities of the filesystem and consuming system are represented using IRI resource relationships rather than duplicated as mount attributes. The filesystem relates to the mount using `iri:has-mount`, and the mount relates to the consuming system using `iri:mounted-on`.
 
-This document defines relatively stable mount configuration characteristics, such as the namespace location, access mode, access protocol, and optional implementation-specific mount options. Dynamic operational information, such as whether the filesystem is currently mounted, accessible, degraded, or unavailable, is outside the scope of this profile and SHOULD be represented through the appropriate resource-state mechanisms.
+This document defines mount configuration characteristics such as the namespace location, access mode, access protocol, and optional implementation-specific mount options. This version of the profile does not define whether the filesystem is currently mounted, accessible, degraded, or unavailable. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Taxonomy
 
@@ -127,7 +127,7 @@ The `schema_version` and `mount_path` attributes are mandatory. A mount resource
 
 The remaining attributes are optional. The absence of an optional attribute indicates that the information has not been provided and MUST NOT be interpreted as implying a particular value or behavior.
 
-The attributes defined by this profile describe relatively stable mount configuration. Dynamic information associated with a mount SHOULD be represented through the corresponding resource-state mechanisms.
+The attributes defined by this profile describe mount configuration. The semantics of any time-varying values associated with a mount are governed by the applicable IRI API contract and Resource Definition Profile.
 
 The following table defines the attributes included in version `1.0.0` of the Filesystem Mount Attribute Profile.
 

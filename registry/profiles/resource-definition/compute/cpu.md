@@ -30,7 +30,7 @@ CPU
 urn:doe-iri:resource:compute:cpu
 ```
 
-Current utilization, active frequency, temperature, power consumption, health, workload assignment, or availability are dynamic operational information and SHOULD be represented through the appropriate resource-state mechanisms.
+This version of the profile does not define current utilization, active frequency, temperature, power consumption, health, workload assignment, or availability. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Taxonomy
 
@@ -108,7 +108,7 @@ These values describe configured processor topology and SHOULD NOT be interprete
 
 `base_clock_mhz` and `max_clock_mhz` describe advertised processor frequency characteristics when those concepts are meaningful for the CPU architecture and implementation.
 
-They do not represent current operating frequency. Current frequency varies dynamically with processor power management, thermal conditions, workload, and system policy and belongs in state if exposed.
+They do not represent current operating frequency. If current frequency is exposed, its semantics and update behavior are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ### 4.4 Vendor and Model
 

@@ -30,7 +30,7 @@ and is distinct from any target representation profile.
 | Target stability | Static resource representation. The target identifies hosting infrastructure independently of current routing, live replica placement, health, or availability. |
 | Authorization affects visibility | Yes. The relationship or individual targets MAY be omitted when the requester is not authorized to discover service-hosting topology. |
 | Target classification | Resource |
-| Relationship volatility | Relatively static hosting topology. Changes when represented hosting infrastructure changes; operational service and infrastructure state is separate. |
+| Relationship volatility | Relatively static hosting topology. Changes when represented hosting infrastructure changes, not merely when service or infrastructure conditions change. |
 
 ## 2. Semantic Meaning
 
@@ -56,7 +56,7 @@ urn:doe-iri:resource:compute:system
 urn:doe-iri:resource:compute:node
 ```
 
-The target is a compute resource representation, not a state object, operation entry point, relationship resource, endpoint, deployment, or live replica.
+The target is a compute Resource representation, not an operation entry point, relationship resource, endpoint, deployment, or live replica.
 
 ## 4. Cardinality
 
@@ -75,7 +75,7 @@ This link-relation definition imposes no inverse-cardinality requirement.
 
 `iri:hosted-on` describes relatively static hosting topology. The relationship SHOULD remain present across ordinary operational state changes such as service degradation, infrastructure maintenance, node failure, temporary unavailability, routing changes, or replica changes.
 
-Current health, availability, request routing, replica placement, workload activity, and endpoint reachability SHOULD be represented through the applicable resource-state mechanisms.
+Current health, availability, request routing, replica placement, workload activity, and endpoint reachability are outside the semantics of this relation. When represented, they are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 6. Authorization and Visibility
 

@@ -34,7 +34,7 @@ urn:doe-iri:resource:compute:node
 
 This separation allows a compute system to be defined once while nodes and processor resources are independently represented and related through IRI links.
 
-The attributes in this profile describe relatively stable characteristics of the compute system. Dynamic operational information, such as current utilization, available nodes, queue depth, free memory, job activity, health, or service availability, is outside the scope of this profile and SHOULD be represented through the appropriate resource-state mechanisms.
+The attributes in this profile describe configured characteristics of the compute system. This version of the profile does not define current utilization, available nodes, queue depth, free memory, job activity, health, or service availability. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Taxonomy
 
@@ -124,7 +124,7 @@ For example:
 }
 ```
 
-These values represent configured capacity and MUST NOT be interpreted as currently idle, allocatable, or available capacity. Dynamic values such as available nodes, free memory, or idle GPUs SHOULD be represented through the applicable state resource.
+These values represent configured capacity and MUST NOT be interpreted as currently idle, allocatable, or available capacity. If values such as available nodes, free memory, or idle GPUs are represented, their semantics and update behavior are governed by the applicable IRI API contract and Resource Definition Profile.
 
 Where a facility exposes detailed node, CPU, or GPU resources, configured aggregate counts MAY be derivable from those resources. Facilities MAY still advertise aggregate values when doing so is useful for discovery or when lower-level topology is not exposed.
 

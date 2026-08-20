@@ -29,7 +29,7 @@ and is distinct from any target representation profile.
 | Target stability | Resource representation. The association is stable for an immutable Event. |
 | Authorization affects visibility | Yes. A provider MAY omit the relation when the target Resource is not visible to the requester; absence does not generally prove that no target exists. |
 | Target classification | Resource |
-| Relationship volatility | Stable for an immutable Event; it is not a live Resource-state assertion. |
+| Relationship volatility | Stable for an immutable Event; it is not a live assertion about the Resource's current condition. |
 
 ## 2. Semantic Meaning
 
@@ -41,7 +41,7 @@ This relation is source-specific: it means an Event applies to one Resource. It 
 
 The relationship MAY originate only from a Facility API `Event` representation and MUST target the DOE-IRI `Resource` representation identified by that Event's required `resource_uri`.
 
-The target is a Resource, not a state object, operation entry point, or relationship resource.
+The target is a Resource, not an operation entry point or relationship resource.
 
 ## 4. Cardinality
 

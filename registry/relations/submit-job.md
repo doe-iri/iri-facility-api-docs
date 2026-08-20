@@ -28,7 +28,7 @@ and is distinct from any target representation profile.
 | Cardinality | `0..1` target from a compute-system resource. |
 | Target stability | Applicable configured affordance, not a live capacity assertion. |
 | Authorization affects visibility | Yes. A provider MAY omit the relation when job submission is not visible to the requester; absence does not generally prove that the compute system has no job-submission operation. |
-| Target classification | Operation entry point; not an API resource, DOE-IRI typed Resource, state object, or relationship resource. |
+| Target classification | Operation entry point; not an API resource, DOE-IRI typed Resource, or relationship resource. |
 | Relationship volatility | Changes when the facility configures, withdraws, or changes the applicable job-submission affordance. It does not change solely because capacity, queue state, health, or schedulability changes. |
 
 ## 2. Semantic Meaning
@@ -45,7 +45,7 @@ The relationship MAY originate only from:
 urn:doe-iri:resource:compute:system
 ```
 
-The target is a resource-specific operation entry point, not a Resource representation, state object, or relationship resource. The current operation is:
+The target is a resource-specific operation entry point, not a Resource representation or relationship resource. The current operation is:
 
 ```text
 POST /api/v2/compute/job/{resource_id}

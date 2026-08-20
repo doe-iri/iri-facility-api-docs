@@ -26,7 +26,7 @@ link-relation semantics and is distinct from any target representation profile.
 | Source representation type | `urn:doe-iri:resource:storage:mount` |
 | Target representation type | `urn:doe-iri:resource:compute:system` |
 | Cardinality | Exactly `1` target for a valid mount resource. |
-| Target stability | Static resource representation. The target identifies the consuming compute system; current mount status is represented separately as state. |
+| Target stability | Static resource representation. The target identifies the consuming compute system; current mount condition is outside the semantics of this relation. |
 | Authorization affects visibility | Yes. The target MAY be hidden when the requester is not authorized to discover the consuming system or topology. |
 | Target classification | Resource |
 | Relationship volatility | Relatively static configuration/topology. It changes when the mount is redefined for a different consuming system, not when mount health changes. |
@@ -51,7 +51,7 @@ and MUST target:
 urn:doe-iri:resource:compute:system
 ```
 
-The target is the compute-system resource definition, not its state object and not an operation endpoint.
+The target is the compute-system Resource representation, not an operation endpoint.
 
 ## 4. Cardinality
 
@@ -70,7 +70,7 @@ The relationship describes configured topology, not current operational state.
 
 The presence of `iri:mounted-on` means that the mount resource is defined in relation to the identified compute system. It does not mean that the mount is currently active or usable.
 
-Mounted/unmounted status, accessibility, errors, or degradation SHOULD be represented in the mount's state representation.
+Mounted/unmounted status, accessibility, errors, or degradation are outside the semantics of this relation and, when represented, are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 6. Authorization and Visibility
 

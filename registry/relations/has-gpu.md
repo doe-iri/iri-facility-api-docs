@@ -29,7 +29,7 @@ and is distinct from any target representation profile.
 | Target stability | Static resource representation. The target identifies a GPU resource independent of current utilization, memory consumption, health, or allocation. |
 | Authorization affects visibility | Yes. GPU-level topology MAY be omitted when the requester is not authorized to discover accelerator-level details. |
 | Target classification | Resource |
-| Relationship volatility | Relatively static hardware/topology relationship. Operational GPU state is separate. |
+| Relationship volatility | Relatively static hardware/topology relationship. Ordinary GPU operational changes do not change the relationship. |
 
 ## 2. Semantic Meaning
 
@@ -51,7 +51,7 @@ and MUST target:
 urn:doe-iri:resource:compute:gpu
 ```
 
-The target is a resource representation, not a state object, operation entry point, or relationship resource.
+The target is a Resource representation, not an operation entry point or relationship resource.
 
 ## 4. Cardinality
 
@@ -68,7 +68,7 @@ A node with no GPU targets may be CPU-only, or the facility may have chosen not 
 
 The relationship describes relatively stable accelerator topology. It SHOULD NOT be added or removed solely because a GPU is allocated, idle, unhealthy, or temporarily unavailable.
 
-Current utilization, allocated memory, temperature, health, workload assignment, and availability belong in state.
+Current utilization, allocated memory, temperature, health, workload assignment, and availability are outside the semantics of this relation. When represented, they are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 6. Authorization and Visibility
 

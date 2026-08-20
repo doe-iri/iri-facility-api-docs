@@ -29,7 +29,7 @@ and is distinct from any target representation profile.
 | Target stability | Static resource representation. The target identifies a compute-node resource whose identity is independent of current health, allocation, or availability. |
 | Authorization affects visibility | Yes. The relationship or individual node targets MAY be omitted when the requester is not authorized to discover node-level topology. |
 | Target classification | Resource |
-| Relationship volatility | Relatively static topology/configuration. Changes when system membership or represented topology changes; operational node state is separate. |
+| Relationship volatility | Relatively static topology/configuration. Changes when system membership or represented topology changes, not merely when the node's operational condition changes. |
 
 ## 2. Semantic Meaning
 
@@ -53,7 +53,7 @@ and MUST target:
 urn:doe-iri:resource:compute:node
 ```
 
-The target is a resource representation, not a state object, operation entry point, or relationship resource.
+The target is a Resource representation, not an operation entry point or relationship resource.
 
 ## 4. Cardinality
 
@@ -72,7 +72,7 @@ This link-relation definition imposes no inverse-cardinality requirement.
 
 `iri:has-node` describes relatively stable compute topology. The relationship SHOULD remain present across ordinary operational state changes such as node allocation, maintenance, drain, failure, or temporary unavailability.
 
-The node's state resource SHOULD represent current node health, workload activity, allocation state, and availability.
+Current node health, workload activity, allocation condition, and availability are outside the semantics of this relation. When represented, they are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 6. Authorization and Visibility
 

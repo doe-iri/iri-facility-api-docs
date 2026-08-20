@@ -28,7 +28,7 @@ and is distinct from any target representation profile.
 | Cardinality | `0..*` targets from a Facility representation. |
 | Target stability | API resource representation. The target identifies a Site in the Facility's relatively stable topology or administrative association. |
 | Authorization affects visibility | Yes. The relationship or individual Site targets MAY be omitted when the requester is not authorized to discover them; absence does not generally prove that no Sites exist. |
-| Target classification | API resource; not a DOE-IRI typed `Resource`, state object, operation entry point, or relationship resource. |
+| Target classification | API resource; not a DOE-IRI typed `Resource`, operation entry point, or relationship resource. |
 | Relationship volatility | Relatively stable Facility topology or administrative association. Changes when the associated Site set changes. |
 
 ## 2. Semantic Meaning
@@ -41,7 +41,7 @@ The relationship does not assert current service availability, operational statu
 
 The relationship MAY originate only from a Facility API `Facility` representation and MUST target Facility API `Site` representations identified by that Facility's `site_uris`.
 
-The targets are independently identifiable API resources, not DOE-IRI typed Resources, state objects, operation entry points, or relationship resources.
+The targets are independently identifiable API resources, not DOE-IRI typed Resources, operation entry points, or relationship resources.
 
 ## 4. Cardinality
 

@@ -32,7 +32,7 @@ urn:doe-iri:resource:compute:gpu
 
 This profile describes relatively stable device characteristics, including memory capacity, vendor-defined architecture information, and programming interfaces made available by the facility software environment.
 
-Current utilization, allocated memory, temperature, power consumption, health, workload assignment, and availability are dynamic operational information and SHOULD be represented through the appropriate resource-state mechanisms.
+This version of the profile does not define current utilization, allocated memory, temperature, power consumption, health, workload assignment, or availability. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Taxonomy
 
@@ -105,7 +105,7 @@ For example:
 }
 ```
 
-The value represents configured device memory and SHOULD NOT be interpreted as currently free or allocatable memory. Current memory usage belongs in state.
+The value represents configured device memory and SHOULD NOT be interpreted as currently free or allocatable memory. If current memory usage is represented, its semantics and update behavior are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ### 4.3 Vendor, Model, and Architecture
 

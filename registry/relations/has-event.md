@@ -27,7 +27,7 @@ and is distinct from any target representation profile.
 | Cardinality | `0..*` targets from an Incident representation. |
 | Target stability | API resource representation. Each target identifies a recorded Event. |
 | Authorization affects visibility | Yes. The relationship or individual Event targets MAY be omitted when the requester is not authorized to discover them; absence does not generally prove that no Events exist. |
-| Target classification | API resource; not a DOE-IRI typed `Resource`, state object, operation entry point, or relationship resource. |
+| Target classification | API resource; not a DOE-IRI typed `Resource`, operation entry point, or relationship resource. |
 | Relationship volatility | Membership may grow as Events are recorded for the Incident. |
 
 ## 2. Semantic Meaning
@@ -40,7 +40,7 @@ The relationship does not establish a required inverse for every Event, and it d
 
 The relationship MAY originate only from a Facility API `Incident` representation and MUST target Facility API `Event` representations identified by that Incident's `event_uris`.
 
-The targets are independently identifiable API resources, not DOE-IRI typed Resources, state objects, operation entry points, or relationship resources.
+The targets are independently identifiable API resources, not DOE-IRI typed Resources, operation entry points, or relationship resources.
 
 ## 4. Cardinality
 

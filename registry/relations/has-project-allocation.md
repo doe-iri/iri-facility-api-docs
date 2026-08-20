@@ -28,7 +28,7 @@ and is distinct from any target representation profile.
 | Cardinality | Exactly `1` target under the current required `project_allocation_uri` contract. |
 | Target stability | API resource representation. The target identifies a stable accounting hierarchy association. |
 | Authorization affects visibility | Yes. A provider MAY omit the relation when the target ProjectAllocation is not visible to the requester; absence does not generally prove that no ProjectAllocation association exists. |
-| Target classification | API resource; not a DOE-IRI typed `Resource`, state object, operation entry point, or relationship resource. |
+| Target classification | API resource; not a DOE-IRI typed `Resource`, operation entry point, or relationship resource. |
 | Relationship volatility | Stable accounting hierarchy. Changes only when the represented UserAllocation is reassigned or replaced. |
 
 ## 2. Semantic Meaning
@@ -41,7 +41,7 @@ The relationship identifies accounting hierarchy. It does not assert a current a
 
 The relationship MAY originate only from a Facility API `UserAllocation` representation and MUST target the Facility API `ProjectAllocation` representation identified by that UserAllocation's required `project_allocation_uri`.
 
-The target is an independently identifiable API resource, not a DOE-IRI typed Resource, state object, operation entry point, or relationship resource.
+The target is an independently identifiable API resource, not a DOE-IRI typed Resource, operation entry point, or relationship resource.
 
 ## 4. Cardinality
 

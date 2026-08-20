@@ -53,7 +53,7 @@ and MUST target:
 urn:doe-iri:resource:storage:block
 ```
 
-The target represents the logical block-storage resource itself, not an attachment, device path, state object, or operation endpoint.
+The target represents the logical block-storage Resource itself, not an attachment, device path, or operation endpoint.
 
 ## 4. Cardinality
 

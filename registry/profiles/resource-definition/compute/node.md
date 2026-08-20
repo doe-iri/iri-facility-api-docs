@@ -32,7 +32,7 @@ urn:doe-iri:resource:compute:node
         └── iri:has-gpu ──> GPU
 ```
 
-The attributes in this profile describe relatively stable characteristics of the node. Current load, free memory, allocation state, health, and workload activity are dynamic operational information and SHOULD be represented through the appropriate resource-state mechanisms.
+The attributes in this profile describe configured characteristics of the node. This version of the profile does not define current load, free memory, allocation condition, health, or workload activity. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Taxonomy
 
@@ -109,7 +109,7 @@ For example:
 }
 ```
 
-These values SHOULD NOT be interpreted as current available memory, free local storage, idle CPU cores, or available GPUs. Those values belong in state.
+These values SHOULD NOT be interpreted as current available memory, free local storage, idle CPU cores, or available GPUs. If such time-varying values are represented, their semantics and update behavior are governed by the applicable IRI API contract and Resource Definition Profile.
 
 Where CPU and GPU resources are separately exposed through `iri:has-cpu` and `iri:has-gpu`, the aggregate counts MAY be derivable from those relationships. Facilities MAY still publish counts when detailed processor topology is not exposed.
 

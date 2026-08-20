@@ -37,7 +37,7 @@ The `iri:provides-filesystem` relationship indicates that the source storage sys
 
 The relationship separates infrastructure identity from logical storage identity. Characteristics of the storage infrastructure belong to the source `urn:doe-iri:resource:storage:system` resource, while characteristics of the logical filesystem belong to the target `urn:doe-iri:resource:storage:filesystem` resource.
 
-A client SHOULD NOT infer filesystem characteristics such as tier, filesystem technology, protocols, capabilities, capacity, media type, health, or current availability solely from the presence of this relationship. Those characteristics SHOULD be obtained from the target filesystem resource or its corresponding state representation.
+A client SHOULD NOT infer filesystem characteristics such as tier, filesystem technology, protocols, capabilities, capacity, media type, health, or current availability solely from the presence of this relationship. Those characteristics SHOULD be obtained from the target filesystem Resource according to the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Source and Target Representation
 
@@ -53,7 +53,7 @@ The relationship MUST target a resource whose `resource_type` is:
 urn:doe-iri:resource:storage:filesystem
 ```
 
-The target is a logical storage resource, not a mount, state object, operation endpoint, or embedded filesystem description.
+The target is a logical storage Resource, not a mount, operation endpoint, or embedded filesystem description.
 
 ## 4. Cardinality
 
@@ -70,7 +70,7 @@ No inverse-cardinality requirement is imposed by this link-relation definition.
 
 The relationship represents a relatively stable storage topology. It describes which logical filesystem resources a storage system provides.
 
-The relationship MUST NOT be used to indicate whether the filesystem is currently healthy, reachable, writable, mounted, or available for new work. Such information is operational state and SHOULD be represented through the applicable resource-state mechanism.
+The relationship MUST NOT be used to indicate whether the filesystem is currently healthy, reachable, writable, mounted, or available for new work. Those conditions are outside the semantics of this relation and, when represented, are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 6. Authorization and Visibility
 

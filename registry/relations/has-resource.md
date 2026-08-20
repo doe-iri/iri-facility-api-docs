@@ -41,7 +41,7 @@ The relationship describes Site topology or administrative association. It does 
 
 The relationship MAY originate only from a Facility API `Site` representation and MUST target DOE-IRI `Resource` representations identified by that Site's `resource_uris`.
 
-The targets are Resources, not state objects, operation entry points, or relationship resources.
+The targets are Resources, not operation entry points or relationship resources.
 
 ## 4. Cardinality
 

@@ -28,7 +28,7 @@ link-relation semantics and is distinct from any target representation profile.
 | Cardinality | `0..1` target from an Event representation. |
 | Target stability | API resource representation. The association is stable once it is set for the Event. |
 | Authorization affects visibility | Yes. A provider MAY omit the relation when the target Incident is not visible to the requester; its absence does not generally prove that no association exists. |
-| Target classification | API resource; not a DOE-IRI typed `Resource`, state object, operation entry point, or relationship resource. |
+| Target classification | API resource; not a DOE-IRI typed `Resource`, operation entry point, or relationship resource. |
 | Relationship volatility | Stable association once set. A null `incident_uri` represents no associated Incident. |
 
 ## 2. Semantic Meaning
@@ -41,7 +41,7 @@ The relationship does not assert that the Incident currently remains active or t
 
 The relationship MAY originate only from a Facility API `Event` representation and, when present, MUST target the Facility API `Incident` representation identified by that Event's `incident_uri`.
 
-The target is an independently identifiable API resource, not a DOE-IRI typed Resource, state object, operation entry point, or relationship resource.
+The target is an independently identifiable API resource, not a DOE-IRI typed Resource, operation entry point, or relationship resource.
 
 ## 4. Cardinality
 
