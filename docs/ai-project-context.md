@@ -1295,7 +1295,8 @@ Preferred conceptual pattern:
 {
   "_links": {
     "iri:mounted-on": {
-      "href": ".../perlmutter"
+      "href": ".../perlmutter",
+      "profile": "https://iri.science/profiles/resource-definition/compute/system"
     }
   }
 }
