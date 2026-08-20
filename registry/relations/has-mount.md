@@ -7,7 +7,7 @@
 **Source representation type:** `urn:doe-iri:resource:storage:filesystem`<br>
 **Target representation type:** `urn:doe-iri:resource:storage:mount`<br>
 **Target resource type:** `urn:doe-iri:resource:storage:mount`<br>
-**Target representation profile:** `https://iri.science/profiles/storage/mount`
+**Target representation profile:** `https://iri.science/profiles/resource-definition/storage/mount`
 
 ## 1. Link Relation Definition
 
@@ -52,7 +52,7 @@ from the profile URI associated with a target mount representation.
 | Semantic meaning | Indicates that a filesystem is exposed through the identified mount relationship resource. |
 | Source representation type | `urn:doe-iri:resource:storage:filesystem` |
 | Target representation type | `urn:doe-iri:resource:storage:mount` |
-| Target representation profile | `https://iri.science/profiles/storage/mount` |
+| Target representation profile | `https://iri.science/profiles/resource-definition/storage/mount` |
 | Cardinality | `0..*` targets from a filesystem resource. |
 | Target stability | Relatively static relationship resource. The target represents configured filesystem exposure, not current mount health or availability. |
 | Authorization affects visibility | Yes. Mount resources MAY be omitted when the requester is not authorized to discover the mount or its associated consuming system. |
@@ -96,7 +96,7 @@ relationship.
 
 A representation of the target mount resource MAY advertise the profile:
 
-`https://iri.science/profiles/storage/mount`
+`https://iri.science/profiles/resource-definition/storage/mount`
 
 The profile identifies the semantic contract of the target mount
 representation. It does not define the semantics of the `iri:has-mount`
@@ -155,7 +155,7 @@ filesystem is not exposed elsewhere.
       "href": "https://api.example.org/api/v2/status/resources/frontier-orion-scratch-mount",
       "title": "Frontier mount of Orion scratch filesystem",
       "type": "application/hal+json",
-      "profile": "https://iri.science/profiles/storage/mount"
+      "profile": "https://iri.science/profiles/resource-definition/storage/mount"
     }
   }
 }

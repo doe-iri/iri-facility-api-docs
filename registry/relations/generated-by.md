@@ -6,7 +6,7 @@
 **Version:** 1.0.0<br>
 **Source representation type:** Facility API `Event` representation.<br>
 **Target representation type:** Facility API `Incident` representation identified by the source Event's `incident_uri`.
-**Target representation profile:** `https://iri.science/profiles/storage/mount`
+**Target representation profile:** `https://iri.science/profiles/status/incident`
 
 This document defines the `iri:generated-by` relationship used by Facility API Event representations.
 

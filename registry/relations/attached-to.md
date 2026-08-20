@@ -6,7 +6,7 @@
 **Version:** 1.0.0<br>
 **Source representation type:** `urn:doe-iri:resource:storage:block`<br>
 **Target representation type:** `urn:doe-iri:resource:compute:system` or `urn:doe-iri:resource:compute:node`<br>
-**Target representation profile:** `https://iri.science/profiles/compute/system` or `https://iri.science/profiles/compute/node`
+**Target representation profile:** `https://iri.science/profiles/resource-definition/compute/system` or `https://iri.science/profiles/resource-definition/compute/node`
 
 
 This document defines the `iri:attached-to` relationship used by the DOE-IRI storage resource model.

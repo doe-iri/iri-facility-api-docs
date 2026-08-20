@@ -6,7 +6,7 @@
 **Version:** 1.0.0<br>
 **Source representation type:** `urn:doe-iri:resource:service:dtn`<br>
 **Target representation type:** `urn:doe-iri:resource:storage:mount`<br>
-**Target representation profile:** `https://iri.science/profiles/storage/mount`
+**Target representation profile:** `https://iri.science/profiles/resource-definition/storage/mount`
 
 This document defines the `iri:accesses-mount` relationship used by the DOE-IRI service resource model.
 
@@ -26,7 +26,7 @@ profile.
 | Semantic meaning | Indicates that the source DTN service is configured to access a filesystem through the identified mount relationship resource for transfer operations. |
 | Source representation type | `urn:doe-iri:resource:service:dtn` |
 | Target representation type | `urn:doe-iri:resource:storage:mount` |
-| Target representation profile | `https://iri.science/profiles/storage/mount` |
+| Target representation profile | `https://iri.science/profiles/resource-definition/storage/mount` |
 | Cardinality | `0..*` targets from a DTN service resource. |
 | Target stability | Relatively static relationship resource. The target identifies configured filesystem access topology, not current mount availability, endpoint reachability, credential validity, unrestricted access, or transfer activity. |
 | Authorization affects visibility | Yes. The relationship or individual mount targets MAY be omitted when the requester is not authorized to discover the configured access topology. |
@@ -58,7 +58,7 @@ urn:doe-iri:resource:storage:mount
 The mount target is a relationship resource representing configured filesystem exposure. It is not a direct filesystem target, state object, operation entry point, or endpoint.
 
 A representation of the target mount resource MAY advertise the profile
-`https://iri.science/profiles/storage/mount`. That profile identifies the
+`https://iri.science/profiles/resource-definition/storage/mount`. That profile identifies the
 semantic contract of the target representation; it does not define the
 semantics of `iri:accesses-mount`, which are identified by
 `https://iri.science/rels/accesses-mount`.

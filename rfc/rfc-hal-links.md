@@ -194,7 +194,7 @@ profiles, but the protocol does not require dereferencing.
       "href": "https://api.example.org/api/v2/status/resources/frontier-orion-scratch-mount",
       "title": "Frontier mount of Orion scratch filesystem",
       "type": "application/hal+json",
-      "profile": "https://iri.science/profiles/storage/mount"
+      "profile": "https://iri.science/profiles/resource-definition/storage/mount"
     },
     "service-desc": {
       "href": "https://api.example.org/openapi.json",
@@ -516,7 +516,7 @@ profiles, but the protocol does not require dereferencing.
       "href": "https://api.example.org/api/v2/status/resources/frontier-orion-scratch-mount",
       "title": "Frontier mount of Orion scratch filesystem",
       "type": "application/hal+json",
-      "profile": "https://iri.science/profiles/storage/mount"
+      "profile": "https://iri.science/profiles/resource-definition/storage/mount"
     },
     "service-desc": {
       "href": "https://api.example.org/openapi.json",
