@@ -682,7 +682,8 @@ A representation may therefore contain type-specific attributes such as:
       }
     ],
     "iri:located-at": {
-      "href": "https://api.example.org/api/v2/facility/sites/example-site"
+      "href": "https://api.example.org/api/v2/facility/sites/example-site",
+      "profile": "https://iri.science/profiles/facility/site"
     },
     "iri:provides-filesystem": [
       {

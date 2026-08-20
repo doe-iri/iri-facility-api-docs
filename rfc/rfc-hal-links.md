@@ -435,10 +435,10 @@ Consumers:
   "site_uri": "/api/v2/facility/sites/pioneer",
   "capability_uris": [],
   "_links": {
-    "self": { "href": "/api/v2/status/resources/pioneer-storage" },
-    "iri:located-at": { "href": "/api/v2/facility/sites/pioneer" },
+    "self": { "href": "/api/v2/status/resources/pioneer-storage", "profile": "https://iri.science/profiles/resource-definition/storage/system" },
+    "iri:located-at": { "href": "/api/v2/facility/sites/pioneer", "profile": "https://iri.science/profiles/facility/site" },
     "iri:provides-filesystem": [
-      { "href": "/api/v2/status/resources/pioneer-scratch" }
+      { "href": "/api/v2/status/resources/pioneer-scratch", "profile": "https://iri.science/profiles/resource-definition/storage/filesystem" }
     ]
   }
 }
@@ -453,9 +453,9 @@ Consumers:
   "resource_uri": "/api/v2/status/resources/pioneer-storage",
   "incident_uri": "/api/v2/status/incidents/incident-001",
   "_links": {
-    "self": { "href": "/api/v2/status/events/event-001" },
-    "iri:impacts": { "href": "/api/v2/status/resources/pioneer-storage" },
-    "iri:generated-by": { "href": "/api/v2/status/incidents/incident-001" }
+    "self": { "href": "/api/v2/status/events/event-001", "profile": "https://iri.science/profiles/status/event" },
+    "iri:impacts": { "href": "/api/v2/status/resources/pioneer-storage", "profile": "https://iri.science/profiles/status/resource" },
+    "iri:generated-by": { "href": "/api/v2/status/incidents/incident-001", "profile": "https://iri.science/profiles/status/incident" }
   }
 }
 ```
@@ -476,7 +476,7 @@ response is `Job`. The second, independent object illustrates a
     "site_uri": "/api/v2/facility/sites/pioneer",
     "capability_uris": [],
     "_links": {
-      "self": { "href": "/api/v2/status/resources/pioneer-compute" },
+      "self": { "href": "/api/v2/status/resources/pioneer-compute", "profile": "https://iri.science/profiles/resource-definition/compute/system" },
       "iri:submit-job": { "href": "/api/v2/compute/job/pioneer-compute" },
       "service-desc": {
         "href": "/openapi.json",
@@ -489,7 +489,7 @@ response is `Job`. The second, independent object illustrates a
     "task_id": "task-001",
     "task_uri": "/api/v2/task/task-001",
     "_links": {
-      "monitor": { "href": "/api/v2/task/task-001" }
+      "monitor": { "href": "/api/v2/task/task-001", "profile": "https://iri.science/profiles/task" }
     }
   }
 ]
