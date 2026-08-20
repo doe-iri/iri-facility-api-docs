@@ -66,13 +66,13 @@ A storage system may provide multiple filesystem resources, and a filesystem may
 
 This document defines attributes applicable specifically to filesystem resources. These attributes describe relatively stable characteristics such as filesystem scope, architecture, capabilities, implementation technology, supported access protocols, storage tier, and underlying media.
 
-Infrastructure-level characteristics are defined by the Storage System Attribute Profile. Information describing how a filesystem is exposed to a particular consuming system is represented by mount resources and corresponding IRI link relations.
+Infrastructure-level characteristics are defined by the Storage System Resource Definition Profile. Information describing how a filesystem is exposed to a particular consuming system is represented by mount resources and corresponding IRI link relations.
 
 This version of the profile does not define current utilization, available capacity, health, performance, or service availability. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Taxonomy
 
-The taxonomy defined in this section identifies the DOE-IRI URN namespaces and controlled vocabulary values used by the Filesystem Attribute Profile. It provides a machine-readable classification for the `urn:doe-iri:resource:storage:filesystem` resource type and for filesystem attributes whose values require consistent semantics across IRI facilities.
+The taxonomy defined in this section identifies the DOE-IRI URN namespaces and controlled vocabulary values used by this Resource Definition Profile. It provides a machine-readable classification for the `urn:doe-iri:resource:storage:filesystem` resource type and for filesystem attributes whose values require consistent semantics across IRI facilities.
 
 The taxonomy distinguishes between the resource being described and the controlled characteristics used to describe that resource. The `urn:doe-iri:resource:storage:filesystem` namespace identifies the resource type itself, while values beneath the `urn:doe-iri:storage` namespace identify standardized filesystem characteristics such as scope, architecture, capabilities, implementation technology, access protocols, storage tier, and media type.
 
@@ -131,9 +131,9 @@ urn:doe-iri
         └── optical
 ```
 
-## 4. Filesystem Attribute Profile
+## 4. Filesystem Attributes
 
-The Filesystem Attribute Profile defines the set of attributes that MAY be used to describe resources of type `urn:doe-iri:resource:storage:filesystem`. These attributes provide a consistent, implementation-independent representation of filesystem characteristics while allowing facilities to expose only the characteristics known and relevant to IRI consumers.
+This Resource Definition Profile defines the set of attributes that MAY be used to describe resources of type `urn:doe-iri:resource:storage:filesystem`. These attributes provide a consistent, implementation-independent representation of filesystem characteristics while allowing facilities to expose only the characteristics known and relevant to IRI consumers.
 
 The profile separates the identity of the filesystem resource from the characteristics of its implementation and use. Controlled characteristics that require consistent machine-readable semantics are represented using registered DOE-IRI URNs.
 
@@ -141,7 +141,7 @@ Except for `schema_version`, attributes in this profile are optional. The absenc
 
 The attributes defined by this profile describe configured characteristics of the filesystem. The semantics of any time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
-The following table defines the attributes included in version `1.0.0` of the Filesystem Attribute Profile.
+The following table defines version `1.0.0` of the filesystem attribute contract.
 
 | Attribute                 | Version | Type                 | Description                                                                                    | Mandatory |
 | ------------------------- | ------- | -------------------- | ---------------------------------------------------------------------------------------------- | --------- |
@@ -201,7 +201,7 @@ Example:
 }
 ```
 
-The `filesystem_architecture` attribute describes the filesystem architecture and SHOULD NOT be interpreted as describing the architecture of the storage system that provides it. Storage-system architecture is represented separately using the Storage System Attribute Profile.
+The `filesystem_architecture` attribute describes the filesystem architecture and SHOULD NOT be interpreted as describing the architecture of the storage system that provides it. Storage-system architecture is represented separately using the Storage System Resource Definition Profile.
 
 Clients SHOULD NOT infer filesystem capabilities, protocols, performance, availability, or storage technology solely from architecture values.
 
@@ -267,7 +267,7 @@ For example:
 Ceph Storage System
 storage_technology = ceph
         │
-        │ providesFilesystem
+        │ iri:provides-filesystem
         ▼
 CephFS Filesystem
 filesystem_technology = cephfs
@@ -404,7 +404,7 @@ components:
         schema_version:
           type: string
           description: >
-            Version of the filesystem attribute profile definition.
+            Version of the filesystem attribute contract.
           enum:
             - "1.0.0"
           example: "1.0.0"

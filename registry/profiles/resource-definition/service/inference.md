@@ -71,9 +71,9 @@ urn:doe-iri
 The complete controlled-vocabulary index is maintained in [Controlled Attribute
 URNs](../../../urns/attributes.md).
 
-## 4. Inference Service Attribute Profile
+## 4. Inference Service Attributes
 
-The Inference Service Attribute Profile defines the attributes that MAY describe a resource of type `urn:doe-iri:resource:service:inference`.
+This Resource Definition Profile defines the attributes that MAY describe a resource of type `urn:doe-iri:resource:service:inference`.
 
 | Attribute | Version | Type | Description | Mandatory |
 |---|---|---|---|---|

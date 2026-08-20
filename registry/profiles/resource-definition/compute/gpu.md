@@ -53,9 +53,9 @@ urn:doe-iri
         └── sycl
 ```
 
-## 4. GPU Attribute Profile
+## 4. GPU Attributes
 
-The GPU Attribute Profile defines attributes that MAY be used to describe resources of type `urn:doe-iri:resource:compute:gpu`.
+This Resource Definition Profile defines attributes that MAY be used to describe resources of type `urn:doe-iri:resource:compute:gpu`.
 
 Except for `schema_version`, attributes are optional.
 

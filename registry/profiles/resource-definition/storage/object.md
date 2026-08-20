@@ -70,7 +70,7 @@ This document defines configured characteristics of object storage resources. Th
 
 ## 3. Taxonomy
 
-The taxonomy defined in this section identifies the DOE-IRI URN namespaces and controlled vocabulary values used by the Object Storage Attribute Profile. It provides a machine-readable classification for the `urn:doe-iri:resource:storage:object` resource type and for object-storage attributes whose values require consistent semantics across IRI facilities.
+The taxonomy defined in this section identifies the DOE-IRI URN namespaces and controlled vocabulary values used by this Resource Definition Profile. It provides a machine-readable classification for the `urn:doe-iri:resource:storage:object` resource type and for object-storage attributes whose values require consistent semantics across IRI facilities.
 
 The taxonomy distinguishes between the resource being described and the controlled characteristics used to describe that resource. The `urn:doe-iri:resource:storage:object` namespace identifies the resource type itself, while values beneath the `urn:doe-iri:storage` namespace identify standardized characteristics such as object-storage APIs, implementation technologies, consistency semantics, capabilities, storage tiers, and physical media.
 
@@ -121,9 +121,9 @@ urn:doe-iri
         └── optical
 ```
 
-## 4. Object Storage Attribute Profile
+## 4. Object Storage Attributes
 
-The Object Storage Attribute Profile defines the set of attributes that MAY be used to describe resources of type `urn:doe-iri:resource:storage:object`. These attributes provide a consistent, implementation-independent representation of logical object-storage characteristics while allowing facilities to expose only those characteristics that are known and relevant to IRI consumers.
+This Resource Definition Profile defines the set of attributes that MAY be used to describe resources of type `urn:doe-iri:resource:storage:object`. These attributes provide a consistent, implementation-independent representation of logical object-storage characteristics while allowing facilities to expose only those characteristics that are known and relevant to IRI consumers.
 
 The profile separates the identity of the object storage resource from the characteristics of the infrastructure that implements it. Controlled characteristics requiring consistent machine-readable semantics are represented using registered DOE-IRI URNs, while endpoint information is represented using structured JSON values.
 
@@ -131,7 +131,7 @@ Except for `schema_version`, attributes in this profile are optional. The absenc
 
 The attributes defined by this profile describe configured characteristics of the object resource. The semantics of any time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
-The following table defines the attributes included in version `1.0.0` of the Object Storage Attribute Profile.
+The following table defines version `1.0.0` of the object-storage attribute contract.
 
 | Attribute             | Version | Type                 | Description                                                                                                                                   | Mandatory |
 | --------------------- | ------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
@@ -234,7 +234,7 @@ The presence of an endpoint does not imply that an unauthenticated consumer is a
 
 Endpoint URLs SHOULD identify the service endpoint rather than an individual object URL.
 
-Current endpoint availability is a time-varying observation and SHOULD NOT be inferred solely from the presence of an endpoint in this attribute profile.
+Current endpoint availability is a time-varying observation and SHOULD NOT be inferred solely from the presence of an endpoint in this Resource Definition Profile.
 
 ### 4.3. Object Storage Technology
 
@@ -267,7 +267,7 @@ For example:
 Ceph Storage System
 storage_technology = ceph
         │
-        │ providesObject
+        │ iri:provides-object
         ▼
 Object Storage
 object_technology = ceph-rgw
@@ -466,7 +466,7 @@ components:
         schema_version:
           type: string
           description: >
-            Version of the object storage attribute profile definition.
+            Version of the object-storage attribute contract.
           enum:
             - "1.0.0"
           example: "1.0.0"

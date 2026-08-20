@@ -68,7 +68,7 @@ This version of the profile does not define whether a volume is currently attach
 
 ## 3. Taxonomy
 
-The taxonomy defined in this section identifies the DOE-IRI URN namespaces and controlled vocabulary values used by the Block Storage Attribute Profile. It provides a machine-readable classification for the `urn:doe-iri:resource:storage:block` resource type and for block-storage attributes whose values require consistent semantics across IRI facilities.
+The taxonomy defined in this section identifies the DOE-IRI URN namespaces and controlled vocabulary values used by this Resource Definition Profile. It provides a machine-readable classification for the `urn:doe-iri:resource:storage:block` resource type and for block-storage attributes whose values require consistent semantics across IRI facilities.
 
 The taxonomy distinguishes between the resource being described and the controlled characteristics used to describe that resource. The `urn:doe-iri:resource:storage:block` namespace identifies the resource type itself, while values beneath the `urn:doe-iri:storage` namespace identify standardized characteristics such as access scope, access protocol, access mode, provisioning model, capabilities, storage tier, and physical media.
 
@@ -123,9 +123,9 @@ urn:doe-iri
         └── optical
 ```
 
-## 4. Block Storage Attribute Profile
+## 4. Block Storage Attributes
 
-The Block Storage Attribute Profile defines the set of attributes that MAY be used to describe resources of type `urn:doe-iri:resource:storage:block`. These attributes provide a consistent, implementation-independent representation of logical block storage characteristics while allowing facilities to expose only those characteristics known and relevant to IRI consumers.
+This Resource Definition Profile defines the set of attributes that MAY be used to describe resources of type `urn:doe-iri:resource:storage:block`. These attributes provide a consistent, implementation-independent representation of logical block storage characteristics while allowing facilities to expose only those characteristics known and relevant to IRI consumers.
 
 The profile separates the identity of the block resource from both the characteristics of the infrastructure that implements it and the configuration of individual attachments to consuming systems. Controlled characteristics that require consistent machine-readable semantics are represented using registered DOE-IRI URNs.
 
@@ -133,7 +133,7 @@ Except for `schema_version`, attributes in this profile are optional. The absenc
 
 The attributes defined by this profile describe configured characteristics of the block resource. The semantics of any time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
-The following table defines the attributes included in version `1.0.0` of the Block Storage Attribute Profile.
+The following table defines version `1.0.0` of the block-storage attribute contract.
 
 | Attribute            | Version | Type                 | Description                                                                                         | Mandatory |
 | -------------------- | ------- | -------------------- | --------------------------------------------------------------------------------------------------- | --------- |
@@ -200,7 +200,7 @@ For example:
 Storage System
     storage_technology = vendor/platform implementation
             │
-            │ providesBlock
+            │ iri:provides-block
             ▼
 Block Resource
     block_protocols:
@@ -241,8 +241,8 @@ For example:
 Block Resource
     block_access_mode = shared
           │
-          ├── attachedTo ──> Compute Node A
-          └── attachedTo ──> Compute Node B
+          ├── iri:attached-to ──> Compute Node A
+          └── iri:attached-to ──> Compute Node B
 ```
 
 Clients SHOULD NOT interpret `block_access_mode` as an authorization policy or as an indication of the resource's current attachment state.
@@ -435,7 +435,7 @@ components:
         schema_version:
           type: string
           description: >
-            Version of the block storage attribute profile definition.
+            Version of the block-storage attribute contract.
           enum:
             - "1.0.0"
           example: "1.0.0"

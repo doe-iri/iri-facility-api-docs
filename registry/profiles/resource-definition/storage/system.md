@@ -64,17 +64,17 @@ urn:doe-iri:resource:compute:system
 
 This separation allows the same storage infrastructure to provide multiple logical storage resources without duplicating infrastructure-level information and allows those logical resources to be independently described, discovered, and related to consuming systems.
 
-This document defines the attributes applicable specifically to the storage-system resource. These attributes describe configured characteristics of the storage infrastructure. Characteristics specific to filesystem, block, or object resources are defined by their respective attribute profiles. This version of the profile does not define current utilization, available capacity, health, or service availability. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
+This document defines the attributes applicable specifically to the storage-system resource. These attributes describe configured characteristics of the storage infrastructure. Characteristics specific to filesystem, block, or object resources are defined by their respective Resource Definition Profiles. This version of the profile does not define current utilization, available capacity, health, or service availability. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Taxonomy
 
-The taxonomy defined in this section identifies the DOE-IRI URN namespaces and controlled vocabulary values used by the Storage System Attribute Profile. It provides a machine-readable classification for the `urn:doe-iri:resource:storage:system` resource type and for those storage-system attributes whose values require consistent semantics across IRI facilities.
+The taxonomy defined in this section identifies the DOE-IRI URN namespaces and controlled vocabulary values used by this Resource Definition Profile. It provides a machine-readable classification for the `urn:doe-iri:resource:storage:system` resource type and for those storage-system attributes whose values require consistent semantics across IRI facilities.
 
 The taxonomy distinguishes between the resource being described and the controlled characteristics used to describe that resource. The `urn:doe-iri:resource:storage:system` namespace identifies the resource type itself, while values beneath the `urn:doe-iri:storage` namespace identify standardized attribute values such as storage technology, architecture, capabilities, and physical media.
 
 The taxonomy is not intended to represent the physical topology or containment relationships of a storage system. Relationships between a storage system and the logical resources it provides—such as filesystems, block storage, or object storage—are represented separately using IRI link relations. Similarly, relationships between those logical storage resources and consuming compute systems are outside the scope of this taxonomy.
 
-Only attributes represented by controlled DOE-IRI URNs appear in the taxonomy. Scalar or descriptive attributes such as `capacity_gib`, `vendor`, `product`, and `version` are defined by the attribute profile but are not represented as branches of the URN taxonomy.
+Only attributes represented by controlled DOE-IRI URNs appear in the taxonomy. Scalar or descriptive attributes such as `capacity_gib`, `vendor`, `product`, and `version` are defined by this Resource Definition Profile but are not represented as branches of the URN taxonomy.
 
 The following tree shows the resource type and controlled vocabulary namespaces defined by this profile.
 
@@ -110,9 +110,9 @@ urn:doe-iri
         ├── tape
         └── optical
 ```
-## 4. Storage Attribute Profile
+## 4. Storage System Attributes
 
-The Storage Attribute Profile defines the set of attributes that MAY be used to describe resources of type urn:doe-iri:resource:storage:system. These attributes provide a consistent, implementation-independent representation of a storage system's characteristics while allowing facilities to expose only those characteristics known and relevant to IRI consumers.
+This Resource Definition Profile defines the set of attributes that MAY be used to describe resources of type urn:doe-iri:resource:storage:system. These attributes provide a consistent, implementation-independent representation of a storage system's characteristics while allowing facilities to expose only those characteristics known and relevant to IRI consumers.
 
 The profile separates the identity of the storage resource from the characteristics of the infrastructure that implements it. Controlled characteristics that require consistent machine-readable semantics, such as storage technology, architecture, capabilities, and media types, are represented using registered DOE-IRI URNs. Other descriptive or quantitative characteristics, such as capacity, vendor, product, and software version, are represented using their corresponding JSON scalar types.
 
@@ -120,7 +120,7 @@ Except for schema_version, attributes in this profile are optional. The absence 
 
 The attributes defined by this profile describe configured characteristics of the storage system. This version of the profile does not define current utilization, available capacity, health, performance, or service availability. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
-The following table defines the attributes included in version 1.0.0 of the Storage System Attribute Profile.
+The following table defines version 1.0.0 of the storage-system attribute contract.
 
 | Attribute | Version | Type | Description | Mandatory |
 |---|---|---|---|---|
@@ -155,12 +155,12 @@ For example, a Ceph storage system may provide multiple logical storage resource
 Ceph Storage System
 storage_technology = urn:doe-iri:storage:system-technology:ceph
     |
-    ├── providesFilesystem ──> CephFS Filesystem
+    ├── iri:provides-filesystem ──> CephFS Filesystem
     │                          filesystem_technology = cephfs
     │
-    ├── providesBlock ────────> RBD Block Storage
+    ├── iri:provides-block ────────> RBD Block Storage
     │
-    └── providesObject ───────> Ceph Object Gateway
+    └── iri:provides-object ───────> Ceph Object Gateway
 ```
 
 Similarly, a Lustre storage system may provide one or more logical filesystems:
@@ -169,8 +169,8 @@ Similarly, a Lustre storage system may provide one or more logical filesystems:
 Lustre Storage System
 storage_technology = urn:doe-iri:storage:system-technology:lustre
     |
-    ├── providesFilesystem ──> Scratch Filesystem
-    └── providesFilesystem ──> Project Filesystem
+    ├── iri:provides-filesystem ──> Scratch Filesystem
+    └── iri:provides-filesystem ──> Project Filesystem
 ```
 
 The storage-system technology is also distinct from vendor and product information. For example:
@@ -221,7 +221,7 @@ Storage System
         distributed
         clustered
             │
-            │ providesFilesystem
+            │ iri:provides-filesystem
             ▼
 Filesystem
     filesystem_architecture:
@@ -269,9 +269,9 @@ Storage System
         snapshot
         encryption-at-rest
             │
-            ├── providesFilesystem ──> Scratch Filesystem
-            ├── providesFilesystem ──> Home Filesystem
-            └── providesBlock ───────> Project Volume
+            ├── iri:provides-filesystem ──> Scratch Filesystem
+            ├── iri:provides-filesystem ──> Home Filesystem
+            └── iri:provides-block ───────> Project Volume
 ```
 
 The fact that the storage system supports snapshots does not imply that snapshots are available to consumers of every filesystem or block resource. When a capability is meaningful at the logical-resource level, it SHOULD also be advertised using the capability attribute defined for that resource type.
@@ -333,9 +333,9 @@ Storage System
         magnetic-disk
         tape
             │
-            ├── providesFilesystem ──> Scratch Filesystem
-            ├── providesFilesystem ──> Project Filesystem
-            └── providesFilesystem ──> Archive Filesystem
+            ├── iri:provides-filesystem ──> Scratch Filesystem
+            ├── iri:provides-filesystem ──> Project Filesystem
+            └── iri:provides-filesystem ──> Archive Filesystem
 ```
 
 In this example, the storage-system definition indicates that all three media types are present somewhere within the infrastructure. It does not imply that every filesystem uses all three media types.
@@ -391,7 +391,7 @@ components:
         schema_version:
           type: string
           description: >
-            Version of the storage system attribute profile definition.
+            Version of the storage-system attribute contract.
           enum:
             - "1.0.0"
           example: "1.0.0"

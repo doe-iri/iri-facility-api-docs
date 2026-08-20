@@ -86,11 +86,11 @@ This document defines mount configuration characteristics such as the namespace 
 
 ## 3. Taxonomy
 
-The taxonomy defined in this section identifies the DOE-IRI URN namespaces and controlled vocabulary values used by the Filesystem Mount Attribute Profile. It provides a machine-readable classification for the `urn:doe-iri:resource:storage:mount` resource type and for mount attributes whose values require consistent semantics across IRI facilities.
+The taxonomy defined in this section identifies the DOE-IRI URN namespaces and controlled vocabulary values used by this Resource Definition Profile. It provides a machine-readable classification for the `urn:doe-iri:resource:storage:mount` resource type and for mount attributes whose values require consistent semantics across IRI facilities.
 
 The taxonomy distinguishes between the mount resource itself and the controlled characteristics used to describe that resource. The `urn:doe-iri:resource:storage:mount` namespace identifies the resource type, while values beneath the `urn:doe-iri:storage` namespace identify standardized mount characteristics.
 
-The mount profile also reuses the `urn:doe-iri:storage:filesystem-protocol` vocabulary defined by the Filesystem Attribute Profile. Reusing this vocabulary ensures that a protocol has the same semantic meaning whether it is advertised as a protocol supported by a filesystem or as the protocol used by a particular mount.
+The mount profile also reuses the `urn:doe-iri:storage:filesystem-protocol` vocabulary defined by the Filesystem Resource Definition Profile. Reusing this vocabulary ensures that a protocol has the same semantic meaning whether it is advertised as a protocol supported by a filesystem or as the protocol used by a particular mount.
 
 The taxonomy does not represent the filesystem being mounted or the consuming system on which it is mounted. Those relationships are expressed separately using `iri:has-mount` and `iri:mounted-on`.
 
@@ -117,9 +117,9 @@ urn:doe-iri
         └── webdav
 ```
 
-## 4. Filesystem Mount Attribute Profile
+## 4. Filesystem Mount Attributes
 
-The Filesystem Mount Attribute Profile defines the set of attributes that MAY be used to describe resources of type `urn:doe-iri:resource:storage:mount`. These attributes provide a consistent representation of how a filesystem is exposed within the namespace of a particular consuming system.
+This Resource Definition Profile defines the set of attributes that MAY be used to describe resources of type `urn:doe-iri:resource:storage:mount`. These attributes provide a consistent representation of how a filesystem is exposed within the namespace of a particular consuming system.
 
 The profile deliberately avoids duplicating characteristics that belong to the filesystem itself or to the consuming system. Information such as filesystem technology, filesystem tier, storage media, or compute-system identity SHOULD be obtained from the related resources.
 
@@ -129,7 +129,7 @@ The remaining attributes are optional. The absence of an optional attribute indi
 
 The attributes defined by this profile describe mount configuration. The semantics of any time-varying values associated with a mount are governed by the applicable IRI API contract and Resource Definition Profile.
 
-The following table defines the attributes included in version `1.0.0` of the Filesystem Mount Attribute Profile.
+The following table defines version `1.0.0` of the filesystem-mount attribute contract.
 
 | URN | Short name | Description | Status |
 |---|---|---|---|
@@ -242,7 +242,7 @@ For example:
 }
 ```
 
-The Filesystem Attribute Profile may advertise multiple protocols that can be used to access a logical filesystem:
+The Filesystem Resource Definition Profile may advertise multiple protocols that can be used to access a logical filesystem:
 
 ```text
 Filesystem
@@ -339,7 +339,7 @@ components:
         schema_version:
           type: string
           description: >
-            Version of the filesystem mount attribute profile definition.
+            Version of the filesystem-mount attribute contract.
           enum:
             - "1.0.0"
           example: "1.0.0"
@@ -394,7 +394,7 @@ components:
 }
 ```
 
-The complete resource model associates this attribute profile with the filesystem and consuming system through IRI relationships:
+The complete resource model associates this Resource Definition Profile with the filesystem and consuming system through IRI relationships:
 
 ```text
 Filesystem

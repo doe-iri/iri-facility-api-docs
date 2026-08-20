@@ -38,7 +38,7 @@ The attributes in this profile describe configured characteristics of the comput
 
 ## 3. Taxonomy
 
-The taxonomy defined in this section identifies the DOE-IRI URN namespaces and controlled vocabulary values used by the Compute System Attribute Profile.
+The taxonomy defined in this section identifies the DOE-IRI URN namespaces and controlled vocabulary values used by this Resource Definition Profile.
 
 Only attributes represented using controlled DOE-IRI URNs appear in the taxonomy. Quantitative or descriptive attributes such as configured resource counts, memory capacity, vendor, product, and version are defined by the profile but are not represented as taxonomy branches.
 
@@ -57,9 +57,9 @@ urn:doe-iri
         └── accelerator-support
 ```
 
-## 4. Compute System Attribute Profile
+## 4. Compute System Attributes
 
-The Compute System Attribute Profile defines the set of attributes that MAY be used to describe resources of type `urn:doe-iri:resource:compute:system`.
+This Resource Definition Profile defines the set of attributes that MAY be used to describe resources of type `urn:doe-iri:resource:compute:system`.
 
 Except for `schema_version`, attributes in this profile are optional. The absence of an optional attribute indicates that the information has not been provided and MUST NOT be interpreted as implying a particular value or capability.
 
@@ -162,7 +162,7 @@ components:
         schema_version:
           type: string
           description: >
-            Version of the compute system attribute profile definition.
+            Version of the compute-system attribute contract.
           enum:
             - "1.0.0"
           example: "1.0.0"

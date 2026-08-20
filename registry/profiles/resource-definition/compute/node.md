@@ -36,7 +36,7 @@ The attributes in this profile describe configured characteristics of the node. 
 
 ## 3. Taxonomy
 
-The following taxonomy identifies the controlled vocabulary values used by the Compute Node Attribute Profile.
+The following taxonomy identifies the controlled vocabulary values used by this Resource Definition Profile.
 
 ```text
 urn:doe-iri
@@ -52,9 +52,9 @@ urn:doe-iri
         └── service
 ```
 
-## 4. Compute Node Attribute Profile
+## 4. Compute Node Attributes
 
-The Compute Node Attribute Profile defines attributes that MAY be used to describe resources of type `urn:doe-iri:resource:compute:node`.
+This Resource Definition Profile defines attributes that MAY be used to describe resources of type `urn:doe-iri:resource:compute:node`.
 
 Except for `schema_version`, attributes are optional. Configured counts and capacities describe the node definition rather than current available capacity.
 

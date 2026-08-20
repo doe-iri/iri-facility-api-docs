@@ -51,9 +51,9 @@ urn:doe-iri
         └── riscv64
 ```
 
-## 4. CPU Attribute Profile
+## 4. CPU Attributes
 
-The CPU Attribute Profile defines attributes that MAY be used to describe resources of type `urn:doe-iri:resource:compute:cpu`.
+This Resource Definition Profile defines attributes that MAY be used to describe resources of type `urn:doe-iri:resource:compute:cpu`.
 
 Except for `schema_version`, attributes are optional.
 

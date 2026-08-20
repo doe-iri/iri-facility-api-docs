@@ -70,9 +70,9 @@ urn:doe-iri
 The complete controlled-vocabulary index is maintained in [Controlled Attribute
 URNs](../../../urns/attributes.md).
 
-## 4. DTN Service Attribute Profile
+## 4. DTN Service Attributes
 
-The DTN Service Attribute Profile defines the attributes that MAY describe a resource of type `urn:doe-iri:resource:service:dtn`.
+This Resource Definition Profile defines the attributes that MAY describe a resource of type `urn:doe-iri:resource:service:dtn`.
 
 | Attribute | Version | Type | Description | Mandatory |
 |---|---|---|---|---|
@@ -171,7 +171,7 @@ components:
 
         schema_version:
           type: string
-          description: Version of the DTN service attribute profile definition.
+          description: Version of the DTN service attribute contract.
           enum:
             - "1.0.0"
           example: "1.0.0"

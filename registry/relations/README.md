@@ -34,7 +34,7 @@ intended for navigation and summary only.
 | Service | `iri:hosted-on` | Indicates that the identified compute system or compute node provides hosting infrastructure for the source service. | `urn:doe-iri:resource:service:dtn` or `urn:doe-iri:resource:service:inference` | `urn:doe-iri:resource:compute:system` or `urn:doe-iri:resource:compute:node` | `0..*` targets from a service resource. | [`iri:hosted-on`](./hosted-on.md) |
 | Service | `iri:accesses-mount` | Indicates that the source DTN service is configured to access a filesystem through the identified mount relationship resource for transfer operations. | `urn:doe-iri:resource:service:dtn` | `urn:doe-iri:resource:storage:mount` | `0..*` targets from a DTN service resource. | [`iri:accesses-mount`](./accesses-mount.md) |
 
-[Back to the DOE-IRI Registry README](./README.md)
+[Back to the DOE-IRI Registry README](../README.md)
 
 ---
 
