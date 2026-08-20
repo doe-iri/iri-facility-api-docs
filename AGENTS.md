@@ -60,11 +60,38 @@ Other registry/profiles/** documents
 
 docs/ai-project-context.md
     Architectural and historical context only.
+
+docs/decisions/**
+    Non-normative architectural decision records. They explain why accepted
+    choices were made but never override OpenAPI, RFCs, URN registries,
+    relation definitions, or representation profiles.
 ```
 
 If sources that are authoritative for different concerns appear to conflict, do
 not silently choose one. Identify whether the mismatch is structural, semantic,
 registry-related, or stale documentation before changing normative content.
+
+### Documentation Lifecycle
+
+Keep normative rules in the source authoritative for that concern: OpenAPI for
+structure; RFCs for governing protocol and namespace rules; URN registries for
+assigned identifiers and lifecycle; relation definitions for `iri:*` semantics;
+and representation and Resource Definition profiles for representation
+semantics.
+
+Use `docs/decisions/` only for durable architectural rationale that helps future
+maintainers understand why an accepted choice was made. Decision records are
+non-normative and MUST NOT become a second registry, schema, or conformance
+source. A decision record never overrides OpenAPI, RFCs, registries, relation
+definitions, or representation profiles.
+
+Do not retain transient AI/Codex implementation plans, scratch analyses,
+command transcripts, or completed migration checklists as durable repository
+documentation. Git history is the implementation record.
+
+If a decision record conflicts with a current authoritative source, the
+authoritative source wins. Update, supersede, or mark the decision record
+historical rather than changing normative semantics to match stale rationale.
 
 ## 1. Core Modeling Rules
 

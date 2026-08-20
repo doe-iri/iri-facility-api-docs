@@ -29,7 +29,7 @@ registration is authoritative in the URN registry.
 | Status | `provisional` |
 | Introduced | IRI v2.0 |
 | Change controller | IRI technical subcommittee. |
-| Reference | [Service Resource Types Design](../../../../docs/superpowers/specs/2026-08-13-service-resource-types-design.md). |
+| Reference | [Service Resource Types Design](../../../../docs/decisions/0001-service-resource-boundaries.md). |
 | Legacy value | `service` enumeration. The broad legacy value does not distinguish this refinement. |
 | Examples | `urn:doe-iri:resource:service:dtn` |
 | Notes | This profile defines relatively stable characteristics of a consumable DTN service. |
