@@ -46,10 +46,11 @@ IRI operation
      ▼
 TaskSubmitResponse
      │
-     │ task_uri
+     │ task_uri / _links.monitor.href
      ▼
-    Task
+Task representation
      │
+     ├── _links.self.href
      ├── status
      ├── command
      └── result
@@ -419,11 +420,19 @@ For example, given:
 ```json
 {
   "task_id": "task-123",
-  "task_uri": "https://api.example.org/api/v2/task/task-123"
+  "task_uri": "https://api.example.org/api/v2/task/task-123",
+  "_links": {
+    "monitor": {
+      "href": "https://api.example.org/api/v2/task/task-123",
+      "type": "application/hal+json",
+      "profile": "https://iri.science/profiles/task"
+    }
+  }
 }
 ```
 
-a client SHOULD follow:
+the standard `monitor` relation describes why the submission response links to
+the Task. A client SHOULD follow:
 
 ```text
 https://api.example.org/api/v2/task/task-123
@@ -521,10 +530,23 @@ Conceptually:
 TaskSubmitResponse.task_uri
         │
         ▼
+_links.monitor.href
+        │
+        ▼
+Task representation
+        │
+        ▼
 Task._links.self.href
 ```
 
-When both forms are available for the same Task, they SHOULD identify the same Task representation.
+`monitor` describes why `TaskSubmitResponse` links to the Task. `self`
+identifies the Task representation once retrieved. Their `href` values may be
+identical while their relation semantics differ.
+
+When `TaskSubmitResponse.task_uri` and `_links.monitor.href` are both present,
+they MUST identify the same Task representation and have the same URI value.
+The standard relation name is `monitor`; this profile does not define or use an
+`iri:monitor` relation.
 
 A HAL-enabled Task producer SHOULD advertise `_links.self`.
 
@@ -693,12 +715,13 @@ A representation conforms to the IRI Task Profile when:
 7. `command`, when present, conforms to the applicable `TaskCommand` structure;
 8. `router` and `command` are not interpreted as API paths or HTTP methods;
 9. Task discovery uses advertised Task URIs rather than URL construction where such URIs are available;
-10. `_links.self`, when supplied, identifies the canonical retrievable Task representation;
-11. profile URIs identify representation semantics and are not used as Task identifiers or link-relation identifiers;
-12. no Task-specific `iri:*` relationships are inferred without registered relation definitions;
-13. HTTP DELETE is not automatically equated with Task cancellation;
-14. Task visibility is not interpreted as authorization to invoke related operations;
-15. clients do not require operation-specific `result` or `args` members unless defined by the governing operation contract.
+10. a HAL-enabled `TaskSubmitResponse` uses the standard `monitor` relation for its `task_uri` target and does not invent `iri:monitor`;
+11. `_links.self`, when supplied, identifies the canonical retrievable Task representation;
+12. profile URIs identify representation semantics and are not used as Task identifiers or link-relation identifiers;
+13. no Task-specific `iri:*` relationships are inferred without registered relation definitions;
+14. HTTP DELETE is not automatically equated with Task cancellation;
+15. Task visibility is not interpreted as authorization to invoke related operations;
+16. clients do not require operation-specific `result` or `args` members unless defined by the governing operation contract.
 
 A conforming representation MAY contain additional properties and links where permitted by the applicable IRI API specification.
 

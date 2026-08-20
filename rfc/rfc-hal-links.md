@@ -9,11 +9,11 @@ environments.
 
 This RFC defines an additive HAL `_links` convention for IRI 2.0
 resource-oriented JSON representations. The convention makes related resources,
-dynamic state resources, operation entry points, and topology relationships
-explicit and navigable. It also defines migration of existing navigable
-URI-valued properties to standard or registered DOE-IRI link relations and
-advertises an initial job-submission affordance. It does not change the
-production OpenAPI schemas.
+topology relationships, operation entry points, and machine-readable service
+descriptions explicit and navigable. It also defines migration of existing
+navigable URI-valued properties to standard or registered DOE-IRI link
+relations and advertises an initial job-submission affordance. It does not
+change the production OpenAPI schemas.
 
 ## Status of This Memo
 
@@ -44,8 +44,8 @@ For an existing API `Resource` representation:
 ```text
 resource_type identifies what the Resource is.
 ordinary properties describe the representation.
-_links identifies related resources, dynamic state resources, topology
-       relationships, and applicable operation entry points.
+_links identifies related resources, topology relationships, applicable
+       operation entry points, and machine-readable service descriptions.
 link relations identify why a target is related or applicable.
 OpenAPI defines how to invoke an operation.
 ```
@@ -59,14 +59,15 @@ v2, define operational telemetry, or define other operation affordances.
 The JSON below is registry-aligned HAL migration material: it uses canonical
 registry URNs and illustrates representation shapes, rather than claiming to
 be complete instances conformant with the current production OpenAPI. In
-particular, migration from the current v2 `ResourceType` legacy enum is outside
-this RFC and requires later OpenAPI work.
+IRI v2, `Resource.resource_type` is an extensible string containing a DOE-IRI
+Resource Type URN.
 
 ## 2. Problem Statement
 
 IRI APIs describe heterogeneous resources implemented across independently
 operated facilities and services. Those resources expose relationships to other
-resources, capabilities, dynamic state, topology, and operation entry points.
+resources, capabilities, topology, operation entry points, and service
+descriptions.
 Because facilities may implement these APIs using different internal routing
 structures, clients cannot safely infer a target URI from a resource identifier
 or resource type.
@@ -82,7 +83,7 @@ API, a client may need to discover questions such as:
 
 ```text
 Which related resource represents a filesystem?
-Which resource exposes current state or capacity information?
+Which machine-readable service description applies in this context?
 Which incidents or events affect the resource?
 Which mount relationship connects a compute resource to a filesystem?
 Which operation entry point applies to the resource?
@@ -288,7 +289,7 @@ and `Site.resource_uris` map to three different relations.
 general meaning: a Resource provides the Capability, while a
 ProjectAllocation applies to it. For full source, target, cardinality, target
 classification, visibility, and volatility rules, consult the registered
-profile for each `iri:*` relation.
+relation definition for each `iri:*` relation.
 
 ## 6. Operation Affordance: `iri:submit-job`
 
@@ -416,9 +417,9 @@ Consumers:
   suitable relation is present.
 - MAY use an advertised `service-desc` link to discover the machine-readable
   service contract applicable to the context.
-- MUST consult the applicable relation profile and governing OpenAPI contract
-  before invoking an operation, and MUST NOT treat an operation link or
-  `service-desc` link as authorization.
+- MUST consult the applicable registered relation definition and governing
+  OpenAPI contract before invoking an operation, and MUST NOT treat an
+  operation link or `service-desc` link as authorization.
 - MUST treat link targets as data and avoid automatically following arbitrary
   links from untrusted sources.
 
