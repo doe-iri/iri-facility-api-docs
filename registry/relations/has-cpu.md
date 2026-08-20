@@ -83,10 +83,12 @@ Absence of visible CPU targets MUST NOT be interpreted as evidence that the node
   "_links": {
     "iri:has-cpu": [
       {
-        "href": "/api/v2/status/resources/node-001-cpu-0"
+        "href": "/api/v2/status/resources/node-001-cpu-0",
+        "profile": "https://iri.science/profiles/resource-definition/compute/cpu"
       },
       {
-        "href": "/api/v2/status/resources/node-001-cpu-1"
+        "href": "/api/v2/status/resources/node-001-cpu-1",
+        "profile": "https://iri.science/profiles/resource-definition/compute/cpu"
       }
     ]
   }

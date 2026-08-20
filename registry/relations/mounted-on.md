@@ -86,7 +86,8 @@ Because `iri:mounted-on` is required for the semantic completeness of a mount re
 {
   "_links": {
     "iri:mounted-on": {
-      "href": "/api/v2/status/resources/perlmutter"
+      "href": "/api/v2/status/resources/perlmutter",
+      "profile": "https://iri.science/profiles/resource-definition/compute/system"
     }
   }
 }

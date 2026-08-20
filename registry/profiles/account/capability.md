@@ -384,7 +384,8 @@ For example:
   "_links": {
     "self": {
       "href":
-        "https://api.example.org/api/v2/account/capabilities/perlmutter-gpu"
+        "https://api.example.org/api/v2/account/capabilities/perlmutter-gpu",
+      "profile": "https://iri.science/profiles/account/capability"
     }
   }
 }

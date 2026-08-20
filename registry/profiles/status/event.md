@@ -300,7 +300,8 @@ For example:
     "iri:impacts": {
       "href": "https://api.example.org/api/v2/status/resources/orion-scratch",
       "title": "Orion Scratch Filesystem",
-      "type": "application/hal+json"
+      "type": "application/hal+json",
+      "profile": "https://iri.science/profiles/status/resource"
     },
 
     "iri:generated-by": {
@@ -411,15 +412,18 @@ For example:
 
   "_links": {
     "self": {
-      "href": "https://api.example.org/api/v2/status/events/event-1234"
+      "href": "https://api.example.org/api/v2/status/events/event-1234",
+      "profile": "https://iri.science/profiles/status/event"
     },
 
     "iri:impacts": {
-      "href": "https://api.example.org/api/v2/status/resources/orion-scratch"
+      "href": "https://api.example.org/api/v2/status/resources/orion-scratch",
+      "profile": "https://iri.science/profiles/status/resource"
     },
 
     "iri:generated-by": {
-      "href": "https://api.example.org/api/v2/status/incidents/inc-1234"
+      "href": "https://api.example.org/api/v2/status/incidents/inc-1234",
+      "profile": "https://iri.science/profiles/status/incident"
     }
   }
 }

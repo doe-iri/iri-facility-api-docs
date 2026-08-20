@@ -86,7 +86,8 @@ Deprecating or removing `site_uri` requires a separate approved schema revision.
   "site_uri": "https://api.example.gov/api/v2/facility/sites/example-site",
   "_links": {
     "iri:located-at": {
-      "href": "https://api.example.gov/api/v2/facility/sites/example-site"
+      "href": "https://api.example.gov/api/v2/facility/sites/example-site",
+      "profile": "https://iri.science/profiles/facility/site"
     }
   }
 }

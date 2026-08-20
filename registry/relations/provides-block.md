@@ -84,7 +84,7 @@ An omitted target MUST NOT be interpreted as evidence that the storage system pr
 {
   "_links": {
     "iri:provides-block": [
-      { "href": "/api/v2/status/resources/project-volume-001" }
+      { "href": "/api/v2/status/resources/project-volume-001", "profile": "https://iri.science/profiles/resource-definition/storage/block" }
     ]
   }
 }

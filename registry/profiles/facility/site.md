@@ -293,12 +293,14 @@ For example:
       {
         "href": "https://api.example.org/api/v2/status/resources/perlmutter",
         "title": "Perlmutter Compute System",
-        "type": "application/hal+json"
+        "type": "application/hal+json",
+        "profile": "https://iri.science/profiles/status/resource"
       },
       {
         "href": "https://api.example.org/api/v2/status/resources/perlmutter-scratch",
         "title": "Perlmutter Scratch Filesystem",
-        "type": "application/hal+json"
+        "type": "application/hal+json",
+        "profile": "https://iri.science/profiles/status/resource"
       }
     ]
   }
@@ -397,15 +399,18 @@ For example:
 
   "_links": {
     "self": {
-      "href": "https://api.example.org/api/v2/facility/sites/nersc"
+      "href": "https://api.example.org/api/v2/facility/sites/nersc",
+      "profile": "https://iri.science/profiles/facility/site"
     },
 
     "iri:has-resource": [
       {
-        "href": "https://api.example.org/api/v2/status/resources/perlmutter"
+        "href": "https://api.example.org/api/v2/status/resources/perlmutter",
+        "profile": "https://iri.science/profiles/status/resource"
       },
       {
-        "href": "https://api.example.org/api/v2/status/resources/perlmutter-scratch"
+        "href": "https://api.example.org/api/v2/status/resources/perlmutter-scratch",
+        "profile": "https://iri.science/profiles/status/resource"
       }
     ]
   }

@@ -83,8 +83,8 @@ Removing or changing `resource_uris` requires a subsequent OpenAPI change.
   ],
   "_links": {
     "iri:has-resource": [
-      { "href": "/api/v2/status/resources/pioneer" },
-      { "href": "/api/v2/status/resources/pioneer-scratch" }
+      { "href": "/api/v2/status/resources/pioneer", "profile": "https://iri.science/profiles/status/resource" },
+      { "href": "/api/v2/status/resources/pioneer-scratch", "profile": "https://iri.science/profiles/status/resource" }
     ]
   }
 }

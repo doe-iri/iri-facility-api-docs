@@ -82,8 +82,8 @@ Removing or changing `event_uris` requires a subsequent OpenAPI change.
   ],
   "_links": {
     "iri:has-event": [
-      { "href": "/api/v2/status/events/network-maintenance-start" },
-      { "href": "/api/v2/status/events/network-maintenance-complete" }
+      { "href": "/api/v2/status/events/network-maintenance-start", "profile": "https://iri.science/profiles/status/event" },
+      { "href": "/api/v2/status/events/network-maintenance-complete", "profile": "https://iri.science/profiles/status/event" }
     ]
   }
 }

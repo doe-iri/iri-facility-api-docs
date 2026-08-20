@@ -80,7 +80,8 @@ Removing or changing `resource_uri` requires a subsequent OpenAPI change.
   "resource_uri": "/api/v2/status/resources/pioneer",
   "_links": {
     "iri:impacts": {
-      "href": "/api/v2/status/resources/pioneer"
+      "href": "/api/v2/status/resources/pioneer",
+      "profile": "https://iri.science/profiles/status/resource"
     }
   }
 }

@@ -31,14 +31,17 @@
     },
     "_links": {
       "self": {
-        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-storage"
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-storage",
+        "profile": "https://iri.science/profiles/resource-definition/storage/system"
       },
       "iri:located-at": {
-        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
+        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+        "profile": "https://iri.science/profiles/facility/site"
       },
       "iri:provides-filesystem": [
         {
-          "href": "/api/v2/status/resources/pioneer-scratch"
+          "href": "/api/v2/status/resources/pioneer-scratch",
+          "profile": "https://iri.science/profiles/resource-definition/storage/filesystem"
         }
       ]
     }
@@ -75,14 +78,17 @@
     },
     "_links": {
       "self": {
-        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-scratch"
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-scratch",
+        "profile": "https://iri.science/profiles/resource-definition/storage/filesystem"
       },
       "iri:located-at": {
-        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
+        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+        "profile": "https://iri.science/profiles/facility/site"
       },
       "iri:has-mount": [
         {
-          "href": "/api/v2/status/resources/pioneer-scratch-mount"
+          "href": "/api/v2/status/resources/pioneer-scratch-mount",
+          "profile": "https://iri.science/profiles/resource-definition/storage/mount"
         }
       ]
     }
@@ -108,13 +114,16 @@
     },
     "_links": {
       "self": {
-        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-scratch-mount"
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-scratch-mount",
+        "profile": "https://iri.science/profiles/resource-definition/storage/mount"
       },
       "iri:located-at": {
-        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
+        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+        "profile": "https://iri.science/profiles/facility/site"
       },
       "iri:mounted-on": {
-        "href": "/api/v2/status/resources/pioneer-compute"
+        "href": "/api/v2/status/resources/pioneer-compute",
+        "profile": "https://iri.science/profiles/resource-definition/compute/system"
       }
     }
   },
@@ -146,14 +155,17 @@
     },
     "_links": {
       "self": {
-        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-compute"
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-compute",
+        "profile": "https://iri.science/profiles/resource-definition/compute/system"
       },
       "iri:located-at": {
-        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
+        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+        "profile": "https://iri.science/profiles/facility/site"
       },
       "iri:has-node": [
         {
-          "href": "/api/v2/status/resources/pioneer-node-001"
+          "href": "/api/v2/status/resources/pioneer-node-001",
+          "profile": "https://iri.science/profiles/resource-definition/compute/node"
         }
       ]
     }
@@ -184,14 +196,17 @@
     },
     "_links": {
       "self": {
-        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-node-001"
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-node-001",
+        "profile": "https://iri.science/profiles/resource-definition/compute/node"
       },
       "iri:located-at": {
-        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
+        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+        "profile": "https://iri.science/profiles/facility/site"
       },
       "iri:has-gpu": [
         {
-          "href": "/api/v2/status/resources/pioneer-node-001-gpu-0"
+          "href": "/api/v2/status/resources/pioneer-node-001-gpu-0",
+          "profile": "https://iri.science/profiles/resource-definition/compute/gpu"
         }
       ]
     }
@@ -218,10 +233,12 @@
     },
     "_links": {
       "self": {
-        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-node-001-gpu-0"
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-node-001-gpu-0",
+        "profile": "https://iri.science/profiles/resource-definition/compute/gpu"
       },
       "iri:located-at": {
-        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
+        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+        "profile": "https://iri.science/profiles/facility/site"
       }
     }
   },
@@ -258,17 +275,21 @@
     },
     "_links": {
       "self": {
-        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-dtn"
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-dtn",
+        "profile": "https://iri.science/profiles/resource-definition/service/dtn"
       },
       "iri:located-at": {
-        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
+        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+        "profile": "https://iri.science/profiles/facility/site"
       },
       "iri:hosted-on": {
-        "href": "/api/v2/status/resources/pioneer-compute"
+        "href": "/api/v2/status/resources/pioneer-compute",
+        "profile": "https://iri.science/profiles/resource-definition/compute/system"
       },
       "iri:accesses-mount": [
         {
-          "href": "/api/v2/status/resources/pioneer-scratch-mount"
+          "href": "/api/v2/status/resources/pioneer-scratch-mount",
+          "profile": "https://iri.science/profiles/resource-definition/storage/mount"
         }
       ]
     }
@@ -314,13 +335,16 @@
     },
     "_links": {
       "self": {
-        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-inference"
+        "href": "https://api.pioneer.example.gov/api/v2/status/resources/pioneer-inference",
+        "profile": "https://iri.science/profiles/resource-definition/service/inference"
       },
       "iri:located-at": {
-        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer"
+        "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
+        "profile": "https://iri.science/profiles/facility/site"
       },
       "iri:hosted-on": {
-        "href": "/api/v2/status/resources/pioneer-node-001"
+        "href": "/api/v2/status/resources/pioneer-node-001",
+        "profile": "https://iri.science/profiles/resource-definition/compute/node"
       }
     }
   }

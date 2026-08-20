@@ -79,7 +79,8 @@ Removing or changing `project_uri` requires a subsequent OpenAPI change.
   "project_uri": "/api/v2/account/projects/climate-simulation",
   "_links": {
     "iri:has-project": {
-      "href": "/api/v2/account/projects/climate-simulation"
+      "href": "/api/v2/account/projects/climate-simulation",
+      "profile": "https://iri.science/profiles/account/project"
     }
   }
 }

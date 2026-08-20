@@ -84,7 +84,7 @@ Absence of the link or a particular target MUST NOT be interpreted as proof that
 {
   "_links": {
     "iri:provides-object": [
-      { "href": "/api/v2/status/resources/science-object-store" }
+      { "href": "/api/v2/status/resources/science-object-store", "profile": "https://iri.science/profiles/resource-definition/storage/object" }
     ]
   }
 }

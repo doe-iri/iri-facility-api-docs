@@ -100,8 +100,8 @@ The mount target is more precise than a direct filesystem target because it iden
 {
   "_links": {
     "iri:accesses-mount": [
-      { "href": "/api/v2/status/resources/perlmutter-scratch-mount" },
-      { "href": "/api/v2/status/resources/analysis-home-mount" }
+      { "href": "/api/v2/status/resources/perlmutter-scratch-mount", "profile": "https://iri.science/profiles/resource-definition/storage/mount" },
+      { "href": "/api/v2/status/resources/analysis-home-mount", "profile": "https://iri.science/profiles/resource-definition/storage/mount" }
     ]
   }
 }

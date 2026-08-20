@@ -83,10 +83,12 @@ Absence of visible GPU targets MUST NOT be interpreted as evidence that no accel
   "_links": {
     "iri:has-gpu": [
       {
-        "href": "/api/v2/status/resources/node-001-gpu-0"
+        "href": "/api/v2/status/resources/node-001-gpu-0",
+        "profile": "https://iri.science/profiles/resource-definition/compute/gpu"
       },
       {
-        "href": "/api/v2/status/resources/node-001-gpu-1"
+        "href": "/api/v2/status/resources/node-001-gpu-1",
+        "profile": "https://iri.science/profiles/resource-definition/compute/gpu"
       }
     ]
   }

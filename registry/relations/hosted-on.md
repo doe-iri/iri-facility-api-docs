@@ -91,7 +91,8 @@ A service hosted on one compute system can use a singular link object:
 {
   "_links": {
     "iri:hosted-on": {
-      "href": "/api/v2/status/resources/perlmutter"
+      "href": "/api/v2/status/resources/perlmutter",
+      "profile": "https://iri.science/profiles/resource-definition/compute/system"
     }
   }
 }
@@ -103,8 +104,8 @@ A service hosted across multiple compute nodes can use an array of link objects:
 {
   "_links": {
     "iri:hosted-on": [
-      { "href": "/api/v2/status/resources/node-001" },
-      { "href": "/api/v2/status/resources/node-002" }
+      { "href": "/api/v2/status/resources/node-001", "profile": "https://iri.science/profiles/resource-definition/compute/node" },
+      { "href": "/api/v2/status/resources/node-002", "profile": "https://iri.science/profiles/resource-definition/compute/node" }
     ]
   }
 }

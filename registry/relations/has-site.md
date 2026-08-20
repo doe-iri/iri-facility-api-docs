@@ -83,8 +83,8 @@ Removing or changing `site_uris` requires a subsequent OpenAPI change.
   ],
   "_links": {
     "iri:has-site": [
-      { "href": "/api/v2/facility/sites/pioneer" },
-      { "href": "/api/v2/facility/sites/analysis" }
+      { "href": "/api/v2/facility/sites/pioneer", "profile": "https://iri.science/profiles/facility/site" },
+      { "href": "/api/v2/facility/sites/analysis", "profile": "https://iri.science/profiles/facility/site" }
     ]
   }
 }

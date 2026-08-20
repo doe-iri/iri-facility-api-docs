@@ -84,8 +84,8 @@ If the source storage system is visible but the requester cannot discover a targ
 {
   "_links": {
     "iri:provides-filesystem": [
-      { "href": "/api/v2/status/resources/scratch" },
-      { "href": "/api/v2/status/resources/home" }
+      { "href": "/api/v2/status/resources/scratch", "profile": "https://iri.science/profiles/resource-definition/storage/filesystem" },
+      { "href": "/api/v2/status/resources/home", "profile": "https://iri.science/profiles/resource-definition/storage/filesystem" }
     ]
   }
 }

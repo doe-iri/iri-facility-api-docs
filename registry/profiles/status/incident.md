@@ -346,12 +346,14 @@ For example:
       {
         "href": "https://api.example.org/api/v2/status/events/event-101",
         "title": "Maintenance started",
-        "type": "application/hal+json"
+        "type": "application/hal+json",
+        "profile": "https://iri.science/profiles/status/event"
       },
       {
         "href": "https://api.example.org/api/v2/status/events/event-102",
         "title": "Filesystem entered degraded state",
-        "type": "application/hal+json"
+        "type": "application/hal+json",
+        "profile": "https://iri.science/profiles/status/event"
       }
     ],
 
@@ -359,7 +361,8 @@ For example:
       {
         "href": "https://api.example.org/api/v2/status/resources/orion-scratch",
         "title": "Orion Scratch Filesystem",
-        "type": "application/hal+json"
+        "type": "application/hal+json",
+        "profile": "https://iri.science/profiles/status/resource"
       }
     ]
   }
@@ -466,21 +469,25 @@ For example:
 
   "_links": {
     "self": {
-      "href": "https://api.example.org/api/v2/status/incidents/inc-1234"
+      "href": "https://api.example.org/api/v2/status/incidents/inc-1234",
+      "profile": "https://iri.science/profiles/status/incident"
     },
 
     "iri:has-event": [
       {
-        "href": "https://api.example.org/api/v2/status/events/event-101"
+        "href": "https://api.example.org/api/v2/status/events/event-101",
+        "profile": "https://iri.science/profiles/status/event"
       },
       {
-        "href": "https://api.example.org/api/v2/status/events/event-102"
+        "href": "https://api.example.org/api/v2/status/events/event-102",
+        "profile": "https://iri.science/profiles/status/event"
       }
     ],
 
     "iri:may-impact": [
       {
-        "href": "https://api.example.org/api/v2/status/resources/orion-scratch"
+        "href": "https://api.example.org/api/v2/status/resources/orion-scratch",
+        "profile": "https://iri.science/profiles/status/resource"
       }
     ]
   }

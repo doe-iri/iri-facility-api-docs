@@ -270,17 +270,21 @@ resource-level example, not an instance of `DtnServiceAttributes` alone.
   },
   "_links": {
     "iri:located-at": {
-      "href": "https://api.example.gov/api/v2/facility/sites/example-site"
+      "href": "https://api.example.gov/api/v2/facility/sites/example-site",
+      "profile": "https://iri.science/profiles/facility/site"
     },
     "iri:hosted-on": {
-      "href": "/api/v2/status/resources/perlmutter"
+      "href": "/api/v2/status/resources/perlmutter",
+      "profile": "https://iri.science/profiles/resource-definition/compute/system"
     },
     "iri:accesses-mount": [
       {
-        "href": "/api/v2/status/resources/perlmutter-scratch-mount"
+        "href": "/api/v2/status/resources/perlmutter-scratch-mount",
+        "profile": "https://iri.science/profiles/resource-definition/storage/mount"
       },
       {
-        "href": "/api/v2/status/resources/analysis-home-mount"
+        "href": "/api/v2/status/resources/analysis-home-mount",
+        "profile": "https://iri.science/profiles/resource-definition/storage/mount"
       }
     ]
   }

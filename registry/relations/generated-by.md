@@ -83,7 +83,8 @@ Removing or changing `incident_uri` requires a subsequent OpenAPI change.
   "incident_uri": "/api/v2/status/incidents/network-maintenance",
   "_links": {
     "iri:generated-by": {
-      "href": "/api/v2/status/incidents/network-maintenance"
+      "href": "/api/v2/status/incidents/network-maintenance",
+      "profile": "https://iri.science/profiles/status/incident"
     }
   }
 }

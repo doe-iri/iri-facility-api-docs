@@ -333,7 +333,8 @@ For example:
   "_links": {
     "self": {
       "href":
-        "https://api.example.org/api/v2/account/projects/proj-abc123"
+        "https://api.example.org/api/v2/account/projects/proj-abc123",
+      "profile": "https://iri.science/profiles/account/project"
     }
   }
 }

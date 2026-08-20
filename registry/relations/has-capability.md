@@ -100,8 +100,8 @@ Resource example:
   ],
   "_links": {
     "iri:has-capability": [
-      { "href": "/api/v2/account/capabilities/cpu-node-hours" },
-      { "href": "/api/v2/account/capabilities/gpu-node-hours" }
+      { "href": "/api/v2/account/capabilities/cpu-node-hours", "profile": "https://iri.science/profiles/account/capability" },
+      { "href": "/api/v2/account/capabilities/gpu-node-hours", "profile": "https://iri.science/profiles/account/capability" }
     ]
   }
 }
@@ -114,7 +114,8 @@ ProjectAllocation example:
   "capability_uri": "/api/v2/account/capabilities/gpu-node-hours",
   "_links": {
     "iri:has-capability": {
-      "href": "/api/v2/account/capabilities/gpu-node-hours"
+      "href": "/api/v2/account/capabilities/gpu-node-hours",
+      "profile": "https://iri.science/profiles/account/capability"
     }
   }
 }

@@ -87,10 +87,12 @@ The absence of visible node targets MUST NOT be interpreted as proof that the co
   "_links": {
     "iri:has-node": [
       {
-        "href": "/api/v2/status/resources/node-001"
+        "href": "/api/v2/status/resources/node-001",
+        "profile": "https://iri.science/profiles/resource-definition/compute/node"
       },
       {
-        "href": "/api/v2/status/resources/node-002"
+        "href": "/api/v2/status/resources/node-002",
+        "profile": "https://iri.science/profiles/resource-definition/compute/node"
       }
     ]
   }

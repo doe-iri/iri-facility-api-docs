@@ -80,7 +80,8 @@ Removing or changing `project_allocation_uri` requires a subsequent OpenAPI chan
   "project_allocation_uri": "/api/v2/account/projects/climate-simulation/project_allocations/alloc-001",
   "_links": {
     "iri:has-project-allocation": {
-      "href": "/api/v2/account/projects/climate-simulation/project_allocations/alloc-001"
+      "href": "/api/v2/account/projects/climate-simulation/project_allocations/alloc-001",
+      "profile": "https://iri.science/profiles/account/project-allocation"
     }
   }
 }

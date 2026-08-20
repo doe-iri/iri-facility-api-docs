@@ -118,7 +118,7 @@ Exclusive attachment example:
 {
   "_links": {
     "iri:attached-to": [
-      { "href": "/api/v2/status/resources/compute-node-123" }
+      { "href": "/api/v2/status/resources/compute-node-123", "profile": "https://iri.science/profiles/resource-definition/compute/node" }
     ]
   }
 }
@@ -130,8 +130,8 @@ Shared attachment example:
 {
   "_links": {
     "iri:attached-to": [
-      { "href": "/api/v2/status/resources/compute-node-123" },
-      { "href": "/api/v2/status/resources/compute-node-124" }
+      { "href": "/api/v2/status/resources/compute-node-123", "profile": "https://iri.science/profiles/resource-definition/compute/node" },
+      { "href": "/api/v2/status/resources/compute-node-124", "profile": "https://iri.science/profiles/resource-definition/compute/node" }
     ]
   }
 }

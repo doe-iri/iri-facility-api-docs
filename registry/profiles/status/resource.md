@@ -604,7 +604,8 @@ For example:
         "href":
           "https://api.example.org/api/v2/account/capabilities/pioneer-gpu",
         "title": "Pioneer GPU Capability",
-        "type": "application/hal+json"
+        "type": "application/hal+json",
+        "profile": "https://iri.science/profiles/account/capability"
       }
     ],
 
@@ -777,18 +778,21 @@ For example:
   "_links": {
     "self": {
       "href":
-        "https://api.example.org/api/v2/status/resources/pioneer-compute"
+        "https://api.example.org/api/v2/status/resources/pioneer-compute",
+      "profile": "https://iri.science/profiles/status/resource"
     },
 
     "iri:located-at": {
       "href":
-        "https://api.example.org/api/v2/facility/sites/example-site"
+        "https://api.example.org/api/v2/facility/sites/example-site",
+      "profile": "https://iri.science/profiles/facility/site"
     },
 
     "iri:has-capability": [
       {
         "href":
-          "https://api.example.org/api/v2/account/capabilities/pioneer-gpu"
+          "https://api.example.org/api/v2/account/capabilities/pioneer-gpu",
+        "profile": "https://iri.science/profiles/account/capability"
       }
     ]
   }

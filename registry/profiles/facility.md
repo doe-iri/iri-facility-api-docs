@@ -295,14 +295,17 @@ For example:
 {
   "_links": {
     "self": {
-      "href": "https://api.example.org/api/v2/facility"
+      "href": "https://api.example.org/api/v2/facility",
+      "profile": "https://iri.science/profiles/facility"
     },
     "iri:site": [
       {
-        "href": "https://api.example.org/api/v2/facility/sites/berkeley"
+        "href": "https://api.example.org/api/v2/facility/sites/berkeley",
+        "profile": "https://iri.science/profiles/facility/site"
       },
       {
-        "href": "https://api.example.org/api/v2/facility/sites/nersc"
+        "href": "https://api.example.org/api/v2/facility/sites/nersc",
+        "profile": "https://iri.science/profiles/facility/site"
       }
     ]
   }
