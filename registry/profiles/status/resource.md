@@ -51,7 +51,7 @@ A Resource representation describes:
 
 - the identity of the Resource;
 - the semantic type of the Resource;
-- relatively stable descriptive attributes;
+- descriptive metadata;
 - the Site associated with the Resource;
 - current reported status when available;
 - Capabilities associated with the Resource;
@@ -88,6 +88,7 @@ The V2 Resource schema defines the following conceptual properties:
 | `current_status` | No | Current status reported for the Resource. |
 | `resource_type` | Yes | IRI Resource Type URN identifying the semantic type of the Resource. |
 | `supported_endpoints` | No | Broad endpoint categories supported by the Resource. |
+| `attributes` | No | Optional type-specific metadata whose semantics are defined by the applicable Resource Definition Profile selected by `resource_type`. |
 | `self_uri` | Yes | Canonical API URI of the Resource representation. |
 | `site_uri` | Yes | URI identifying the authoritative Site associated with the Resource. |
 | `capability_uris` | Yes | URIs identifying Capabilities associated with the Resource. |
@@ -95,9 +96,10 @@ The V2 Resource schema defines the following conceptual properties:
 The OpenAPI schema is authoritative for:
 
 - property names;
-- JSON data types;
-- required properties;
+- JSON data types and structure;
+- required and optional properties;
 - nullable properties;
+- `additionalProperties` behavior;
 - formats;
 - structural validation;
 - read-only properties.
@@ -501,9 +503,15 @@ The existence of a Capability relationship MUST NOT itself be interpreted as:
 ### 8.2 Resource Definition Profiles
 
 The common Resource profile defines semantics applicable to every IRI Resource
-representation. A registered `resource_type` MAY select an additional Resource
-Definition profile for type-specific, relatively stable attributes,
-relationships, and operation affordances.
+representation. When the Resource Type Registry associates the exact
+`resource_type` with a Resource Definition Profile, that registered mapping
+selects the additional type-specific semantics that apply.
+
+A Resource Definition Profile supplements this common profile. It defines
+type-specific semantics and MAY define attributes, relationships, and operation
+affordances applicable to the Resource type. When `attributes` is non-null, its
+members are interpreted according to the applicable Resource Definition
+Profile.
 
 For example:
 
@@ -514,17 +522,24 @@ For example:
 }
 ```
 
-identifies the applicable Resource Definition profile as:
+is mapped by the Resource Type Registry to:
 
 ```text
 https://iri.science/profiles/resource-definition/compute/system
 ```
 
-The Resource Type registration is authoritative in
-[Resource Type URNs](../../urns/resource-types.md), and the selected Resource
-Definition profile specializes rather than replaces this common profile.
+The registered mapping in [Resource Type URNs](../../urns/resource-types.md) is
+authoritative; clients MUST NOT construct a Resource Definition Profile URI by
+transforming the Resource Type URN.
 
-A generic client MUST remain capable of processing the common Resource representation even when it does not understand the Resource's most-specific type.
+A Resource Definition Profile specializes the existing IRI v2 Resource
+representation. It does not replace the common Resource representation and does
+not create a separate IRI v2 Resource Definition API object or endpoint.
+
+A generic client MUST remain capable of processing the common Resource
+representation even when it does not understand the Resource's most-specific
+type or applicable Resource Definition Profile. Such a client MAY treat
+unfamiliar `attributes` content as opaque JSON data.
 
 ### 8.3 Resource Type Does Not Define URLs
 
@@ -851,6 +866,15 @@ Dynamic information includes:
 current_status
 last_modified
 ```
+
+The `attributes` object is not categorically static or dynamic. The applicable
+Resource Definition Profile defines whether each type-specific value represents
+configuration, capability, descriptive metadata, a measured or quantitative
+value, a time-varying observation, or another type-specific concept.
+
+Type-specific attributes MUST NOT duplicate or override `current_status`, which
+remains the common top-level property for the current reported Resource
+condition.
 
 Relationships such as:
 
