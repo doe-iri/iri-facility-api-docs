@@ -15,10 +15,11 @@ workflows on top of IRI.
 
 # Contents
 
-## 1. **[IRI Registry](./registry/README.md)**
-
-- [IRI Link Relation Index](./registry/relations/README.md)
-## 2. **[IRI Specification 1.0](./specification-v1/README.md)**
-## 3. **[IRI Specification 2.0](./specification-v2/README.md)**
-## 4. **[IRI Request For Comments](./rfc)**
-## 5. **[IRI Presentations](./presentations)**
+## 1. [IRI Request For Comments](./rfc)
+## 2. [IRI Registry](./registry/README.md)
+### 2.1. [URNs](./registry/urns/README.md)
+### 2.2. [Resource Profiles](./registry/profiles/README.md)
+### 2.3. [Link Relation Index](./registry/relations/README.md)
+## 5. [IRI Specification 1.0](./specification-v1/README.md)
+## 6. [IRI Specification 2.0](./specification-v2/README.md)
+## 7. [IRI Presentations](./presentations)
