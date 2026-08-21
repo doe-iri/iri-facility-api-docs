@@ -1,9 +1,5 @@
 # DOE-IRI Facility API Documentation — Repository Instructions
 
-Do not spawn subagents or use collaboration tools.
-
-Perform all work in the current agent/thread.
-
 These instructions apply repository-wide. More-specific `AGENTS.md` files under
 `registry/`, `rfc/`, and `specification-v2/` add rules for those areas.
 

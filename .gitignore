@@ -1,4 +1,9 @@
-.codex/
+# Codex local/runtime files
+.codex/local/
+.codex/tmp/
+.codex/*.local.toml
+.codex/*.private.toml
+
 .firecrawl/
 
 # Compiled class file

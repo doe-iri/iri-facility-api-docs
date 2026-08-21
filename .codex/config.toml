@@ -1,0 +1,17 @@
+# Project-scoped Codex behavior for the DOE-IRI documentation repository.
+#
+# Provider, credentials, model aliases, and runtime quality profiles belong in
+# user-level Codex configuration. Project agents intentionally inherit the
+# selected parent session model/reasoning policy.
+
+[agents]
+enabled = true
+
+# Registry work is mostly sequential:
+# discovery -> decision -> implementation -> validation.
+# Three child threads still allow limited independent read-only exploration
+# without encouraging large fan-out.
+max_concurrent_threads_per_session = 3
+
+# Avoid adding model-visible interruption messages to child-agent context.
+interrupt_message = false
