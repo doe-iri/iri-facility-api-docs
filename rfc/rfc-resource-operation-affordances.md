@@ -2,14 +2,15 @@
 
 ## Abstract
 
-This RFC proposes replacing broad Resource endpoint categories with discoverable, Resource-specific HAL operation affordances. It maps the resource-scoped compute, filesystem, and storage operations in IRI 2.0 OpenAPI to existing or proposed DOE-IRI link relations, defines applicability and visibility rules, and specifies a staged migration from `Resource.supported_endpoints`.
+This RFC proposes replacing broad Resource endpoint categories with discoverable, Resource-specific HAL operation affordances. It maps the resource-scoped compute, filesystem, and storage operations in IRI 2.0 OpenAPI to existing or proposed DOE-IRI link relations, defines applicability and visibility rules, defines an `x-iri-relation` OpenAPI binding from relation URIs to Operation Objects, and specifies a staged migration from `Resource.supported_endpoints`.
 
 ## Status of This Memo
 
 **Status:** Draft for discussion  
 **Target:** IRI 2.0 additive adoption; field removal in a subsequently approved contract revision  
-**Revision:** 0.1  
-**Date:** 2026-09-09
+**Revision:** 0.2
+
+**Date:** 2026-09-10
 
 The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHOULD**, **SHOULD NOT**, and **MAY** are to be interpreted as described in RFC 2119 and RFC 8174 when, and only when, they appear in all capitals.
 
@@ -45,13 +46,41 @@ For every proposed registration in §3:
 | Stability | Configured applicability; changes with configuration or visibility, not solely with load, capacity, queue state, or health. |
 | Visibility | Authorization MAY suppress a link. Presence grants no permission; absence means “not advertised in this representation,” not “unsupported everywhere.” |
 | Invocation | The applicable deployed OpenAPI governs method, parameters, body, responses, errors, and security. |
+| OpenAPI binding | The canonical relation URI appears in the operation's `x-iri-relation` extension as defined in §2.1. |
 | Registry ownership | Registration must identify an approved change controller and link the governing OpenAPI and relevant profiles. |
 
 An adopting producer SHOULD advertise each applicable operation visible to the requester and MUST NOT advertise an operation its adapter does not implement for that context. It MUST NOT synthesize all operation links merely because a category appears in `supported_endpoints`.
 
 The producer MUST bind `resource_id` to the represented Resource's adapter context. Clients MUST follow the advertised target rather than construct paths from IDs, types, or relation names. If an operation belongs to another Resource, the producer must expose the appropriate Resource relationship rather than label the operation as belonging to the source.
 
-HAL does not encode an HTTP method or request schema. This RFC adds no nonstandard `method` or `operationId` member to HAL links. Producers SHOULD advertise `service-desc` for the deployed operation contract. Link `type` is a response representation hint, not a request Content-Type. Producers MUST NOT place a Job profile on `iri:submit-job` or another mutation-operation link.
+HAL does not encode an HTTP method or request schema. This RFC adds no nonstandard `method` or `operationId` member to HAL links. A producer advertising an operation-affordance relation defined by this RFC MUST also advertise an applicable `service-desc` for the deployed operation contract. Link `type` is a response representation hint, not a request Content-Type. Producers MUST NOT place a Job profile on `iri:submit-job` or another mutation-operation link.
+
+### 2.1 Machine-Readable OpenAPI Operation Binding
+
+`x-iri-relation` is an OpenAPI Specification Extension on an Operation Object, not a HAL Link Object member. An adopting OpenAPI description advertised through `service-desc` MUST place it on every Operation Object that is advertised through an operation-affordance relation defined by this RFC. The extension value MUST be a non-empty array of unique absolute canonical relation URI strings. It MUST NOT contain CURIEs, because CURIE expansion belongs to the HAL representation rather than the OpenAPI document.
+
+For example:
+
+```yaml
+paths:
+  /api/v2/compute/job/{resource_id}:
+    post:
+      operationId: launchJob
+      x-iri-relation:
+        - https://iri.science/rels/submit-job
+```
+
+Within one applicable OpenAPI description, each canonical relation URI governed by this RFC MUST occur on exactly one Operation Object. An Operation Object MAY list more than one relation URI only when every listed registered relation truthfully identifies that same operation. The extension does not register a relation, alter relation semantics, or override the OpenAPI method, path, parameters, request body, responses, errors, or security requirements.
+
+A client resolving an advertised operation:
+
+1. expands the HAL CURIE to its canonical relation URI;
+2. retrieves the applicable OpenAPI description through `service-desc`;
+3. finds the single Operation Object whose `x-iri-relation` array contains that URI;
+4. verifies that the advertised `href` is an instance or URI-template form of that operation after OpenAPI server resolution and producer-bound path variables; and
+5. uses that Operation Object for the method, parameters, request body, responses, errors, and security requirements.
+
+The canonical relation URI, not `operationId`, is the binding key. An `operationId` rename therefore does not change the HAL relation or this binding. A client encountering a missing, duplicate, or target-inconsistent binding MUST NOT guess the method from the relation name or probe a mutation to discover its contract. During migration, such a client MAY use an explicitly supported version-specific mapping obtained from the relation registry or other governing documentation.
 
 ## 3. Operation Registration Proposals
 
@@ -173,6 +202,32 @@ These are partial Resource representations illustrating the proposed extension, 
 }
 ```
 
+The OpenAPI description advertised through `service-desc` binds the canonical relation URI to its Operation Object. A compact excerpt is:
+
+```yaml
+paths:
+  /api/v2/compute/job/{resource_id}:
+    post:
+      operationId: launchJob
+      x-iri-relation:
+        - https://iri.science/rels/submit-job
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobSpec'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+```
+
+The `post` Operation Object supplies the HTTP method and full invocation contract. The relation URI remains the binding key if the `operationId` changes.
+
 ### 5.2 Filesystem Resource after field retirement
 
 ```json
@@ -210,7 +265,7 @@ URI templates follow RFC 6570 [6]. Runtime template expansion and OpenAPI parame
 
 ### Phase 1 — Register and add
 
-Approve the relation definitions and update the affected profiles, Link Relation Index, and HAL RFC. Add the reusable HAL schema to OpenAPI through its normal revision process. Adopting implementations publish applicable links alongside the existing field.
+Approve the relation definitions and update the affected profiles, Link Relation Index, and HAL RFC. Add the reusable HAL schema and `x-iri-relation` Operation Object bindings to OpenAPI through its normal revision process. Adopting implementations publish applicable links alongside the existing field and advertise the bound deployed OpenAPI description through `service-desc`.
 
 `supported_endpoints` remains optional with its current category semantics. Do not change it into a list of relation names, URLs, or operations.
 
@@ -218,7 +273,7 @@ Where the field is supplied, advertised compute and filesystem operations MUST b
 
 ### Phase 2 — Deprecate and migrate clients
 
-Mark `supported_endpoints` deprecated in an approved OpenAPI revision. Clients prefer a recognized advertised relation and its deployed operation contract. Legacy fallback MAY use an existing documented integration when no suitable link is advertised; clients MUST NOT turn a category label into a guessed URL or probe mutations to discover support.
+Mark `supported_endpoints` deprecated in an approved OpenAPI revision. Clients prefer a recognized advertised relation, resolve its canonical URI through `x-iri-relation`, and use the resulting deployed Operation Object. Legacy fallback MAY use an existing documented integration when no suitable link or machine-readable binding is advertised; clients MUST NOT turn a category label into a guessed URL or probe mutations to discover support.
 
 Missing `_links` may indicate an older producer. Missing individual relations, or a Resource with only `self` and `service-desc`, does not prove lack of implementation support. This proposal intentionally replaces navigation information; it does not preserve an authorization-independent negative support assertion.
 
@@ -244,10 +299,11 @@ Before adoption:
 
 1. Register the 24 new relations and retain the existing provisional `submit-job` definition.
 2. Validate all 25 method/path/operationId mappings against the adopted OpenAPI version.
-3. Verify source-type and context rules, singular cardinality, concrete Resource binding, and advertised template variables.
-4. Test both visible and authorization-suppressed links without treating omission as unsupported behavior.
-5. Verify multipart upload, POST job queries, Task monitoring, and legacy-field coexistence.
-6. Update the affected Resource Definition Profiles, Job profile, HAL RFC, and OpenAPI in coordinated review.
+3. Add exactly one `x-iri-relation` Operation Object binding for each adopted canonical relation URI and reject duplicate or target-inconsistent bindings.
+4. Verify source-type and context rules, singular cardinality, concrete Resource binding, advertised template variables, and correspondence between each `href` and its bound OpenAPI path.
+5. Test both visible and authorization-suppressed links without treating omission as unsupported behavior.
+6. Verify multipart upload, POST job queries, Task monitoring, and legacy-field coexistence.
+7. Update the affected Resource Definition Profiles, Job profile, HAL RFC, and OpenAPI in coordinated review.
 
 This RFC does not register operations absent from the reviewed contract, such as object CRUD, block provisioning, inference invocation, or general transfer submission. Account/facility/status navigation and Task lifecycle management are outside this field migration. Standard `monitor` and Task `self` remain the completion-discovery mechanism; Task deletion is not redefined as cancellation.
 
@@ -262,4 +318,3 @@ Repository links are pinned to the reviewed commit.
 5. [Job Profile](https://github.com/doe-iri/iri-facility-api-docs/blob/f030f46a82fb883df0fb59bf6f88e1b0cecf4364/registry/profiles/compute/job.md) and [Task Profile](https://github.com/doe-iri/iri-facility-api-docs/blob/f030f46a82fb883df0fb59bf6f88e1b0cecf4364/registry/profiles/task.md).
 6. [RFC 6570: URI Template](https://www.rfc-editor.org/rfc/rfc6570.html).
 7. [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119.html) and [RFC 8174](https://www.rfc-editor.org/rfc/rfc8174.html).
-
