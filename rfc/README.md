@@ -30,13 +30,26 @@ This repository follows an open RFC process. Community members and facility repr
 
 For more information on the broader DoE IRI project, official reference implementations, and toolkits, please visit the main GitHub organization page.
 
+## Status
+
+| Title | Status | Date |
+| --- | --- | --- |
+| IRI URN Structure and Registry | Approved | June 15, 2026 |
+| Type-Specific Attributes for IRI Resource Objects | Approved | August 7, 2026 |
+| HAL \_links for the IRI Facility API | Approved | August 14, 2026 |
+| Container Execution Capability Discovery for IRI Compute Systems | Draft / Proposed | August 14, 2026 |
+| Migrating Resource.supported_endpoints to HAL Operation Affordances | Draft / Proposed | September 9, 2026 |
+|  | Draft / Proposed | September 9, 2026 |
+
+
+
 ## Contents
 
 1. **[IRI URN Structure and Registry](./rfc-iri-urn-structure-and-registry.md)**: 
 
-	This document outlines an extensible Uniform Resource Name (URN) structure for Department of Energy (DoE) Integrated Research Infrastructure (IRI) identifiers, designed to decouple data model stability from the evolution of type taxonomies. It provides guidelines for hierarchical identifier naming, registry management, and validation, facilitating interoperable resource and service typing without requiring frequent OpenAPI schema revisions.
+	This document outlines an extensible Uniform Resource Name (URN) structure for Department of Energy (DoE) Integrated Research Infrastructure (IRI) identifiers, designed to decouple data model stability from evolving type taxonomies. It provides guidelines for hierarchical identifier naming, registry management, and validation, facilitating interoperable resource and service typing without requiring frequent OpenAPI schema revisions.
 
-2. **[Type-Specific Attributes and Resource Definition Profiles for IRI Resource Objects](./rfc-type-specific-attributes.md)**:
+2. **[Type-Specific Attributes for IRI Resource Objects](./rfc-type-specific-attributes.md)**:
 
 	This document defines the semantics of `Resource.attributes` and how `resource_type` selects the applicable Resource Definition semantics. Resource Type URNs and Resource Definition Profile URIs are distinct identifiers. The current IRI v2 OpenAPI schema remains authoritative for the structural contract, including the optionality, nullability, JSON structure, and additional-properties behavior of `attributes`. The RFC specializes the existing IRI v2 `Resource` representation and does not introduce separate Resource Definition or Resource State API objects.
 
@@ -47,3 +60,7 @@ For more information on the broader DoE IRI project, official reference implemen
 4. **[Container Execution Capability Discovery for IRI Compute Systems](./rfc-container-capability-discovery.md)**:
 
 	This document defines a read-only, structured capability-discovery contract for containerized workloads on IRI compute systems. It adds an optional `container_runtimes` attribute to the in-progress Compute System Resource Definition Profile describing accepted runtimes and image formats, direct registry pull versus required pre-staging, registry policy and private-registry authentication model, execution identity and privilege policy, GPU integration, build availability, and CPU architecture. It reuses the type-specific `attributes` mechanism, the DOE-IRI URN registry, and HAL `_links`; it defines no new endpoint and no change to the `Container` job schema. A normalized image acquisition and reuse contract is deferred to a companion RFC.
+
+5. **[Migrating `Resource.supported_endpoints` to HAL Operation Affordances](./rfc-resource-operation-affordances.md)**:
+
+	This document proposes replacing the broad `compute` and `filesystem` categories in `Resource.supported_endpoints` with Resource-specific HAL links to operation entry points. It maps all 25 Resource-scoped compute, filesystem, and storage operations in the reviewed IRI v2 OpenAPI contract to existing or proposed DOE-IRI link relations; defines applicability, authorization visibility, URI-template, and invocation rules; and describes a phased add, deprecate, and retire migration. OpenAPI remains authoritative for operation methods and payloads, and the RFC does not itself register the proposed relations or change the production schema.
