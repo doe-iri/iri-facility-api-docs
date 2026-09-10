@@ -2,11 +2,11 @@
 
 # DoE IRI Requests for Comments (RFC)
 
-Welcome to the DoE Integrated Research Infrastructure (IRI) RFC repository. This space serves as the central hub for the proposal, discussion, and archival of technical specifications, architecture decisions, and registry standards governing the IRI ecosystem.
+Welcome to the DoE Integrated Research Infrastructure (IRI) RFC repository. This space serves as the central hub for proposing, discussing, and archiving technical specifications, architecture decisions, and registry standards governing the IRI ecosystem.
 
 ## Purpose
 
-The primary objective of this repository is to provide a transparent, version-controlled process for evolving IRI technical standards. By documenting proposed specifications as Requests for Comments (RFCs), we aim to:
+This repository provides a transparent, version-controlled process for evolving IRI technical standards. By documenting proposed specifications as Requests for Comments (RFCs), we aim to:
 
   - **Establish Stability:** Define extensible, long-term identifiers and data models that decouple infrastructure evolution from client-side implementation.
   - **Ensure Interoperability:** Create shared governance for IRI-type namespaces, service definitions, and registration policies.
@@ -40,6 +40,7 @@ For more information on the broader DoE IRI project, official reference implemen
 | Container Execution Capability Discovery for IRI Compute Systems | Draft / Proposed | August 14, 2026 |
 | Normalized Queueing Policy Discovery for IRI Resources | Draft / Proposed | September 4, 2026 |
 | Migrating Resource.supported_endpoints to HAL Operation Affordances | Draft / Proposed | September 9, 2026 |
+| IRI Facility API Root Discovery and Implementation Conformance | Draft / Proposed | September 10, 2026 |
 
 ## Contents
 
@@ -66,3 +67,7 @@ For more information on the broader DoE IRI project, official reference implemen
 6. **[Migrating `Resource.supported_endpoints` to HAL Operation Affordances](./rfc-resource-operation-affordances.md)**:
 
 	This document proposes replacing the broad `compute` and `filesystem` categories in `Resource.supported_endpoints` with Resource-specific HAL links to operation entry points. It maps all 25 Resource-scoped compute, filesystem, and storage operations in the reviewed IRI v2 OpenAPI contract to existing or proposed DOE-IRI link relations; defines applicability, authorization visibility, URI-template, and invocation rules; and describes a phased add, deprecate, and retire migration. OpenAPI remains authoritative for operation methods and payloads, and the RFC does not itself register the proposed relations or change the production schema.
+
+7. **[IRI Facility API Root Discovery and Implementation Conformance](./rfc-iri-capability-discovery.md)**:
+
+	This document proposes a read-only HAL API root for discovering what portions of the IRI v2 contract an independently operated facility implements. The root combines a `conforms_to` declaration, typed links to deployed API-area entry points, and `service-desc` for the deployment-specific OpenAPI description. It distinguishes deployment conformance from account Capabilities, Resource attributes, and context-specific operation affordances; proposes nine initial conformance classes and seven API-area relations; and requires coordinated registry and OpenAPI adoption before those identifiers or behaviors become canonical.
