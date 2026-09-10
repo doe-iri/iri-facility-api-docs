@@ -61,6 +61,9 @@ For more information on the broader DoE IRI project, official reference implemen
 
 	This document defines a read-only, structured capability-discovery contract for containerized workloads on IRI compute systems. It adds an optional `container_runtimes` attribute to the in-progress Compute System Resource Definition Profile describing accepted runtimes and image formats, direct registry pull versus required pre-staging, registry policy and private-registry authentication model, execution identity and privilege policy, GPU integration, build availability, and CPU architecture. It reuses the type-specific `attributes` mechanism, the DOE-IRI URN registry, and HAL `_links`; it defines no new endpoint and no change to the `Container` job schema. A normalized image acquisition and reuse contract is deferred to a companion RFC.
 
+5. **[Normalized Queueing Policy Discovery for IRI Resources](./rfc-normalized-queue-atttributes.md)::
+
+    This document defines supplemental attributes for Resources that allow a site to describe what kind of queuing behavior exists for that resource, and what the site policies around this behavior are.
 5. **[Migrating `Resource.supported_endpoints` to HAL Operation Affordances](./rfc-resource-operation-affordances.md)**:
 
 	This document proposes replacing the broad `compute` and `filesystem` categories in `Resource.supported_endpoints` with Resource-specific HAL links to operation entry points. It maps all 25 Resource-scoped compute, filesystem, and storage operations in the reviewed IRI v2 OpenAPI contract to existing or proposed DOE-IRI link relations; defines applicability, authorization visibility, URI-template, and invocation rules; and describes a phased add, deprecate, and retire migration. OpenAPI remains authoritative for operation methods and payloads, and the RFC does not itself register the proposed relations or change the production schema.

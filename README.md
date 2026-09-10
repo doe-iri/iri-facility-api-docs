@@ -22,6 +22,8 @@ workflows on top of IRI.
   - [IRI URN Structure and Registry](rfc/rfc-iri-urn-structure-and-registry.md)
   - [Type-Specific Attributes and Resource Definition Profiles for IRI Resource Objects](rfc/rfc-type-specific-attributes.md)
   - [HAL `_links` for the IRI Facility API](rfc/rfc-hal-links.md)
+  - [Normalized Queueing Policy IRI Facility APIi](rfc/rfc-normalized-queue-atttributes.md)
+
 
 ### [IRI Registry](./registry/README.md) - Registered URNs, resource profiles, and link relations
 
