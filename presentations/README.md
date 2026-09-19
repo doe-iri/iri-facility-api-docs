@@ -43,3 +43,11 @@ authoritative sources for the API and its semantics.
   capabilities discoverable to people, software clients, and agents. It covers
   `resource_type` URNs, profile-governed `attributes`, HAL `_links` and relation
   definitions, and OpenAPI operation contracts.
+
+- [IRI Resource Operation Affordances - September 17, 2026](<2026.09.17 - IRI Resource Operation Affordances.pdf>):
+  Proposes how IRI v2 Resource representations can advertise operation-specific
+  applicability and invocation locations through HAL links while keeping the
+  deployed OpenAPI document authoritative for methods, schemas, security, and
+  responses. It also describes `x-iri-relation` bindings, caller-specific link
+  visibility and omission semantics, client resolution behavior, and an
+  additive migration from `supported_endpoints`.
