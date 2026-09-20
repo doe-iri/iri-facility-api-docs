@@ -28,6 +28,8 @@ This RFC does not introduce a separate Resource Definition API object or a separ
 
 ## Status of This Memo
 
+**Status:** Approved
+
 This document is an IRI Facility API RFC intended for use with DOE IRI specification version 2.0 and reference implementations.
 
 The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and **OPTIONAL** in this document are to be interpreted as described in RFC 2119 and RFC 8174 when, and only when, they appear in all capitals.
@@ -39,6 +41,7 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **
 | 0.3 | John MacAuley | Jul 22, 2026 | Final revisions before subcommittee discussions. |
 | 1.0 | John MacAuley | Aug 7, 2026 | Comments addressed; issued version 1.0 for publication. |
 | 1.1 | John MacAuley | Aug 19, 2026 | Aligned with Resource Definition Profiles, current URN registries, and current IRI v2 Resource schema. |
+| 1.2 | DOE IRI | Sep 19, 2026 | Recorded Approved status; technical semantics unchanged. |
 
 # 1. Introduction
 

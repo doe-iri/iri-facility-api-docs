@@ -472,6 +472,45 @@ components:
       - site_uris
       title: Facility
       description: Facility representation, including associated Sites.
+    HalLink:
+      type: object
+      required:
+      - href
+      properties:
+        href:
+          type: string
+          format: uri-reference
+        templated:
+          type: boolean
+          default: false
+        type:
+          type: string
+          description: Media-type hint for the target representation.
+        deprecation:
+          type: string
+          format: uri
+        name:
+          type: string
+        profile:
+          type: string
+          format: uri
+          description: URI that identifies or hints at the profile of the target representation.
+        title:
+          type: string
+          description: Human-readable label for the link.
+        hreflang:
+          type: string
+      additionalProperties: true
+    HalLinkValue:
+      oneOf:
+      - $ref: '#/components/schemas/HalLink'
+      - type: array
+        items:
+          $ref: '#/components/schemas/HalLink'
+    HalLinks:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/HalLinkValue'
     Incident:
       properties:
         attributes:
@@ -603,6 +642,9 @@ components:
           - $ref: '#/components/schemas/JobSpec'
           - type: 'null'
           description: Specification used to create the job
+        _links:
+          $ref: '#/components/schemas/HalLinks'
+          readOnly: true
       additionalProperties: true
       type: object
       required:
@@ -1559,7 +1601,9 @@ components:
         site_uri:
           type: string
           title: Site Uri
-          description: Required authoritative URI of the site where this resource is located. When `_links.iri:located-at` is present, its `href` MUST exactly equal this value.
+          description: Required authoritative URI of the site where this resource
+            is located. When `_links.iri:located-at` is present, its `href` MUST exactly
+            equal this value.
           readOnly: true
         capability_uris:
           items:
@@ -1567,6 +1611,9 @@ components:
           type: array
           title: Capability Uris
           description: The list of capabilities in this resource
+          readOnly: true
+        _links:
+          $ref: '#/components/schemas/HalLinks'
           readOnly: true
       additionalProperties: true
       type: object
@@ -1870,6 +1917,9 @@ components:
           - $ref: '#/components/schemas/TaskCommand'
           - type: 'null'
           description: Command associated with this task
+        _links:
+          $ref: '#/components/schemas/HalLinks'
+          readOnly: true
       type: object
       required:
       - id
@@ -1923,6 +1973,9 @@ components:
           type: string
           title: Task Uri
           description: The list of past events in this incident
+          readOnly: true
+        _links:
+          $ref: '#/components/schemas/HalLinks'
           readOnly: true
       type: object
       required:
@@ -3050,21 +3103,18 @@ paths:
       tags:
       - compute
       summary: Submit Job
-      description: "Submit a job on a compute resource\n\n- **resource**: the name\
-        \ of the compute resource to use\n- **job_request**: a PSIJ job spec as defined\
-        \ <a href=\"https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec\"\
-        >here</a>\n- **project/account resolution**:\n  The effective project/account\
-        \ for the submission must be supplied in exactly one place:\n  `job_spec.attributes.account`\
-        \ or the trusted `X-IRI-Facility-Project` request header.\n  If the forwarded\
-        \ header is present and valid, IRI treats its value as the effective facility-native\
-        \ project/account\n  for the downstream submission and related job metadata.\
-        \ If both sources are present, or neither is present,\n  the request is rejected\
-        \ with `400 Bad Request`.\n- **Idempotency-Key**: optional client-generated\
-        \ UUID. A retry with the same key and body\n  returns the original response\
-        \ without re-submitting the job. Same key with a different body\n  returns\
-        \ 422. An in-flight duplicate returns 409.\n\nThis command will attempt to\
-        \ submit a job and return its id."
+      description: 'Submit a job on a compute resource
+
+
+        - **resource**: the name of the compute resource to use
+
+        - **job_request**: a PSIJ job spec as defined <a href="https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec">here</a>
+
+
+        This command will attempt to submit a job and return its id.'
       operationId: launchJob
+      x-iri-relation:
+      - https://iri.science/rels/submit-job
       security:
       - HTTPBearer: []
       parameters:
@@ -3074,14 +3124,6 @@ paths:
         schema:
           type: string
           title: Resource Id
-      - name: Idempotency-Key
-        in: header
-        required: false
-        schema:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Idempotency-Key
       requestBody:
         required: true
         content:
@@ -3182,19 +3224,18 @@ paths:
       tags:
       - compute
       summary: Update Job
-      description: "Update a previously submitted job for a resource.\nNote that only\
-        \ some attributes of a scheduled job can be updated. Check the facility documentation\
-        \ for details.\n\n- **resource**: the name of the compute resource to use\n\
-        - **job_request**: a PSIJ job spec as defined <a href=\"https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec\"\
-        >here</a>\n- **project/account resolution**:\n  The effective project/account\
-        \ for the update must be supplied in exactly one place:\n  `job_spec.attributes.account`\
-        \ or the trusted `X-IRI-Facility-Project` request header.\n  If the forwarded\
-        \ header is present and valid, IRI treats its value as the effective facility-native\
-        \ project/account\n  for downstream update handling and job metadata. If both\
-        \ sources are present, or neither is present,\n  the request is rejected with\
-        \ `400 Bad Request`.\n- **Idempotency-Key**: optional client-generated UUID.\
-        \ Same semantics as submit_job."
+      description: 'Update a previously submitted job for a resource.
+
+        Note that only some attributes of a scheduled job can be updated. Check the
+        facility documentation for details.
+
+
+        - **resource**: the name of the compute resource to use
+
+        - **job_request**: a PSIJ job spec as defined <a href="https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec">here</a>'
       operationId: updateJob
+      x-iri-relation:
+      - https://iri.science/rels/update-job
       security:
       - HTTPBearer: []
       parameters:
@@ -3210,14 +3251,6 @@ paths:
         schema:
           type: string
           title: Job Id
-      - name: Idempotency-Key
-        in: header
-        required: false
-        schema:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Idempotency-Key
       requestBody:
         required: true
         content:
@@ -3320,6 +3353,8 @@ paths:
       summary: Get Job Status
       description: Get a job's status
       operationId: getJob
+      x-iri-relation:
+      - https://iri.science/rels/get-job
       security:
       - HTTPBearer: []
       parameters:
@@ -3457,6 +3492,8 @@ paths:
       summary: Get Job Statuses
       description: Get multiple jobs' statuses
       operationId: getJobs
+      x-iri-relation:
+      - https://iri.science/rels/query-jobs
       security:
       - HTTPBearer: []
       parameters:
@@ -3617,6 +3654,8 @@ paths:
       summary: Cancel Job
       description: Cancel a job
       operationId: cancelJob
+      x-iri-relation:
+      - https://iri.science/rels/cancel-job
       security:
       - HTTPBearer: []
       parameters:
@@ -4186,6 +4225,8 @@ paths:
       summary: Post Chmod
       description: Change the permission mode of a file(`chmod`)
       operationId: chmod
+      x-iri-relation:
+      - https://iri.science/rels/change-file-mode
       security:
       - HTTPBearer: []
       parameters:
@@ -4297,6 +4338,8 @@ paths:
       summary: Post Chown
       description: Change the ownership of a given file (`chown`)
       operationId: chown
+      x-iri-relation:
+      - https://iri.science/rels/change-file-owner
       security:
       - HTTPBearer: []
       parameters:
@@ -4408,6 +4451,8 @@ paths:
       summary: Post File
       description: Output the type of a file or directory
       operationId: file
+      x-iri-relation:
+      - https://iri.science/rels/identify-file
       security:
       - HTTPBearer: []
       parameters:
@@ -4519,6 +4564,8 @@ paths:
       summary: Post Stat
       description: Output the `stat` of a file
       operationId: stat
+      x-iri-relation:
+      - https://iri.science/rels/stat-file
       security:
       - HTTPBearer: []
       parameters:
@@ -4630,6 +4677,8 @@ paths:
       summary: Post Mkdir
       description: Create directory operation (`mkdir`)
       operationId: mkdir
+      x-iri-relation:
+      - https://iri.science/rels/create-directory
       security:
       - HTTPBearer: []
       parameters:
@@ -4741,6 +4790,8 @@ paths:
       summary: Post Symlink
       description: Create symlink operation (`ln`)
       operationId: symlink
+      x-iri-relation:
+      - https://iri.science/rels/create-symlink
       security:
       - HTTPBearer: []
       parameters:
@@ -4852,6 +4903,8 @@ paths:
       summary: Post Ls
       description: List the contents of the given directory (`ls`) asynchronously
       operationId: ls
+      x-iri-relation:
+      - https://iri.science/rels/list-directory
       security:
       - HTTPBearer: []
       parameters:
@@ -4963,6 +5016,8 @@ paths:
       summary: Post Head
       description: Output the first part of file/s (`head`)
       operationId: head
+      x-iri-relation:
+      - https://iri.science/rels/read-file-head
       security:
       - HTTPBearer: []
       parameters:
@@ -5074,6 +5129,8 @@ paths:
       summary: Post View
       description: View file content (up to max 5242880 bytes)
       operationId: view
+      x-iri-relation:
+      - https://iri.science/rels/view-file
       security:
       - HTTPBearer: []
       parameters:
@@ -5185,6 +5242,8 @@ paths:
       summary: Post Tail
       description: Output the last part of a file (`tail`)
       operationId: tail
+      x-iri-relation:
+      - https://iri.science/rels/read-file-tail
       security:
       - HTTPBearer: []
       parameters:
@@ -5296,6 +5355,8 @@ paths:
       summary: Post Checksum
       description: Output the checksum of a file (using SHA-256 algorithm)
       operationId: checksum
+      x-iri-relation:
+      - https://iri.science/rels/checksum-file
       security:
       - HTTPBearer: []
       parameters:
@@ -5407,6 +5468,8 @@ paths:
       summary: Post Rm
       description: Delete file or directory operation (`rm`)
       operationId: rm
+      x-iri-relation:
+      - https://iri.science/rels/remove-path
       security:
       - HTTPBearer: []
       parameters:
@@ -5518,6 +5581,8 @@ paths:
       summary: Post Compress
       description: Compress files and directories using `tar` command
       operationId: compress
+      x-iri-relation:
+      - https://iri.science/rels/compress-paths
       security:
       - HTTPBearer: []
       parameters:
@@ -5629,6 +5694,8 @@ paths:
       summary: Post Extract
       description: Extract `tar` `gzip` archives
       operationId: extract
+      x-iri-relation:
+      - https://iri.science/rels/extract-archive
       security:
       - HTTPBearer: []
       parameters:
@@ -5737,9 +5804,11 @@ paths:
     post:
       tags:
       - filesystem
-      summary: Post Mv
+      summary: Move Mv
       description: Create move file or directory operation (`mv`)
       operationId: mv
+      x-iri-relation:
+      - https://iri.science/rels/move-path
       security:
       - HTTPBearer: []
       parameters:
@@ -5851,6 +5920,8 @@ paths:
       summary: Post Cp
       description: Create copy file or directory operation (`cp`)
       operationId: cp
+      x-iri-relation:
+      - https://iri.science/rels/copy-path
       security:
       - HTTPBearer: []
       parameters:
@@ -5962,6 +6033,8 @@ paths:
       summary: Post Download
       description: Download a small file (max 5242880 Bytes)
       operationId: download
+      x-iri-relation:
+      - https://iri.science/rels/download-file
       security:
       - HTTPBearer: []
       parameters:
@@ -6073,6 +6146,8 @@ paths:
       summary: Post Upload
       description: Upload a small file (max 5242880 Bytes)
       operationId: upload
+      x-iri-relation:
+      - https://iri.science/rels/upload-file
       security:
       - HTTPBearer: []
       parameters:
@@ -6087,7 +6162,9 @@ paths:
         required: true
         schema:
           type: string
+          description: Specify path where file should be uploaded.
           title: Path
+        description: Specify path where file should be uploaded.
       requestBody:
         required: true
         content:
@@ -7106,6 +7183,8 @@ paths:
 
         - `read`: no filtering'
       operationId: getStorageLocations
+      x-iri-relation:
+      - https://iri.science/rels/resolve-storage-locations
       security:
       - HTTPBearer: []
       parameters:
@@ -7263,6 +7342,8 @@ paths:
 
         Optionally filter by protocol and/or endpoint ID.'
       operationId: getStorageAccessEndpoints
+      x-iri-relation:
+      - https://iri.science/rels/get-storage-access-endpoints
       security:
       - HTTPBearer: []
       parameters:

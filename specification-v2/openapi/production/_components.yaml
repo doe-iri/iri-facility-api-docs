@@ -472,6 +472,45 @@ components:
       - site_uris
       title: Facility
       description: Facility representation, including associated Sites.
+    HalLink:
+      type: object
+      required:
+      - href
+      properties:
+        href:
+          type: string
+          format: uri-reference
+        templated:
+          type: boolean
+          default: false
+        type:
+          type: string
+          description: Media-type hint for the target representation.
+        deprecation:
+          type: string
+          format: uri
+        name:
+          type: string
+        profile:
+          type: string
+          format: uri
+          description: URI that identifies or hints at the profile of the target representation.
+        title:
+          type: string
+          description: Human-readable label for the link.
+        hreflang:
+          type: string
+      additionalProperties: true
+    HalLinkValue:
+      oneOf:
+      - $ref: '#/components/schemas/HalLink'
+      - type: array
+        items:
+          $ref: '#/components/schemas/HalLink'
+    HalLinks:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/HalLinkValue'
     Incident:
       properties:
         attributes:
@@ -603,6 +642,9 @@ components:
           - $ref: '#/components/schemas/JobSpec'
           - type: 'null'
           description: Specification used to create the job
+        _links:
+          $ref: '#/components/schemas/HalLinks'
+          readOnly: true
       additionalProperties: true
       type: object
       required:
@@ -1568,6 +1610,9 @@ components:
           title: Capability Uris
           description: The list of capabilities in this resource
           readOnly: true
+        _links:
+          $ref: '#/components/schemas/HalLinks'
+          readOnly: true
       additionalProperties: true
       type: object
       required:
@@ -1870,6 +1915,9 @@ components:
           - $ref: '#/components/schemas/TaskCommand'
           - type: 'null'
           description: Command associated with this task
+        _links:
+          $ref: '#/components/schemas/HalLinks'
+          readOnly: true
       type: object
       required:
       - id
@@ -1923,6 +1971,9 @@ components:
           type: string
           title: Task Uri
           description: The list of past events in this incident
+          readOnly: true
+        _links:
+          $ref: '#/components/schemas/HalLinks'
           readOnly: true
       type: object
       required:

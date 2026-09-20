@@ -431,15 +431,9 @@ resource_uri
 
 or another URI-valued Resource relationship.
 
-Therefore, this profile does not invent a Job-to-Resource relation.
-
-In particular, this profile does not normatively define unregistered relations such as:
-
-```text
-iri:executed-on
-iri:runs-on
-iri:submitted-to
-```
+Therefore, this profile does not invent a Job-to-Resource relation. No
+registered IRI relation currently establishes this Job-to-compute-Resource
+relationship.
 
 A future IRI relation MAY define an explicit Job-to-compute-Resource relationship.
 
@@ -541,6 +535,21 @@ For example:
       }
     ],
 
+    "iri:get-job": {
+      "href":
+        "https://api.example.org/api/v2/compute/status/perlmutter/job-12345"
+    },
+
+    "iri:update-job": {
+      "href":
+        "https://api.example.org/api/v2/compute/job/perlmutter/job-12345"
+    },
+
+    "iri:cancel-job": {
+      "href":
+        "https://api.example.org/api/v2/compute/cancel/perlmutter/job-12345"
+    },
+
     "service-desc": {
       "href": "https://api.example.org/openapi.json",
       "type": "application/vnd.oai.openapi+json;version=3.1"
@@ -551,9 +560,18 @@ For example:
 
 In this representation:
 
-- `self` identifies the Job representation;
+- `self` identifies the canonical Job representation;
 - `profile` identifies the IRI Compute Job semantic profile;
-- `service-desc` identifies a machine-readable service description governing applicable compute operations.
+- `iri:get-job`, `iri:update-job`, and `iri:cancel-job` identify optional
+  operation entry points applicable to this fully bound Job context;
+- `service-desc` identifies the applicable deployed OpenAPI description, which
+  contains the matching canonical `x-iri-relation` bindings for the advertised
+  operations.
+
+The operation links do not carry an IRI representation `profile` because their
+targets are operation entry points rather than Job representations. Both the
+compute Resource identifier and Job identifier are producer-bound in every
+operation `href` shown.
 
 The example `self` URI reflects the current V2 retrieval operation.
 
@@ -588,31 +606,53 @@ This profile therefore does not define a compatibility mapping for a Job-to-Reso
 
 ## 13. Job Operations
 
-The V2 Compute API supports operations associated with Jobs, including:
+The following registered operation-affordance relations MAY originate from a
+Job representation when the operation is applicable and visible to the
+requester:
 
 ```text
-submit Job
-update Job
-retrieve Job status
-```
-
-The current API uses `JobSpec` for submission and update and returns a `Job` representation.
-
-The existence of an operation in OpenAPI does not automatically define an IRI link relation for that operation.
-
-Job-specific operation relations SHOULD be registered before being emitted as normative `iri:*` links.
-
-For example, this profile intentionally does **not** invent:
-
-```text
+iri:get-job
 iri:update-job
 iri:cancel-job
-iri:get-job-status
 ```
 
-unless and until those relations are defined by the IRI relation registry.
+The registered relation definitions own their complete semantics, source
+eligibility, cardinality, stability, authorization behavior, and omission
+rules. This profile does not redefine them.
 
-Until explicit Job operation affordances are registered, clients SHOULD use the governing OpenAPI service description to discover and invoke Job operations.
+Standard `self` remains the canonical retrieval relation for a Job.
+`iri:get-job` is an optional operation affordance and does not replace or
+redefine `self`, even when both links have the same target URI.
+
+Every Job-source operation link MUST have both `resource_id` and `job_id` bound
+by the producer. The producer MUST retain the compute Resource operation
+context because clients cannot infer a Resource identifier from the Job
+identifier. A Job-source link MUST NOT leave either identifier as a URI-template
+variable.
+
+`iri:update-job` and `iri:cancel-job` MAY be omitted when the operation is not
+applicable to the selected Job's lifecycle state. Presence advertises an
+applicable entry point but grants no permission and guarantees no successful
+invocation.
+
+The following registered relations remain compute-system Resource sourced and
+MUST NOT originate from a Job representation:
+
+```text
+iri:submit-job
+iri:query-jobs
+```
+
+When a Job advertises any operation-affordance relation, it MUST also advertise
+at least one applicable `service-desc` link. The deployed OpenAPI description
+identified by that link MUST contain the matching canonical `x-iri-relation`
+binding. OpenAPI remains authoritative for methods, parameters, request and
+response schemas, errors, and security requirements.
+
+Operation-affordance links MUST NOT carry an IRI representation `profile`.
+Their absence means only that the operation is not advertised in the current
+representation; it does not prove that the operation is unsupported everywhere
+or permanently unavailable.
 
 ## 14. Static and Dynamic Semantics
 
@@ -673,7 +713,15 @@ A provider MAY restrict:
 - whether update operations are permitted;
 - whether other Job operations are permitted.
 
+A provider MAY omit `iri:get-job`, `iri:update-job`, or `iri:cancel-job` based
+on authorization and, where applicable, the selected Job's lifecycle state.
+If any such operation link is advertised, the applicable bound `service-desc`
+MUST also be visible in that representation.
+
 Visibility of a Job MUST NOT itself be interpreted as authorization to modify, cancel, or otherwise operate on the Job.
+
+Visibility of a Job operation link likewise grants no permission and does not
+guarantee successful invocation.
 
 Likewise, visibility of:
 
@@ -701,11 +749,22 @@ A representation conforms to the IRI Compute Job Profile when:
 8. Job Specification semantics are distinguished from Job identity;
 9. the compute Resource context is not inferred from the Job identifier;
 10. no Job-to-Resource relation is invented without an applicable registered IRI relation;
-11. `iri:submit-job` is interpreted as a Resource-to-operation-entry-point relationship, not as a Job relationship;
+11. `iri:submit-job` and `iri:query-jobs` are interpreted as
+    compute-system-Resource-to-operation-entry-point relationships, not Job
+    relationships;
 12. an advertised `_links.self` identifies the canonical retrievable Job representation;
-13. profile URIs identify representation semantics and are not used as Job identifiers or link-relation identifiers;
-14. clients do not infer or construct Job URLs when an advertised link or governing API contract supplies the applicable target;
-15. Job visibility is not interpreted as authorization to perform Job operations.
+13. `iri:get-job` is treated as an optional operation affordance and does not
+    replace or redefine `self`;
+14. advertised `iri:get-job`, `iri:update-job`, and `iri:cancel-job` links have
+    both Resource and Job identifiers bound by the producer and retain the
+    applicable compute Resource operation context;
+15. profile URIs identify representation semantics and are not used as Job identifiers or link-relation identifiers;
+16. clients do not infer or construct Job URLs when an advertised link or governing API contract supplies the applicable target;
+17. Job or operation-link visibility is not interpreted as authorization to perform Job operations;
+18. every advertised Job operation-affordance link has an applicable
+    `service-desc` whose deployed OpenAPI contains the matching canonical
+    `x-iri-relation` binding; and
+19. Job operation-affordance links do not carry IRI representation profiles.
 
 A conforming representation MAY contain additional properties and links where permitted by the applicable IRI API specification.
 

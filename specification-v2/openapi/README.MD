@@ -4,7 +4,8 @@ This directory holds the IRI Facility API **v2** OpenAPI specification in a modu
 The specification is split into multiple YAML files organized by lifecycle stage. v2 evolves
 independently from v1, which lives in `../../specification-v1/openapi/`.
 
-Three helper scripts are provided to manage the specification lifecycle and versioned build artifacts.
+Four helper scripts are provided to manage the specification lifecycle, versioned build artifacts,
+and operation-relation binding validation.
 
 ## Directory Structure
 
@@ -36,6 +37,7 @@ compute.yaml
 - `production-prepare.py`	Convert a single OpenAPI spec into modular YAML files
 - `diff-prepare.py`	Generate differences between a new spec and a modular baseline
 - `build-final-spec.py`	Merge modular YAML files into a single OpenAPI spec
+- `validate-operation-relations.py`	Check the adopted operation-relation bindings, registry entries, HAL attachments, and generated artifact
 
 These scripts allow to prepare all specification from an HTTP Endpoint (or local files).
 They default to the `v2` API version.
@@ -101,3 +103,16 @@ Recommended artifact flow:
 
 - `all_spec_v2.yaml`: build from the `production` directory (and any later lifecycle stages) as v2 evolves.
   This is the default output of `build-final-spec.py`.
+
+### Validate operation-relation bindings (`validate-operation-relations.py`)
+
+After generating the production artifact, validate the approved Phase 1
+operation-relation mapping and its supporting registry and HAL declarations:
+
+```bash
+$HOME/.venvs/codex-tools/bin/python validate-operation-relations.py
+```
+
+The check treats its 25 relation-to-operation mappings as regression
+assertions. The relation registry and OpenAPI documents remain authoritative
+for relation semantics and operation structure, respectively.

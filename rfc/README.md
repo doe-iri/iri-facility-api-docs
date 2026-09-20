@@ -37,9 +37,9 @@ For more information on the broader DoE IRI project, official reference implemen
 | IRI URN Structure and Registry | Approved | June 15, 2026 |
 | Type-Specific Attributes for IRI Resource Objects | Approved | August 7, 2026 |
 | HAL \_links for the IRI Facility API | Approved | August 14, 2026 |
-| Container Execution Capability Discovery for IRI Compute Systems | Draft / Proposed | August 14, 2026 |
+| Container Execution Capability Discovery for IRI Compute Systems | Approved | September 10, 2026 |
 | Normalized Queueing Policy Discovery for IRI Resources | Draft / Proposed | September 4, 2026 |
-| Migrating Resource.supported_endpoints to HAL Operation Affordances | Draft / Proposed | September 9, 2026 |
+| Migrating Resource.supported_endpoints to HAL Operation Affordances | Approved | September 17, 2026 |
 | IRI Facility API Root Discovery and Implementation Conformance | Draft / Proposed | September 10, 2026 |
 
 ## Contents
@@ -54,7 +54,7 @@ For more information on the broader DoE IRI project, official reference implemen
 
 3. **[HAL `_links` for the IRI Facility API](./rfc-hal-links.md)**:
 
-	This document defines an additive HAL `_links` convention for IRI v2 resource-oriented JSON representations. It makes related resources, topology relationships, operation entry points, and machine-readable service descriptions explicit and navigable; defines migration of existing navigable URI-valued properties to standard or registered DOE-IRI link relations; and advertises an initial job-submission affordance. OpenAPI remains authoritative for operation invocation, and the RFC does not change the production OpenAPI schemas.
+	This document defines an additive HAL `_links` convention for IRI v2 resource-oriented JSON representations. It makes related resources, topology relationships, operation entry points, and machine-readable service descriptions explicit and navigable; defines migration of existing navigable URI-valued properties to standard or registered DOE-IRI link relations; and defines common wire rules for registered operation affordances. OpenAPI remains authoritative for operation invocation, and the relation registry remains authoritative for `iri:*` relation semantics.
 
 4. **[Container Execution Capability Discovery for IRI Compute Systems](./rfc-container-capability-discovery.md)**:
 
@@ -66,7 +66,7 @@ For more information on the broader DoE IRI project, official reference implemen
 
 6. **[Migrating `Resource.supported_endpoints` to HAL Operation Affordances](./rfc-resource-operation-affordances.md)**:
 
-	This document proposes replacing the broad `compute` and `filesystem` categories in `Resource.supported_endpoints` with Resource-specific HAL links to operation entry points. It maps all 25 Resource-scoped compute, filesystem, and storage operations in the reviewed IRI v2 OpenAPI contract to existing or proposed DOE-IRI link relations; defines applicability, authorization visibility, URI-template, and invocation rules; and describes a phased add, deprecate, and retire migration. OpenAPI remains authoritative for operation methods and payloads, and the RFC does not itself register the proposed relations or change the production schema.
+	This document approves Phase 1 of an additive migration from the broad `compute` and `filesystem` categories in `Resource.supported_endpoints` to Resource-specific HAL links to operation entry points. It maps all 25 Resource-scoped compute, filesystem, and storage operations in the reviewed IRI v2 OpenAPI contract to registered DOE-IRI link relations and defines applicability, authorization visibility, URI-template, invocation, and coexistence rules. Phase 2 deprecation and Phase 3 removal remain subject to separately approved revisions. OpenAPI remains authoritative for operation methods and payloads, and the relation registry remains authoritative for relation assignments and semantics.
 
 7. **[IRI Facility API Root Discovery and Implementation Conformance](./rfc-iri-capability-discovery.md)**:
 

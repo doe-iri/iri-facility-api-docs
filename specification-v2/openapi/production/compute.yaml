@@ -111,6 +111,8 @@ paths:
 
         This command will attempt to submit a job and return its id.'
       operationId: launchJob
+      x-iri-relation:
+      - https://iri.science/rels/submit-job
       security:
       - HTTPBearer: []
       parameters:
@@ -230,6 +232,8 @@ paths:
 
         - **job_request**: a PSIJ job spec as defined <a href="https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec">here</a>'
       operationId: updateJob
+      x-iri-relation:
+      - https://iri.science/rels/update-job
       security:
       - HTTPBearer: []
       parameters:
@@ -347,6 +351,8 @@ paths:
       summary: Get Job Status
       description: Get a job's status
       operationId: getJob
+      x-iri-relation:
+      - https://iri.science/rels/get-job
       security:
       - HTTPBearer: []
       parameters:
@@ -484,6 +490,8 @@ paths:
       summary: Get Job Statuses
       description: Get multiple jobs' statuses
       operationId: getJobs
+      x-iri-relation:
+      - https://iri.science/rels/query-jobs
       security:
       - HTTPBearer: []
       parameters:
@@ -644,6 +652,8 @@ paths:
       summary: Cancel Job
       description: Cancel a job
       operationId: cancelJob
+      x-iri-relation:
+      - https://iri.science/rels/cancel-job
       security:
       - HTTPBearer: []
       parameters:

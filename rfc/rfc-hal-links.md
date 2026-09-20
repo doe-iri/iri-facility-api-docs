@@ -12,12 +12,15 @@ resource-oriented JSON representations. The convention makes related resources,
 topology relationships, operation entry points, and machine-readable service
 descriptions explicit and navigable. It also defines migration of existing
 navigable URI-valued properties to standard or registered DOE-IRI link
-relations and advertises an initial job-submission affordance. It does not
-change the production OpenAPI schemas.
+relations and defines common wire rules for registered operation affordances.
+It does not assign link-relation names or replace the governing OpenAPI
+contract.
 
 ## Status of This Memo
 
-This document is a proposed IRI Facility API RFC. The key words **MUST**,
+**Status:** Approved
+
+This document is an approved IRI Facility API RFC. The key words **MUST**,
 **MUST NOT**, **SHOULD**, **SHOULD NOT**, and **MAY** are to be interpreted as
 described in BCP 14 when, and only when, they appear in all capitals. The
 authoritative source for DOE-IRI resource-type and controlled-value URNs is
@@ -26,8 +29,8 @@ the [DOE-IRI URN Registry](../registry/urns/README.md). The
 authoritative navigation index for registered `iri:*` names; each linked
 definition is authoritative for that relation's complete semantics.
 
-This document proposes an IRI Facility API extension and is intended for adoption
-in the DOE IRI specification version 2.0 and reference implementations.
+This document defines an IRI Facility API extension for use with DOE IRI
+specification version 2.0 and reference implementations.
 
 | Revision | Author | Date | Notes |
 |---|---|---|---|
@@ -35,6 +38,7 @@ in the DOE IRI specification version 2.0 and reference implementations.
 | 0.2 | John MacAuley | Jul 31, 2026 | Revised based on initial thoughts. |
 | 0.3 | John MacAuley | Aug 14, 2026 | Revising for consistency. |
 | 0.4 | John MacAuley | Aug 14, 2026 | Added problem statement and layered hypermedia/service-description discovery model. |
+| 1.0 | DOE IRI | Sep 19, 2026 | Approved; generalized operation-affordance discovery and required an applicable bound service description when an operation affordance is advertised. |
 
 
 ## 1. Scope and Semantic Model
@@ -52,9 +56,12 @@ OpenAPI defines how to invoke an operation.
 
 This RFC covers HAL link objects, migration of URI-valued properties, standard
 relations, registered DOE-IRI relations, topology relationships, discovery of
-machine-readable service descriptions, and operations such as `iri:submit-job`.
-It does not assign URNs or link-relation names, alter production OpenAPI v1 or
-v2, define operational telemetry, or define other operation affordances.
+machine-readable service descriptions, and common wire rules for registered
+operation-affordance relations. It does not assign URNs or link-relation names,
+alter production OpenAPI v1 or v2, or define operational telemetry. The
+[operation-affordance RFC](./rfc-resource-operation-affordances.md) governs the
+IRI v2 operation-affordance migration, and the Link Relation Index and linked
+definitions remain authoritative for each registered relation.
 
 The JSON below is registry-aligned HAL migration material: it uses canonical
 registry URNs and illustrates representation shapes, rather than claiming to
@@ -315,25 +322,29 @@ ProjectAllocation applies to it. For full source, target, cardinality, target
 classification, visibility, and volatility rules, consult the registered
 relation definition for each `iri:*` relation.
 
-## 6. Operation Affordance: `iri:submit-job`
+## 6. Operation Affordances
 
-`iri:submit-job` is the registered provisional relation for the applicable
-job-submission entry point of a Resource whose `resource_type` is
-`urn:doe-iri:resource:compute:system`. It has cardinality `0..1`; the target
-is an operation entry point, not an API resource.
+A registered operation-affordance relation identifies why an operation entry
+point is applicable and where that entry point is located. Its registered
+definition governs source eligibility, target classification, cardinality,
+context binding, visibility, and omission semantics. The governing OpenAPI
+Operation Object defines the HTTP method, parameters, request body, responses,
+errors, and security requirements. The Link Relation Index is authoritative;
+this RFC does not reproduce the operation-affordance catalog.
 
-The current operation is `POST /api/v2/compute/job/{resource_id}` with
-`operationId: launchJob`. The link identifies where job submission is defined;
-it does not specify the HTTP method or request body, grant permission,
-guarantee schedulability, or replace the OpenAPI `JobSpec`, response, error,
-or security contracts. The current `launchJob` operation returns `Job`.
-Visibility MAY be filtered by authorization.
+The [operation-affordance RFC](./rfc-resource-operation-affordances.md) defines
+the IRI v2 migration and the `x-iri-relation` binding. A representation that
+advertises an operation-affordance relation adopted by that RFC **MUST** also
+advertise at least one applicable `service-desc` whose deployed OpenAPI
+description contains the matching `x-iri-relation` binding. The operation link
+**MUST NOT** carry an IRI representation profile URI because its target is an
+operation entry point, not an IRI resource representation.
 
-A representation MAY advertise a `service-desc` link to allow a client to
-discover the machine-readable service description governing the operation.
-When that target is an OpenAPI description, the operation relation identifies
-which entry point is applicable and the OpenAPI description defines how to
-invoke it.
+For example, `iri:submit-job` identifies the applicable job-submission entry
+point for an eligible Resource. It does not specify the HTTP method or request
+body, grant permission, guarantee schedulability, or replace the OpenAPI job,
+response, error, or security contracts. Visibility **MAY** be filtered by
+authorization.
 
 ## 7. OpenAPI 3.1 Schema
 

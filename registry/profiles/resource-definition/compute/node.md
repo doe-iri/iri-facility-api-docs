@@ -200,6 +200,56 @@ components:
 }
 ```
 
+## 7. Applicable Operation Affordances
+
+This profile supplements the [common Resource profile](../../status/resource.md).
+The registered relation definitions remain authoritative for operation
+semantics, and the applicable deployed OpenAPI description remains
+authoritative for the invocation contract.
+
+The filesystem operation family is conditionally applicable only when this
+specific compute node is explicitly configured as a filesystem execution
+context and the adapter establishes an unambiguous path namespace and
+operation context:
+
+- metadata and security: [`iri:change-file-mode`](../../../relations/change-file-mode.md),
+  [`iri:change-file-owner`](../../../relations/change-file-owner.md),
+  [`iri:identify-file`](../../../relations/identify-file.md),
+  [`iri:stat-file`](../../../relations/stat-file.md), and
+  [`iri:checksum-file`](../../../relations/checksum-file.md);
+- directory and read: [`iri:create-directory`](../../../relations/create-directory.md),
+  [`iri:create-symlink`](../../../relations/create-symlink.md),
+  [`iri:list-directory`](../../../relations/list-directory.md),
+  [`iri:read-file-head`](../../../relations/read-file-head.md), and
+  [`iri:read-file-tail`](../../../relations/read-file-tail.md);
+- content transfer: [`iri:view-file`](../../../relations/view-file.md),
+  [`iri:copy-path`](../../../relations/copy-path.md),
+  [`iri:download-file`](../../../relations/download-file.md), and
+  [`iri:upload-file`](../../../relations/upload-file.md); and
+- mutation and archive: [`iri:remove-path`](../../../relations/remove-path.md),
+  [`iri:compress-paths`](../../../relations/compress-paths.md),
+  [`iri:extract-archive`](../../../relations/extract-archive.md), and
+  [`iri:move-path`](../../../relations/move-path.md).
+
+[`iri:resolve-storage-locations`](../../../relations/resolve-storage-locations.md)
+MAY be advertised only when storage-location resolution is explicitly
+configured for this node. Compute-job relations and
+`iri:get-storage-access-endpoints` do not apply to a compute-node Resource.
+Membership in a compute system, node roles, and configured capacity do not
+confer those operations or a filesystem execution context.
+
+When any applicable operation relation is advertised, the representation MUST
+also advertise at least one applicable `service-desc` whose deployed OpenAPI
+contains the matching canonical `x-iri-relation` binding. An operation link
+targets an operation entry point and MUST NOT carry an IRI representation
+`profile`. Clients MUST NOT infer an operation path from the Resource Type,
+profile URI, Resource identifier, topology, or node attributes.
+
+A provider MAY omit an operation link because it is not configured,
+applicable, or visible to the requester. Absence means only that the operation
+is not advertised in the current representation. Presence grants no
+permission and guarantees no successful invocation.
+
 ---
 
 *DOE Integrated Research Infrastructure — URN Registry: Compute Node*

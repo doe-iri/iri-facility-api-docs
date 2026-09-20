@@ -96,7 +96,10 @@ The extension uses OpenAPI's standard Specification Extension mechanism but is D
 
 Operation-link visibility remains authorization-sensitive where the relation definition says so. Link presence does not grant permission, and OpenAPI security requirements remain authoritative at invocation.
 
-The current production OpenAPI remains authoritative until the `x-iri-relation` annotations are adopted through the normal OpenAPI revision and generation workflow.
+The production OpenAPI now carries the adopted `x-iri-relation` annotations,
+and the consolidated artifact is generated from those modular production
+sources. OpenAPI remains authoritative for the operation structure; the
+annotations bind registered relation URIs without changing that structure.
 
 ## Normative and current sources
 

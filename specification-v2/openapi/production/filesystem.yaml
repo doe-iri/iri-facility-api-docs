@@ -103,6 +103,8 @@ paths:
       summary: Post Chmod
       description: Change the permission mode of a file(`chmod`)
       operationId: chmod
+      x-iri-relation:
+      - https://iri.science/rels/change-file-mode
       security:
       - HTTPBearer: []
       parameters:
@@ -214,6 +216,8 @@ paths:
       summary: Post Chown
       description: Change the ownership of a given file (`chown`)
       operationId: chown
+      x-iri-relation:
+      - https://iri.science/rels/change-file-owner
       security:
       - HTTPBearer: []
       parameters:
@@ -325,6 +329,8 @@ paths:
       summary: Post File
       description: Output the type of a file or directory
       operationId: file
+      x-iri-relation:
+      - https://iri.science/rels/identify-file
       security:
       - HTTPBearer: []
       parameters:
@@ -436,6 +442,8 @@ paths:
       summary: Post Stat
       description: Output the `stat` of a file
       operationId: stat
+      x-iri-relation:
+      - https://iri.science/rels/stat-file
       security:
       - HTTPBearer: []
       parameters:
@@ -547,6 +555,8 @@ paths:
       summary: Post Mkdir
       description: Create directory operation (`mkdir`)
       operationId: mkdir
+      x-iri-relation:
+      - https://iri.science/rels/create-directory
       security:
       - HTTPBearer: []
       parameters:
@@ -658,6 +668,8 @@ paths:
       summary: Post Symlink
       description: Create symlink operation (`ln`)
       operationId: symlink
+      x-iri-relation:
+      - https://iri.science/rels/create-symlink
       security:
       - HTTPBearer: []
       parameters:
@@ -769,6 +781,8 @@ paths:
       summary: Post Ls
       description: List the contents of the given directory (`ls`) asynchronously
       operationId: ls
+      x-iri-relation:
+      - https://iri.science/rels/list-directory
       security:
       - HTTPBearer: []
       parameters:
@@ -880,6 +894,8 @@ paths:
       summary: Post Head
       description: Output the first part of file/s (`head`)
       operationId: head
+      x-iri-relation:
+      - https://iri.science/rels/read-file-head
       security:
       - HTTPBearer: []
       parameters:
@@ -991,6 +1007,8 @@ paths:
       summary: Post View
       description: View file content (up to max 5242880 bytes)
       operationId: view
+      x-iri-relation:
+      - https://iri.science/rels/view-file
       security:
       - HTTPBearer: []
       parameters:
@@ -1102,6 +1120,8 @@ paths:
       summary: Post Tail
       description: Output the last part of a file (`tail`)
       operationId: tail
+      x-iri-relation:
+      - https://iri.science/rels/read-file-tail
       security:
       - HTTPBearer: []
       parameters:
@@ -1213,6 +1233,8 @@ paths:
       summary: Post Checksum
       description: Output the checksum of a file (using SHA-256 algorithm)
       operationId: checksum
+      x-iri-relation:
+      - https://iri.science/rels/checksum-file
       security:
       - HTTPBearer: []
       parameters:
@@ -1324,6 +1346,8 @@ paths:
       summary: Post Rm
       description: Delete file or directory operation (`rm`)
       operationId: rm
+      x-iri-relation:
+      - https://iri.science/rels/remove-path
       security:
       - HTTPBearer: []
       parameters:
@@ -1435,6 +1459,8 @@ paths:
       summary: Post Compress
       description: Compress files and directories using `tar` command
       operationId: compress
+      x-iri-relation:
+      - https://iri.science/rels/compress-paths
       security:
       - HTTPBearer: []
       parameters:
@@ -1546,6 +1572,8 @@ paths:
       summary: Post Extract
       description: Extract `tar` `gzip` archives
       operationId: extract
+      x-iri-relation:
+      - https://iri.science/rels/extract-archive
       security:
       - HTTPBearer: []
       parameters:
@@ -1657,6 +1685,8 @@ paths:
       summary: Move Mv
       description: Create move file or directory operation (`mv`)
       operationId: mv
+      x-iri-relation:
+      - https://iri.science/rels/move-path
       security:
       - HTTPBearer: []
       parameters:
@@ -1768,6 +1798,8 @@ paths:
       summary: Post Cp
       description: Create copy file or directory operation (`cp`)
       operationId: cp
+      x-iri-relation:
+      - https://iri.science/rels/copy-path
       security:
       - HTTPBearer: []
       parameters:
@@ -1879,6 +1911,8 @@ paths:
       summary: Post Download
       description: Download a small file (max 5242880 Bytes)
       operationId: download
+      x-iri-relation:
+      - https://iri.science/rels/download-file
       security:
       - HTTPBearer: []
       parameters:
@@ -1990,6 +2024,8 @@ paths:
       summary: Post Upload
       description: Upload a small file (max 5242880 Bytes)
       operationId: upload
+      x-iri-relation:
+      - https://iri.science/rels/upload-file
       security:
       - HTTPBearer: []
       parameters:

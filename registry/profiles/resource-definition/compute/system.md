@@ -699,6 +699,67 @@ components:
 
 A compute system that does not support containerized execution publishes `"container_runtimes": []` and omits `urn:doe-iri:compute:system-capability:container-execution` from `system_capabilities`.
 
+## 7. Applicable Operation Affordances
+
+This profile supplements the [common Resource profile](../../status/resource.md).
+The registered relation definitions remain authoritative for operation
+semantics, and the applicable deployed OpenAPI description remains
+authoritative for the invocation contract.
+
+A compute-system Resource MAY advertise the following compute operation
+relations when each operation is applicable and visible:
+
+- [`iri:submit-job`](../../../relations/submit-job.md),
+  [`iri:update-job`](../../../relations/update-job.md),
+  [`iri:get-job`](../../../relations/get-job.md),
+  [`iri:query-jobs`](../../../relations/query-jobs.md), and
+  [`iri:cancel-job`](../../../relations/cancel-job.md).
+
+The filesystem operation family is conditionally applicable only when this
+compute system is explicitly configured as a filesystem execution context and
+the adapter establishes an unambiguous path namespace and operation context:
+
+- metadata and security: [`iri:change-file-mode`](../../../relations/change-file-mode.md),
+  [`iri:change-file-owner`](../../../relations/change-file-owner.md),
+  [`iri:identify-file`](../../../relations/identify-file.md),
+  [`iri:stat-file`](../../../relations/stat-file.md), and
+  [`iri:checksum-file`](../../../relations/checksum-file.md);
+- directory and read: [`iri:create-directory`](../../../relations/create-directory.md),
+  [`iri:create-symlink`](../../../relations/create-symlink.md),
+  [`iri:list-directory`](../../../relations/list-directory.md),
+  [`iri:read-file-head`](../../../relations/read-file-head.md), and
+  [`iri:read-file-tail`](../../../relations/read-file-tail.md);
+- content transfer: [`iri:view-file`](../../../relations/view-file.md),
+  [`iri:copy-path`](../../../relations/copy-path.md),
+  [`iri:download-file`](../../../relations/download-file.md), and
+  [`iri:upload-file`](../../../relations/upload-file.md); and
+- mutation and archive: [`iri:remove-path`](../../../relations/remove-path.md),
+  [`iri:compress-paths`](../../../relations/compress-paths.md),
+  [`iri:extract-archive`](../../../relations/extract-archive.md), and
+  [`iri:move-path`](../../../relations/move-path.md).
+
+[`iri:resolve-storage-locations`](../../../relations/resolve-storage-locations.md)
+MAY be advertised when storage-location resolution is supported for this
+compute-system context. `iri:get-storage-access-endpoints` does not apply to a
+compute-system Resource.
+
+Compute-system classification, configured capacity, capabilities, and job
+operations do not by themselves establish a filesystem execution context.
+Operation eligibility also does not flow from this system to its compute
+nodes.
+
+When any applicable operation relation is advertised, the representation MUST
+also advertise at least one applicable `service-desc` whose deployed OpenAPI
+contains the matching canonical `x-iri-relation` binding. An operation link
+targets an operation entry point and MUST NOT carry an IRI representation
+`profile`. Clients MUST NOT infer an operation path from the Resource Type,
+profile URI, Resource identifier, topology, or capability attributes.
+
+A provider MAY omit an operation link because it is not configured,
+applicable, or visible to the requester. Absence means only that the operation
+is not advertised in the current representation. Presence grants no
+permission and guarantees no successful invocation.
+
 ---
 
 *DOE Integrated Research Infrastructure — URN Registry: Compute System*

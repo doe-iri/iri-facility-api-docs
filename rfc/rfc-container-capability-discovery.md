@@ -12,7 +12,9 @@ A normalized image runtime and reuse (facility pre-stage, immutable facility-sco
 
 ## Status of This Memo
 
-This document is a proposed IRI Facility API extension intended for adoption within specification version 2.0 and its reference implementations.
+**Status:** Approved
+
+This document defines an approved IRI Facility API extension for use with specification version 2.0 and its reference implementations.
 
 The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and **OPTIONAL** in this document are to be interpreted as described in RFC 2119 and RFC 8174 when, and only when, they appear in all capitals.
 
@@ -22,6 +24,7 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **
 | 0.2 | Justas Balcas | Aug 28, 2026 | Full review and sections rewrite. |
 | 0.3 | Justas Balcas | Aug 28, 2026 | Dropped the Compute System profile `1.1.0` version bump; `container_runtimes` is added as an OPTIONAL attribute on the in-progress `1.0.0` profile. |
 | 0.4 | Justas Balcas | Aug 28, 2026 | Added `ContainerMpiSupport` (`mpi` on `ContainerRuntimeProfile`) and the `container-mpi-*` vocabularies, from a survey of NERSC (Podman-HPC, Shifter), OLCF (Apptainer), and ALCF (Polaris, Aurora) container MPI documentation. |
+| 1.0 | DOE IRI | Sep 19, 2026 | Recorded Approved status; technical semantics unchanged. |
 
 ## Table of Contents
 
@@ -78,7 +81,7 @@ This RFC:
 
 1. Extends the `urn:doe-iri:resource:compute:system` Resource Definition Profile with a `container_runtimes` attribute.
 2. Defines an array of behavior-oriented `ContainerRuntimeProfile` entries rather than treating a runtime product name as a complete description.
-3. Registers DOE-IRI URN for runtime, image format, acquisition, registry authentication, execution UID mode, GPU injection mechanism, and build availability, all in `provisional` status.
+3. Requests registration of DOE-IRI URNs for runtime, image format, acquisition, registry authentication, execution UID mode, GPU injection mechanism, and build availability, all in `provisional` status.
 4. Defines producer and consumer processing requirements, backward-compatibility behavior, security considerations, and a conformance plan.
 
 `container_runtimes` is added to the existing Compute System Attribute Profile as an OPTIONAL attribute. The profile stays at `schema_version` `1.0.0` while it is in draft; this RFC mints no new profile version. A v2 producer that supports this RFC SHOULD publish `container_runtimes` for every `urn:doe-iri:resource:compute:system` resource it exposes. A non-empty `container_runtimes` array means containerized execution is supported and described. An empty array explicitly means containerized execution is not supported. Absence of the attribute means only that structured information has not been published; it is **unknown**, never a negative capability assertion.
@@ -132,7 +135,7 @@ This RFC adds the `container_runtimes` attribute to that profile. It does not ad
 
 ## 4.2. DOE-IRI URN Namespace and Registry
 
-Per [RFC: A URN Namespace for the DoE IRI Project](./rfc-iri-urn-structure-and-registry.md), controlled vocabulary values are registered DOE-IRI URNs in the `compute` semantic category, and facilities MAY define local values through the delegated `ext` mechanism. This RFC registers new `compute`-category vocabularies (Section 6) and reuses two existing ones unchanged: `urn:doe-iri:compute:cpu-architecture:*` and `urn:doe-iri:compute:gpu-programming-interface:*` (see [Controlled Attribute URNs](../registry/urns/attributes.md)).
+Per [RFC: A URN Namespace for the DoE IRI Project](./rfc-iri-urn-structure-and-registry.md), controlled vocabulary values are registered DOE-IRI URNs in the `compute` semantic category, and facilities MAY define local values through the delegated `ext` mechanism. This RFC defines registration requests for new `compute`-category vocabularies (Section 6) and reuses two existing ones unchanged: `urn:doe-iri:compute:cpu-architecture:*` and `urn:doe-iri:compute:gpu-programming-interface:*` (see [Controlled Attribute URNs](../registry/urns/attributes.md)).
 
 Consumers MUST treat these URNs as data and MUST NOT reject a Resource solely because a syntactically valid URN value is unfamiliar. Hierarchy-aware fallback to the nearest recognized parent, or opaque handling, is the required behavior.
 
@@ -217,9 +220,9 @@ MPI behaviour inside a container is the sharpest difference between facilities a
 
 # 6. Controlled URN Registrations
 
-This RFC proposes the following controlled URNs under the `compute` semantic category. All values begin in `provisional` status. Each row is a compact canonical-URN enumeration: concatenate the vocabulary and each value as `urn:doe-iri:compute:<vocabulary>:<value>`.
+This RFC defines the following controlled-URN registration requests under the `compute` semantic category. Approval of this RFC does not itself assign the values; the DOE-IRI URN Registry remains authoritative. When registered, all values begin in `provisional` status. Each row is a compact canonical-URN enumeration: concatenate the vocabulary and each value as `urn:doe-iri:compute:<vocabulary>:<value>`.
 
-| Vocabulary | Registered values |
+| Vocabulary | Requested values |
 |---|---|
 | `container-runtime` | `apptainer`, `singularity`, `podman`, `podman-hpc`, `shifter`, `docker` |
 | `container-image-format` | `oci-image`, `docker-v2-image`, `oci-image-layout`, `oci-archive`, `docker-archive`, `sif`, `apptainer-sandbox` |

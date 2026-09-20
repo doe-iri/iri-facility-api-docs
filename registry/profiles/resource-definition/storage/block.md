@@ -561,6 +561,43 @@ Compute System / Compute Node
 
 The `iri:attached-to` relationship identifies the consuming resource. Attachment-specific details that can differ between consumers, such as local device paths or host-specific mappings, SHOULD NOT be represented as intrinsic attributes of the block resource.
 
+## 7. Applicable Storage-Discovery Affordances
+
+This profile supplements the [common Resource profile](../../status/resource.md).
+The registered relation definitions remain authoritative for operation
+semantics, and the applicable deployed OpenAPI description remains
+authoritative for the invocation contract.
+
+A block-storage Resource MAY advertise
+[`iri:get-storage-access-endpoints`](../../../relations/get-storage-access-endpoints.md)
+when its adapter implements access-endpoint discovery for this exact Resource.
+It MAY advertise
+[`iri:resolve-storage-locations`](../../../relations/resolve-storage-locations.md)
+only when the existing location-response semantics apply to this Resource.
+Both affordances require an explicit adapter context for the source block
+storage identifier.
+
+Block-storage classification, protocols, access mode, provisioning model, and
+capabilities do not imply filesystem operations, a block-provisioning
+operation, object CRUD, or transfer execution. Location resolution does not
+describe configured topology. Access-endpoint descriptions and
+`AccessEndpoint.capabilities` remain distinct from operation links; discovery
+does not attach a volume, perform block I/O, execute an external protocol
+operation, or guarantee protocol success.
+
+When either operation relation is advertised, the representation MUST also
+advertise at least one applicable `service-desc` whose deployed OpenAPI
+contains the matching canonical `x-iri-relation` binding. An operation link
+targets an operation entry point and MUST NOT carry an IRI representation
+`profile`. Clients MUST NOT infer an operation path from the Resource Type,
+profile URI, Resource identifier, topology, attributes, or discovered endpoint
+descriptions.
+
+A provider MAY omit either operation link because it is not implemented,
+applicable, or visible to the requester. Absence means only that the operation
+is not advertised in the current representation. Presence grants no
+permission and guarantees no successful invocation.
+
 ---
 
 *DOE Integrated Research Infrastructure — URN Registry: Block Storage*

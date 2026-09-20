@@ -20,6 +20,8 @@ paths:
 
         - `read`: no filtering'
       operationId: getStorageLocations
+      x-iri-relation:
+      - https://iri.science/rels/resolve-storage-locations
       security:
       - HTTPBearer: []
       parameters:
@@ -177,6 +179,8 @@ paths:
 
         Optionally filter by protocol and/or endpoint ID.'
       operationId: getStorageAccessEndpoints
+      x-iri-relation:
+      - https://iri.science/rels/get-storage-access-endpoints
       security:
       - HTTPBearer: []
       parameters:

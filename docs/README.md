@@ -32,7 +32,9 @@ docs/
     ├── 0002-delegated-extension-governance.md
     ├── 0003-hal-hypermedia-model.md
     ├── 0004-link-relation-naming.md
-    └── 0005-location-vs-hosting.md
+    ├── 0005-location-vs-hosting.md
+    ├── 0006-submit-job-operation-naming.md
+    └── 0007-operation-relation-openapi-binding.md
 ```
 
 ### `ai-project-context.md`

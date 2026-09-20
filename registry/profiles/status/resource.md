@@ -93,6 +93,11 @@ The V2 Resource schema defines the following conceptual properties:
 | `site_uri` | Yes | URI identifying the authoritative Site associated with the Resource. |
 | `capability_uris` | Yes | URIs identifying Capabilities associated with the Resource. |
 
+During the Phase 1 operation-affordance migration, `supported_endpoints`
+remains an optional array of broad endpoint categories under the existing
+OpenAPI contract. It is not a list of relation names, operation identifiers,
+or URLs, and this profile does not deprecate or remove it.
+
 The OpenAPI schema is authoritative for:
 
 - property names;
@@ -574,6 +579,7 @@ For example:
   "last_modified": "2026-08-17T18:12:00Z",
   "resource_type": "urn:doe-iri:resource:compute:system",
   "current_status": "up",
+  "supported_endpoints": ["compute"],
 
   "_links": {
     "self": {
@@ -629,7 +635,9 @@ In this representation:
 - `iri:located-at` identifies the associated Site;
 - `iri:has-capability` identifies associated Capabilities;
 - `iri:submit-job` identifies an applicable operation entry point;
-- `service-desc` identifies a machine-readable service description defining how operations are invoked;
+- `service-desc` identifies the applicable deployed OpenAPI description, which
+  binds `https://iri.science/rels/submit-job` to its Operation Object through
+  `x-iri-relation`;
 - `profile` identifies the semantic profile of a target representation.
 
 These identifiers serve different purposes and MUST NOT be treated as interchangeable.
@@ -694,6 +702,10 @@ may advertise:
     "iri:submit-job": {
       "href":
         "https://api.example.org/api/v2/compute/job/pioneer-compute"
+    },
+    "service-desc": {
+      "href": "https://api.example.org/openapi.json",
+      "type": "application/vnd.oai.openapi+json;version=3.1"
     }
   }
 }
@@ -731,7 +743,69 @@ An operation link does not itself define:
 
 Those invocation semantics remain defined by the applicable machine-readable API contract, such as OpenAPI.
 
+When a Resource advertises an operation-affordance relation adopted by the
+operation-affordance RFC, it MUST also advertise at least one applicable
+`service-desc` link. The deployed OpenAPI description identified by that link
+MUST contain an `x-iri-relation` binding from the operation's canonical
+relation URI to the applicable Operation Object.
+
+Clients use the registered relation to determine why the operation applies,
+the advertised `href` to locate it, and the bound deployed OpenAPI Operation
+Object to determine the method, parameters, request body, responses, errors,
+and security requirements. Clients MUST NOT infer those details from the
+relation name or probe a mutation to discover them.
+
+An operation-affordance link targets an operation entry point rather than an
+IRI representation. It MUST NOT carry an IRI representation `profile`.
+
 Clients MUST NOT infer an operation URI solely from `resource_type`.
+
+### 10.2 Phase 1 Coexistence with `supported_endpoints`
+
+Phase 1 retains `supported_endpoints` with its existing optional category
+semantics. When that property is present on a Resource:
+
+- advertising a registered compute-family operation relation requires
+  `"compute"` in the array;
+- advertising a registered filesystem-family operation relation requires
+  `"filesystem"` in the array;
+- storage-discovery relations have no legacy category mapping.
+
+The reverse implication does not apply. A retained category does not require
+any individual operation link, including when a link is authorization-filtered
+or its adapter operation is not implemented for the represented context.
+Authorization-suppressed links therefore do not make a retained category
+inconsistent.
+
+Producers MUST NOT replace category values with relation names, operation
+identifiers, or URLs. Clients MUST NOT construct or infer an operation link
+from a category. Deprecation or removal of `supported_endpoints` requires a
+separately approved later compatibility revision.
+
+### 10.3 Generic Compute and Storage Resource Types
+
+The exact generic Resource Types:
+
+```text
+urn:doe-iri:resource:compute
+urn:doe-iri:resource:storage
+```
+
+are governed by this common Resource profile; this profile does not create
+generic compute or storage Resource Definition Profiles.
+
+Generic compute and storage Resources are conditionally eligible only for the
+filesystem and storage-location relations whose registered definitions permit
+the exact generic type, and only when the actual adapter semantics and
+operation context are explicit and unambiguous. Generic storage may also
+advertise registered storage-access-endpoint discovery where implemented.
+Generic compute is not eligible for compute-job relations.
+
+Operation eligibility is exact-type-based. Eligibility of a generic or parent
+type MUST NOT be inherited automatically by descendants such as compute CPU or
+GPU Resources, storage systems, block storage, or object storage. Each
+registered relation definition remains authoritative for its complete source
+matrix and context requirements.
 
 ## 11. Relationship to Existing URI Properties
 
@@ -958,9 +1032,21 @@ A representation conforms to the IRI Status Resource Profile when:
 16. when both `site_uri` and `_links["iri:located-at"]` are present, they identify the same target;
 17. when both `capability_uris` and `_links["iri:has-capability"]` are present, they identify the same targets;
 18. applicable operation entry points are discovered through advertised links rather than inferred from Resource identifiers or Resource Type URNs;
-19. clients are not required to infer or construct related-resource or operation URLs.
+19. clients are not required to infer or construct related-resource or operation URLs;
 20. when a Resource Definition profile applies, it supplements this common
-    profile and does not replace it.
+    profile and does not replace it;
+21. every advertised adopted operation-affordance relation has an applicable
+    `service-desc` whose deployed OpenAPI contains the matching canonical
+    `x-iri-relation` binding;
+22. operation-affordance links do not carry IRI representation profiles;
+23. when `supported_endpoints` is present, visible compute-family and
+    filesystem-family links have the corresponding category, without requiring
+    the reverse implication;
+24. storage-discovery relations are not assigned a `supported_endpoints`
+    category; and
+25. generic compute and storage operation eligibility is applied only to exact
+    types under the applicable registered relation and explicit adapter-context
+    rules, never inferred through the Resource Type hierarchy.
 
 A conforming representation MAY contain additional properties and links where permitted by the applicable IRI API specification.
 

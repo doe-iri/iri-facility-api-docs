@@ -2,25 +2,29 @@
 
 ## Abstract
 
-This RFC proposes replacing broad Resource endpoint categories with discoverable, Resource-specific HAL operation affordances. It maps the resource-scoped compute, filesystem, and storage operations in IRI 2.0 OpenAPI to existing or proposed DOE-IRI link relations, defines applicability and visibility rules, defines an `x-iri-relation` OpenAPI binding from relation URIs to Operation Objects, and specifies a staged migration from `Resource.supported_endpoints`.
+This RFC defines Phase 1 of an additive migration from broad Resource endpoint categories to discoverable, Resource-specific HAL operation affordances. It maps the resource-scoped compute, filesystem, and storage operations in IRI 2.0 OpenAPI to registered DOE-IRI link relations, defines applicability and visibility rules, and defines an `x-iri-relation` OpenAPI binding from relation URIs to Operation Objects. Later deprecation and removal of `Resource.supported_endpoints` require separately approved revisions.
 
 ## Status of This Memo
 
-**Status:** Draft for discussion  
-**Target:** IRI 2.0 additive adoption; field removal in a subsequently approved contract revision  
-**Revision:** 0.2
+**Status:** Approved
+
+**Approval scope:** IRI 2.0 Phase 1 additive adoption only; Phase 2 deprecation and Phase 3 removal require separately approved revisions
+
+**Revision:** 1.0
+
+**Approved:** 2026-09-19
 
 **Date:** 2026-09-10
 
 The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHOULD**, **SHOULD NOT**, and **MAY** are to be interpreted as described in RFC 2119 and RFC 8174 when, and only when, they appear in all capitals.
 
-The baseline is repository commit [`f030f46a82fb`](https://github.com/doe-iri/iri-facility-api-docs/commit/f030f46a82fb883df0fb59bf6f88e1b0cecf4364). OpenAPI defines existing operation contracts [1]; the relation registry defines existing relations [2]. Except for the already provisional `iri:submit-job`, all operation relations proposed below are **registration requests**, not existing assignments. This document changes no repository registry or production schema by itself.
+The baseline is repository commit [`f030f46a82fb`](https://github.com/doe-iri/iri-facility-api-docs/commit/f030f46a82fb883df0fb59bf6f88e1b0cecf4364). OpenAPI defines operation contracts [1]; the relation registry defines assigned relation names and their complete semantics [2]. Approval of this RFC adopts only the Phase 1 protocol and migration rules. Relation assignments and production schemas remain authoritative only in their respective registry and OpenAPI sources.
 
 ## 1. Problem and Scope
 
 The current optional `Resource.supported_endpoints` property contains `Endpoint` values `compute` and `filesystem`. It identifies broad router categories, but provides neither an invocation URI nor operation-level support information [1]. A `compute` value alone cannot distinguish job submission, status queries, updates, and cancellation.
 
-This RFC proposes explicit links to applicable operations, using the HAL model already defined for IRI [3]. It covers all 25 Resource-scoped operations in the compute, filesystem, and storage sections of the reviewed OpenAPI: 5 compute + 18 filesystem + 2 storage. The proposal retains the current HTTP methods, inputs, and responses.
+This RFC defines explicit links to applicable operations, using the HAL model already defined for IRI [3]. It covers all 25 Resource-scoped operations in the compute, filesystem, and storage sections of the reviewed OpenAPI: 5 compute + 18 filesystem + 2 storage. Phase 1 retains the current HTTP methods, inputs, and responses.
 
 The following remain separate:
 
@@ -33,12 +37,12 @@ No generic `iri:compute` or `iri:filesystem` relation is required. No separate R
 
 ## 2. Common Relation Contract
 
-For every proposed registration in §3:
+For every operation-affordance relation registered for this migration:
 
-| Registration field | Proposed rule |
+| Registration field | Rule |
 | --- | --- |
-| Canonical relation URI | `https://iri.science/rels/` followed by the exact proposed relation name. These URIs become authoritative only through registration. |
-| Requested lifecycle status | Provisional; version 1.0.0 upon registration. |
+| Canonical relation URI | The URI assigned by the Link Relation Index and authoritative linked relation definition. |
+| Lifecycle status | Provisional; version 1.0.0. |
 | Source | An existing Resource representation satisfying §4; selected Job relations additionally permit Job representations as specified below. |
 | Target | The Resource-scoped operation entry point, or an explicitly advertised URI template for it. |
 | Cardinality | Zero or one link object per relation in each source representation. |
@@ -47,13 +51,13 @@ For every proposed registration in §3:
 | Visibility | Authorization MAY suppress a link. Presence grants no permission; absence means “not advertised in this representation,” not “unsupported everywhere.” |
 | Invocation | The applicable deployed OpenAPI governs method, parameters, body, responses, errors, and security. |
 | OpenAPI binding | The canonical relation URI appears in the operation's `x-iri-relation` extension as defined in §2.1. |
-| Registry ownership | Registration must identify an approved change controller and link the governing OpenAPI and relevant profiles. |
+| Registry ownership | Each registration **MUST** identify an approved change controller and link the governing OpenAPI and relevant profiles. |
 
 An adopting producer SHOULD advertise each applicable operation visible to the requester and MUST NOT advertise an operation its adapter does not implement for that context. It MUST NOT synthesize all operation links merely because a category appears in `supported_endpoints`.
 
-The producer MUST bind `resource_id` to the represented Resource's adapter context. Clients MUST follow the advertised target rather than construct paths from IDs, types, or relation names. If an operation belongs to another Resource, the producer must expose the appropriate Resource relationship rather than label the operation as belonging to the source.
+The producer MUST bind `resource_id` to the represented Resource's adapter context. Clients MUST follow the advertised target rather than construct paths from IDs, types, or relation names. If an operation belongs to another Resource, the producer MUST expose the appropriate Resource relationship rather than label the operation as belonging to the source.
 
-HAL does not encode an HTTP method or request schema. This RFC adds no nonstandard `method` or `operationId` member to HAL links. A producer advertising an operation-affordance relation defined by this RFC MUST also advertise an applicable `service-desc` for the deployed operation contract. Link `type` is a response representation hint, not a request Content-Type. Producers MUST NOT place a Job profile on `iri:submit-job` or another mutation-operation link.
+HAL does not encode an HTTP method or request schema. This RFC adds no nonstandard `method` or `operationId` member to HAL links. A producer advertising an operation-affordance relation defined by this RFC MUST also advertise at least one applicable `service-desc` whose deployed OpenAPI contains the matching `x-iri-relation` binding. Link `type` is a response representation hint, not a request Content-Type. Producers MUST NOT place an IRI representation profile on `iri:submit-job` or any other operation-affordance link.
 
 ### 2.1 Machine-Readable OpenAPI Operation Binding
 
@@ -82,9 +86,9 @@ A client resolving an advertised operation:
 
 The canonical relation URI, not `operationId`, is the binding key. An `operationId` rename therefore does not change the HAL relation or this binding. A client encountering a missing, duplicate, or target-inconsistent binding MUST NOT guess the method from the relation name or probe a mutation to discover its contract. During migration, such a client MAY use an explicitly supported version-specific mapping obtained from the relation registry or other governing documentation.
 
-## 3. Operation Registration Proposals
+## 3. Adopted Operation Relations
 
-The tables bind proposed semantic names to the reviewed OpenAPI. They are not URL-construction instructions or a second assignment registry. Upon adoption, individual definitions under `registry/relations/` and the Link Relation Index become authoritative.
+The tables summarize the adopted relation-to-operation mappings in the reviewed OpenAPI. They are not URL-construction instructions or a second assignment registry. Individual definitions under `registry/relations/` and the Link Relation Index are authoritative for assigned names and complete relation semantics.
 
 ### 3.1 Compute
 
@@ -96,11 +100,11 @@ The tables bind proposed semantic names to the reviewed OpenAPI. They are not UR
 | `iri:query-jobs` | Query job statuses | `POST /api/v2/compute/status/{resource_id}` | `getJobs` |
 | `iri:cancel-job` | Cancel a selected job | `DELETE /api/v2/compute/cancel/{resource_id}/{job_id}` | `cancelJob` |
 
-`iri:submit-job` retains its existing definition and compute-system-only source scope [2]. The four other rows are new registrations. `query-jobs` intentionally reflects `POST getJobs`, not an invented GET collection operation.
+`iri:submit-job` retains its existing definition and compute-system-only source scope [2]. The other four relations are registered for this migration. `query-jobs` intentionally reflects `POST getJobs`, not an invented GET collection operation.
 
 On a compute-system Resource, the producer binds `resource_id`. For `get-job`, `update-job`, and `cancel-job`, it MAY leave only `job_id` as an advertised URI-template variable and MUST set `templated: true`. Expansion identifies a selected job in that Resource context; it grants no permission to act on arbitrary job IDs.
 
-The new `get-job`, `update-job`, and `cancel-job` registrations also permit a Job source with both IDs already bound by the producer. A Job's canonical retrieval URI remains `self`; a `get-job` link is optional there. The producer must retain the operation context because clients cannot infer a Resource identifier from a Job identifier. Job updates remain limited to attributes supported by the facility's contract [1, 5].
+The `get-job`, `update-job`, and `cancel-job` registrations also permit a Job source with both IDs already bound by the producer. A Job's canonical retrieval URI remains `self`; a `get-job` link is optional there. The producer MUST retain the operation context because clients cannot infer a Resource identifier from a Job identifier. Job updates remain limited to attributes supported by the facility's contract [1, 5].
 
 ### 3.2 Filesystem
 
@@ -146,11 +150,11 @@ These extend discovery beyond the two legacy endpoint categories; they do not ad
 
 ## 4. Applicability to Registered Resource Types
 
-OpenAPI uses `resource_id` parameters but does not define an exhaustive Resource-Type-to-operation matrix. The mapping below is a **proposed semantic policy**, not a claim that every facility or every Resource of these types implements the operations. Type classification alone MUST NOT imply operation support.
+OpenAPI uses `resource_id` parameters but does not define an exhaustive Resource-Type-to-operation matrix. The mapping below is the adopted semantic policy, not a claim that every facility or every Resource of these types implements the operations. Type classification alone MUST NOT imply operation support.
 
 All shortened type names below have prefix `urn:doe-iri:resource:`; they are assigned types in the reviewed registry [4].
 
-| Resource types | Proposed eligible operations and conditions |
+| Resource types | Eligible operations and conditions |
 | --- | --- |
 | `compute:system` | Compute relations; filesystem relations when the system is a configured filesystem execution context; storage-location resolution when supported for that context. |
 | `compute:node` | Filesystem operations and storage-location resolution only if explicitly configured for that node. No automatic compute-job relations; a node is not the source permitted by existing `submit-job`. |
@@ -162,13 +166,13 @@ All shortened type names below have prefix `urn:doe-iri:resource:`; they are ass
 | `compute:cpu`, `compute:gpu` | No operation family assigned by this RFC; hardware classification does not imply a scheduler or filesystem context. |
 | `service`, `service:inference`, `network`, `system`, `website`, `unknown` | No operation family assigned by this RFC. The reviewed API does not supply corresponding type-specific execution contracts sufficient for new mappings. |
 
-For filesystem operations, an adapter MUST establish the path namespace and execution/access context for the source Resource. A filesystem mounted on several systems does not imply one interchangeable execution context. If a single source cannot identify one unambiguous context, expose separate Resources using the existing model and link through registered topology relations; do not silently choose a host or add an undocumented context selector.
+For filesystem operations, an adapter MUST establish the path namespace and execution/access context for the source Resource. A filesystem mounted on several systems does not imply one interchangeable execution context. If a single source cannot identify one unambiguous context, the producer MUST expose separate Resources using the existing model and link through registered topology relations; it MUST NOT silently choose a host or add an undocumented context selector.
 
-A legacy generic compute Resource supporting job submission requires either accurate reclassification as a registered compute system or an explicitly reviewed relation-scope extension before full migration. Do not silently broaden `iri:submit-job`, change Resource types, or discard legacy functionality.
+A legacy generic compute Resource supporting job submission requires either accurate reclassification as a registered compute system or an explicitly reviewed relation-scope extension before full migration. Producers MUST NOT silently broaden `iri:submit-job`, change Resource types, or discard legacy functionality.
 
 ## 5. Examples
 
-These are partial Resource representations illustrating the proposed extension, not complete OpenAPI instances. The new relations require registration before normative use.
+These are partial Resource representations illustrating the approved Phase 1 extension, not complete OpenAPI instances. The Link Relation Index and linked definitions are authoritative for the relations shown.
 
 ### 5.1 Compute Resource during coexistence
 
@@ -259,29 +263,33 @@ The `post` Operation Object supplies the HTTP method and full invocation contrac
 }
 ```
 
-URI templates follow RFC 6570 [6]. Runtime template expansion and OpenAPI parameter serialization must preserve the advertised binding and encoding.
+URI templates follow RFC 6570 [6]. Runtime template expansion and OpenAPI parameter serialization MUST preserve the advertised binding and encoding.
 
 ## 6. Migration and Compatibility
 
+Approval of this RFC authorizes Phase 1 only. Phase 2 and Phase 3 are future
+migration gates and have no effect unless separately approved through the
+applicable OpenAPI and compatibility-review processes.
+
 ### Phase 1 — Register and add
 
-Approve the relation definitions and update the affected profiles, Link Relation Index, and HAL RFC. Add the reusable HAL schema and `x-iri-relation` Operation Object bindings to OpenAPI through its normal revision process. Adopting implementations publish applicable links alongside the existing field and advertise the bound deployed OpenAPI description through `service-desc`.
+Phase 1 registers the relation definitions and updates the affected profiles, Link Relation Index, HAL RFC, reusable HAL schema, and `x-iri-relation` Operation Object bindings through their normal revision processes. Adopting implementations publish applicable links alongside the existing field and advertise the bound deployed OpenAPI description through `service-desc`.
 
-`supported_endpoints` remains optional with its current category semantics. Do not change it into a list of relation names, URLs, or operations.
+`supported_endpoints` remains optional with its current category semantics. Producers MUST NOT change it into a list of relation names, URLs, or operations.
 
-Where the field is supplied, advertised compute and filesystem operations MUST be consistent with their legacy category. The reverse does not hold: a category may remain when some or all operation links are hidden or not yet implemented in discovery. Storage-discovery links have no legacy category mapping. This is semantic consistency, not the URI-equality rule for `self_uri` and other URI-valued properties.
+When `supported_endpoints` is present on a Resource, a Resource advertising a compute-family relation MUST include `"compute"` in the array, and a Resource advertising a filesystem-family relation MUST include `"filesystem"`. The reverse does not hold: a retained category does not require any individual operation link, including when links are authorization-suppressed or not yet implemented in discovery. Storage-discovery links have no legacy category mapping. This coexistence rule does not apply to Job representations. It is semantic consistency, not the URI-equality rule for `self_uri` and other URI-valued properties.
 
 ### Phase 2 — Deprecate and migrate clients
 
-Mark `supported_endpoints` deprecated in an approved OpenAPI revision. Clients prefer a recognized advertised relation, resolve its canonical URI through `x-iri-relation`, and use the resulting deployed Operation Object. Legacy fallback MAY use an existing documented integration when no suitable link or machine-readable binding is advertised; clients MUST NOT turn a category label into a guessed URL or probe mutations to discover support.
+A future separately approved OpenAPI revision can mark `supported_endpoints` deprecated. Under that revision, clients prefer a recognized advertised relation, resolve its canonical URI through `x-iri-relation`, and use the resulting deployed Operation Object. Legacy fallback MAY use an existing documented integration when no suitable link or machine-readable binding is advertised; clients MUST NOT turn a category label into a guessed URL or probe mutations to discover support.
 
-Missing `_links` may indicate an older producer. Missing individual relations, or a Resource with only `self` and `service-desc`, does not prove lack of implementation support. This proposal intentionally replaces navigation information; it does not preserve an authorization-independent negative support assertion.
+Missing `_links` may indicate an older producer. Missing individual relations, or a Resource with only `self` and `service-desc`, does not prove lack of implementation support. The future migration would replace navigation information; it would not preserve an authorization-independent negative support assertion.
 
 Internal adapter routing MAY retain endpoint categories independently of the public field. Existing `getComputeResources` and `getFilesystemResources` discovery operations remain unchanged.
 
 ### Phase 3 — Retire the field
 
-Remove the field from the public contract only in a separately approved compatibility revision after implementations and clients have migrated. Its current optionality does not justify silently withdrawing it from clients that use it.
+A future compatibility revision MAY remove the field from the public contract only after separate approval and after implementations and clients have migrated. Its current optionality does not justify silently withdrawing it from clients that use it.
 
 The retirement gate requires coverage for every legacy Resource operation, explicit resolution of generic-type and context ambiguities, and documented handling of callers needing broad support declarations. Such callers may need a separately specified conformance mechanism; this RFC does not invent one.
 
@@ -291,11 +299,11 @@ Operation links describe configured, discoverable affordances. They do not grant
 
 Links MAY be filtered by authorization and, on Job representations, operation applicability. Temporary outages alone SHOULD NOT remove configured Resource operation links. Clients consult current representations and handle ordinary HTTP failures.
 
-Caller-specific representations require appropriate cache controls. Links MUST NOT contain credentials or secrets. A client must not automatically forward credentials to an unrelated origin merely because a link or service description names it. Destructive actions such as removal, overwrite, cancellation, and ownership changes remain explicit invocations governed by the caller's policy.
+Caller-specific representations require appropriate cache controls. Links MUST NOT contain credentials or secrets. A client MUST NOT automatically forward credentials to an unrelated origin merely because a link or service description names it. Destructive actions such as removal, overwrite, cancellation, and ownership changes remain explicit invocations governed by the caller's policy.
 
-## 8. Validation and Adoption Work
+## 8. Phase 1 Implementation and Validation
 
-Before adoption:
+Phase 1 implementation requires coordinated completion of the following work:
 
 1. Register the 24 new relations and retain the existing provisional `submit-job` definition.
 2. Validate all 25 method/path/operationId mappings against the adopted OpenAPI version.

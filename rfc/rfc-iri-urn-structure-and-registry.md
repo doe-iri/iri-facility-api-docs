@@ -4,15 +4,15 @@
 
 This document defines an extensible URN structure for DoE Integrated Research Infrastructure (IRI) identifiers, following the guidelines in \[RFC8141\].
 
-The proposed format provides stable, hierarchical identifiers for resource types and controlled vocabulary values without requiring revisions to the OpenAPI schema whenever a new subtype or controlled value is introduced. It separates data-model stability from the evolution of registered taxonomies.
+The defined format provides stable, hierarchical identifiers for resource types and controlled vocabulary values without requiring revisions to the OpenAPI schema whenever a new subtype or controlled value is introduced. It separates data-model stability from the evolution of registered taxonomies.
 
 The URN structure defined by this document is intended to be referenced by other IRI specifications, including the IRI `ResourceType` data-model definition. The URN structure can be extended to cover other IRI schema usages as required.
 
 # Status of This Memo
 
-This document defines a proposed URN structure for identifying typed IRI concepts, including resource types and controlled service vocabulary values.
+**Status:** Approved
 
-This memo is intended for discussion and adoption within the DOE IRI specification and reference implementations.
+This document defines the approved URN structure for identifying typed IRI concepts, including resource types and controlled service vocabulary values, for use within the DOE IRI specification and reference implementations.
 
 | Revision | Author | Date | Notes |
 | :---- | :---- | :---- | :---- |
@@ -23,6 +23,7 @@ This memo is intended for discussion and adoption within the DOE IRI specificati
 | 0.5 | John MacAuley | Jun 15, 2026 | Incorporated feedback. |
 | 1.0 | John MacAuley | Jun 15, 2026 | Minted version 1.0. |
 | 1.1 | John MacAuley | Aug 14, 2026 | Modified the service resource type to be under the resource URN. |
+| 1.2 | DOE IRI | Sep 19, 2026 | Recorded Approved status; technical semantics unchanged. |
 
 # Table of Contents
 
