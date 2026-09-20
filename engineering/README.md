@@ -17,14 +17,16 @@ Current normative and structural authority remains outside this directory and is
 | Type-specific Resource semantics selected by `resource_type` | `registry/profiles/resource-definition/` |
 | Other representation-specific semantics | Other documents under `registry/profiles/` |
 
-Documents under `docs/` do not override those sources.
+Documents under `engineering/` do not override those sources.
 
 ## Directory structure
 
 ```text
-docs/
+engineering/
 ├── README.md
-├── ai-project-context.md
+├── codex/
+│   ├── agent-workflow.md
+│   └── ai-project-context.md
 └── decisions/
     ├── README.md
     ├── _template.md

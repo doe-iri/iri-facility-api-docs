@@ -6,7 +6,13 @@ These instructions apply repository-wide. More-specific `AGENTS.md` files under
 Keep this root file intentionally small. Do not move domain-specific rules back
 here unless they apply to the entire repository.
 
-## 1. Source-of-Truth Precedence
+## 1. Required context
+
+- Before substantive work, read:
+  - `engineering/codex/ai-project-context.md`
+  - `engineering/codex/agent-workflow.md`
+
+## 2. Source-of-Truth Precedence
 
 Resolve authority by concern:
 
@@ -32,10 +38,10 @@ rfc/rfc-hal-links.md
 registry/profiles/
     Semantic and interoperability conventions for API representations.
 
-docs/decisions/
+engineering/decisions/
     Architectural rationale only; non-normative.
 
-docs/ai-project-context.md
+engineering/codex/ai-project-context.md
     Architectural and historical context only; non-normative.
 ```
 
@@ -43,7 +49,7 @@ When authorities for different concerns appear to disagree, identify whether
 the mismatch is structural, semantic, registry-related, or stale documentation.
 Do not silently choose one source and rewrite another.
 
-## 2. IRI v2 Modeling Scope
+## 3. IRI v2 Modeling Scope
 
 IRI v2 does not define or require separate Resource Definition and Resource
 State representations, endpoints, or conformance models.
@@ -62,7 +68,7 @@ Preserve valid v2 distinctions such as:
 - relationship existence versus target health;
 - Job and Task lifecycle state.
 
-## 3. Identifier Roles
+## 4. Identifier Roles
 
 Keep these concepts distinct:
 
@@ -85,7 +91,7 @@ OpenAPI
 
 Do not derive API paths from Resource Type URNs or profile identifiers.
 
-## 4. Scoped Instructions
+## 5. Scoped Instructions
 
 Before changing files under one of these areas, apply the closest local
 `AGENTS.md`:
@@ -101,7 +107,7 @@ specification-v2/AGENTS.md
 
 Do not load unrelated scoped instruction files into a task packet.
 
-## 5. Agent Workflow
+## 6. Agent Workflow
 
 Use named agents only for bounded tasks.
 
@@ -129,7 +135,7 @@ Do not run overlapping write-heavy agents in parallel.
 If custom agents are unavailable, preserve the same stages in the parent
 thread rather than skipping semantic review or validation.
 
-## 6. Context and Task-Size Rules
+## 7. Context and Task-Size Rules
 
 Keep the parent thread focused on requirements, decisions, and concise
 handoffs. Exploration logs, long grep output, and full file contents should not
@@ -149,7 +155,7 @@ If a task expands materially beyond its approved scope:
 2. report the newly discovered concern;
 3. create a separate work item.
 
-## 7. Handoff Packet
+## 8. Handoff Packet
 
 Pass only the context required by the next agent:
 
@@ -175,7 +181,7 @@ Adjacent work that must not be absorbed into this task.
 
 Do not pass raw prior transcripts as the default handoff mechanism.
 
-## 8. Change Discipline
+## 9. Change Discipline
 
 - Make the smallest coherent change.
 - Preserve unrelated user edits.
@@ -186,12 +192,12 @@ Do not pass raw prior transcripts as the default handoff mechanism.
 - Prefer targeted validation over repository-wide scans for every small edit.
 - Use repository-wide validation only when the task genuinely has repository-wide scope.
 
-## 9. Documentation Classes
+## 10. Documentation Classes
 
 Normative or authoritative documentation belongs in the appropriate RFC,
 registry, profile, relation, or OpenAPI source.
 
-`docs/decisions/` records accepted architectural rationale and MUST identify
+`engineering/decisions/` records accepted architectural rationale and MUST identify
 itself as non-normative. If a decision record disagrees with current normative
 material, the normative source wins and the decision record should be updated
 or marked superseded.
@@ -199,7 +205,7 @@ or marked superseded.
 Do not retain completed AI/Codex execution plans as current design authority.
 Git history provides implementation history.
 
-## 10. Runtime Configuration Boundary
+## 11. Runtime Configuration Boundary
 
 Repository configuration must not contain:
 
