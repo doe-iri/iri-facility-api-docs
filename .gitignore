@@ -36,6 +36,17 @@ replay_pid*
 .DS_Store
 .worktrees/
 
+# Local GitHub Pages/Jekyll output
+_site/
+.bundle/
+.jekyll-cache/
+.sass-cache/
+docs/_site/
+docs/.jekyll-cache/
+docs/.sass-cache/
+docs/.bundle/
+docs/vendor/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -1,10 +1,11 @@
 # DOE-IRI Facility API Documentation — Repository Instructions
 
 These instructions apply repository-wide. More-specific `AGENTS.md` files under
-`registry/`, `rfc/`, and `specification-v2/` add rules for those areas.
+`docs/`, `registry/`, `rfc/`, and `specification-v2/` add rules for those areas.
 
-Keep this root file intentionally small. Do not move domain-specific rules back
-here unless they apply to the entire repository.
+Keep this root file focused on repository-wide rules and workflows that must be
+understood when Codex starts from the repository root. Keep specialized editing
+details in the closest scoped `AGENTS.md`.
 
 ## 1. Required context
 
@@ -91,12 +92,45 @@ OpenAPI
 
 Do not derive API paths from Resource Type URNs or profile identifiers.
 
-## 5. Scoped Instructions
+## 5. Human-Oriented Documentation and GitHub Pages
+
+- Treat `iri-facility-api-docs/docs` (`docs/` from the repository root) as the
+  canonical source for the human-oriented documentation site.
+- GitHub Pages publishes the site from `main:/docs`. Do not maintain a
+  `gh-pages` branch or commit generated `_site/` output.
+- The `iri-facility-api-docs.wiki` repository is a retired historical copy.
+  Do not edit it, synchronize content to it, recreate a root `wiki/` mirror, or
+  restore the retired wiki synchronization scripts.
+- Content under `docs/` is explanatory. It must link to, and must not override,
+  the applicable specifications, RFCs, registries, profiles, relation
+  definitions, and OpenAPI sources.
+- Before editing `docs/`, read and follow `docs/AGENTS.md`. Preserve required
+  front matter and navigation metadata, repository-relative `.md` links,
+  parseable JSON/YAML examples, and fenced Mermaid diagrams.
+- Use `docs/Gemfile` and `docs/Gemfile.lock` for the local build. Do not edit or
+  vendor generated site output as source content.
+
+After changing published documentation, site configuration, or documentation
+validation, run from the repository root:
+
+```sh
+ruby scripts/validate-docs.rb
+BUNDLE_GEMFILE=docs/Gemfile bundle exec jekyll build --source docs --destination _site/iri-facility-api-docs
+BUNDLE_GEMFILE=docs/Gemfile bundle exec htmlproofer _site --disable-external
+```
+
+The CI equivalent is `.github/workflows/docs-check.yml`. Enabling or disabling
+GitHub Pages, changing the repository homepage, and disabling the legacy Wiki
+feature are remote administrative actions; perform them only when explicitly
+requested.
+
+## 6. Scoped Instructions
 
 Before changing files under one of these areas, apply the closest local
 `AGENTS.md`:
 
 ```text
+docs/AGENTS.md
 registry/AGENTS.md
 registry/urns/AGENTS.md
 registry/profiles/AGENTS.md
@@ -107,7 +141,7 @@ specification-v2/AGENTS.md
 
 Do not load unrelated scoped instruction files into a task packet.
 
-## 6. Agent Workflow
+## 7. Agent Workflow
 
 Use named agents only for bounded tasks.
 
@@ -135,7 +169,7 @@ Do not run overlapping write-heavy agents in parallel.
 If custom agents are unavailable, preserve the same stages in the parent
 thread rather than skipping semantic review or validation.
 
-## 7. Context and Task-Size Rules
+## 8. Context and Task-Size Rules
 
 Keep the parent thread focused on requirements, decisions, and concise
 handoffs. Exploration logs, long grep output, and full file contents should not
@@ -155,7 +189,7 @@ If a task expands materially beyond its approved scope:
 2. report the newly discovered concern;
 3. create a separate work item.
 
-## 8. Handoff Packet
+## 9. Handoff Packet
 
 Pass only the context required by the next agent:
 
@@ -181,9 +215,10 @@ Adjacent work that must not be absorbed into this task.
 
 Do not pass raw prior transcripts as the default handoff mechanism.
 
-## 9. Change Discipline
+## 10. Change Discipline
 
 - Make the smallest coherent change.
+- Check `git status` before editing and preserve unrelated worktree changes.
 - Preserve unrelated user edits.
 - Do not perform opportunistic cleanup outside the approved scope.
 - Do not invent URNs, relations, profile URIs, or OpenAPI fields.
@@ -192,7 +227,7 @@ Do not pass raw prior transcripts as the default handoff mechanism.
 - Prefer targeted validation over repository-wide scans for every small edit.
 - Use repository-wide validation only when the task genuinely has repository-wide scope.
 
-## 10. Documentation Classes
+## 11. Documentation Classes
 
 Normative or authoritative documentation belongs in the appropriate RFC,
 registry, profile, relation, or OpenAPI source.
@@ -205,7 +240,7 @@ or marked superseded.
 Do not retain completed AI/Codex execution plans as current design authority.
 Git history provides implementation history.
 
-## 11. Runtime Configuration Boundary
+## 12. Runtime Configuration Boundary
 
 Repository configuration must not contain:
 

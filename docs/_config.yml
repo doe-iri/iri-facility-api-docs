@@ -1,0 +1,67 @@
+title: IRI Facility API Documentation
+description: Human-oriented architecture, discovery, and implementation guidance for the DOE Integrated Research Infrastructure Facility API.
+url: https://doe-iri.github.io
+baseurl: /iri-facility-api-docs
+repository: doe-iri/iri-facility-api-docs
+lang: en-US
+
+remote_theme: just-the-docs/just-the-docs@v0.12.0
+permalink: pretty
+strict_front_matter: true
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-relative-links
+  - jekyll-seo-tag
+  - jekyll-include-cache
+  - jekyll-sitemap
+
+relative_links:
+  enabled: true
+  collections: true
+
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+
+exclude:
+  - AGENTS.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle
+  - .jekyll-cache
+  - _site
+
+search_enabled: true
+heading_anchors: true
+enable_copy_code_button: true
+nav_error_report: true
+
+mermaid:
+  version: "9.1.6"
+
+aux_links:
+  IRI Facility API on GitHub:
+    - https://github.com/doe-iri/iri-facility-api-docs
+aux_links_new_tab: true
+
+back_to_top: true
+back_to_top_text: Back to top
+footer_content: Explanatory guidance; normative requirements remain in the versioned specifications, RFCs, registries, profiles, and OpenAPI sources.
+
+gh_edit_link: true
+gh_edit_link_text: Edit this page on GitHub
+gh_edit_repository: https://github.com/doe-iri/iri-facility-api-docs
+gh_edit_branch: main
+gh_edit_source: docs
+gh_edit_view_mode: edit
+
+kramdown:
+  input: GFM
+
+liquid:
+  error_mode: strict

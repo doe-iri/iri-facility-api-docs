@@ -15,7 +15,7 @@ workflows on top of IRI.
 
 # Contents
 
-### [IRI Wiki](https://github.com/doe-iri/iri-facility-api-docs/wiki) - Your source for documentation
+### [IRI Facility API Documentation](https://doe-iri.github.io/iri-facility-api-docs/) - Human-oriented architecture, discovery, and implementation guidance
 
 ### [IRI Request For Comments](./rfc) - New proposals for enhancements to the IRI API
 
