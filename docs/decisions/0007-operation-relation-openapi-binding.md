@@ -78,7 +78,7 @@ method + parameters + request body + responses + security
 
 A client expands the HAL CURIE, retrieves the OpenAPI description through `service-desc`, finds the Operation Object whose `x-iri-relation` contains the canonical URI, verifies that the advertised `href` corresponds to that operation's server and path template, and then follows the OpenAPI invocation contract.
 
-The canonical relation URI—not `operationId`—is the stable binding key. Changing `launchJob` to `submitJob` therefore does not rename `iri:submit-job` or alter the `x-iri-relation` value.
+The canonical relation URI—not `operationId`—is the stable binding key. The current `operationId: launchJob` and `iri:submit-job` relation coexist as distinct identifiers; neither renames or aliases the other, and the `x-iri-relation` value remains the canonical relation URI.
 
 ## Rationale
 
@@ -109,4 +109,4 @@ The current production OpenAPI remains authoritative until the `x-iri-relation` 
 
 ## Historical notes
 
-This decision extends Decision 0003's use of HAL for operation affordances by recording the machine-readable OpenAPI binding. It is consistent with Decision 0006, which retains `iri:submit-job` while planning the `operationId` migration from `launchJob` to `submitJob`. Neither earlier decision is superseded.
+This decision extends Decision 0003's use of HAL for operation affordances by recording the machine-readable OpenAPI binding. It is consistent with Decision 0006, which preserves both `iri:submit-job` and `operationId: launchJob` as distinct identifiers. Neither earlier decision is superseded.

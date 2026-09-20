@@ -1,42 +1,40 @@
-# Decision 0006: Align the job-submission operation ID with submit terminology
+# Decision 0006: Keep the job-submission relation and operation ID distinct
 
 **Status:** Accepted
 
 **Date:** 2026-09-10
 
-**Scope:** IRI v2 compute job-submission operation naming
+**Scope:** IRI v2 compute job-submission relation and operation naming
 
-> **Non-normative:** This record explains architectural rationale. The checked-out OpenAPI, HAL RFC, and link-relation registry remain authoritative until the planned contract change is approved and implemented.
+> **Non-normative:** This record explains architectural rationale. The checked-out OpenAPI, HAL RFC, and link-relation registry remain authoritative by concern.
 
 ## Context
 
 The registered operation-affordance relation is `iri:submit-job`, and the current `POST /api/v2/compute/job/{resource_id}` summary and semantics describe submitting a job. The checked-out IRI v2 OpenAPI contract identifies that operation as `launchJob`.
 
-Although an OpenAPI `operationId` is not an HTTP method, path, or representation field, client and server generators commonly use it to create method names. Retaining different verbs for the relation and operation identifier creates avoidable terminology drift, while renaming the relation would change a registered hypermedia identifier exposed in representations.
+Although an OpenAPI `operationId` is not an HTTP method, path, or representation field, client and server generators commonly use it to create method names. The relation and operation identifier use different verbs, but they also serve different roles: the relation identifies why an operation target is linked, while the OpenAPI Operation Object defines how that operation is invoked.
 
 ## Decision
 
 Retain `iri:submit-job` as the DOE-IRI link relation and `https://iri.science/rels/submit-job` as its canonical relation URI.
 
-In a separately approved IRI v2 OpenAPI contract revision, rename the `operationId` for `POST /api/v2/compute/job/{resource_id}` from `launchJob` to `submitJob`.
+`launchJob` remains the authoritative current `operationId` in the OpenAPI specification.
 
-The migration changes only the OpenAPI operation identifier. It does not change the HTTP method or path, `JobSpec` request, `Job` response, errors, security requirements, job-submission semantics, or link-relation identity.
-
-Until that OpenAPI revision is adopted, `launchJob` remains the authoritative current `operationId`, and documentation describing the current contract should continue to report it accurately.
+These identifiers remain distinct. Neither is renamed or treated as an alias for the other.
 
 ## Rationale
 
-`submit` is the established term in the relation registry, OpenAPI operation summary, API description, and job-processing domain. Aligning the OpenAPI identifier with that terminology makes mappings between hypermedia discovery, generated client methods, documentation, and implementation code easier to understand.
+`submit` is the established term in the relation registry, OpenAPI operation summary, API description, and job-processing domain. The registered relation is part of the representation vocabulary used for runtime discovery, whereas `launchJob` identifies the corresponding Operation Object in the current structural contract.
 
-Changing the OpenAPI metadata is preferable to changing the registered relation because the relation is part of the representation vocabulary used for runtime discovery. The relation and the `operationId` still serve different roles: the relation explains why an operation target is linked, while OpenAPI defines how that operation is invoked.
+Clients resolve the canonical relation URI to the applicable deployed OpenAPI Operation Object and use that object's method, parameters, request body, responses, and security requirements. Identifier spelling does not need to match across those layers because the relation URI, rather than the `operationId`, is the semantic binding key.
 
 ## Consequences and tradeoffs
 
-The eventual OpenAPI revision may be source-incompatible for generated clients and server stubs that expose a method named from `launchJob`. The contract release must therefore document the rename and coordinate regeneration or compatibility handling for affected SDKs, implementations, tests, and examples.
+Generated clients and server stubs may expose a method named from `launchJob`, as defined by the applicable IRI v2 OpenAPI description. Implementations and documentation should use that description rather than deriving a method name from `iri:submit-job`.
 
-OpenAPI permits only one `operationId` for an operation, so the contract cannot expose `launchJob` and `submitJob` as simultaneous aliases on the same operation. Deployed descriptions and older contract versions may continue to report `launchJob`; clients must use the applicable deployed or versioned OpenAPI description rather than assuming the new identifier is already present.
+Hypermedia clients must not infer the OpenAPI `operationId`, HTTP method, path template, or payload contract from the relation name. They should follow `service-desc`, locate the Operation Object bound to the canonical relation URI, and apply that OpenAPI contract.
 
-Implementation should update the authoritative OpenAPI source and regenerate consolidated artifacts through the repository workflow. Historical verification results remain historical records and are not rewritten.
+Keeping the identifiers distinct avoids changing the registered relation vocabulary or the generated-code surface of the current OpenAPI contract. Historical verification results remain historical records and are not rewritten.
 
 This decision does not authorize unrelated changes to job submission, routing, payloads, authentication, authorization, idempotency, or lifecycle behavior.
 
