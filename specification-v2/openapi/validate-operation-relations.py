@@ -314,8 +314,13 @@ def validate_hal_schemas(document: dict, label: str, errors: list[str]) -> None:
         if hal_link.get("required") != ["href"]:
             errors.append(f"{label}: HalLink must require only href")
         href = hal_link.get("properties", {}).get("href", {})
-        if href.get("type") != "string" or href.get("format") != "uri-reference":
-            errors.append(f"{label}: HalLink.href must be a uri-reference string")
+        if href.get("type") != "string":
+            errors.append(f"{label}: HalLink.href must be a string")
+        if href.get("format") == "uri-reference":
+            errors.append(
+                f"{label}: HalLink.href must not declare format: uri-reference -- "
+                "templated hrefs are RFC 6570 URI Templates, not plain URI-references"
+            )
 
     expected_value = [
         {"$ref": "#/components/schemas/HalLink"},

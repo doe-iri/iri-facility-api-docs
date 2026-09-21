@@ -363,7 +363,11 @@ HalLink:
   properties:
     href:
       type: string
-      format: uri-reference
+      description: >-
+        A plain URI-reference, or an RFC 6570 URI Template when templated is
+        true. Templated hrefs contain literal { and } characters and are not
+        valid under the uri-reference format, so no format constraint is
+        declared here.
     templated:
       type: boolean
       default: false
