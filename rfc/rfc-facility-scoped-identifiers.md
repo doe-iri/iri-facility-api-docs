@@ -25,7 +25,7 @@ new representation, endpoint, link relation, or resolution service.
 
 **Target:** Explicit adoption in a future IRI API contract revision
 
-**Revision:** 0.2
+**Revision:** 0.3
 
 **Date:** 2026-09-27
 
@@ -47,11 +47,91 @@ contract; they do not impose new requirements on current IRI v2 deployments.
 
 ## 1. Motivation and Current Contract
 
-A bare UUID can provide globally unique identity, but does not identify its
-issuing facility. A facility-scoped URN adds a governed issuance namespace and
-allows durable local keys without requiring globally coordinated object
-registration. It does not make UUID collision avoidance obsolete, and it does
-not itself provide discovery, resolution, or proof of origin.
+### 1.1. Justification: Portable Identity Across Facilities
+
+IRI operates across independently administered facilities. Object identifiers
+need to remain unambiguous when exchanged through federated catalogs,
+workflows, event streams, and provenance records. Facility-scoped URNs provide
+a common naming convention that explicitly identifies the issuing namespace
+while allowing each facility to manage its own permanent local keys. This
+supports cross-facility identity exchange without embedding deployment URLs
+or requiring central registration of individual objects.
+
+UUIDs already support decentralized generation and global uniqueness, and
+can themselves be represented as `urn:uuid:<uuid>` under
+[RFC 9562](https://www.rfc-editor.org/rfc/rfc9562). Merely changing an ID's
+syntax to a URN does not improve those properties. The additional value of
+this proposal is the explicit facility issuance namespace, common object-kind
+convention, and governed assignment rules. A bare UUID does not identify its
+issuing facility; that association normally comes from accompanying metadata
+or a separate mapping.
+
+### 1.2. Example: Cross-Facility Workflow and Provenance
+
+Consider a workflow that runs a computation at NERSC, transfers its results to
+ALCF, and performs further computation there. An external workflow service
+records references to the Resource and Job objects involved. These references
+may later appear in exported provenance records, logs, or a shared catalog
+without the original API response or retrieval URL.
+
+The following identifiers are illustrative; this example introduces no new IRI
+workflow or provenance representation:
+
+| Workflow role | Referenced instance ID |
+| --- | --- |
+| Initial compute Resource | `urn:doe-iri:id:nersc:resource:r-001` |
+| Initial computation Job | `urn:doe-iri:id:nersc:job:j-84027` |
+| Downstream compute Resource | `urn:doe-iri:id:alcf:resource:r-001` |
+| Downstream computation Job | `urn:doe-iri:id:alcf:job:j-93012` |
+
+A catalog stores and compares the complete identifiers. The two facilities
+can independently assign the local Resource key `r-001` without identifying
+the same object. A workflow service correlates later observations of each
+object using its full ID. When a reference is examined outside the original
+API interaction, the issuing namespace and object family remain explicit.
+This helps operators identify which namespace's records to consult without
+first looking up the facility associated with an otherwise opaque UUID.
+
+The identifier alone does not establish the workflow's execution order,
+data-transfer relationships, or provenance authenticity. The workflow records
+and trusted data sources supply those facts. Retrieval still uses advertised
+links or an independently known deployment and OpenAPI operation; an authority
+code does not determine an API hostname. When the Resource is retrieved through
+`GET /api/v2/status/resources/{resource_id}`, the complete ID is substituted
+as described in Section 6.
+
+### 1.3. Benefits and Adoption Tradeoffs
+
+The intended benefits are:
+
+- **Operational traceability:** The issuing namespace remains visible when an
+  ID is copied into a log, support report, or exported record without its
+  original API context. This is naming context, not proof of origin or current
+  ownership.
+- **Federated naming:** A shared catalog can accept independently assigned
+  local keys under distinct facility namespaces using one identifier field.
+  This is particularly useful when integrating existing facility identifiers;
+  UUIDs already provide distributed uniqueness when used correctly.
+- **Facility autonomy:** Facilities can choose durable local-key strategies
+  within the common contract. They can retain UUID generation and use existing
+  UUIDs as suffixes, as illustrated in Section 5, while coordinating any other
+  local keys across their issuing systems.
+
+These benefits require persistent assignment records and the non-reuse rules
+in Section 5. URN syntax alone does not ensure persistence, and it does not
+provide discovery, resolution, or access control. Moving an API endpoint does
+not inherently require changing a UUID either; separating identity from
+location is a property that the proposed contract preserves.
+
+Adoption also lengthens identifiers and requires updates to stored references,
+ID-bound URLs, and clients when existing IDs change. Retaining a UUID suffix
+reduces local key-allocation work but still produces a different complete ID.
+The migration cost is justified where portable facility context and support
+for independently managed local keys improve interoperability. Where UUIDs
+already meet those needs and reliable facility metadata accompanies every
+reference, the additional benefit may be too small to justify migration.
+
+### 1.4. Current Contract
 
 The checked-out [IRI v2 schemas](../specification-v2/openapi/production/_components.yaml)
 already declare object `id` properties as strings rather than `format: uuid`.
@@ -460,6 +540,9 @@ Repository sources were reviewed at the baseline commit identified in
 - [RFC 8141: Uniform Resource Names (URNs)](https://www.rfc-editor.org/rfc/rfc8141).
   Defines URN syntax, persistent naming, and assigned-name equivalence,
   particularly Section 3.
+- [RFC 9562: Universally Unique IDentifiers (UUIDs)](https://www.rfc-editor.org/rfc/rfc9562).
+  Defines UUIDs and their URN namespace; informs the distinction between
+  distributed uniqueness and explicit facility-scoped naming.
 - [RFC 3986: Uniform Resource Identifier (URI): Generic Syntax](https://www.rfc-editor.org/rfc/rfc3986).
   Defines URI components, percent encoding, and path-segment syntax,
   particularly Sections 2.1, 2.4, and 3.3.
