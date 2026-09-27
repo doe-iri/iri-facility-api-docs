@@ -41,6 +41,7 @@ For more information on the broader DoE IRI project, official reference implemen
 | Normalized Queueing Policy Discovery for IRI Resources | Draft / Proposed | September 4, 2026 |
 | Migrating Resource.supported_endpoints to HAL Operation Affordances | Approved | September 17, 2026 |
 | IRI Facility API Root Discovery and Implementation Conformance | Draft / Proposed | September 10, 2026 |
+| Facility-Scoped URN Instance Identifiers | Draft / Proposed | September 27, 2026 |
 
 ## Contents
 
@@ -71,3 +72,7 @@ For more information on the broader DoE IRI project, official reference implemen
 7. **[IRI Facility API Root Discovery and Implementation Conformance](./rfc-iri-capability-discovery.md)**:
 
 	This document proposes a read-only HAL API root for discovering what portions of the IRI v2 contract an independently operated facility implements. The root combines a `conforms_to` declaration, typed links to deployed API-area entry points, and `service-desc` for the deployment-specific OpenAPI description. It distinguishes deployment conformance from account Capabilities, Resource attributes, and context-specific operation affordances; proposes nine initial conformance classes and seven API-area relations; and requires coordinated registry and OpenAPI adoption before those identifiers or behaviors become canonical.
+
+8. **[Facility-Scoped URN Instance Identifiers](./rfc-facility-scoped-identifiers.md)**:
+
+    This document proposes `urn:doe-iri:id:<authority>:<kind>:<local-id>` for stable API object identity under facility-specific issuance namespaces. It distinguishes instance IDs from type URNs and retrieval URLs, defines permanence and uniqueness rules, and describes migration from UUID or other local IDs. Adoption requires coordinated namespace, registry, and API contract changes; the draft does not change current assignments or schemas.
