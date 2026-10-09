@@ -112,6 +112,33 @@ Facility or service endpoint
 
 Because the URI is advertised, the target does not need to share the same hostname or path layout as the source representation.
 
+## Example 6: Retrying a job submission
+
+For a deployment that has enabled the Python reference implementation's
+idempotency support, generate a UUID before submitting a job and keep the same
+key and payload if the request times out. Given a trusted `SUBMIT_URL` obtained
+from `iri:submit-job`, an `ACCESS_TOKEN` for that facility, and a valid job
+specification saved as `job-spec.json`, an illustrative request is:
+
+```bash
+IDEMPOTENCY_KEY='"8e03978e-40d5-43e8-bc93-6894a57f9324"'
+curl --include --request POST "$SUBMIT_URL" \
+  --header "Authorization: Bearer $ACCESS_TOKEN" \
+  --header 'Content-Type: application/json' \
+  --header "Idempotency-Key: $IDEMPOTENCY_KEY" \
+  --data-binary @job-spec.json
+```
+
+Choose your own UUID for each logical submission and include any additional
+facility-required request context. After a timeout, repeat the request with
+the same URL, key, user, and payload. A completed matching retry returns the
+cached Job response with `Idempotency-Key-Reply: hit`. A request still in
+progress returns `409`, so wait before retrying.
+
+See [Idempotency-Key and Job Retries](idempotency.md) for complete submit and
+update examples, configuration requirements, error handling, and retention
+limits. Confirm deployment support before relying on this optional behavior.
+
 ## Authoritative references
 
 - [IRI v2 OpenAPI](https://github.com/doe-iri/iri-facility-api-docs/tree/main/specification-v2/openapi)
