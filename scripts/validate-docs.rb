@@ -18,6 +18,7 @@ EXPECTED_PAGES = %w[
   examples.md
   getting-started.md
   hypermedia-and-discovery.md
+  idempotency.md
   implementation-guide.md
   index.md
   iri-2.0.md

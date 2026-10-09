@@ -131,6 +131,13 @@ HTTP method behavior, status codes, headers, conditional request behavior, error
 
 Do not rely on examples on this site as the source of truth for exact wire behavior.
 
+For facilities using the Python reference implementation, configure and test
+the optional job retry support described in
+[Idempotency-Key and Job Retries](idempotency.md). The guide covers store
+selection, retention, and failure limits for `submit_job` and `update_job`.
+This implementation behavior is not declared in the checked-in v2 OpenAPI;
+describe the support and policy of your deployment for clients.
+
 ## 8. Validate representations
 
 Validation should include both:

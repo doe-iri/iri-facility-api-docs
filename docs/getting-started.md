@@ -48,6 +48,9 @@ Recommended path:
 5. Inspect `_links` for available relationships and operation entry points.
 6. Follow the advertised URI rather than constructing a URI from assumed path templates.
 7. Use an advertised service description, when provided, to obtain the applicable machine-readable API contract.
+8. Confirm the facility's retry policy before submitting or updating jobs. For
+   deployments using the Python reference implementation's optional header,
+   follow [Idempotency-Key and Job Retries](idempotency.md).
 
 See [Hypermedia and Discovery](hypermedia-and-discovery.md).
 
