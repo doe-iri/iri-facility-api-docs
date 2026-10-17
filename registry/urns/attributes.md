@@ -38,7 +38,7 @@ the CPU-architecture row registers
 
 | Vocabulary (semantic purpose) | Registered values | Used by |
 |---|---|---|
-| `system-technology` | `lustre`, `spectrum-scale`, `ceph`, `beegfs` | [Storage System](../profiles/resource-definition/storage/system.md) |
+| `system-technology` | `lustre`, `spectrum-scale`, `ceph`, `beegfs`, `weka`, `vast`, `aws-efs`, `aws-fsx-openzfs`, `azure-files`, `gcp-filestore` | [Storage System](../profiles/resource-definition/storage/system.md) |
 | `system-architecture` | `distributed`, `clustered` | [Storage System](../profiles/resource-definition/storage/system.md) |
 | `system-capability` | `replication`, `erasure-coding`, `encryption-at-rest`, `snapshot`, `data-tiering` | [Storage System](../profiles/resource-definition/storage/system.md) |
 | `filesystem-scope` | `local`, `network` | [Filesystem](../profiles/resource-definition/storage/filesystem.md) |
