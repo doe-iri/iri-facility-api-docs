@@ -4,6 +4,7 @@ import os
 import re
 import json
 import argparse
+import uuid
 import warnings
 import yaml
 import schemathesis
@@ -97,11 +98,25 @@ def before_call(ctx, case, kwargs):
 
         clean[safe_k] = safe_v
 
-    # ---- AUTH ----
-    if API_TOKEN:
-        clean["Authorization"] = f"Bearer {API_TOKEN}"
+    # Generated keys repeat across cases with different bodies, which the server must
+    # reject with 422 (key reuse). Use a fresh key so each case is a first submission.
+    if "Idempotency-Key" in clean:
+        clean["Idempotency-Key"] = str(uuid.uuid4())
 
     case.headers = clean
+
+
+if API_TOKEN:
+    # Registered as an auth provider, not set in before_call: schemathesis then skips it for
+    # negative cases that deliberately drop Authorization, so those requests can expect a 401.
+    @schemathesis.auth()
+    class BearerToken:
+        def get(self, case, ctx):
+            return API_TOKEN
+
+        def set(self, case, data, ctx):
+            case.headers = case.headers or {}
+            case.headers["Authorization"] = f"Bearer {data}"
 
 # Spec compliance helpers
 def _load_schema(source):
