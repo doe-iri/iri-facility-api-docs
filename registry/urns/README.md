@@ -124,6 +124,10 @@ These URNs identify units used to express resource quantities in allocation obje
 | `urn:doe-iri:allocation:compute:node-hours` | Node-hours | Compute allocation measured in node-hours. | `node-hours` | `active` |
 | `urn:doe-iri:allocation:storage:bytes` | Bytes | Storage allocation measured in bytes. | `bytes` | `active` |
 | `urn:doe-iri:allocation:storage:inodes` | Inodes | Storage allocation measured in filesystem inodes. | `inodes` | `active` |
+| `urn:doe-iri:allocation:currency:usd` | US dollars | Monetary allocation measured in United States dollars, in major currency units. | None | `provisional` |
+| `urn:doe-iri:allocation:inference:tokens` | Inference tokens | Inference allocation measured in model tokens processed by an inference service, counted as input tokens plus output tokens. | None | `provisional` |
+
+The `currency` and `inference` units are requested by [RFC: Monetary and Inference-Token Allocation Units](../../rfc/rfc-monetary-and-inference-allocation-units.md), which defines their interpretation, and remain `provisional` until that RFC is approved. `urn:doe-iri:allocation:currency` and `urn:doe-iri:allocation:inference` are grouping levels, not allocation units.
 
 ## 6. Compression Type Registry
 
