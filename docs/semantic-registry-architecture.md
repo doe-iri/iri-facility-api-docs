@@ -496,7 +496,7 @@ registry/profiles/
 registry/profiles/resource-definition/
     Resource Definition Profiles
 
-registry/relations/
+registry/rels/
     IRI link relations
 
 rfc/rfc-hal-links.md

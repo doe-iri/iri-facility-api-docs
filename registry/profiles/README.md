@@ -70,7 +70,7 @@ Authority is resolved by concern.
 | JSON properties, types, required/nullable rules, formats, operation shapes, structural validation | IRI v2 OpenAPI |
 | DOE-IRI URN syntax, hierarchy, delegation, registration rules, and conformance | Governing DOE-IRI URN specification |
 | Assigned Resource Type URNs and controlled values | [`../urns/`](../urns/README.md) |
-| Registered IRI link-relation names and complete relation semantics | [`../relations/`](../relations/README.md) |
+| Registered IRI link-relation names and complete relation semantics | [`../rels/`](../rels/README.md) |
 | HAL wire conventions and URI-property migration | [`../../rfc/rfc-hal-links.md`](../../rfc/rfc-hal-links.md) |
 | Common IRI Resource semantic conventions | [`status/resource.md`](status/resource.md) |
 | Type-specific Resource semantics | [`resource-definition/`](resource-definition/) |
@@ -349,7 +349,7 @@ the type-specific attribute/profile model defined by:
 - [DOE-IRI URN Registry](../urns/README.md)
 - [Resource Type URNs](../urns/resource-types.md)
 - [Controlled Attribute URNs](../urns/attributes.md)
-- [IRI Link Relation Index](../relations/README.md)
+- [IRI Link Relation Index](../rels/README.md)
 - [HAL `_links` RFC](../../rfc/rfc-hal-links.md)
 - [Type-Specific Attributes and Resource Definition Profiles RFC](../../rfc/rfc-type-specific-attributes.md)
 

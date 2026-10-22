@@ -28,8 +28,8 @@ An advertised job operation alone does not establish idempotency support.
 
 | Python handler | HTTP operation in the current v2 contract | OpenAPI operation ID | Discovery relation |
 |---|---|---|---|
-| `submit_job` | `POST /api/v2/compute/job/{resource_id}` | `launchJob` | [`iri:submit-job`](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/relations/submit-job.md) |
-| `update_job` | `PUT /api/v2/compute/job/{resource_id}/{job_id}` | `updateJob` | [`iri:update-job`](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/relations/update-job.md) |
+| `submit_job` | `POST /api/v2/compute/job/{resource_id}` | `launchJob` | [`iri:submit-job`](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/rels/submit-job.md) |
+| `update_job` | `PUT /api/v2/compute/job/{resource_id}/{job_id}` | `updateJob` | [`iri:update-job`](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/rels/update-job.md) |
 
 These paths identify the current contract mappings. Use the advertised
 operation URL and the deployed OpenAPI method and request schema, as explained

@@ -188,7 +188,7 @@ The authoritative registries are:
 ../registry/urns/attributes.md
     assigned controlled attribute URNs
 
-../registry/relations/README.md
+../registry/rels/README.md
     registered IRI link relations
 
 ../registry/profiles/resource-definition/
@@ -582,7 +582,7 @@ iri:provides-block
 iri:provides-object
 ```
 
-The corresponding definitions under `../registry/relations/` remain authoritative for relation semantics, cardinality, source and target classification, visibility, and volatility.
+The corresponding definitions under `../registry/rels/` remain authoritative for relation semantics, cardinality, source and target classification, visibility, and volatility.
 
 A Resource Definition Profile MUST NOT redefine a registered link relation with different semantics.
 
@@ -927,7 +927,7 @@ The DOE-IRI URN namespace specification separately discusses potential future IA
 9. [DOE-IRI URN Registry](../registry/urns/README.md).
 10. [DOE-IRI Resource Type URNs](../registry/urns/resource-types.md).
 11. [DOE-IRI Controlled Attribute URNs](../registry/urns/attributes.md).
-12. [DOE-IRI Link Relation Index](../registry/relations/README.md).
+12. [DOE-IRI Link Relation Index](../registry/rels/README.md).
 13. [IRI Status Resource Profile](../registry/profiles/status/resource.md).
 14. [IRI Resource Definition Profiles](../registry/profiles/resource-definition/).
 15. [IRI Facility API OpenAPI v2](../specification-v2/openapi/all_spec_v2.yaml).
@@ -991,7 +991,7 @@ a profile-aware client can process the representation as:
    registry/urns/attributes.md
 
 7. Interpret any `iri:*` links using:
-   registry/relations/README.md and the linked relation definition.
+   registry/rels/README.md and the linked relation definition.
 ```
 
 A generic client that does not know step 4 can still process the common Resource representation and safely treat the `attributes` object as unfamiliar type-specific data.

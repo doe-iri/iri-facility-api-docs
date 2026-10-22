@@ -11,7 +11,7 @@ Current normative and structural authority remains outside this directory and is
 | API structure, properties, required/nullable rules, formats, and operation shapes | `specification-v2/openapi/` |
 | DOE-IRI URN syntax, hierarchy, delegation, registration procedure, and conformance | Governing URN RFCs under `rfc/` |
 | Assigned Resource Type and controlled-value URNs | `registry/urns/` |
-| Registered `iri:*` relation names and complete relation semantics | `registry/relations/` |
+| Registered `iri:*` relation names and complete relation semantics | `registry/rels/` |
 | HAL wire conventions and URI-property migration | `rfc/rfc-hal-links.md` |
 | Common Resource semantics | `registry/profiles/status/resource.md` |
 | Type-specific Resource semantics selected by `resource_type` | `registry/profiles/resource-definition/` |

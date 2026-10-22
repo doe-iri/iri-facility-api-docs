@@ -30,7 +30,7 @@ workflows on top of IRI.
 
   - [URNs](./registry/urns/README.md)
   - [Resource Profiles](./registry/profiles/README.md)
-  - [Link Relation Index](./registry/relations/README.md)
+  - [Link Relation Index](./registry/rels/README.md)
 
 ### [IRI Specification 1.0](./specification-v1/README.md) - Accepted production version
 
