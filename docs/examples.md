@@ -143,5 +143,5 @@ limits. Confirm deployment support before relying on this optional behavior.
 
 - [IRI v2 OpenAPI](https://github.com/doe-iri/iri-facility-api-docs/tree/main/specification-v2/openapi)
 - [IRI Registry](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/README.md)
-- [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/relations)
+- [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/rels)
 - [IRI RFCs](https://github.com/doe-iri/iri-facility-api-docs/tree/main/rfc)

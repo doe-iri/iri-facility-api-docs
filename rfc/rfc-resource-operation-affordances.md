@@ -88,7 +88,7 @@ The canonical relation URI, not `operationId`, is the binding key. An `operation
 
 ## 3. Adopted Operation Relations
 
-The tables summarize the adopted relation-to-operation mappings in the reviewed OpenAPI. They are not URL-construction instructions or a second assignment registry. Individual definitions under `registry/relations/` and the Link Relation Index are authoritative for assigned names and complete relation semantics.
+The tables summarize the adopted relation-to-operation mappings in the reviewed OpenAPI. They are not URL-construction instructions or a second assignment registry. Individual definitions under `registry/rels/` and the Link Relation Index are authoritative for assigned names and complete relation semantics.
 
 ### 3.1 Compute
 

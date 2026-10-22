@@ -18,7 +18,7 @@ registry/
 │   ├── README.md
 │   ├── resource-types.md
 │   └── attributes.md
-└── relations/
+└── rels/
 ```
 
 | Location | Authority |
@@ -27,7 +27,7 @@ registry/
 | [profiles/resource-definition/](profiles/resource-definition/) | Type-specific Resource Definition semantics selected by `resource_type`. |
 | [urns/resource-types.md](urns/resource-types.md) | Assigned Resource Type URNs. |
 | [urns/attributes.md](urns/attributes.md) | Assigned controlled attribute URNs. |
-| [relations/](relations/README.md) | Registered relation names and their complete semantics. |
+| [rels/](rels/README.md) | Registered relation names and their complete semantics. |
 
 A Resource Type URN is not a profile URI. A Resource Definition profile is
 selected by the Resource's `resource_type`, and supplements rather than
@@ -65,7 +65,7 @@ topology uses `iri:has-node`, `iri:has-cpu`, and `iri:has-gpu`.
 | Find a Resource Type | [Resource Type URNs](urns/resource-types.md) |
 | Find a controlled attribute value | [Controlled Attribute URNs](urns/attributes.md) |
 | Describe a typed Resource | Its linked Resource Definition profile |
-| Understand a relationship | [Link Relation Index](relations/README.md) |
+| Understand a relationship | [Link Relation Index](rels/README.md) |
 | Understand the common Resource representation | [IRI Status Resource Profile](profiles/status/resource.md) |
 
 *IRI specification — DOE Integrated Research Infrastructure*

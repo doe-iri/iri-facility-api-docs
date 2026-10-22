@@ -212,26 +212,26 @@ specific compute node is explicitly configured as a filesystem execution
 context and the adapter establishes an unambiguous path namespace and
 operation context:
 
-- metadata and security: [`iri:change-file-mode`](../../../relations/change-file-mode.md),
-  [`iri:change-file-owner`](../../../relations/change-file-owner.md),
-  [`iri:identify-file`](../../../relations/identify-file.md),
-  [`iri:stat-file`](../../../relations/stat-file.md), and
-  [`iri:checksum-file`](../../../relations/checksum-file.md);
-- directory and read: [`iri:create-directory`](../../../relations/create-directory.md),
-  [`iri:create-symlink`](../../../relations/create-symlink.md),
-  [`iri:list-directory`](../../../relations/list-directory.md),
-  [`iri:read-file-head`](../../../relations/read-file-head.md), and
-  [`iri:read-file-tail`](../../../relations/read-file-tail.md);
-- content transfer: [`iri:view-file`](../../../relations/view-file.md),
-  [`iri:copy-path`](../../../relations/copy-path.md),
-  [`iri:download-file`](../../../relations/download-file.md), and
-  [`iri:upload-file`](../../../relations/upload-file.md); and
-- mutation and archive: [`iri:remove-path`](../../../relations/remove-path.md),
-  [`iri:compress-paths`](../../../relations/compress-paths.md),
-  [`iri:extract-archive`](../../../relations/extract-archive.md), and
-  [`iri:move-path`](../../../relations/move-path.md).
+- metadata and security: [`iri:change-file-mode`](../../../rels/change-file-mode.md),
+  [`iri:change-file-owner`](../../../rels/change-file-owner.md),
+  [`iri:identify-file`](../../../rels/identify-file.md),
+  [`iri:stat-file`](../../../rels/stat-file.md), and
+  [`iri:checksum-file`](../../../rels/checksum-file.md);
+- directory and read: [`iri:create-directory`](../../../rels/create-directory.md),
+  [`iri:create-symlink`](../../../rels/create-symlink.md),
+  [`iri:list-directory`](../../../rels/list-directory.md),
+  [`iri:read-file-head`](../../../rels/read-file-head.md), and
+  [`iri:read-file-tail`](../../../rels/read-file-tail.md);
+- content transfer: [`iri:view-file`](../../../rels/view-file.md),
+  [`iri:copy-path`](../../../rels/copy-path.md),
+  [`iri:download-file`](../../../rels/download-file.md), and
+  [`iri:upload-file`](../../../rels/upload-file.md); and
+- mutation and archive: [`iri:remove-path`](../../../rels/remove-path.md),
+  [`iri:compress-paths`](../../../rels/compress-paths.md),
+  [`iri:extract-archive`](../../../rels/extract-archive.md), and
+  [`iri:move-path`](../../../rels/move-path.md).
 
-[`iri:resolve-storage-locations`](../../../relations/resolve-storage-locations.md)
+[`iri:resolve-storage-locations`](../../../rels/resolve-storage-locations.md)
 MAY be advertised only when storage-location resolution is explicitly
 configured for this node. Compute-job relations and
 `iri:get-storage-access-endpoints` do not apply to a compute-node Resource.

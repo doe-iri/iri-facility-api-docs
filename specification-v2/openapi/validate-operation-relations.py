@@ -18,7 +18,7 @@ OPENAPI_DIR = Path(__file__).resolve().parent
 REPOSITORY_ROOT = OPENAPI_DIR.parents[1]
 PRODUCTION_DIR = OPENAPI_DIR / "production"
 GENERATED_SPEC = OPENAPI_DIR / "all_spec_v2.yaml"
-RELATION_DIR = REPOSITORY_ROOT / "registry" / "relations"
+RELATION_DIR = REPOSITORY_ROOT / "registry" / "rels"
 RELATION_INDEX = RELATION_DIR / "README.md"
 
 CANONICAL_PREFIX = "https://iri.science/rels/"

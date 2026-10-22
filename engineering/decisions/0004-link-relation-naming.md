@@ -4,7 +4,7 @@
 **Date:** 2026-08-14  
 **Scope:** DOE-IRI custom HAL relation identifiers
 
-> **Non-normative:** This record explains the naming rationale. `rfc/rfc-hal-links.md` and `registry/relations/` define the current registered names and conformance requirements.
+> **Non-normative:** This record explains the naming rationale. `rfc/rfc-hal-links.md` and `registry/rels/` define the current registered names and conformance requirements.
 
 ## Context
 
@@ -45,8 +45,8 @@ Future relation names should be reviewed for semantics first; the naming convent
 ## Normative and current sources
 
 - `rfc/rfc-hal-links.md`
-- `registry/relations/README.md`
-- `registry/relations/*.md`
+- `registry/rels/README.md`
+- `registry/rels/*.md`
 
 ## Historical notes
 

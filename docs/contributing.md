@@ -32,7 +32,7 @@ Check whether the desired semantic already exists in:
 - [Resource Type URNs](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/urns/resource-types.md)
 - [Controlled Attribute URNs](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/urns/attributes.md)
 - [Resource Definition Profiles](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/profiles/resource-definition)
-- [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/relations)
+- [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/rels)
 
 Avoid creating two identifiers for the same semantic concept.
 

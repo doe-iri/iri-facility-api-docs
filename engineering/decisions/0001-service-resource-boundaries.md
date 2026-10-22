@@ -58,8 +58,8 @@ The model deliberately does not make every internal service component independen
 - `registry/urns/attributes.md`
 - `registry/profiles/resource-definition/service/dtn.md`
 - `registry/profiles/resource-definition/service/inference.md`
-- `registry/relations/hosted-on.md`
-- `registry/relations/accesses-mount.md`
+- `registry/rels/hosted-on.md`
+- `registry/rels/accesses-mount.md`
 - `rfc/rfc-type-specific-attributes.md`
 
 ## Historical notes

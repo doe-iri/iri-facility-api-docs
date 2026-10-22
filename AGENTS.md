@@ -29,7 +29,7 @@ Governing DOE-IRI URN specification
 registry/urns/
     Assigned DOE-IRI URNs, controlled values, parentage, and lifecycle status.
 
-registry/relations/
+registry/rels/
     Registered IRI link-relation names and complete relation semantics.
 
 rfc/rfc-hal-links.md
@@ -134,7 +134,7 @@ docs/AGENTS.md
 registry/AGENTS.md
 registry/urns/AGENTS.md
 registry/profiles/AGENTS.md
-registry/relations/AGENTS.md
+registry/rels/AGENTS.md
 rfc/AGENTS.md
 specification-v2/AGENTS.md
 ```

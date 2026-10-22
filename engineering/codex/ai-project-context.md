@@ -251,7 +251,7 @@ urn-registry-type-<domain>-taxonomy.md
 urn-registry-attributes-<domain>-<type>.md
     Attribute profile for a specific resource type.
 
-relations/<relation>.md
+rels/<relation>.md
     Semantic definition of an IRI link relation.
 ```
 
@@ -267,8 +267,8 @@ urn-registry-type-compute-taxonomy.md
 urn-registry-attributes-storage-filesystem.md
 urn-registry-attributes-compute-node.md
 
-relations/has-mount.md
-relations/has-node.md
+rels/has-mount.md
+rels/has-node.md
 ```
 
 The repository README should function primarily as a navigation map rather than restating every registry value.

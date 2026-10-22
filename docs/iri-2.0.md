@@ -79,7 +79,7 @@ HAL-style links provide a mechanism for advertising relationships and navigation
 See:
 
 - [HAL Links RFC](https://github.com/doe-iri/iri-facility-api-docs/blob/main/rfc/rfc-hal-links.md)
-- [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/relations)
+- [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/rels)
 - [Hypermedia and Discovery](hypermedia-and-discovery.md)
 
 ### Resource operation affordances

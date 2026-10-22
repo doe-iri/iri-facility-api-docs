@@ -1,6 +1,6 @@
 # IRI Link Relation Registry Instructions
 
-These rules apply under `registry/relations/`.
+These rules apply under `registry/rels/`.
 
 ## 1. Relation Identity
 

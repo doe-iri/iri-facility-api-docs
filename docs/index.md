@@ -92,7 +92,7 @@ See [Hypermedia and Discovery](hypermedia-and-discovery.md) for the detailed mod
 - [Registry overview](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/README.md)
 - [URN Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/urns)
 - [Resource Definition Profiles](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/profiles)
-- [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/relations)
+- [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/rels)
 
 ### Requests for Comments
 
