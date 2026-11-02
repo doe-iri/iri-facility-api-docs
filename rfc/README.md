@@ -42,6 +42,7 @@ For more information on the broader DoE IRI project, official reference implemen
 | Migrating Resource.supported_endpoints to HAL Operation Affordances | Approved | September 17, 2026 |
 | IRI Facility API Root Discovery and Implementation Conformance | Draft / Proposed | September 10, 2026 |
 | Facility-Scoped URN Instance Identifiers | Draft / Proposed | September 27, 2026 |
+| Monetary and Inference-Token Allocation Units | Draft / Proposed | October 13, 2026 |
 
 ## Contents
 
@@ -76,3 +77,7 @@ For more information on the broader DoE IRI project, official reference implemen
 8. **[Facility-Scoped URN Instance Identifiers](./rfc-facility-scoped-identifiers.md)**:
 
     This document proposes `urn:doe-iri:id:<authority>:<kind>:<local-id>` for stable API object identity under facility-specific issuance namespaces. It distinguishes instance IDs from type URNs and retrieval URLs, defines permanence and uniqueness rules, and describes migration from UUID or other local IDs. Adoption requires coordinated namespace, registry, and API contract changes; the draft does not change current assignments or schemas.
+
+9. **[Monetary and Inference-Token Allocation Units](./rfc-monetary-and-inference-allocation-units.md)**:
+
+    This document requests registration of `urn:doe-iri:allocation:currency:usd` and `urn:doe-iri:allocation:inference:tokens` so that facilities can express cloud spending limits and inference token allocations in the existing Allocation Entry model. It defines interpretation rules for monetary and token quantities, treats every entry in an `entries` array as an independent limit, defines optional Allocation Entry attributes for accounting period, renewal, usage freshness, and reconciliation state, and scopes token allocations to served models through a Capability attribute. It requires no OpenAPI structural change.
