@@ -44,8 +44,8 @@ Consumers that are authorized to discover hosting topology can use `iri:hosted-o
 
 ## Normative and current sources
 
-- `registry/relations/located-at.md`
-- `registry/relations/hosted-on.md`
+- `registry/rels/located-at.md`
+- `registry/rels/hosted-on.md`
 - `rfc/rfc-hal-links.md`
 - `registry/profiles/facility/site.md`
 - `registry/profiles/resource-definition/compute/system.md`

@@ -30,7 +30,7 @@ Recommended path:
 3. Review the [v2 OpenAPI definition](https://github.com/doe-iri/iri-facility-api-docs/tree/main/specification-v2/openapi).
 4. Identify the IRI Resource Types your facility will expose using the [Resource Type registry](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/urns/resource-types.md).
 5. Review applicable [Resource Definition Profiles](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/profiles/resource-definition).
-6. Review the [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/relations).
+6. Review the [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/rels).
 7. Implement and validate the API using the guidance in [Implementation Guide](implementation-guide.md).
 
 A facility implementation should use the registered semantics rather than creating local meanings for shared IRI identifiers.

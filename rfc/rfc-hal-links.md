@@ -25,7 +25,7 @@ This document is an approved IRI Facility API RFC. The key words **MUST**,
 described in BCP 14 when, and only when, they appear in all capitals. The
 authoritative source for DOE-IRI resource-type and controlled-value URNs is
 the [DOE-IRI URN Registry](../registry/urns/README.md). The
-[DOE-IRI Link Relation Index](../registry/relations/README.md) is the
+[DOE-IRI Link Relation Index](../registry/rels/README.md) is the
 authoritative navigation index for registered `iri:*` names; each linked
 definition is authoritative for that relation's complete semantics.
 
@@ -596,5 +596,5 @@ invocation semantics.
    `draft-kelly-json-hal`](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal).
 5. [OpenAPI Specification
    3.1](https://spec.openapis.org/oas/v3.1.0.html).
-6. [DOE-IRI Link Relation Index](../registry/relations/README.md).
+6. [DOE-IRI Link Relation Index](../registry/rels/README.md).
 7. [IRI Facility API OpenAPI v2](../specification-v2/openapi/all_spec_v2.yaml).

@@ -42,8 +42,8 @@ This decision does not authorize unrelated changes to job submission, routing, p
 
 - `specification-v2/openapi/production/compute.yaml`
 - `specification-v2/openapi/all_spec_v2.yaml`
-- `registry/relations/submit-job.md`
-- `registry/relations/README.md`
+- `registry/rels/submit-job.md`
+- `registry/rels/README.md`
 - `rfc/rfc-hal-links.md`
 
 ## Historical notes

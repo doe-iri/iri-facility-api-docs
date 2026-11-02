@@ -99,8 +99,8 @@ This decision record remains explanatory. If it differs from the sources below,
 the applicable RFC, OpenAPI, or registry definition controls.
 
 - `rfc/rfc-hal-links.md`
-- `registry/relations/README.md`
-- `registry/relations/*.md`
+- `registry/rels/README.md`
+- `registry/rels/*.md`
 - `registry/profiles/`
 - `specification-v2/openapi/`
 

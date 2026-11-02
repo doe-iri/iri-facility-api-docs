@@ -168,7 +168,7 @@ Do not duplicate or override common top-level Resource properties such as
 ## 6. Relations and Operation Affordances
 
 Profiles may state which registered relations are applicable to the
-representation, but the relation definition under `registry/relations/` owns
+representation, but the relation definition under `registry/rels/` owns
 the relation semantics.
 
 Profiles may advertise operation-affordance relations. OpenAPI remains

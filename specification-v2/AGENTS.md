@@ -22,7 +22,7 @@ Where OpenAPI descriptions refer to DOE-IRI semantics:
 
 - use Resource Type URNs registered in `registry/urns/resource-types.md`;
 - use controlled URNs registered in `registry/urns/attributes.md`;
-- use relation names from `registry/relations/`;
+- use relation names from `registry/rels/`;
 - use canonical profile terminology from `registry/profiles/`.
 
 Descriptions may reference semantics but should not duplicate complete registry

@@ -95,8 +95,8 @@ TASK
 Correct HAL target profiles in storage Resource Definition examples.
 
 AUTHORITATIVE SOURCES
-- registry/relations/has-mount.md
-- registry/relations/provides-filesystem.md
+- registry/rels/has-mount.md
+- registry/rels/provides-filesystem.md
 - registry/profiles/README.md
 
 APPROVED DECISION

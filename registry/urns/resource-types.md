@@ -28,7 +28,7 @@ semantics of a Resource representation.
 | `urn:doe-iri:resource:unknown` | Unknown | Fallback type when a more-specific registered Resource Type is unavailable. | `urn:doe-iri:resource` | `active` | `unknown` | — |
 
 Resource Type URNs classify resources; they do not encode containment or
-topology. Registered link relations in [the relation index](../relations/README.md)
+topology. Registered link relations in [the relation index](../rels/README.md)
 define relationships between independently identified resources.
 
 *DOE Integrated Research Infrastructure — URN Registry*

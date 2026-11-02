@@ -28,7 +28,7 @@ List the current authoritative documents that define the resulting behavior, for
 
 - `rfc/...`
 - `registry/urns/...`
-- `registry/relations/...`
+- `registry/rels/...`
 - `registry/profiles/...`
 - `specification-v2/openapi/...`
 

@@ -498,10 +498,10 @@ semantics, and the applicable deployed OpenAPI description remains
 authoritative for the invocation contract.
 
 A storage-system Resource MAY advertise
-[`iri:get-storage-access-endpoints`](../../../relations/get-storage-access-endpoints.md)
+[`iri:get-storage-access-endpoints`](../../../rels/get-storage-access-endpoints.md)
 when its adapter implements access-endpoint discovery for this exact Resource.
 It MAY advertise
-[`iri:resolve-storage-locations`](../../../relations/resolve-storage-locations.md)
+[`iri:resolve-storage-locations`](../../../rels/resolve-storage-locations.md)
 only when the existing location-response semantics apply to this Resource.
 Both affordances require an explicit adapter context for the source storage
 system identifier.

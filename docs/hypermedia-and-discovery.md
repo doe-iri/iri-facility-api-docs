@@ -10,7 +10,7 @@ permalink: /hypermedia-and-discovery/
 
 A central IRI design goal is that clients should be able to discover relationships and applicable entry points from resource representations instead of constructing facility-specific URLs from assumptions.
 
-The normative design is maintained in the [HAL links RFC](https://github.com/doe-iri/iri-facility-api-docs/blob/main/rfc/rfc-hal-links.md), the approved [Resource Operation Affordances RFC](https://github.com/doe-iri/iri-facility-api-docs/blob/main/rfc/rfc-resource-operation-affordances.md), and the [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/relations). This page provides the conceptual model.
+The normative design is maintained in the [HAL links RFC](https://github.com/doe-iri/iri-facility-api-docs/blob/main/rfc/rfc-hal-links.md), the approved [Resource Operation Affordances RFC](https://github.com/doe-iri/iri-facility-api-docs/blob/main/rfc/rfc-resource-operation-affordances.md), and the [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/rels). This page provides the conceptual model.
 
 ## Why discovery matters
 
@@ -113,7 +113,7 @@ href          ─────► "the target can be found here"
 profile       ─────► "interpret the target according to this profile"
 ```
 
-Canonical IRI-specific relation names and their semantics are maintained in the [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/relations).
+Canonical IRI-specific relation names and their semantics are maintained in the [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/rels).
 
 ## Do not infer paths
 

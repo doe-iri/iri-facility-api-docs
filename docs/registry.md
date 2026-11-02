@@ -39,7 +39,7 @@ Resource Definition semantics
 | [Controlled Attribute URNs](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/urns/attributes.md) | Registered controlled attribute values |
 | [Resource Profiles](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/profiles) | Common and type-specific representation semantics |
 | [Resource Definition Profiles](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/profiles/resource-definition) | Type-specific Resource semantics |
-| [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/relations) | Registered relation names and their semantics |
+| [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/rels) | Registered relation names and their semantics |
 
 ## Resource Type vs Resource Definition Profile
 

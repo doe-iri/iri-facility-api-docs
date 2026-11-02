@@ -35,9 +35,9 @@ An adopting representation also advertises `service-desc` for the applicable dep
 
 ### Relation definition
 
-Every DOE-IRI operation relation has an individual definition under `registry/relations/`, linked from the Link Relation Index. That document is authoritative for the relation URI and CURIE, semantic meaning, permitted source, operation-entry-point target classification, cardinality, applicability and stability, authorization-sensitive visibility, and omission semantics. It records the current OpenAPI mapping for navigation, while OpenAPI remains authoritative for the operation structure.
+Every DOE-IRI operation relation has an individual definition under `registry/rels/`, linked from the Link Relation Index. That document is authoritative for the relation URI and CURIE, semantic meaning, permitted source, operation-entry-point target classification, cardinality, applicability and stability, authorization-sensitive visibility, and omission semantics. It records the current OpenAPI mapping for navigation, while OpenAPI remains authoritative for the operation structure.
 
-For `iri:submit-job`, the definition is `registry/relations/submit-job.md`, and its canonical relation URI is:
+For `iri:submit-job`, the definition is `registry/rels/submit-job.md`, and its canonical relation URI is:
 
 ```text
 https://iri.science/rels/submit-job
@@ -105,8 +105,8 @@ annotations bind registered relation URIs without changing that structure.
 
 - `rfc/rfc-resource-operation-affordances.md`
 - `rfc/rfc-hal-links.md`
-- `registry/relations/README.md`
-- `registry/relations/submit-job.md`
+- `registry/rels/README.md`
+- `registry/rels/submit-job.md`
 - `specification-v2/openapi/production/compute.yaml`
 - `specification-v2/openapi/all_spec_v2.yaml`
 

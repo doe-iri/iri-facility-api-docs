@@ -596,7 +596,7 @@ This site is explanatory. The repository remains authoritative.
 - Representation and Resource Definition Profiles:
   [`registry/profiles/`](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/profiles)
 - Link Relation Registry:
-  [`registry/relations/`](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/relations)
+  [`registry/rels/`](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/rels)
 - HAL architecture:
   [`rfc/rfc-hal-links.md`](https://github.com/doe-iri/iri-facility-api-docs/blob/main/rfc/rfc-hal-links.md)
 - Resource-specific attributes and profiles:

@@ -54,7 +54,7 @@ Clients should compare registered identifiers as identifiers rather than attempt
 
 A **link relation** identifies the meaning of a link between the current representation and a target.
 
-IRI-specific relation names are registered in the [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/relations).
+IRI-specific relation names are registered in the [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/rels).
 
 Conceptually:
 
@@ -92,7 +92,7 @@ Producers must not manufacture operation links solely from a broad
 `supported_endpoints` category.
 
 See the approved [Resource Operation Affordances RFC](https://github.com/doe-iri/iri-facility-api-docs/blob/main/rfc/rfc-resource-operation-affordances.md)
-and the [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/relations).
+and the [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/rels).
 
 ## `profile`
 

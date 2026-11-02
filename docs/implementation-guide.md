@@ -71,7 +71,7 @@ Use registered IRI link relations for resource relationships and navigation.
 }
 ```
 
-Check the [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/relations) for the authoritative relation semantics.
+Check the [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/rels) for the authoritative relation semantics.
 
 Do not invent an unregistered IRI relation simply to match an internal database relationship.
 
