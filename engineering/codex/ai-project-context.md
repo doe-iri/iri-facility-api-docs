@@ -644,12 +644,13 @@ Target:
 
 ```text
 urn:doe-iri:resource:compute:system
+urn:doe-iri:resource:service:dtn
 ```
 
 Cardinality:
 
 ```text
-1
+1..*
 ```
 
 Target classification:
@@ -658,7 +659,7 @@ Target classification:
 Resource
 ```
 
-The relationship identifies the consuming system to which the mount applies.
+The relationship identifies the consumers to which the mount applies. Its inverse is `iri:accesses-mount`.
 
 Current mount state remains separate.
 
@@ -1294,10 +1295,12 @@ Preferred conceptual pattern:
 ```json
 {
   "_links": {
-    "iri:mounted-on": {
-      "href": ".../perlmutter",
-      "profile": "https://iri.science/profiles/resource-definition/compute/system"
-    }
+    "iri:mounted-on": [
+      {
+        "href": ".../perlmutter",
+        "profile": "https://iri.science/profiles/resource-definition/compute/system"
+      }
+    ]
   }
 }
 ```
@@ -1864,7 +1867,7 @@ DTN Service or Inference Service
         │
         └── iri:hosted-on ──────> Compute System or Compute Node
 
-DTN Service
+DTN Service or Compute System
         │
         └── iri:accesses-mount ─> Filesystem Mount
 ```
@@ -1907,6 +1910,7 @@ Source:
 
 ```text
 urn:doe-iri:resource:service:dtn
+urn:doe-iri:resource:compute:system
 ```
 
 Target:
@@ -1927,16 +1931,17 @@ Target classification:
 Relationship resource
 ```
 
-`iri:accesses-mount` means the DTN service is configured to access a filesystem
-through the identified mount relationship resource for transfer operations.
-The mount is the target instead of the filesystem because it identifies the
-particular exposure and can carry the path, access mode, protocol, mount
-options, and consuming-system relationship.
+`iri:accesses-mount` means the source DTN service or compute system is configured
+to access a filesystem through the identified mount relationship resource. It is
+the inverse of `iri:mounted-on`. The mount is the target instead of the filesystem
+because it identifies the particular exposure and can carry the path, access mode,
+protocol, mount options, and consuming-system relationship.
 
 Do not infer DTN access by combining `iri:hosted-on` with a mount's
-`iri:mounted-on` link. Co-location on the same compute infrastructure does not
-prove that the service can access that mount. The explicit `iri:accesses-mount`
-link is required to represent configured access.
+`iri:mounted-on` link to the hosting compute system. Co-location on the same compute
+infrastructure does not prove that the service can access that mount. An explicit
+`iri:accesses-mount` link, or an `iri:mounted-on` link naming the service, is required
+to represent configured access.
 
 The link does not imply current mount availability, endpoint reachability,
 credential validity, unrestricted authorization, or active transfer activity.
