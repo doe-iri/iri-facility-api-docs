@@ -6375,17 +6375,16 @@ paths:
         in: query
         required: false
         schema:
-          type: array
-          items:
-            type: string
-            minLength: 24
-            pattern: ^urn:doe-iri:allocation:(?:[A-Za-z0-9._~-]|%[0-9A-Fa-f]{2}|[!$&'()*+,;=@]|/)+(?::(?:[A-Za-z0-9._~-]|%[0-9A-Fa-f]{2}|[!$&'()*+,;=@]|/)+)*$
-            description: DOE IRI allocation-unit URN.
-            examples:
-            - urn:doe-iri:allocation:compute:node-hours
-            - urn:doe-iri:allocation:storage:bytes
-          minItems: 1
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Capability ids to filter by. Including multiple capability
+            ids returns any matches (logical OR not AND).
           title: Capability
+        description: Capability ids to filter by. Including multiple capability ids
+          returns any matches (logical OR not AND).
       responses:
         '200':
           description: Successful Response
