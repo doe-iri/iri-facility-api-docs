@@ -464,8 +464,10 @@ Typical topology includes:
 storage system
     └── iri:provides-filesystem → filesystem
              └── iri:has-mount → mount
-                      └── iri:mounted-on → compute system
+                      └── iri:mounted-on → compute system or DTN service
 ```
+
+A compute system or DTN service links back to its mounts with `iri:accesses-mount`.
 
 Block storage can use:
 

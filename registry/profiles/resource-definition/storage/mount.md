@@ -38,7 +38,7 @@ registration metadata and lifecycle are authoritative in the URN registry.
 
 The purpose of this document is to define a common, implementation-independent representation of filesystem mounts within the DOE Integrated Research Infrastructure (IRI). A mount resource represents the exposure of a filesystem to a particular consuming system at a specific location within that system's filesystem namespace.
 
-The IRI storage model intentionally separates the logical filesystem from the way that filesystem is exposed to a consuming system. A `urn:doe-iri:resource:storage:filesystem` resource describes the logical filesystem itself, while a `urn:doe-iri:resource:storage:mount` resource describes a particular presentation of that filesystem to a compute system or other consuming resource.
+The IRI storage model intentionally separates the logical filesystem from the way that filesystem is exposed to a consuming system. A `urn:doe-iri:resource:storage:filesystem` resource describes the logical filesystem itself, while a `urn:doe-iri:resource:storage:mount` resource describes a particular presentation of that filesystem to one or more consuming compute systems or DTN services.
 
 For example:
 
@@ -58,8 +58,8 @@ urn:doe-iri:resource:storage:mount
         │
         │ iri:mounted-on
         ▼
-Compute System
-urn:doe-iri:resource:compute:system
+Compute System or DTN Service
+urn:doe-iri:resource:compute:system or urn:doe-iri:resource:service:dtn
 ```
 
 This separation allows a filesystem to be defined once while being exposed differently on multiple consuming systems. For example, the same filesystem might appear as `/scratch` on one compute system and `/global/scratch` on another:
@@ -78,9 +78,24 @@ Scratch Filesystem
                               └── iri:mounted-on ──> Compute System B
 ```
 
+Consumers can also share one mount when its attributes describe the exposure for all of them. A common case is a filesystem exposed on a compute system and used by a DTN service through the same configured exposure. Each consumer links back to the mount using `iri:accesses-mount`:
+
+```text
+Project Filesystem
+        │
+        └── iri:has-mount ──> Project Mount
+                          mount_path = /project
+                              │
+                              ├── iri:mounted-on ──> Compute System
+                              └── iri:mounted-on ──> DTN Service
+
+Compute System ── iri:accesses-mount ──> Project Mount
+DTN Service    ── iri:accesses-mount ──> Project Mount
+```
+
 The filesystem resource remains responsible for describing characteristics of the logical storage resource, such as filesystem technology, architecture, capabilities, protocols, tier, and media types. The mount resource contains only characteristics that are specific to a particular exposure of that filesystem to a consuming system.
 
-The identities of the filesystem and consuming system are represented using IRI resource relationships rather than duplicated as mount attributes. The filesystem relates to the mount using `iri:has-mount`, and the mount relates to the consuming system using `iri:mounted-on`.
+The identities of the filesystem and its consumers are represented using IRI resource relationships rather than duplicated as mount attributes. The filesystem relates to the mount using `iri:has-mount`, the mount relates to each consumer using `iri:mounted-on`, and each consumer relates back to the mount using `iri:accesses-mount`.
 
 This document defines mount configuration characteristics such as the namespace location, access mode, access protocol, and optional implementation-specific mount options. This version of the profile does not define whether the filesystem is currently mounted, accessible, degraded, or unavailable. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
@@ -164,7 +179,9 @@ A POSIX-based compute environment might expose a filesystem using paths such as:
 
 Other operating environments MAY use different namespace conventions. Clients therefore SHOULD treat the value as an opaque namespace location unless they understand the conventions of the consuming system.
 
-The `mount_path` identifies the location at which the filesystem is visible on the system referenced by `iri:mounted-on`. It does not identify the filesystem itself and SHOULD NOT be interpreted independently of the mount's resource relationships.
+The `mount_path` identifies the location at which the filesystem is visible on each compute system referenced by `iri:mounted-on`. When a mount references several compute systems, the filesystem MUST be visible at that location on all of them. The `mount_path` does not identify the filesystem itself and SHOULD NOT be interpreted independently of the mount's resource relationships.
+
+A DTN service referenced by `iri:mounted-on` MAY present the filesystem under its own namespace, such as a transfer collection path. The `mount_path` does not describe that namespace, and clients MUST NOT use it to construct a path at a transfer endpoint.
 
 For example:
 
@@ -452,9 +469,9 @@ mount-specific context. Compute-job relations and
 `iri:get-storage-access-endpoints` do not apply to a mount Resource.
 
 A mount does not inherit operations from its represented filesystem or its
-consuming system. The `iri:has-mount` and `iri:mounted-on` topology relations,
-the presence of `mount_path`, and a `read-write` access mode do not by
-themselves establish operation support or caller authorization.
+consumers. The `iri:has-mount`, `iri:mounted-on`, and `iri:accesses-mount`
+topology relations, the presence of `mount_path`, and a `read-write` access
+mode do not by themselves establish operation support or caller authorization.
 
 When any applicable operation relation is advertised, the representation MUST
 also advertise at least one applicable `service-desc` whose deployed OpenAPI
