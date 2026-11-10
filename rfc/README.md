@@ -43,6 +43,7 @@ For more information on the broader DoE IRI project, official reference implemen
 | IRI Facility API Root Discovery and Implementation Conformance | Draft / Proposed | September 10, 2026 |
 | Facility-Scoped URN Instance Identifiers | Draft / Proposed | September 27, 2026 |
 | Monetary and Inference-Token Allocation Units | Draft / Proposed | October 13, 2026 |
+| Persistent Services | Draft / Proposed | November 10, 2026 |
 
 ## Contents
 
@@ -81,3 +82,9 @@ For more information on the broader DoE IRI project, official reference implemen
 9. **[Monetary and Inference-Token Allocation Units](./rfc-monetary-and-inference-allocation-units.md)**:
 
     This document requests registration of `urn:doe-iri:allocation:currency:usd` and `urn:doe-iri:allocation:inference:tokens` so that facilities can express cloud spending limits and inference token allocations in the existing Allocation Entry model. It defines interpretation rules for monetary and token quantities, treats every entry in an `entries` array as an independent limit, defines optional Allocation Entry attributes for accounting period, renewal, usage freshness, and reconciliation state, and scopes token allocations to served models through a Capability attribute. It requires no OpenAPI structural change.
+
+10. **[Persistent Services](./rfc-persistent-services.md)**:
+
+    This document proposes an API for facilities to expose their Kubernetes (k8s) services. The actual work of managing k8s resources is left to
+    the k8s api. The new portion of the IRI api dealing with persistent services is restricted to getting the user access to a k8s server in 
+    a multi-cluster/server and multi-tenant k8s environment.
