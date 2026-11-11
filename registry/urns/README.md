@@ -47,10 +47,7 @@ urn:doe-iri
 │   ├── service
 │   │   ├── dtn
 │   │   └── inference
-│   ├── persistent-service
-│   │   ├── kubernetes-server
-│   │   ├── kubernetes-cluster
-│   │   └── project
+│   │   └── persistent-service
 │   └── unknown
 │
 ├── storage
