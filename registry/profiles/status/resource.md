@@ -794,8 +794,9 @@ urn:doe-iri:resource:storage
 are governed by this common Resource profile; this profile does not create
 generic compute or storage Resource Definition Profiles.
 
-Generic compute and storage Resources are conditionally eligible only for the
-filesystem and storage-location relations whose registered definitions permit
+For operation affordances, generic compute and storage Resources are
+conditionally eligible only for the filesystem and storage-location relations
+whose registered definitions permit
 the exact generic type, and only when the actual adapter semantics and
 operation context are explicit and unambiguous. Generic storage may also
 advertise registered storage-access-endpoint discovery where implemented.
@@ -806,6 +807,30 @@ type MUST NOT be inherited automatically by descendants such as compute CPU or
 GPU Resources, storage systems, block storage, or object storage. Each
 registered relation definition remains authoritative for its complete source
 matrix and context requirements.
+
+### 10.4 Configured Filesystem Access
+
+A Resource representing an actual configured filesystem consumer MAY advertise
+[`iri:accesses-mount`](../../rels/accesses-mount.md) to identify the mount
+Resources through which it accesses a filesystem. Eligibility is based on that
+configured role, not a closed list of Resource Types. It includes generic
+compute and service Resources, compute systems and nodes, DTNs, inference
+services, and other conforming registered or delegated Resource Types when
+they satisfy the relation's consumer-role requirement.
+
+A Resource whose exact type is `urn:doe-iri:resource:storage:mount` MAY advertise
+the inverse [`iri:accessed-by`](../../rels/accessed-by.md) to identify those
+consumers. Each direction permits `0..*` targets and is independently optional;
+visible links describing the same configuration must agree, but neither
+direction requires reciprocal links or complete enumeration. Authorization
+may filter either direction, and absence is not proof that no access exists.
+
+Resource Type validity, hosting, containment, and `iri:mounted-on` alone do not
+establish configured access. These topology relations do not establish caller
+permission, current availability, or eligibility for operation affordances.
+The mount's path remains in the namespace of its single `iri:mounted-on`
+compute system; linking a consumer does not relocate that path. The relation
+definitions remain authoritative for complete semantics and target profiles.
 
 ## 11. Relationship to Existing URI Properties
 

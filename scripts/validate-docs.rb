@@ -24,6 +24,7 @@ EXPECTED_PAGES = %w[
   iri-2.0.md
   object-model-reference.md
   registry.md
+  relationship-cheat-sheet.md
   resource-architecture-overview.md
   resource-model.md
   rfc-process.md

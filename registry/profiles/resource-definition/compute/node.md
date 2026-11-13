@@ -252,4 +252,21 @@ permission and guarantees no successful invocation.
 
 ---
 
+## 8. Configured Mount Access
+
+A compute-node Resource MAY advertise
+[`iri:accesses-mount`](../../../rels/accesses-mount.md) when the node is
+explicitly configured to consume the identified filesystem exposure. A mount
+MAY identify the node through the inverse
+[`iri:accessed-by`](../../../rels/accessed-by.md). Each direction permits
+`0..*` targets and is independently optional under the registered consistency
+and visibility rules. Membership in a compute system does not establish this
+access, caller permission, or operation eligibility.
+
+The mount's `mount_path` remains in its single `iri:mounted-on` compute-system
+namespace. A link from or to a node does not assert that the same path is valid
+in a distinct node namespace or make the node the `iri:mounted-on` target.
+
+---
+
 *DOE Integrated Research Infrastructure — URN Registry: Compute Node*

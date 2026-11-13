@@ -762,4 +762,21 @@ permission and guarantees no successful invocation.
 
 ---
 
+## 8. Configured Mount Access
+
+A compute-system Resource MAY advertise
+[`iri:accesses-mount`](../../../rels/accesses-mount.md) when it is a configured
+consumer of the identified filesystem exposure. A mount MAY identify the
+system through the inverse [`iri:accessed-by`](../../../rels/accessed-by.md).
+Both directions have `0..*` targets and are independently optional, subject to
+the registered consistency and visibility rules. System classification and
+topology alone do not establish access, and neither relation confers operation
+eligibility or authorization.
+
+The mount's `mount_path` is interpreted in its single `iri:mounted-on`
+compute-system namespace. Access links do not change that consuming-system
+identity or introduce another path namespace.
+
+---
+
 *DOE Integrated Research Infrastructure — URN Registry: Compute System*
