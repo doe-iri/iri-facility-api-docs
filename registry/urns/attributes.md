@@ -71,6 +71,7 @@ enumeration, not a template permitting unlisted values.
 | `transfer-protocol` (DTN transfer interface) | `https`, `gridftp`, `xrootd`, `sftp` | [DTN Service](../profiles/resource-definition/service/dtn.md) |
 | `inference-api` (inference invocation interface) | `openai`, `kserve-v2` | [Inference Service](../profiles/resource-definition/service/inference.md) |
 | `inference-technology` (inference implementation) | `vllm`, `hugging-face-tgi`, `nvidia-triton`, `kserve` | [Inference Service](../profiles/resource-definition/service/inference.md) |
+| `streaming-technology` (streaming transport implementation) | `ejfat` | [Streaming Transport Service](../profiles/resource-definition/service/streaming-transport.md) |
 
 Each row is a compact canonical-URN enumeration: concatenate its vocabulary and
 each listed value as `urn:doe-iri:service:<vocabulary>:<value>`. This is an
