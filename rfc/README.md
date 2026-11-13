@@ -43,6 +43,7 @@ For more information on the broader DoE IRI project, official reference implemen
 | IRI Facility API Root Discovery and Implementation Conformance | Draft / Proposed | September 10, 2026 |
 | Facility-Scoped URN Instance Identifiers | Draft / Proposed | September 27, 2026 |
 | Monetary and Inference-Token Allocation Units | Draft / Proposed | October 13, 2026 |
+| Streaming Data Transport Reservations | Draft / Proposed | November 12, 2026 |
 
 ## Contents
 
@@ -81,3 +82,7 @@ For more information on the broader DoE IRI project, official reference implemen
 9. **[Monetary and Inference-Token Allocation Units](./rfc-monetary-and-inference-allocation-units.md)**:
 
     This document requests registration of `urn:doe-iri:allocation:currency:usd` and `urn:doe-iri:allocation:inference:tokens` so that facilities can express cloud spending limits and inference token allocations in the existing Allocation Entry model. It defines interpretation rules for monetary and token quantities, treats every entry in an `entries` array as an independent limit, defines optional Allocation Entry attributes for accounting period, renewal, usage freshness, and reconciliation state, and scopes token allocations to served models through a Capability attribute. It requires no OpenAPI structural change.
+
+10. **[Streaming Data Transport Reservations](./rfc-streaming-data-transport.md)**:
+
+    This document defines how a facility offers a high-rate streaming transport service, with EJFAT as the reference technology, through the IRI API. It proposes the `urn:doe-iri:resource:service:streaming-transport` Resource Type, instance-hour and concurrent-instance allocation units charged through the existing Project Allocation model, admission and accounting rules, a reservation API that returns a reservation-scoped connection bundle, a credential model that keeps reservation rights with the facility, and operation-affordance relations for discovery.

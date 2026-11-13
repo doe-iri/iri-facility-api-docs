@@ -22,6 +22,7 @@ semantics of a Resource representation.
 | `urn:doe-iri:resource:service` | Service | Generic service resource. | `urn:doe-iri:resource` | `active` | `service` | — |
 | `urn:doe-iri:resource:service:dtn` | DTN Service | Consumable data-transfer service, distinct from its host. | `urn:doe-iri:resource:service` | `provisional` | `service` | [DTN Service](../profiles/resource-definition/service/dtn.md) |
 | `urn:doe-iri:resource:service:inference` | Inference Service | Consumable model-invocation service, distinct from its deployment and host. | `urn:doe-iri:resource:service` | `provisional` | `service` | [Inference Service](../profiles/resource-definition/service/inference.md) |
+| `urn:doe-iri:resource:service:streaming-transport` | Streaming Transport Service | Consumable service that forwards and load-balances high-rate datagram streams from senders to registered receivers through reservable load balancer instances. | `urn:doe-iri:resource:service` | `provisional` | `service` | [Streaming Transport Service](../profiles/resource-definition/service/streaming-transport.md) |
 | `urn:doe-iri:resource:network` | Network | Generic network resource. | `urn:doe-iri:resource` | `active` | `network` | — |
 | `urn:doe-iri:resource:system` | System | Generic system resource. | `urn:doe-iri:resource` | `active` | `system` | — |
 | `urn:doe-iri:resource:website` | Website | Generic website resource. | `urn:doe-iri:resource` | `active` | `website` | — |
