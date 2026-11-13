@@ -245,4 +245,23 @@ The following vLLM inference service advertises an OpenAI-compatible endpoint an
 
 ---
 
+## 7. Configured Mount Access
+
+An inference-service Resource MAY advertise
+[`iri:accesses-mount`](../../../rels/accesses-mount.md) when it is configured
+to consume the identified filesystem exposure, for example for model inputs.
+A mount MAY identify the service through the inverse
+[`iri:accessed-by`](../../../rels/accessed-by.md). Each direction permits
+`0..*` targets and is independently optional under the registered consistency
+and visibility rules.
+
+Service classification, served-model catalog entries, endpoints, and hosting
+do not establish mount access. These topology links do not confer filesystem
+operations, storage-discovery operations, caller permission, or current
+availability. The mount's `mount_path` remains in its single `iri:mounted-on`
+compute-system namespace; it is not a service or container path inferred from
+the link.
+
+---
+
 *DOE Integrated Research Infrastructure — URN Registry: Inference Service*

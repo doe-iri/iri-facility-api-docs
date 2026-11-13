@@ -319,12 +319,33 @@ Storage System
                                                                            ├─ iri:has-node ─▶ Node
                                                                            └─ iri:submit-job ─▶ Operation
 
-DTN Service
+Configured Filesystem Consumer
   └─ iri:accesses-mount ────────────────────────────▶ Mount
+
+Mount
+  └─ iri:accessed-by ───────────────────────────────▶ Configured Filesystem Consumer
 ```
 
 Resources carry their own type and attributes. Relations connect independently
 meaningful Resources without duplicating their descriptions.
+
+The configured consumer can be a compute Resource, system, node, DTN, another
+service, or another conforming Resource Type with that actual consumer role.
+The [mount-access relation pair](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/rels/accesses-mount.md)
+permits `0..*` targets in each direction. Providers may expose either or both
+directions and filter them by authorization; visible links describing the same
+configuration must agree, but neither reciprocal links nor complete lists are
+required. Hosting or membership alone does not establish access.
+
+The mount still has exactly one `iri:mounted-on` compute system, and its path
+remains in that system's namespace. The access links do not establish operation
+eligibility, current availability, or caller permission. The
+[Pioneer facility example](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/examples/hpc-facility-resources.json)
+shows a compute system, node, DTN, and inference service sharing a scratch
+exposure, with the system and DTN also accessing a project exposure. It
+advertises both directions for those associations; a requester-visible subset
+could omit individual targets or an entire direction without contradicting
+the configured topology.
 
 The public NERSC prototype demonstrates how the same model can describe
 Perlmutter, node classes, scratch storage, filesystems, and DTN services.

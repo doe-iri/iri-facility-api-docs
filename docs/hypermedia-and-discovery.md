@@ -115,6 +115,10 @@ profile       ─────► "interpret the target according to this profile
 
 Canonical IRI-specific relation names and their semantics are maintained in the [Link Relation Registry](https://github.com/doe-iri/iri-facility-api-docs/tree/main/registry/rels).
 
+For a single-page summary of every registered relation's source and target
+restrictions, cardinality, and meaning, see the
+[Relationship Cheat Sheet](relationship-cheat-sheet.md).
+
 ## Do not infer paths
 
 Clients, workflow engines, MCP servers, and AI agents should prefer advertised links over path speculation.
