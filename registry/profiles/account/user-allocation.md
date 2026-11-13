@@ -3,7 +3,7 @@
 **Profile URI:** `https://iri.science/profiles/account/user-allocation`  
 **OpenAPI type:** `UserAllocation`  
 **Status:** Draft  
-**Version:** 1.0.0
+**Version:** 1.1.0
 
 ## 1. Purpose
 
@@ -83,6 +83,8 @@ The current User Allocation schema defines:
 | `user_id` | Yes | Identifier of the user receiving the allocation. |
 | `entries` | Yes | Allocation entries describing allocation quantities and usage for the user. |
 | `project_allocation_uri` | Yes | URI identifying the Project Allocation of which this User Allocation is a part. |
+| `start` | No | Time at which the User Allocation becomes valid. |
+| `end` | No | Time at which the User Allocation stops being valid. |
 
 Each element of `entries` conforms to the OpenAPI `AllocationEntry` schema.
 
@@ -415,6 +417,27 @@ However, a positive arithmetic remainder MUST NOT by itself be interpreted as pr
 
 Accounting quantity, authorization, policy, allocation validity, and operational availability are separate concerns.
 
+### 9.1 Validity Period
+
+The optional `start` and `end` properties describe the time window during which the User Allocation is valid according to Facility accounting policy.
+
+For example:
+
+```json
+{
+  "start": "2026-01-01T00:00:00Z",
+  "end": "2026-12-31T23:59:59Z"
+}
+```
+
+Both properties are optional and either MAY be present without the other. The OpenAPI schema defines their date-time format and states that, when both are present, `end` is not earlier than `start`.
+
+When `start` or `end` is omitted, the Facility does not report that bound. Clients MUST NOT interpret the absence of `end` as proof that the User Allocation never expires, nor the absence of `start` as proof that it is already valid.
+
+When both a User Allocation and its Project Allocation report a window, the User Allocation window SHOULD fall within the Project Allocation window. This profile does not define inheritance: a client MAY consult the Project Allocation when a User Allocation omits a bound, but MUST NOT assume the two windows are identical.
+
+A current time within the reported window MUST NOT by itself be interpreted as authorization to consume the allocation or as evidence that the Capability is available. This profile does not define how usage recorded outside the window is accounted.
+
 ## 10. Hypermedia Representation
 
 When represented using HAL, a User Allocation SHOULD advertise its Project Allocation relationship through `_links`.
@@ -566,6 +589,8 @@ Depending on Facility allocation policy, the following MAY also change:
 ```text
 entries[].allocation
 entries
+start
+end
 ```
 
 The User-to-UserAllocation association and UserAllocation-to-ProjectAllocation association SHOULD normally remain stable for the lifetime of the represented User Allocation.
