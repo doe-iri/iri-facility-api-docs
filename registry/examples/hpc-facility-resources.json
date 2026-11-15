@@ -96,7 +96,7 @@
   {
     "id": "pioneer-scratch-mount",
     "name": "Pioneer Scratch Mount",
-    "description": "Native Lustre exposure of the scratch filesystem on the Pioneer compute system.",
+    "description": "Native Lustre exposure of the scratch filesystem on the Pioneer compute system, also used by the Pioneer DTN service.",
     "last_modified": "2026-08-14T12:00:00Z",
     "current_status": "up",
     "resource_type": "urn:doe-iri:resource:storage:mount",
@@ -121,10 +121,16 @@
         "href": "https://api.pioneer.example.gov/api/v2/facility/sites/pioneer",
         "profile": "https://iri.science/profiles/facility/site"
       },
-      "iri:mounted-on": {
-        "href": "/api/v2/status/resources/pioneer-compute",
-        "profile": "https://iri.science/profiles/resource-definition/compute/system"
-      }
+      "iri:mounted-on": [
+        {
+          "href": "/api/v2/status/resources/pioneer-compute",
+          "profile": "https://iri.science/profiles/resource-definition/compute/system"
+        },
+        {
+          "href": "/api/v2/status/resources/pioneer-dtn",
+          "profile": "https://iri.science/profiles/resource-definition/service/dtn"
+        }
+      ]
     }
   },
   {
@@ -166,6 +172,12 @@
         {
           "href": "/api/v2/status/resources/pioneer-node-001",
           "profile": "https://iri.science/profiles/resource-definition/compute/node"
+        }
+      ],
+      "iri:accesses-mount": [
+        {
+          "href": "/api/v2/status/resources/pioneer-scratch-mount",
+          "profile": "https://iri.science/profiles/resource-definition/storage/mount"
         }
       ]
     }

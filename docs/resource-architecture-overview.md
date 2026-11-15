@@ -315,11 +315,12 @@ interpret the attributes. A hypermedia client can traverse the facility graph.
 Storage System
   └─ iri:provides-filesystem ─▶ Filesystem
                                  └─ iri:has-mount ─▶ Mount
-                                                     └─ iri:mounted-on ─▶ Compute System
-                                                                           ├─ iri:has-node ─▶ Node
-                                                                           └─ iri:submit-job ─▶ Operation
+                                                     ├─ iri:mounted-on ─▶ Compute System
+                                                     │                     ├─ iri:has-node ─▶ Node
+                                                     │                     └─ iri:submit-job ─▶ Operation
+                                                     └─ iri:mounted-on ─▶ DTN Service
 
-DTN Service
+Compute System or DTN Service
   └─ iri:accesses-mount ────────────────────────────▶ Mount
 ```
 

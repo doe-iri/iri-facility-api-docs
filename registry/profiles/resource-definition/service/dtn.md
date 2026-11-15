@@ -36,7 +36,7 @@ registration is authoritative in the URN registry.
 
 ## 2. Introduction
 
-A DTN service is a consumable service through which a facility makes data-transfer operations available. It is distinct from the compute system or compute node that hosts it; hosting topology is represented separately using `iri:hosted-on`. A DTN service may also be configured to access filesystem mounts for transfer operations through `iri:accesses-mount`.
+A DTN service is a consumable service through which a facility makes data-transfer operations available. It is distinct from the compute system or compute node that hosts it; hosting topology is represented separately using `iri:hosted-on`. A DTN service may also be configured to access filesystem mounts for transfer operations through `iri:accesses-mount`, and each such mount can name the service in return through `iri:mounted-on`.
 
 This profile records service configuration. Endpoint URLs are attributes of the DTN service rather than independent IRI resources because they normally do not require independent identity, lifecycle, or relationships. If a future use case requires those properties, an endpoint may be defined as a separate resource type in a future profile version.
 

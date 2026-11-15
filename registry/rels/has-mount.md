@@ -89,9 +89,9 @@ urn:doe-iri:resource:storage:mount
 
 The mount target represents the relationship/configuration through which the
 filesystem is exposed. It is not a second filesystem representation and is not
-itself the consuming compute system.
+itself a consuming compute system or service.
 
-The consuming system is identified by the mount resource's `iri:mounted-on`
+The consumers are identified by the mount resource's `iri:mounted-on`
 relationship.
 
 A representation of the target mount resource MAY advertise the profile:

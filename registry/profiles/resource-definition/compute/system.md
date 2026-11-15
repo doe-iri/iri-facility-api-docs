@@ -34,6 +34,8 @@ urn:doe-iri:resource:compute:node
 
 This separation allows a compute system to be defined once while nodes and processor resources are independently represented and related through IRI links.
 
+A compute system MAY identify the filesystem mounts configured on it through `iri:accesses-mount`, the inverse of a mount's `iri:mounted-on` relationship. The [Filesystem Mount profile](../storage/mount.md) describes those mounts.
+
 The attributes in this profile describe configured characteristics of the compute system. This version of the profile does not define current utilization, available nodes, queue depth, free memory, job activity, health, or service availability. If represented, the semantics and update behavior of those time-varying values are governed by the applicable IRI API contract and Resource Definition Profile.
 
 ## 3. Taxonomy
@@ -743,8 +745,9 @@ MAY be advertised when storage-location resolution is supported for this
 compute-system context. `iri:get-storage-access-endpoints` does not apply to a
 compute-system Resource.
 
-Compute-system classification, configured capacity, capabilities, and job
-operations do not by themselves establish a filesystem execution context.
+Compute-system classification, configured capacity, capabilities, job
+operations, and `iri:accesses-mount` links do not by themselves establish a
+filesystem execution context.
 Operation eligibility also does not flow from this system to its compute
 nodes.
 
