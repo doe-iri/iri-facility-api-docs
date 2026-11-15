@@ -45,7 +45,7 @@ assumes a backing store implementing the reference store contract.
 | Scenario | Result |
 |---|---|
 | Header omitted | Execute the adapter normally on every request; no `Idempotency-Key-Reply` header. |
-| Non-empty header supplied, but no store configured | Return `501`; do not invoke the job submission or update handler. |
+| Non-empty header supplied, but no store configured | Return `400` with a `detail` stating that the deployment does not support the header; do not invoke the job submission or update handler. |
 | Key not yet recorded | Acquire a lock and invoke the adapter. On success, store the Job response with status `200` and return `Idempotency-Key-Reply: miss`. |
 | Completed key reused with a matching request body | Return the cached `200` response with `Idempotency-Key-Reply: hit`; do not invoke the job submission or update handler again. |
 | Completed key reused with a different request body | Return `422`. |
@@ -106,9 +106,11 @@ the payload and request context when retrying.
 4. On `422`, check whether the key was reused for a different request. A
    deliberate new operation needs a fresh key. Do not change the key merely
    to bypass a conflict when the original operation's outcome is uncertain.
-5. On `501`, resolve the deployment's support or configuration before retrying
-   with idempotency protection. Dropping the header executes the operation
-   without this protection.
+5. On a `400` whose `detail` says the deployment does not support
+   `Idempotency-Key`, the request was not processed. Resolve the deployment's
+   support or configuration before retrying with idempotency protection.
+   Dropping the header executes the operation without this protection. Other
+   `400` responses report a different problem with the request.
 6. For other errors, follow the facility's recovery guidance. An error or
    expired cache entry does not establish that no scheduler action occurred.
 
@@ -199,7 +201,7 @@ to your deployment. The reference stores use these defaults:
 
 | Setting | Default | Meaning |
 |---|---|---|
-| `IRI_IDEMPOTENCY_STORE` | Unset | Store class; a non-empty key receives `501` when no store is configured. |
+| `IRI_IDEMPOTENCY_STORE` | Unset | Store class; a non-empty key receives `400` when no store is configured. |
 | `REDIS_URL` | Unset | Required connection URL when selecting the Redis store. |
 | `IDEMPOTENCY_TTL_SECONDS` | `86400` | Retain a successful response for 24 hours after storing it. Cache hits do not renew the period. |
 | `LOCK_TTL_SECONDS` | `60` | Expire an in-flight lock 60 seconds after acquisition. |
