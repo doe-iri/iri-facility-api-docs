@@ -279,6 +279,7 @@ iri:has-gpu
 
 iri:hosted-on
 iri:accesses-mount
+iri:accessed-by
 
 iri:submit-job
 ```

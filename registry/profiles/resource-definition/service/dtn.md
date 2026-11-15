@@ -373,4 +373,21 @@ permission and guarantees no successful invocation.
 
 ---
 
+## 8. Configured Mount Access
+
+A DTN Resource configured to consume a filesystem exposure MAY advertise
+[`iri:accesses-mount`](../../../rels/accesses-mount.md). A mount MAY identify
+the DTN through the inverse [`iri:accessed-by`](../../../rels/accessed-by.md).
+Each direction permits `0..*` targets and is independently optional under the
+registered consistency and visibility rules. DTNs are one eligible consumer
+type; the relation also applies to other Resources with the configured
+consumer role. Existing DTN-to-mount links retain their meaning.
+
+Hosting and mount topology alone do not establish access, and access links do
+not grant permission or operation eligibility. The mount's `mount_path`
+remains in its single `iri:mounted-on` compute-system namespace, not a DTN or
+transfer-endpoint namespace inferred from the link.
+
+---
+
 *DOE Integrated Research Infrastructure — URN Registry: DTN Service*
