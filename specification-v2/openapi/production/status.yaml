@@ -93,11 +93,11 @@ paths:
             items:
               type: string
           - type: 'null'
-          description: Capability ids to filter by. Including multiple capability ids
-            returns any matches (logical OR not AND).
+          description: Capability ids to filter by. Including multiple capability
+            ids returns any matches (logical OR not AND).
           title: Capability
-        description: Capability ids to filter by. Including multiple capability ids returns
-          any matches (logical OR not AND).
+        description: Capability ids to filter by. Including multiple capability ids
+          returns any matches (logical OR not AND).
       responses:
         '200':
           description: Successful Response
