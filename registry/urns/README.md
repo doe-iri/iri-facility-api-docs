@@ -47,6 +47,7 @@ urn:doe-iri
 │   ├── service
 │   │   ├── dtn
 │   │   └── inference
+│   │   └── persistent-service
 │   └── unknown
 │
 ├── storage
