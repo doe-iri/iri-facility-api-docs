@@ -146,6 +146,14 @@ The value of `storage_technology` MUST be a registered DOE-IRI URN from the `urn
 | `urn:doe-iri:storage:system-technology:spectrum-scale` | IBM Storage Scale | A clustered storage and filesystem technology, formerly known as IBM Spectrum Scale and GPFS, providing shared data access across multiple systems. | `provisional` |
 | `urn:doe-iri:storage:system-technology:ceph` | Ceph | A distributed storage platform capable of providing object, block, and filesystem storage services from a common storage infrastructure. | `provisional` |
 | `urn:doe-iri:storage:system-technology:beegfs` | BeeGFS  | A distributed parallel storage and filesystem technology designed to provide scalable, high-performance shared storage across multiple storage servers and clients. | `provisional` |
+| `urn:doe-iri:storage:system-technology:weka` | WEKA | A software-defined, NVMe-optimized parallel filesystem technology commonly used for AI/ML and HPC workloads. | `provisional` |
+| `urn:doe-iri:storage:system-technology:vast` | VAST Data | A disaggregated, shared-everything storage platform providing unified file and object access on flash media. | `provisional` |
+| `urn:doe-iri:storage:system-technology:aws-efs` | Amazon EFS | A fully-managed, elastic NFS file storage service operated by Amazon Web Services. | `provisional` |
+| `urn:doe-iri:storage:system-technology:aws-fsx-openzfs` | Amazon FSx for OpenZFS | A fully-managed OpenZFS-based file storage service operated by Amazon Web Services. | `provisional` |
+| `urn:doe-iri:storage:system-technology:azure-files` | Azure Files | A fully-managed SMB/NFS file storage service operated by Microsoft Azure. | `provisional` |
+| `urn:doe-iri:storage:system-technology:gcp-filestore` | Google Cloud Filestore | A fully-managed NFS file storage service operated by Google Cloud Platform. | `provisional` |
+
+The four cloud entries (`aws-efs`, `aws-fsx-openzfs`, `azure-files`, `gcp-filestore`) are different in kind: each is a fully-managed service where the cloud provider does not disclose a separate underlying storage technology, so the managed service itself is the registered value. This does not apply when a managed offering is a hosted deployment of an *already-registered* technology -- for example, Amazon FSx for Lustre remains `storage_technology: lustre` with `vendor: Amazon Web Services` and `product: FSx for Lustre`, and Amazon FSx for NetApp ONTAP or Azure NetApp Files would follow the same pattern once a NetApp ONTAP technology value is registered, rather than minting a separate per-cloud-vendor entry for a technology that already has one.
 
 The `storage_technology` attribute identifies the technology implementing the storage infrastructure and SHOULD NOT be used to identify the logical storage interface exposed to consumers. Logical resources provided by the system are modeled independently using their corresponding resource types and type-specific attributes.
 
