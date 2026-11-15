@@ -101,15 +101,15 @@ paths:
       tags:
       - compute
       summary: Submit Job
-      description: 'Submit a job on a compute resource
-
-
-        - **resource**: the name of the compute resource to use
-
-        - **job_request**: a PSIJ job spec as defined <a href="https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec">here</a>
-
-
-        This command will attempt to submit a job and return its id.'
+      description: "Submit a job on a compute resource\n\n- **resource**: the name\
+        \ of the compute resource to use\n- **job_request**: a PSIJ job spec as defined\
+        \ <a href=\"https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec\"\
+        >here</a>\n- **Idempotency-Key**: optional client-generated UUID. A retry\
+        \ with the same key and body\n  returns the original response without re-submitting\
+        \ the job. Same key with a different body\n  returns 422. An in-flight duplicate\
+        \ returns 409. A deployment that does not support the header\n  returns 400\
+        \ without submitting the job.\n\nThis command will attempt to submit a job\
+        \ and return its id."
       operationId: launchJob
       x-iri-relation:
       - https://iri.science/rels/submit-job
@@ -122,6 +122,14 @@ paths:
         schema:
           type: string
           title: Resource Id
+      - name: Idempotency-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Idempotency-Key
       requestBody:
         required: true
         content:
@@ -230,7 +238,9 @@ paths:
 
         - **resource**: the name of the compute resource to use
 
-        - **job_request**: a PSIJ job spec as defined <a href="https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec">here</a>'
+        - **job_request**: a PSIJ job spec as defined <a href="https://exaworks.org/psij-python/docs/v/0.9.11/.generated/tree.html#jobspec">here</a>
+
+        - **Idempotency-Key**: optional client-generated UUID. Same semantics as submit_job.'
       operationId: updateJob
       x-iri-relation:
       - https://iri.science/rels/update-job
@@ -249,6 +259,14 @@ paths:
         schema:
           type: string
           title: Job Id
+      - name: Idempotency-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Idempotency-Key
       requestBody:
         required: true
         content:
