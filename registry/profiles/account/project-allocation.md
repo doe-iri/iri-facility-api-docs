@@ -3,7 +3,7 @@
 **Profile URI:** `https://iri.science/profiles/account/project-allocation`  
 **OpenAPI type:** `ProjectAllocation`  
 **Status:** Draft  
-**Version:** 1.0.0
+**Version:** 1.1.0
 
 ## 1. Purpose
 
@@ -80,6 +80,8 @@ The current Project Allocation schema defines:
 | `entries` | Yes | Allocation entries describing granted quantities and usage. |
 | `project_uri` | Yes | URI identifying the Project to which the allocation belongs. |
 | `capability_uri` | Yes | URI identifying the Capability to which the allocation applies. |
+| `start` | No | Time at which the allocation becomes valid. |
+| `end` | No | Time at which the allocation stops being valid. |
 
 Each element of `entries` conforms to the OpenAPI `AllocationEntry` schema.
 
@@ -373,6 +375,25 @@ However, an arithmetically positive remainder MUST NOT by itself be interpreted 
 
 Accounting quantity, authorization, policy, and operational availability are separate concerns.
 
+### 8.1 Validity Period
+
+The optional `start` and `end` properties describe the time window during which the Project Allocation is valid according to Facility accounting policy.
+
+For example:
+
+```json
+{
+  "start": "2026-01-01T00:00:00Z",
+  "end": "2026-12-31T23:59:59Z"
+}
+```
+
+Both properties are optional and either MAY be present without the other. The OpenAPI schema defines their date-time format and states that, when both are present, `end` is not earlier than `start`.
+
+When `start` or `end` is omitted, the Facility does not report that bound. Clients MUST NOT interpret the absence of `end` as proof that the Project Allocation never expires, nor the absence of `start` as proof that it is already valid.
+
+A current time within the reported window MUST NOT by itself be interpreted as authorization to consume the allocation or as evidence that the Capability is available. This profile does not define how usage recorded outside the window is accounted.
+
 ## 9. Hypermedia Representation
 
 When represented using HAL, a Project Allocation SHOULD advertise its Project and Capability relationships through `_links`.
@@ -580,6 +601,8 @@ Depending on Facility allocation policy, the following may also change over the 
 ```text
 entries[].allocation
 entries
+start
+end
 ```
 
 The Project and Capability relationships SHOULD remain stable for the lifetime of the represented Project Allocation.
