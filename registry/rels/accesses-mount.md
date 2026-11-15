@@ -3,12 +3,12 @@
 **Relation URI:** `https://iri.science/rels/accesses-mount`<br>
 **CURIE:** `iri:accesses-mount`<br>
 **Status:** Provisional<br>
-**Version:** 1.1.0<br>
-**Source representation type:** `urn:doe-iri:resource:service:dtn` or `urn:doe-iri:resource:compute:system`<br>
+**Version:** 1.0.0<br>
+**Source representation type:** `urn:doe-iri:resource:service:dtn`<br>
 **Target representation type:** `urn:doe-iri:resource:storage:mount`<br>
 **Target representation profile:** `https://iri.science/profiles/resource-definition/storage/mount`
 
-This document defines the `iri:accesses-mount` relationship used by the DOE-IRI service and compute resource models.
+This document defines the `iri:accesses-mount` relationship used by the DOE-IRI service resource model.
 
 The canonical relation URI is `https://iri.science/rels/accesses-mount`. With
 the canonical IRI CURIE template `https://iri.science/rels/{rel}`,
@@ -23,20 +23,19 @@ profile.
 | Relationship | `iri:accesses-mount` |
 | Relation URI | `https://iri.science/rels/accesses-mount` |
 | Status | `provisional` |
-| Semantic meaning | Indicates that the source DTN service or compute system is configured to access a filesystem through the identified mount relationship resource. |
-| Source representation type | `urn:doe-iri:resource:service:dtn` or `urn:doe-iri:resource:compute:system` |
+| Semantic meaning | Indicates that the source DTN service is configured to access a filesystem through the identified mount relationship resource for transfer operations. |
+| Source representation type | `urn:doe-iri:resource:service:dtn` |
 | Target representation type | `urn:doe-iri:resource:storage:mount` |
 | Target representation profile | `https://iri.science/profiles/resource-definition/storage/mount` |
-| Cardinality | `0..*` targets from a DTN service or compute system resource. |
-| Inverse relation | [`iri:mounted-on`](./mounted-on.md) |
+| Cardinality | `0..*` targets from a DTN service resource. |
 | Target stability | Relatively static relationship resource. The target identifies configured filesystem access topology, not current mount availability, endpoint reachability, credential validity, unrestricted access, or transfer activity. |
 | Authorization affects visibility | Yes. The relationship or individual mount targets MAY be omitted when the requester is not authorized to discover the configured access topology. |
 | Target classification | Relationship resource |
-| Relationship volatility | Relatively static configured access topology. Changes when the source's access configuration changes, not merely when mount or transfer conditions change. |
+| Relationship volatility | Relatively static configured access topology. Changes when DTN access configuration changes, not merely when mount or transfer conditions change. |
 
 ## 2. Semantic Meaning
 
-The `iri:accesses-mount` relationship indicates that the source resource is configured to access a filesystem through the identified mount relationship resource. A DTN service uses the mount for transfer operations; a compute system makes the mount available to workloads that run on it.
+The `iri:accesses-mount` relationship indicates that the source DTN service is configured to access a filesystem through the identified mount relationship resource for transfer operations.
 
 The target is a mount rather than a direct filesystem because the mount identifies the particular filesystem exposure and configuration through which the filesystem is accessed. It can carry information such as the mount path, access mode, protocol, mount options, and consuming-system relationship that does not belong solely to the filesystem resource.
 
@@ -44,11 +43,10 @@ The relationship MUST NOT be interpreted as indicating current mount availabilit
 
 ## 3. Source and Target Representation
 
-The relationship MUST originate from a resource whose `resource_type` is one of:
+The relationship MUST originate from a resource whose `resource_type` is:
 
 ```text
 urn:doe-iri:resource:service:dtn
-urn:doe-iri:resource:compute:system
 ```
 
 The relationship MUST target a resource whose `resource_type` is:
@@ -67,14 +65,16 @@ semantics of `iri:accesses-mount`, which are identified by
 
 ## 4. Cardinality
 
-A DTN service or compute system MAY identify zero, one, or multiple mount resources:
+A DTN service MAY identify zero, one, or multiple mount resources:
 
 ```text
-DTN Service or Compute System  -- iri:accesses-mount -->  Filesystem Mount
-              1                          0..*
+DTN Service  -- iri:accesses-mount -->  Filesystem Mount
+     1                   0..*
 ```
 
-The use of `0..*` permits facilities to represent a source resource without exposing configured mount access and to represent access to multiple filesystem exposures.
+The use of `0..*` permits facilities to represent a DTN service without exposing configured mount access and to represent access to multiple filesystem exposures.
+
+No inverse relation is initially registered. A visible mount does not by itself identify every service that can access it, and any future inverse relation requires a separate registration decision.
 
 ## 5. Static and Dynamic Semantics
 
@@ -84,17 +84,13 @@ Current mount status, endpoint reachability, credential validity, authorization 
 
 ## 6. Authorization and Visibility
 
-Authorization MAY affect visibility of configured access topology. A provider MAY expose a DTN service or compute system while omitting individual `iri:accesses-mount` targets for requesters that are not permitted to discover the relevant mount or access configuration.
+Authorization MAY affect visibility of configured DTN access topology. A provider MAY expose a DTN service while omitting individual `iri:accesses-mount` targets for requesters that are not permitted to discover the relevant mount or access configuration.
 
-The absence of visible targets MUST NOT be interpreted as proof that the source resource has no configured mount access.
+The absence of visible targets MUST NOT be interpreted as proof that the DTN service has no configured mount access.
 
 ## 7. Cross-Relation Guidance
 
-`iri:mounted-on` is the inverse of this relation: `Consumer -- iri:accesses-mount --> Mount` and `Mount -- iri:mounted-on --> Consumer` state the same configured relationship. Providers SHOULD publish both directions so that clients can start from either resource.
-
-A link in either direction is sufficient to establish the relationship. A missing inverse link MUST NOT be interpreted as denying it, because the provider may not publish it or authorization may hide it.
-
-Clients MUST use one of these two relations to discover configured DTN access to a filesystem exposure. The combination of `iri:hosted-on` and a mount resource's `iri:mounted-on` link to the hosting compute system MUST NOT be used to infer that a DTN service can access the mount, even when the service and mount are associated with the same compute infrastructure.
+Clients MUST use `iri:accesses-mount` to discover configured DTN access to a filesystem exposure. The combination of `iri:hosted-on` and a mount resource's `iri:mounted-on` relationship MUST NOT be used to infer that a DTN service can access the mount, even when the service and mount are associated with the same compute infrastructure.
 
 The mount target is more precise than a direct filesystem target because it identifies the particular exposure through which the DTN is configured to access the filesystem. A filesystem can have multiple mount relationship resources with different paths, protocols, access modes, or consuming systems.
 
