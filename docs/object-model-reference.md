@@ -475,6 +475,19 @@ iri:attached-to
 
 to identify consuming compute infrastructure.
 
+A mount can identify configured filesystem consumers through
+[`iri:accessed-by`](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/rels/accessed-by.md).
+The inverse
+[`iri:accesses-mount`](https://github.com/doe-iri/iri-facility-api-docs/blob/main/registry/rels/accesses-mount.md)
+originates from any conforming Resource with the actual configured-consumer
+role, including compute systems and nodes, generic compute and service
+Resources, DTNs, and inference services. Each direction permits `0..*` targets
+and is independently optional under the registered consistency and visibility
+rules. Hosting, containment, and type validity alone do not establish access.
+The mount's exactly-one `iri:mounted-on` compute system and its path namespace
+remain unchanged; access links do not confer operation eligibility or caller
+permission.
+
 ## Services
 
 | Resource Type | Resource Definition Profile |

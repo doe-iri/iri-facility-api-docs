@@ -1852,21 +1852,30 @@ an empty array means the service reports no active models. Current endpoint
 reachability, health, availability, request rate, queue depth, active replicas,
 model loading, and model activity also remain state.
 
-## 29.5. Service relationships
+## 29.5. Hosting and mount-access relationships
 
-The Service model registers two link relations:
+Hosting and configured filesystem access use three provisional link relations:
 
-Both currently registered Service link relations, `iri:hosted-on` and
-`iri:accesses-mount`, have lifecycle status `provisional`.
+- `iri:hosted-on` identifies service-hosting infrastructure.
+- [`iri:accesses-mount`](../../registry/rels/accesses-mount.md), version 1.1.0,
+  identifies a configured consumer's mount access.
+- [`iri:accessed-by`](../../registry/rels/accessed-by.md), version 1.0.0, is its
+  mount-to-consumer inverse.
+
+The relation definitions remain authoritative; this section records context.
 
 ```text
 DTN Service or Inference Service
         │
         └── iri:hosted-on ──────> Compute System or Compute Node
 
-DTN Service
+Configured Filesystem Consumer
         │
         └── iri:accesses-mount ─> Filesystem Mount
+
+Filesystem Mount
+        │
+        └── iri:accessed-by ────> Configured Filesystem Consumer
 ```
 
 ### iri:hosted-on
@@ -1906,7 +1915,7 @@ target is currently serving requests.
 Source:
 
 ```text
-urn:doe-iri:resource:service:dtn
+Any conforming Resource representing an actual configured filesystem consumer
 ```
 
 Target:
@@ -1927,21 +1936,67 @@ Target classification:
 Relationship resource
 ```
 
-`iri:accesses-mount` means the DTN service is configured to access a filesystem
-through the identified mount relationship resource for transfer operations.
+`iri:accesses-mount` means the source Resource is configured to access a
+filesystem through the identified mount relationship resource. The initial
+DTN-only source domain was broadened in version 1.1.0. Eligible consumers can
+include generic compute and service Resources, compute systems and nodes,
+DTNs, inference services, and other properly registered or delegated Resource
+Types with that actual role. These are examples, not a closed whitelist;
+Resource Type validity alone does not establish configured access.
+
 The mount is the target instead of the filesystem because it identifies the
 particular exposure and can carry the path, access mode, protocol, mount
 options, and consuming-system relationship.
 
-Do not infer DTN access by combining `iri:hosted-on` with a mount's
-`iri:mounted-on` link. Co-location on the same compute infrastructure does not
-prove that the service can access that mount. The explicit `iri:accesses-mount`
-link is required to represent configured access.
+### iri:accessed-by
 
-The link does not imply current mount availability, endpoint reachability,
-credential validity, unrestricted authorization, or active transfer activity.
-Both Service relationships may be hidden by authorization; absence of a
-visible link is not proof that the relationship does not exist.
+Source:
+
+```text
+urn:doe-iri:resource:storage:mount
+```
+
+Target:
+
+```text
+Any conforming Resource representing an actual configured filesystem consumer
+```
+
+Cardinality:
+
+```text
+0..*
+```
+
+Target classification:
+
+```text
+Resource
+```
+
+`iri:accessed-by` describes the same configured consumer–mount association as
+`iri:accesses-mount`, viewed from the mount. Either direction may be advertised
+independently; neither reciprocal links nor exhaustive lists are required.
+Visible links describing the same configuration agree, while authorization
+filtering, partial publication, and absence do not imply a contradictory
+inverse or that access does not exist.
+
+Forward links use the mount target profile. Inverse links use the common
+Resource profile unless the actual consumer's applicable specialized profile
+is established. A visible mount does not identify every consumer automatically.
+
+Do not infer configured access from Resource Type, hosting, containment, or
+`iri:mounted-on`. Co-location on the same infrastructure does not prove that a
+Resource can access an exposure. The mount still identifies exactly one
+`compute:system` through `iri:mounted-on`; its `mount_path` remains in that
+system's namespace, not a consumer's node, service, or container namespace
+inferred from an access link.
+
+Neither direction implies current mount availability, endpoint reachability,
+credential validity, unrestricted authorization, current filesystem use, or
+active transfer activity. Mount access does not confer operation-affordance
+eligibility. Hosting and access relationships may be hidden by authorization;
+absence of a visible link is not proof that the relationship does not exist.
 
 ---
 

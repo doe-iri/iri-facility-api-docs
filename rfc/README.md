@@ -44,6 +44,7 @@ For more information on the broader DoE IRI project, official reference implemen
 | Facility-Scoped URN Instance Identifiers | Draft / Proposed | September 27, 2026 |
 | Monetary and Inference-Token Allocation Units | Draft / Proposed | October 13, 2026 |
 | Streaming Data Transport Reservations | Draft / Proposed | November 12, 2026 |
+| Persistent Services | Draft / Proposed | November 10, 2026 |
 
 ## Contents
 
@@ -86,3 +87,8 @@ For more information on the broader DoE IRI project, official reference implemen
 10. **[Streaming Data Transport Reservations](./rfc-streaming-data-transport.md)**:
 
     This document defines how a facility offers a high-rate streaming transport service, with EJFAT as the reference technology, through the IRI API. It proposes the `urn:doe-iri:resource:service:streaming-transport` Resource Type, instance-hour and concurrent-instance allocation units charged through the existing Project Allocation model, admission and accounting rules, a reservation API that returns a reservation-scoped connection bundle, a credential model that keeps reservation rights with the facility, and operation-affordance relations for discovery.
+10. **[Persistent Services](./rfc-persistent-services.md)**:
+
+    This document proposes an API for facilities to expose their Kubernetes (k8s) services. The actual work of managing k8s resources is left to
+    the k8s api. The new portion of the IRI api dealing with persistent services is restricted to getting the user access to a k8s server in 
+    a multi-cluster/server and multi-tenant k8s environment.

@@ -38,7 +38,7 @@ registration metadata and lifecycle are authoritative in the URN registry.
 
 The purpose of this document is to define a common, implementation-independent representation of filesystem mounts within the DOE Integrated Research Infrastructure (IRI). A mount resource represents the exposure of a filesystem to a particular consuming system at a specific location within that system's filesystem namespace.
 
-The IRI storage model intentionally separates the logical filesystem from the way that filesystem is exposed to a consuming system. A `urn:doe-iri:resource:storage:filesystem` resource describes the logical filesystem itself, while a `urn:doe-iri:resource:storage:mount` resource describes a particular presentation of that filesystem to a compute system or other consuming resource.
+The IRI storage model intentionally separates the logical filesystem from the way that filesystem is exposed to a consuming system. A `urn:doe-iri:resource:storage:filesystem` resource describes the logical filesystem itself, while a `urn:doe-iri:resource:storage:mount` resource describes a particular presentation of that filesystem to the compute system identified by `iri:mounted-on`.
 
 For example:
 
@@ -467,6 +467,32 @@ A provider MAY omit an operation link because it is not configured,
 applicable, or visible to the requester. Absence means only that the operation
 is not advertised in the current representation. Presence grants no
 permission and guarantees no successful invocation.
+
+---
+
+## 8. Configured Consumers
+
+A mount Resource MAY advertise [`iri:accessed-by`](../../../rels/accessed-by.md)
+to identify Resources configured to access a filesystem through this exposure.
+The target domain is any conforming Resource with that configured consumer
+role, including compute systems and nodes, generic compute or service
+Resources, DTNs, inference services, and other eligible Resource Types. These
+examples are not a closed list; type validity alone does not establish access.
+
+The inverse [`iri:accesses-mount`](../../../rels/accesses-mount.md) originates
+from the consumer and targets this mount. Each direction permits `0..*`
+targets and is independently optional. Visible links describing the same
+configuration must agree, but providers need not publish reciprocal links or
+complete lists. Authorization may filter consumers or mounts, so absence is
+not a negative access assertion. These links do not establish health, caller
+permission, or eligibility for operation affordances.
+
+Multiple consumers do not change the mount's exactly-one `iri:mounted-on`
+compute-system target. The `mount_path` remains in that system's namespace;
+an access link does not relocate it into a consumer's node, service, or
+container namespace. Inverse-link `profile` values describe the consumer
+target: use the common Resource profile unless the actual target's applicable
+specialized profile is established.
 
 ---
 

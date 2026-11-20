@@ -29,7 +29,12 @@ An inference Resource represents a consumable model-invocation service, not a mo
 
 Endpoint descriptors and served-model catalog entries remain type-specific attributes unless a future use case requires independent identity, lifecycle, authorization, or relationships.
 
-Hosting topology is expressed with `iri:hosted-on`. A DTN's configured access through a filesystem mount is expressed with `iri:accesses-mount`.
+Hosting topology is expressed with `iri:hosted-on`. A Resource's configured
+access through a filesystem mount is expressed with `iri:accesses-mount`, and
+the mount can identify that consumer through `iri:accessed-by`. DTNs and
+inference services are eligible when they have the configured consumer role;
+hosting alone does not establish access. The relation definitions govern the
+current consumer domain and inverse semantics.
 
 IRI v2 does not require a separate Resource Definition / Resource State representation model. Time-varying values, when represented, are governed by the applicable API contract and Resource Definition Profile.
 
@@ -60,8 +65,16 @@ The model deliberately does not make every internal service component independen
 - `registry/profiles/resource-definition/service/inference.md`
 - `registry/rels/hosted-on.md`
 - `registry/rels/accesses-mount.md`
+- `registry/rels/accessed-by.md`
 - `rfc/rfc-type-specific-attributes.md`
 
 ## Historical notes
+
+The initial `iri:accesses-mount` registration was DTN-only. Version 1.1.0
+generalizes the configured filesystem-consumer role beyond DTNs, and
+`iri:accessed-by` version 1.0.0 adds the inverse. Each direction is independently
+optional. These additions preserve the service-identity and hosting boundaries
+recorded by this decision; they do not change the mount's single consuming
+compute system or its path namespace.
 
 This record distills durable rationale from an earlier design note retained in Git history. That note also contained implementation paths and a now-superseded v2 definition/state proposal; those details are intentionally not preserved here.
