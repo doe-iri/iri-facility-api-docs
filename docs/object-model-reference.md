@@ -494,6 +494,7 @@ permission.
 |---|---|
 | `urn:doe-iri:resource:service:dtn` | `https://iri.science/profiles/resource-definition/service/dtn` |
 | `urn:doe-iri:resource:service:inference` | `https://iri.science/profiles/resource-definition/service/inference` |
+| `urn:doe-iri:resource:service:streaming-transport` | `https://iri.science/profiles/resource-definition/service/streaming-transport` |
 
 Service topology can include:
 

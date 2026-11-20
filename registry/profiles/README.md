@@ -184,6 +184,7 @@ Resource Type URN.
 |---|---|---|
 | `urn:doe-iri:resource:service:dtn` | [`resource-definition/service/dtn.md`](resource-definition/service/dtn.md) | `https://iri.science/profiles/resource-definition/service/dtn` |
 | `urn:doe-iri:resource:service:inference` | [`resource-definition/service/inference.md`](resource-definition/service/inference.md) | `https://iri.science/profiles/resource-definition/service/inference` |
+| `urn:doe-iri:resource:service:streaming-transport` | [`resource-definition/service/streaming-transport.md`](resource-definition/service/streaming-transport.md) | `https://iri.science/profiles/resource-definition/service/streaming-transport` |
 
 ## Identifier Roles
 
